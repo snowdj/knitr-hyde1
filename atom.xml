@@ -1,150 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>A Statistics Blog</title>
-  <meta name="author" content="Homer White">
-
-  
-  <meta name="description" content="Data Basics Getting Data in R Variable Types Descriptive Statistics Outline One Factor Variable Tables Barcharts. Two Factor Variables Two-Way &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://homerhanumat.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<!-- MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-47254229-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">A Statistics Blog</a></h1>
-  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
-  
-    <h2>R for Statistics Education, and information for the courses I teach.</h2>
-  
- 
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/book/index.html">Book</a><li>
-  <li><a href="/about/index.html">About</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[A Statistics Blog]]></title>
+  <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
+  <link href="http://homerhanumat.github.io/"/>
+  <updated>2014-01-22T01:17:54-05:00</updated>
+  <id>http://homerhanumat.github.io/</id>
+  <author>
+    <name><![CDATA[Homer White]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/21/ch2/">Describing Patterns in Data</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2014-01-21T00:00:00-05:00" pubdate data-updated="true"></time>
-        
-           | <a href="/blog/2014/01/21/ch2/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/21/ch2/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
+  <entry>
+    <title type="html"><![CDATA[Describing Patterns in Data]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/01/21/ch2/"/>
+    <updated>2014-01-21T00:00:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/01/21/ch2</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#data-basics">Data Basics</a>    <ul>
       <li><a href="#getting-data-in-r">Getting Data in R</a></li>
       <li><a href="#variable-types">Variable Types</a></li>
@@ -371,7 +245,7 @@ require(tigerstats)
            type="percent")
 </code></pre>
 
-<p><img src="/images/figure/bar.png" alt="Barchart" /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/bar.png" alt="Barchart" /> </p>
 
 <h2 id="two-factor-variables">Two Factor Variables</h2>
 
@@ -415,7 +289,7 @@ tabsexseat
 
 <p>Again, a barchart will convey the information in a table, but in graphical form (see Figure [A Two-Way Barchart]).</p>
 
-<p><img src="/images/figure/barsexseat.png" alt="A Two-Way Barchart" /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/barsexseat.png" alt="A Two-Way Barchart" /> </p>
 
 <p>Here is another example:</p>
 
@@ -447,7 +321,7 @@ sexlove
 
 <p>Figure [Barchart Sex and Love] shows the same thing graphically.</p>
 
-<p><img src="/images/figure/sexlovebar.png" alt="Barchart Sex and Love:  belief in love at first sight in the m111survey data, broken down by sex of respondent." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/sexlovebar.png" alt="Barchart Sex and Love:  belief in love at first sight in the m111survey data, broken down by sex of respondent." /> </p>
 
 <h2 id="one-numerical-variable">One Numerical Variable</h2>
 
@@ -656,7 +530,7 @@ median(FakeData2)
 
 <p>The histogram is a popular device for representing the shape of the distribution of a numerical variable.  Figure [Two Histograms] shows two common types:  a <em>frequency</em> histogram on the left, and a <em>percentage</em> or <em>relative frequency</em> histogram on the right.</p>
 
-<p><img src="/images/figure/fastesthist1.png" alt="Two Histograms.  Histograms of the variable **fastest** in the m111survey data.  On the left the vertical axis indicates the count of observations falling in each rectangle; on the right the vertical axis indicates percents." /> <img src="/images/figure/fastesthist2.png" alt="Two Histograms.  Histograms of the variable **fastest** in the m111survey data.  On the left the vertical axis indicates the count of observations falling in each rectangle; on the right the vertical axis indicates percents." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/fastesthist1.png" alt="Two Histograms.  Histograms of the variable **fastest** in the m111survey data.  On the left the vertical axis indicates the count of observations falling in each rectangle; on the right the vertical axis indicates percents." /> <img src="http://homerhanumat.github.io/images/figure/fastesthist2.png" alt="Two Histograms.  Histograms of the variable **fastest** in the m111survey data.  On the left the vertical axis indicates the count of observations falling in each rectangle; on the right the vertical axis indicates percents." /> </p>
 
 <p>Here’s the difference:</p>
 
@@ -667,7 +541,7 @@ median(FakeData2)
 
 <p>Most of the time, we will deal with a third type of histogram known as a <em>density</em> histogram.  An example is given in Figure [Density Histogram].</p>
 
-<p><img src="/images/figure/densityhist.png" alt="Density Histogram.  The area of each rectangle gives the proportion of observations that fall within the boundaries indicated at the base of the rectangle." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/densityhist.png" alt="Density Histogram.  The area of each rectangle gives the proportion of observations that fall within the boundaries indicated at the base of the rectangle." /> </p>
 
 <p>In a density histogram:</p>
 
@@ -695,7 +569,7 @@ median(FakeData2)
 
 <p>Figure [Income Histogram] shows a density histogram of the annual incomes in this population.  The histogram consists of approximately 100 rectangles.</p>
 
-<p><img src="/images/figure/incomehist.png" alt="Income Histogram.  The number of rectangles has been chosen to be very large." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/incomehist.png" alt="Income Histogram.  The number of rectangles has been chosen to be very large." /> </p>
 
 <p>When the number of rectangles is very large, don’t you just <em>see</em>, in your mind, a smooth curve that the tops of the rectangles seem to follow?  R can draw that curve for you if you call the function <code>densityplot</code>:</p>
 
@@ -705,7 +579,7 @@ median(FakeData2)
             plot.points=FALSE)
 </code></pre>
 
-<p><img src="/images/figure/incomedensity.png" alt="Income Density Plot.  The plot shows the general shape of the distribution." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/incomedensity.png" alt="Income Density Plot.  The plot shows the general shape of the distribution." /> </p>
 
 <p>The results are shown in Figure [Income Density Plot].  Areas under a density curve give you proportions, so the total are under a density curve is 1.</p>
 
@@ -717,7 +591,7 @@ median(FakeData2)
             plot.points=TRUE)
 </code></pre>
 
-<p><img src="/images/figure/fastestdensity.png" alt="Fastest Density Plot.  When the number of data points is not too large, it is good to produce a &quot;rug&quot; of individual points by setting plot.points to TRUE." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/fastestdensity.png" alt="Fastest Density Plot.  When the number of data points is not too large, it is good to produce a &quot;rug&quot; of individual points by setting plot.points to TRUE." /> </p>
 
 <h4 id="describing-shape">Describing Shape</h4>
 
@@ -738,7 +612,7 @@ median(FakeData2)
 
 <p>A <em>symmetric</em> distribution looks like a mirror image of itself around some central vertical line.  A <em>skewed</em> distribution has a <em>tail</em> running off to the left (smaller values) or to the right (larger values).  The <em>modes</em> of a distribution correspond to “humps” in the density curve: values that occur quite commonly in the data.  Look at Figure [Shapes] for standard examples of these concepts.</p>
 
-<p><img src="/images/figure/distshapes.png" alt="Shapes.  Terminology for describing the shape of a distribution." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/distshapes.png" alt="Shapes.  Terminology for describing the shape of a distribution." /> </p>
 
 <p>Here are some examples:</p>
 
@@ -747,7 +621,7 @@ median(FakeData2)
   <li>Figure [Kim Kardashian Temperature] shows a density histogram of ratings given by people in <code>imagpop</code> to the celebrity Kim Kardashian.  The ratings are on a scale of 0 to 100, where 0 indicates that one doesn’t like her, and 100 indicates a very high level of liking.  The ratings distribution is symmetric, but bimodal:  there are “humps” near 0 and near 100.</li>
 </ul>
 
-<p><img src="/images/figure/unnamed-chunk-27.png" alt="Kim Kardashian Temperature.  People either love her or hate her!" /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/unnamed-chunk-27.png" alt="Kim Kardashian Temperature.  People either love her or hate her!" /> </p>
 
 <h4 id="box-and-whisker-plots">Box-and-Whisker Plots</h4>
 
@@ -758,7 +632,7 @@ median(FakeData2)
 bwplot(~ImaginaryData,xlab="x",main="Example Boxplot")
 </code></pre>
 
-<p><img src="/images/figure/boximaginary.png" alt="Boxplot.  Box-and-whisker plot of some imaginary data." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/boximaginary.png" alt="Boxplot.  Box-and-whisker plot of some imaginary data." /> </p>
 
 <p>Here are the basic features of a boxplot:</p>
 
@@ -776,7 +650,7 @@ bwplot(~ImaginaryData,xlab="x",main="Example Boxplot")
        xlab="height (inches)")
 </code></pre>
 
-<p><img src="/images/figure/boxheight.png" alt="Boxplot Height.  Note the two outliers." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/boxheight.png" alt="Boxplot Height.  Note the two outliers." /> </p>
 
 <p>Note that this time the lower hinge does not extend all of the way down to the minimum value: there are two heights so small that R decided that you might consider them to be outliers.  An <em>outlier</em> in a dataset is a value that lies far above or far below most of the other values.  When R detects possible outliers, they are plotted as individual points.</p>
 
@@ -784,11 +658,11 @@ bwplot(~ImaginaryData,xlab="x",main="Example Boxplot")
 
 <p>Boxplots are not only useful for detecting possible outliers:  they can also detect skewness easily.  Look at Figure [Boxplot Fastest], which shows the fastest speeds driven by the <code>m111survey</code> participants.  As we have seen previously, this distribution is a bit skewed to the right, and the boxplot shows the skewness:  the upper whisker is somewhat longer than the lower whisker, indicating that there is longer “tail” toward the higher values of speed.  We also see that there is an outlier at 190 miles per hour.</p>
 
-<p><img src="/images/figure/boxfastest.png" alt="Boxplot Fastest.  The distribution is a little bit skewed to the right, and there is an oulier at about 190 mph." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/boxfastest.png" alt="Boxplot Fastest.  The distribution is a little bit skewed to the right, and there is an oulier at about 190 mph." /> </p>
 
 <p>Although boxplots excel at detecting skewness and outliers, they fail miserably at detecting modes, so if you are interested in modes you should look at a density plot or histogram as well.  Figure [Kardashian Violin] shows a combination of a violin plot and a boxplot for the Kim Kardashian ratings in the <code>imagpop</code> population.  A violin plot is nothing more than a density plot combined with a mirror image of itself.  Places where the violin is “thick” are regions where data values are relatively crowded together; in “thin” regions, data values are more widely separated from one another.  Note that the boxplot correctly indicates that the distribution is symmetric, but entirely misses the bimodality.</p>
 
-<p><img src="/images/figure/kardashviolin.png" alt="Kardashian Violin.  The violin plot supplements the boxplot, indicating that the data are clumped around 0 and around 100, and are quite sparse in the middle." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/kardashviolin.png" alt="Kardashian Violin.  The violin plot supplements the boxplot, indicating that the data are clumped around 0 and around 100, and are quite sparse in the middle." /> </p>
 
 <h2 id="factor-and-numerical-variable">Factor and Numerical Variable</h2>
 
@@ -838,7 +712,7 @@ Fastest by Sex] shows that guys tend to drive faster:  the median for the guys i
        ylab="speed (mph)")
 </code></pre>
 
-<p><img src="/images/figure/fastestsexbox.png" alt="Boxplot of Fastest by Sex." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/fastestsexbox.png" alt="Boxplot of Fastest by Sex." /> </p>
 
 <p>Here is another example:</p>
 
@@ -860,7 +734,7 @@ Fastest by Sex] shows that guys tend to drive faster:  the median for the guys i
 
 <p>For a graphical approach, let’s look at Figure [GPA by Seat].  We see that the front-sitters have a higher median than the other two groups do.</p>
 
-<p><img src="/images/figure/gpaseatviolin.png" alt="GPA by Seat." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/gpaseatviolin.png" alt="GPA by Seat." /> </p>
 
 <h4 id="side-by-side-histograms">Side-by-Side Histograms</h4>
 
@@ -879,7 +753,7 @@ Fastest by Sex] shows that guys tend to drive faster:  the median for the guys i
        xlab="Fastest Speed, in mph")
 </code></pre>
 
-<p><img src="/images/figure/fastestsexcond.png" alt="Speed by Sex.  Histogram for female and male speeds appear in separate panels." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/fastestsexcond.png" alt="Speed by Sex.  Histogram for female and male speeds appear in separate panels." /> </p>
 
 <p>The results appear in Figure [Speed by Sex], which shows that the guys tend to drive faster: the male histogram is shifted somewhat toward higher speeds, as compared to the female histogram.</p>
 
@@ -894,7 +768,7 @@ Fastest by Sex] shows that guys tend to drive faster:  the median for the guys i
        auto.key=TRUE)
 </code></pre>
 
-<p><img src="/images/figure/fastestsexdensity.png" alt="Grouped Density Plots.  It is very easy to see that the mode for the males is greater than the mode for the females." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/fastestsexdensity.png" alt="Grouped Density Plots.  It is very easy to see that the mode for the males is greater than the mode for the females." /> </p>
 
 <p>Figure [Grouped Density Plots] shows the results.  Indeed, the guys drive faster:  their density plot is shifted a bit to the right, in comparison to that of the gals.</p>
 
@@ -911,7 +785,7 @@ Fastest by Sex] shows that guys tend to drive faster:  the median for the guys i
 
 <p>Accordingly, when the distribution is symmetric the mean and the median will be about the same.  But what happens if the distribution is skewed?  In order to make the plot balance, the mean will have to be closer to the tail of the data than the median is.  Figure [Symmetry and Skewness] illustrates what happens.</p>
 
-<p><img src="/images/figure/meanmedskew.png" alt="Symmetry and Skewness.  The mean and the median are about the same when the distribution is symmetric.  For right-skewed distributions the mean is bigger than the median, and for left-skewed distributions the reverse is true." /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/meanmedskew.png" alt="Symmetry and Skewness.  The mean and the median are about the same when the distribution is symmetric.  For right-skewed distributions the mean is bigger than the median, and for left-skewed distributions the reverse is true." /> </p>
 
 <p>You can investigate these ideas with following app, too:</p>
 
@@ -1196,45 +1070,15 @@ EmpRuleGC(mean=70,sd=3,xlab="height (inches)")
 
 <p>If your variables come from a data frame, don’t forget to supply the name of the data frame, using the <code>data</code> argument!</p>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/19/more-playing-around/">More Playing Around</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-19T23:32:03-05:00" pubdate data-updated="true">Jan 19<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/01/19/more-playing-around/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/more-playing-around/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1 id="rain-and-the-rhinoceros">Rain and the Rhinoceros</h1>
+  <entry>
+    <title type="html"><![CDATA[More Playing Around]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/01/19/more-playing-around/"/>
+    <updated>2014-01-19T23:32:03-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/01/19/more-playing-around</id>
+    <content type="html"><![CDATA[<h1 id="rain-and-the-rhinoceros">Rain and the Rhinoceros</h1>
 
 <p><span class="pullquote-right" data-pullquote="The time will come when they will sell you even your rain.">
 Let me say this before rain becomes a utility that they can plan and distribute for money. By “they” I mean the people who cannot understand that rain is a festival, who do not appreciate its gratuity, who think that what has no price has no value, that what cannot be sold is not real, so that the only way to make something actual is to place it on the market. The time will come when they will sell you even your rain. At the moment it is still free, and I am in it. I celebrate its gratuity and its meaninglessness. 
@@ -1250,87 +1094,27 @@ Let me say this before rain becomes a utility that they can plan and distribute 
 
 <blockquote><p>Every interaction is both precious and an opportunity to delight.</p><footer><strong>Seth Godin</strong> <cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">Welcome to Island Marketing</a></cite></footer></blockquote>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/19/testpost/">A Test Post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-19T11:24:12-05:00" pubdate data-updated="true">Jan 19<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/01/19/testpost/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/testpost/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Test post.  Is this <strong>really</strong> markdown?</p>
+  <entry>
+    <title type="html"><![CDATA[A Test Post]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/01/19/testpost/"/>
+    <updated>2014-01-19T11:24:12-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/01/19/testpost</id>
+    <content type="html"><![CDATA[<p>Test post.  Is this <strong>really</strong> markdown?</p>
 
 <p>$\bar{x}=\frac{\sum{x_i}{n}$</p>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/19/newpost/">Going for R Markdown</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-19T00:00:00-05:00" pubdate data-updated="true"></time>
-        
-           | <a href="/blog/2014/01/19/newpost/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/newpost/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1 id="an-r-markdown-into-html">An R Markdown into HTML</h1>
+  <entry>
+    <title type="html"><![CDATA[Going for R Markdown]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/01/19/newpost/"/>
+    <updated>2014-01-19T00:00:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/01/19/newpost</id>
+    <content type="html"><![CDATA[<h1 id="an-r-markdown-into-html">An R Markdown into HTML</h1>
 
 <p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the <strong>Help</strong> toolbar button for more details on using R Markdown).</p>
 
@@ -1352,137 +1136,13 @@ Let me say this before rain becomes a utility that they can plan and distribute 
 <pre><code>plot(cars)
 </code></pre>
 
-<p><img src="/images/figure/carplot.png" alt="A plot of cars" /> </p>
+<p><img src="http://homerhanumat.github.io/images/figure/carplot.png" alt="A plot of cars" /> </p>
 
 <p>Also some math:</p>
 
 <p>$\bar{x}=\frac{\sum{x_i}}{n}$</p>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/01/21/ch2/">Describing Patterns in Data</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/19/more-playing-around/">More Playing Around</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/19/testpost/">A Test Post</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/19/newpost/">Going for R Markdown</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'homerhanumat',
-            count: 2,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Homer White -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'homerhanumatgithubio';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id; js.async = true;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

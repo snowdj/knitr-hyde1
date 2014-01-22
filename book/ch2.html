@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A Statistics Blog</title>
+  <title>Describing Patterns in Data - A Statistics Blog</title>
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Data Basics Getting Data in R Variable Types Descriptive Statistics Outline One Factor Variable Tables Barcharts. Two Factor Variables Two-Way &hellip;">
+  <meta name="description" content="Describing Patterns in Data Describing Patterns in Data Before you begin work, it’s a good idea to check that the necessary packages are loaded: &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://homerhanumat.github.io">
+  <link rel="canonical" href="http://homerhanumat.github.io/book/ch2.html">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
@@ -110,103 +110,15 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article role="article">
   
-  
-  
-    <article>
-      
   <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/21/ch2/">Describing Patterns in Data</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-21T00:00:00-05:00" pubdate data-updated="true"></time>
-        
-           | <a href="/blog/2014/01/21/ch2/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/21/ch2/">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">Describing Patterns in Data</h1>
     
   </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#data-basics">Data Basics</a>    <ul>
-      <li><a href="#getting-data-in-r">Getting Data in R</a></li>
-      <li><a href="#variable-types">Variable Types</a></li>
-      <li><a href="#descriptive-statistics">Descriptive Statistics</a></li>
-    </ul>
-  </li>
-  <li><a href="#outline">Outline</a></li>
-  <li><a href="#one-factor-variable">One Factor Variable</a>    <ul>
-      <li><a href="#tables">Tables</a></li>
-      <li><a href="#barcharts">Barcharts.</a></li>
-    </ul>
-  </li>
-  <li><a href="#two-factor-variables">Two Factor Variables</a>    <ul>
-      <li><a href="#two-way-tables">Two-Way Tables</a></li>
-      <li><a href="#barcharts-again">Barcharts Again</a></li>
-    </ul>
-  </li>
-  <li><a href="#one-numerical-variable">One Numerical Variable</a>    <ul>
-      <li><a href="#numerical-measures">Numerical Measures</a>        <ul>
-          <li><a href="#the-mean">The Mean</a></li>
-          <li><a href="#the-standard-deviation">The Standard Deviation</a></li>
-          <li><a href="#the-median">The Median</a></li>
-          <li><a href="#quantiles-and-the-iqr">Quantiles and the IQR</a></li>
-        </ul>
-      </li>
-      <li><a href="#graphical-tools">Graphical Tools</a>        <ul>
-          <li><a href="#the-histogram">The Histogram</a></li>
-          <li><a href="#density-plots">Density Plots</a></li>
-          <li><a href="#describing-shape">Describing Shape</a></li>
-          <li><a href="#box-and-whisker-plots">Box-and-Whisker Plots</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#factor-and-numerical-variable">Factor and Numerical Variable</a>    <ul>
-      <li><a href="#numerical-tools">Numerical Tools</a></li>
-      <li><a href="#graphical-tools-1">Graphical Tools</a>        <ul>
-          <li><a href="#parallel-boxplots">Parallel Boxplots</a></li>
-          <li><a href="#side-by-side-histograms">Side-by-Side Histograms</a></li>
-          <li><a href="#grouped-density-plots">Grouped Density Plots</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#choice-of-measures">Choice of Measures</a>    <ul>
-      <li><a href="#mean-median-and-skewness">Mean, Median and Skewness</a></li>
-      <li><a href="#mean-median-and-outliers">Mean, Median and Outliers</a></li>
-      <li><a href="#meansd-vs-medianiqr">Mean/SD vs. Median/IQR</a></li>
-    </ul>
-  </li>
-  <li><a href="#bell-shaped-distributions">Bell-Shaped Distributions</a>    <ul>
-      <li><a href="#the-68-95-rule">The 68-95 Rule</a></li>
-      <li><a href="#z-scores">$z$-scores</a></li>
-    </ul>
-  </li>
-  <li><a href="#reading-in-statistics">Reading in Statistics</a></li>
-  <li><a href="#thoughts-on-r">Thoughts on R</a>    <ul>
-      <li><a href="#new-r-functions">New R Functions</a></li>
-      <li><a href="#those-pesky-formulas">Those Pesky Formulas!</a></li>
-    </ul>
-  </li>
-</ul>
+  
+  <h1 id="describing-patterns-in-data">Describing Patterns in Data</h1>
 
 <p>Before you begin work, it’s a good idea to check that the necessary packages are loaded:</p>
 
@@ -1196,241 +1108,41 @@ EmpRuleGC(mean=70,sd=3,xlab="height (inches)")
 
 <p>If your variables come from a data frame, don’t forget to supply the name of the data frame, using the <code>data</code> argument!</p>
 
-</div>
-  
-  
 
-
-    </article>
   
-  
-    <article>
+    <footer>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/19/more-playing-around/">More Playing Around</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-01-19T23:32:03-05:00" pubdate data-updated="true">Jan 19<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/01/19/more-playing-around/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/more-playing-around/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1 id="rain-and-the-rhinoceros">Rain and the Rhinoceros</h1>
-
-<p><span class="pullquote-right" data-pullquote="The time will come when they will sell you even your rain.">
-Let me say this before rain becomes a utility that they can plan and distribute for money. By “they” I mean the people who cannot understand that rain is a festival, who do not appreciate its gratuity, who think that what has no price has no value, that what cannot be sold is not real, so that the only way to make something actual is to place it on the market. The time will come when they will sell you even your rain. At the moment it is still free, and I am in it. I celebrate its gratuity and its meaninglessness. 
-</span></p>
-
-<p>Maybe someone would like to look at a video:</p>
-
-<video width="640" height="320" preload="none" controls="" poster="http://homerhanumat.github.io/images/videotest.jpg"><source src="http://youtu.be/qCwdwrVZnj0" /></video>
-
-<blockquote><p>Last night I lay in bed looking up at the stars in the sky and I thought to myself, where the heck is the ceiling.</p></blockquote>
-
-<blockquote><p>Flying is learning how to throw yourself at the ground and miss.</p><footer><strong>Douglas Adams</strong> <cite>The Hichhikers Guide to the Galaxy</cite></footer></blockquote>
-
-<blockquote><p>Every interaction is both precious and an opportunity to delight.</p><footer><strong>Seth Godin</strong> <cite><a href="http://sethgodin.typepad.com/seths_blog/2009/07/welcome-to-island-marketing.html">Welcome to Island Marketing</a></cite></footer></blockquote>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/19/testpost/">A Test Post</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
+        <div class="sharing">
   
-
-
-<time datetime="2014-01-19T11:24:12-05:00" pubdate data-updated="true">Jan 19<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/01/19/testpost/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/testpost/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Test post.  Is this <strong>really</strong> markdown?</p>
-
-<p>$\bar{x}=\frac{\sum{x_i}{n}$</p>
-
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://homerhanumat.github.io/book/ch2.html" data-via="" data-counturl="http://homerhanumat.github.io/book/ch2.html" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/19/newpost/">Going for R Markdown</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
+    </footer>
   
-
-
-<time datetime="2014-01-19T00:00:00-05:00" pubdate data-updated="true"></time>
-        
-           | <a href="/blog/2014/01/19/newpost/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/newpost/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h1 id="an-r-markdown-into-html">An R Markdown into HTML</h1>
-
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the <strong>Help</strong> toolbar button for more details on using R Markdown).</p>
-
-<p>When you click the <strong>Knit HTML</strong> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-
-<pre><code>summary(cars)
-
-##      speed           dist    
-##  Min.   : 4.0   Min.   :  2  
-##  1st Qu.:12.0   1st Qu.: 26  
-##  Median :15.0   Median : 36  
-##  Mean   :15.4   Mean   : 43  
-##  3rd Qu.:19.0   3rd Qu.: 56  
-##  Max.   :25.0   Max.   :120
-</code></pre>
-
-<p>You can also embed plots, for example:</p>
-
-<pre><code>plot(cars)
-</code></pre>
-
-<p><img src="/images/figure/carplot.png" alt="A plot of cars" /> </p>
-
-<p>Also some math:</p>
-
-<p>$\bar{x}=\frac{\sum{x_i}}{n}$</p>
+</article>
 
 </div>
-  
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/01/21/ch2/">Describing Patterns in Data</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/19/more-playing-around/">More Playing Around</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/19/testpost/">A Test Post</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/01/19/newpost/">Going for R Markdown</a>
-      </li>
-    
+  <h1>Chapters</h1>
+  <ul id="chapters">
+      <li class="post"><a href="ch1.html">Chapter 1</a></li>
+       <li class="post"><a href="ch2.html">Chapter 2</a></li>
   </ul>
 </section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'homerhanumat',
-            count: 2,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
 
   
 </aside>
+
 
     </div>
   </div>
