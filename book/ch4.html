@@ -1,0 +1,926 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Two Numerical Variables - A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Two Numerical Variables Outline Statistical Relationships Scatterplots Overall Patterns Direction Correlation Strength of Association Regression &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/book/ch4.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/book/index.html">Book</a><li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Two Numerical Variables</h1>
+    
+  </header>
+  
+  <ul id="markdown-toc">
+  <li><a href="#outline">Outline</a></li>
+  <li><a href="#statistical-relationships">Statistical Relationships</a>    <ul>
+      <li><a href="#scatterplots">Scatterplots</a>        <ul>
+          <li><a href="#overall-patterns">Overall Patterns</a></li>
+          <li><a href="#direction">Direction</a></li>
+        </ul>
+      </li>
+      <li><a href="#correlation">Correlation</a>        <ul>
+          <li><a href="#strength-of-association">Strength of Association</a></li>
+        </ul>
+      </li>
+      <li><a href="#regression-equation">Regression Equation</a>        <ul>
+          <li><a href="#residuals">Residuals</a></li>
+          <li><a href="#predictions">Predictions</a></li>
+          <li><a href="#interpretation-of-slope-and-intercept">Interpretation of Slope and Intercept</a></li>
+          <li><a href="#how-well-does-our-regression-line-fit">How Well does our Regression Line fit?</a></li>
+          <li><a href="#properties-of-r2">Properties of $r^2$</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#cautions">Cautions</a>    <ul>
+      <li><a href="#extrapolation">Extrapolation</a></li>
+      <li><a href="#influential-observations">Influential Observations</a></li>
+      <li><a href="#association-versus-causation">Association versus Causation</a></li>
+      <li><a href="#simpsons-paradox">Simpson’s Paradox</a></li>
+    </ul>
+  </li>
+  <li><a href="#thoughts-on-r">Thoughts on R</a>    <ul>
+      <li><a href="#new-r-functions">New R Functions</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="outline">Outline</h2>
+
+<p>In the previous chapter, we investigated methods for describing relationships between two <em>factor</em> variables, using </p>
+
+<ul>
+  <li>tables and row percents,</li>
+  <li>chi-square statistic,</li>
+  <li>P-value, and</li>
+  <li>5 Step Procedure.</li>
+</ul>
+
+<p>In this chapter, we are interested in describing relationships between <strong>two</strong> <em>numerical</em> variables.  </p>
+
+<p>In chapter 2, we learned about methods to graphically and numerically summarize <strong>one</strong> numerical variable.  The methods we used were:</p>
+
+<p><strong>Graphical</strong></p>
+
+<ul>
+  <li>Histogram</li>
+  <li>Density Plot</li>
+  <li>Stem Plot</li>
+  <li>Box Plot (and the really cool Violin Plot)</li>
+</ul>
+
+<p><strong>Numerical</strong></p>
+
+<ul>
+  <li>Median</li>
+  <li>Percentiles (quantiles)</li>
+  <li>5 number summary</li>
+  <li>Mean</li>
+  <li>SD</li>
+  <li>IQR</li>
+</ul>
+
+<p>We will now be learning to describe how two numerical variables <em>relate</em>.  Throughout this chapter, we’re going to work with 3 different datasets:  <code>m111survey</code>, <code>pennstate1</code>, and <code>ucdavis1</code>.  The datasets <code>pennstate1</code> and <code>ucdavis1</code> are both surveys of students at their respective schools, very similar to what we’ve seen in <code>m111survey</code>.  You can put these datasets into your Global Environment, take a quick look at them, and learn more about them with:</p>
+
+<pre><code>data(m111survey)
+View(m111survey)
+help(m111survey)
+ 
+data(pennstate1)
+View(pennstate1)
+help(pennstate1)
+ 
+data(ucdavis1)
+View(ucdavis1)
+help(ucdavis1)
+</code></pre>
+
+<h2 id="statistical-relationships">Statistical Relationships</h2>
+
+<p>When we look at relationships between numerical variables, there are 2 main kinds of relationships that interest us.</p>
+
+<ul>
+  <li><strong>Deterministic</strong> relationships</li>
+  <li><strong>Statistical</strong> relationships</li>
+</ul>
+
+<p><strong>Deterministic</strong> relationships are the type you are used to seeing in algebra class.  In this kind of relationship, the value of one variable can be <em>exactly</em> determined by the value of the other variable.  </p>
+
+<p>For example, consider the relationship between degrees Fahrenheit and degrees Celcius.  If $y= ^\circ$ C and $x= ^\circ$ F, the <em>deterministic</em> relationship can be written</p>
+
+<script type="math/tex; mode=display">y=\frac{5}{9}(x-32).</script>
+
+<p>The degrees Celcius ($y$) is <em>exactly</em> determined by knowing the degrees Fahrenheit ($x$).  The graph of this equation is a line.  See Figure[Deterministic Relationship].</p>
+
+<p><img src="/images/figure/fcplot.png" alt="Deterministic Relationship.  This graph shows the relationship between Fahrenheit and Celcius." /> </p>
+
+<p>We can see from the graph that there is no variation in the pattern.  Every temperature in Fahrenheit has exactly one corresponding temperature in Celcius.  We might regard Fahrenheit and Celcius as having a perfect relationship.  </p>
+
+<p><strong>Statistical</strong> relationships are the ones that we will study in this class.  In this kind of relationship, there is variation from the average pattern.  If we know the value of one variable, we can <em>estimate</em> the typical value of the other variable.  However, this is only an estimation.  There is no certainty!</p>
+
+<p>For example, suppose we want to use the length of a person’s right handspan (the measurement of one’s outstretched right hand from thumb to pinky) to predict the person’s height.  There is certainly a <em>relationship</em> between the length of one’s handspan and their height.  People with large hands tend to be taller than people with small hands.  However, there is not an equation (or a line) that will <strong>exactly</strong> tell us the height of a person with a certain handspan.  Not every person with a handspan of 20 centimeters is exactly the same height.  There is variation in their heights.  What we’ve just described is a statistical relationship.</p>
+
+<p>There are 3 tools that we will use to describe <strong>statistical</strong> relationships:</p>
+
+<ul>
+  <li>Scatterplots</li>
+  <li>Correlation</li>
+  <li>Regression Equation</li>
+</ul>
+
+<h3 id="scatterplots">Scatterplots</h3>
+
+<p>As we just discussed, our intuition tells us that a person with a large right handspan tends to be tall.  Let’s investigate this idea with the following research question.</p>
+
+<blockquote>
+  <p><strong>Research Question</strong>:   At Pennstate, how is a student’s right handspan related to his/her height?</p>
+</blockquote>
+
+<p>A <strong>scatterplot</strong> is how we will graphically display the relationship between two numerical variables.  <strong>Scatterplots</strong> allow us to visually identify </p>
+
+<ul>
+  <li>overall patterns,</li>
+  <li>directions, and</li>
+  <li>strength of association</li>
+</ul>
+
+<p>between two numerical variables.  The best way to get a <em>feel</em> for the relationship between two numerical variables is to take a look at the scatterplot. </p>
+
+<h4 id="overall-patterns">Overall Patterns</h4>
+
+<p>Let’s use the function <code>xyplot</code> in <code>R</code> to create a scatterplot of the variables <code>RtSpan</code> and <code>Height</code> from the <code>pennstate1</code> dataset.</p>
+
+<pre><code>xyplot(Height~RtSpan,data=pennstate1,
+       xlab="Right Handspan (cm)", ylab="Height (in)") 
+</code></pre>
+
+<p><img src="/images/figure/xyhandheight.png" alt="Hand/Height Scatterplot.  Relationship Between Right Handspan and Height" /> </p>
+
+<p>Each point, ($x,y$), that you see on the scatterplot represents an individual in the dataset - one of the 190 Penn State students in the survey.  The $x$-coordinate of the point is that student’s right handspan, in centimeters.  The $y$-coordinate of the point is that student’s height, in inches.</p>
+
+<p>The ‘formula-data’ input syntax for an <code>xyplot</code> should be starting to become familiar to you.  This is the same syntax that we used to produce the graphical outputs from chapter 2.  <code>R</code> will plot the variable in front of the <code>~</code> along the vertical axis and the variable behind the <code>~</code> along the horizontal axis.  Typically, we put the explanatory variable along the horizontal axis and the response variable along the vertical axis.  </p>
+
+<p>You can control how the points in the scatterplot appear using <code>pch</code> and <code>col</code> in the <code>xyplot</code> function.  For example, we can make the scatterplot have solid red points.  See Figure[Red Points].   </p>
+
+<pre><code>xyplot(Height~RtSpan,data=pennstate1,
+       xlab="Right Handspan (cm)", ylab="Height (in)", 
+       col="red",pch=19) 
+</code></pre>
+
+<p><img src="/images/figure/xyhandheightred.png" alt="Red Points:  Relationship Between Right Handspan and Height using solid red points" /> </p>
+
+<p><strong>Note</strong>:  If you are interested in making fancier scatterplots, there are different values of <code>pch</code> that produce various shapes for the points in the scatterplot.  To learn more, consult GeekNotes.  <code>R</code> will also provide a complete list of all available colors with:</p>
+
+<pre><code>colors()
+</code></pre>
+
+<p>When we look at the overall pattern in the scatterplot in Figure[Hand/Height Scatterplot], it appears that students with large right handspans also tend to be tall.  One question that may arise is whether this observed relationship is simply the result of the student’s sex.  On average, males tend to have larger hands than females and also tend to be taller than females.  As we did in chapter 2, we can look at parallel scatterplots in separate panels by “conditioning” on a category, such as <strong>Sex</strong>.  See Figure[Parallel Hand/Height by Sex].</p>
+
+<pre><code>xyplot(Height~RtSpan|Sex,data=pennstate1,
+       xlab="Right Handspan (cm)", ylab="Height (in)",pch=19)
+</code></pre>
+
+<p><img src="/images/figure/parallelxyhandheight.png" alt="Parallel Hand/Height by Sex:  Scatterplots showing the relationship between one's right handspan and height appear in separate panels." /> </p>
+
+<p>We can see that the relationship we observed in the original scatterplot seems to hold separately for both males and females.  </p>
+
+<p>Parallel scatterplots can sometimes be hard to compare since they have separate x-axes.  We can “overlay” these scatterplots, using one color for the points representing the males and another color for the points representing the females.  Overlaying can be accomplished using the <em>groups</em> argument.  See Figure[Overlayed Hand/Height by Sex].</p>
+
+<pre><code>xyplot(Height~RtSpan,groups=Sex,data=pennstate1,
+       xlab="Right Handspan (cm)", ylab="Height (in)",
+       pch=19,auto.key=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/overlayedxyhandheight.png" alt="Overlayed Hand/Height by Sex:  One scatterplot showing the relationship between right handspan and height colored by sex." /> </p>
+
+<p><strong>Note</strong>:  Given several numerical variables, R can produce a group of scatterplots, one for each pair of variables—all in one graph.  Such a graph is called a <em>scatterplot matrix</em>.  For more information, consult GeekNotes.</p>
+
+<h4 id="direction">Direction</h4>
+
+<p>Viewing the scatterplot allows us to detect overall patterns.  One way to describe the scatterplot is by giving a name to the <strong>direction</strong> of the observed pattern.</p>
+
+<p>In the scatterplot Figure[Hand/Height Scatterplot], we could say that the variables <code>RtSpan</code> and <code>Height</code> are <strong>positively associated</strong> since students with larger handspans tend to be on the tall side and students with smaller handspans tend to be on the short side.  </p>
+
+<blockquote>
+  <p><em>Definition</em>:  Two numerical variables have a <strong>positive linear association</strong> if high values of one variable tend to accompany high values of the other and low values of one variable tend to accompany low values of the other.</p>
+</blockquote>
+
+<p>To give a visualization for positively associated variables, let’s add a vertical line that marks the <strong>mean</strong> of the right handspans and a horizontal line that marks the <strong>mean</strong> of the heights to break the scatterplot into four “boxes”.  See Figure[Positive Association].</p>
+
+<p><img src="/images/figure/positivexyhandheight.png" alt="Positive Association: Most of the points are in the upper right and lower left box showing a positive association between the variables." /> </p>
+
+<p>Notice that there are more points in the upper right box and lower left box than in the other two boxes.  The upper right box includes points from individuals with higher than average right handspans <strong>and</strong> higher than average heights.  The lower left box includes points from individuals with lower than average right handspans <strong>and</strong> lower than average heights.  When most of the points in a scatterplot are located in these two boxes, the variables have a  <strong>positive linear association</strong>.  </p>
+
+<blockquote>
+  <p><em>Definition</em>:  Two variables have a <strong>negative linear association</strong> if high values of one variable tend to accompany low values of the other and low values of one variable tend to accompany high values of the other.</p>
+</blockquote>
+
+<p>Let’s take a look at an example of <strong>negatively associated</strong> variables from the <code>m111survey</code> dataset - <code>GPA</code> and <code>height</code>.</p>
+
+<p><img src="/images/figure/negativexyhandheight.png" alt="Negative Association: Most of the points are in the lower right and upper left box showing a negative association between the variables." /> </p>
+
+<p>Notice that in this scatterplot, there are more points in the upper left box and the lower right box.   (See Figure[Negative Association].)  The upper left box includes points from individuals with lower than average GPA’s <strong>and</strong> higher than average heights.  The lower right box includes points from individuals with higher than average GPA’s <strong>and</strong> lower than average heights.  When most of the points in a scatterplot are located in these two boxes, the variables have a <strong>negative linear association</strong>. </p>
+
+<blockquote>
+  <p><em>Definition:</em>  Two variables have <strong>no association</strong> if there is no apparent relationship between the two variables. </p>
+</blockquote>
+
+<p>Let’s look at the <em>association</em> between an individual’s height, <code>Height</code>, and the hours of sleep they got last night, <code>HrsSleep</code>, from the <code>pennstate1</code> dataset.  </p>
+
+<p><img src="/images/figure/noassocxyhandheight.png" alt="No Association: There is no apparent pattern in where the points lie." /> </p>
+
+<p>In the scatterplot in Figure[No Association], it appears that all of the boxes have <em>about</em> the same number of points in them.  When this is the case, the variables have <strong>no linear association</strong>.</p>
+
+<p>In this class, we are only interested in variables that appear to have a <strong>linear association</strong>.  Our goal is to describe the <em>linear association</em> that we see in a scatterplot using the equation of a line.  Data with nonlinear association certainly exists.  For example, <strong>curvilinear</strong> data follows the trend of a curve, rather than a line.  You can see an example of this by looking at the <code>fuel</code> dataset.  Read the <code>help</code> file on this data to understand what the variables are.  </p>
+
+<pre><code>data(fuel)
+View(fuel)
+help(fuel)
+</code></pre>
+
+<p><img src="/images/figure/xyfuel.png" alt="Curvilinear: Efficiency (liters of fuel required to travel 100 kilometers) versus Speed (kilometers per hour)" /> </p>
+
+<p>The scatterplot clearly shows that this data would not be well represented by a line.  (See Figure[Curvilinear].)  As a vehicle’s speed increases up to about 60 kph, the amount of fuel required to travel 100 kilometers decreases.  However, as a vehicle’s speed increases from about 60 kph, the fuel efficiency increases.   We will not discuss nonlinear data this semester.  However, you should be aware that the relationship between two numerical variables is not always a linear one.</p>
+
+<h3 id="correlation">Correlation</h3>
+
+<h4 id="strength-of-association">Strength of Association</h4>
+
+<p>So far, we’ve investigated relationships between two numerical variables by looking at the <em>scatterplot</em> and making note of the <em>observed pattern</em> and <em>direction of association</em>.  However, as we can see in the following scatterplots, we should also consider the <strong>strength of association</strong> between two variables.  See Figure[Strength of Association].</p>
+
+<p><img src="/images/figure/twopositivexy1.png" alt="Strength of Association:  Two examples of pairs of variables with positive linear association.  The first scatterplot shows a positive linear association between Height (in) and Fastest Speed Ever Driven (mph).  The second scatterplot shows a stronger positive linear association between Height (in) and Ideal Height (in)." /> <img src="/images/figure/twopositivexy2.png" alt="Strength of Association:  Two examples of pairs of variables with positive linear association.  The first scatterplot shows a positive linear association between Height (in) and Fastest Speed Ever Driven (mph).  The second scatterplot shows a stronger positive linear association between Height (in) and Ideal Height (in)." /> </p>
+
+<p>These scatterplots both display 2 variables that are <strong>positively associated</strong>, but there is less “scatter” in the second plot.  The variable <code>height</code> appears to have a stronger <em>association</em> with <code>ideal_ht</code> than it does with <code>fastest</code>.  To distinguish between the amount of “scatter” in a plot, it is useful to assign a numerical value to the <strong>strength of association</strong>.</p>
+
+<blockquote>
+  <p><em>Definition:</em>  <strong>Correlation</strong> is the numerical measure of the direction and strength of the linear association between two numerical variables.</p>
+</blockquote>
+
+<p>The formula for the <em>correlation coefficient</em>, $r$, is written:</p>
+
+<script type="math/tex; mode=display"> r=\frac{1}{n-1}\sum{\bigg(\frac{x_i-\bar{x}}{s_x}\bigg)\bigg(\frac{y_i-\bar{y}}{s_y}\bigg)}</script>
+
+<p>where:</p>
+
+<ul>
+  <li>$n$ denotes the number of values in the list</li>
+  <li>$\sum$ means summing</li>
+  <li>$x_i$ denotes the individual $x$ values </li>
+  <li>$\bar{x}$ denotes the average of the $x$’s</li>
+  <li>$s_x$ denotes the SD of the $x$’s</li>
+  <li>$y_i$ denotes the individual $y$ values </li>
+  <li>$\bar{y}$ denotes the average of the $y$’s</li>
+  <li>$s_y$ denotes the SD of the $y$’s</li>
+</ul>
+
+<p>Since this calculation can be cumbersome, we will use R’s built in function, <code>cor</code>.  The correlation coefficient for the variables <code>height</code> and <code>fastest</code> from the <code>m111survey</code> dataset plotted in the first scatterplot in Figure[Strength of Association] can be found by:</p>
+
+<pre><code>cor(fastest~height,data=m111survey,use="na.or.complete")
+
+## [1] 0.1709
+</code></pre>
+
+<p>Let’s compare this to the correlation coefficient for the variables <code>height</code> and <code>ideal_ht</code> from the <code>m111survey</code> dataset plotted in the second scatterplot in Figure[Strength of Association].</p>
+
+<pre><code>cor(ideal_ht~height,data=m111survey,use="na.or.complete")
+
+## [1] 0.832
+</code></pre>
+
+<p>What we’ve just observed holds true in general.  </p>
+
+<ul>
+  <li>
+    <p><strong>Positively associated</strong> variables have a <strong>positive correlation</strong> coefficient, $r&gt;0$.  Consult Geek Notes for a detailed explanation.  </p>
+  </li>
+  <li>
+    <p>The stronger the association is between variables, the larger the correlation coefficient, $r$, will be.</p>
+  </li>
+</ul>
+
+<p>The same ideas hold true for <strong>negatively associated</strong> variables and variables with <strong>no association</strong>.  Let’s summarize all of the properties of the correlation coefficient, $r$.</p>
+
+<p><strong>Properties of $r$</strong></p>
+
+<ul>
+  <li>
+    <p>$r$ always falls between 1 and -1.</p>
+  </li>
+  <li>
+    <p>The <strong>sign</strong> of r indicates the <em>direction</em> of the relationship.</p>
+
+    <ul>
+      <li>$r&gt;0$ indicates a <em>positive association</em></li>
+      <li>$r&lt;0$ indicates a <em>negative association</em></li>
+    </ul>
+  </li>
+  <li>
+    <p>The <strong>magnitude</strong> of r indicates the <em>strength</em> of the relationship.  See Figure[Correlation Values].</p>
+
+    <ul>
+      <li>$r = 1$ indicates a <em>perfect positive</em> linear relationship. All points fall exactly on a line sloping upward.</li>
+      <li>$r = -1$ indicates a <em>perfect negative</em> linear relationship. All points fall exactly on a line sloping downward.</li>
+      <li>$r = 0$ indicates <em>no</em> linear relationship.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="/images/figure/correlationvalues.png" alt="Correlation Values:  The first scatterplot represents two variables that have a perfect positive linear relationship, $r=1$.  The second scatterplot represents two variables that have a perfect negative linear relationship, $r=-1$.  The third scatterplot represents two variables that have no linear relationship, $r=0$." /> </p>
+
+<p>You can investigate this with the following app, as well.</p>
+
+<pre><code>require(manipulate)
+VaryCorrelation()
+</code></pre>
+
+<p>Let’s look at an example.</p>
+
+<blockquote>
+  <p><strong>Research Question</strong>:   At UCDavis, how is a student’s mom’s height (<code>momheight</code>) related to their dad’s height (<code>dadheight</code>)?  </p>
+</blockquote>
+
+<p>Since we are interested in how a mother’s height is related to a father’s height, we will treat <code>dadheight</code> as the explanatory variable and <code>momheight</code> as the response variable.  We will start by taking a look at the scatterplot.  See Figure[Mom/Dad Height].</p>
+
+<pre><code>xyplot(momheight~dadheight,data=ucdavis1)
+</code></pre>
+
+<p><img src="/images/figure/xymomdadheight.png" alt="Mom/Dad Height" /> </p>
+
+<p>Since our cloud of points seems to be somewhat shaped upward to the right, it seems that students with tall dads tend to have tall moms as well and students with short dads also have short moms.  This suggests that the correlation coefficient will be positive.  However, since the cloud of points is not very tightly clustered, we might think that this association is not very strong.  We might predict that the correlation coefficient, $r$, will be positive but closer to 0 than it is to 1.  Let’s find out.</p>
+
+<pre><code>cor(momheight~dadheight,data=ucdavis1,use="na.or.complete")
+
+## [1] 0.2572
+</code></pre>
+
+<h3 id="regression-equation">Regression Equation</h3>
+
+<p><strong>Regression analysis</strong> is used to numerically explain the linear
+relationship between two numerical variables using the equation of a line.  It is much more specific than the visual analysis we’ve been making by looking at scatterplots.</p>
+
+<p>Recall that the equation of the line $y=\frac{5}{9}(x-32)$ was used to describe the <em>deterministic</em> relationship between degrees Celcius and degrees Fahrenheit.  This equation let us determine the <strong>exact</strong> temperature in Celcius by knowing the temperature in Fahrenheit.</p>
+
+<p>The <strong>regression equation</strong> is the equation of a line that is used to <em>predict</em> the value for the response variable ($y$) from a known value of the explanatory variable ($x$) in a <em>statistical</em> relationship.  It describes how, <em>on average</em>, the response variable is related to the explanatory variable.  </p>
+
+<p>In general, the equation of the <strong>regression</strong> line is</p>
+
+<script type="math/tex; mode=display">\hat{y}=a+bx</script>
+
+<p>where:</p>
+
+<ul>
+  <li>
+    <p>$a$ is the <em>$y$-intercept</em>.  (The $y$-intercept is the point where the line crosses the vertical axis.  It is the height of the line at $x=0$.)</p>
+  </li>
+  <li>
+    <p>$b$ is the <em>slope</em>. (The slope is the inclination or orientation of the line.  It is calculated by the ratio $\frac{\mbox{rise}}{\mbox{run}}$.)</p>
+  </li>
+  <li>
+    <p>$x$ is the <em>known</em> value of the explanatory variable.</p>
+  </li>
+  <li>
+    <p>$\hat{y}$ is the <em>predicted</em> value of the response variable.</p>
+  </li>
+</ul>
+
+<p>The regression line is the line that best approximates the data in the scatterplot.  Returning to our original research question involving the variables <code>Height</code> and <code>RtSpan</code> from the <code>pennstate1</code> dataset, let’s take a look at the regression line.  See Figure[Hand/Height Regression Line].</p>
+
+<p><img src="/images/figure/regressionlineheightrtspan.png" alt="Hand/Height Regression Line:  The regression line is plotted on the scatterplot showing the relationship between right handspan and height." /> </p>
+
+<p>Each point $(x,y)$ on the scatterplot is an observation—known $x$ and $y$-values.  These points correspond to the measurements for an actual individual in the sample. Each point $(x,\hat{y})$ on the regression line is a known $x$-value and its predicted response, $\hat{y}$.</p>
+
+<h4 id="residuals">Residuals</h4>
+
+<p>You can see how the regression line in Figure[Hand/Height Regression Line] seems to do a good job describing the trend of the points in the scatterplot.  In fact, it “best fits” the data.  The <em>regression</em> (best fit) line is the line that is collectively the closest, in terms of vertical measurement, to all of the points on the scatterplot.  These vertical measurements are called <strong>residuals</strong>.  Residuals measure the size of the prediction errors. </p>
+
+<blockquote>
+  <p><em>Definition:</em> For a given data point $(x,y)$, the <strong>residual</strong> is the difference between the observed response and the response that is predicted by the regression line.  </p>
+</blockquote>
+
+<p>This can be written</p>
+
+<script type="math/tex; mode=display">y - \hat{y}.</script>
+
+<p>On the graph, a residual is the vertical distance between a point and the regression line.  Several residuals are plotted on the scatterplot shown in Figure[Residuals].</p>
+
+<p><img src="/images/figure/handheightresiduals.png" alt="Residuals" /> </p>
+
+<p>A residual can be computed for every point on the scatterplot.  The regression line $\hat{y} = a + bx$ is determined by choosing $a$ (intercept) and $b$ (slope) so that the sum of the (squared) residuals is minimized.</p>
+
+<script type="math/tex; mode=display">\mbox{Sum of Squares }= \sum(\mbox{ residuals})^2 = \sum(y_i-\hat{y})^2 </script>
+
+<p>Investigate how to minimize the sum of squared residuals with the following app.</p>
+
+<pre><code>require(manipulate)
+FindRegLine()
+</code></pre>
+
+<p>If you are interested in how the actual values of $a$ and $b$ are calculated, consult Geek Notes.</p>
+
+<h4 id="predictions">Predictions</h4>
+
+<p>Now that we know what the regression equation means and how it is found, let’s use it to make some statements about the Pennstate scatterplot of heights and right handspans.  </p>
+
+<blockquote>
+  <p><strong>Research Question</strong>:   What is the predicted height of a Pennstate student with a  right handspan measurement of 22 cm?</p>
+</blockquote>
+
+<p>We have already seen the graph of the regression line in Figure[Hand/Height Regression Line].  Now, we would like to know the equation for this line.  R has a built in function, <code>lmGC</code>, to compute this equation.  (The <code>lm</code> stands for “linear model”.)  This function also has the option to graph the regression line (set <code>graph=TRUE</code>).  </p>
+
+<pre><code>lmGC(Height~RtSpan,data=pennstate1,graph=TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  0.6314 
+## 
+## Equation of Regression Line:
+## 
+## 	 Height = 41.96 + 1.239 * RtSpan 
+## 
+## Residual Standard Error:	s   = 3.149 
+## R^2 (unadjusted):		R^2 = 0.3987
+</code></pre>
+
+<p><img src="/images/figure/heighthandxyreg.png" alt="Height/Hand Regression:  In the lmGC function, the parameter graph=TRUE will plot the regression line as well as giving the equation of the regresion line." /> </p>
+
+<p>So the equation of our regression line is</p>
+
+<script type="math/tex; mode=display">\hat{y}=41.9593+1.2394 x</script>
+
+<p>We can now answer the research question two different ways.  We can use R as a calculator and plug $x=22$ into the equation above.</p>
+
+<pre><code>41.95935+1.239448*22
+
+## [1] 69.23
+</code></pre>
+
+<p>A Penn State student with a right handspan of 22 centimeters will have a predicted height of 69.22721 inches.</p>
+
+<p>Another way to do this is using the <code>predict</code> function.  The <code>predict</code> function requires two inputs:</p>
+
+<ul>
+  <li>a linear model</li>
+  <li>a value of the explanatory variables, $x$</li>
+</ul>
+
+<p>In order to use the <code>predict</code> function, you must store your linear model in a variable.  </p>
+
+<pre><code>handheightmod &lt;- lmGC(Height~RtSpan,data=pennstate1)
+predict(handheightmod,22)
+
+## [1] 69.23
+</code></pre>
+
+<h4 id="interpretation-of-slope-and-intercept">Interpretation of Slope and Intercept</h4>
+
+<p>It’s also important that we know how to interpret the <em>slope</em> and <em>intercept</em> of a regression line.  Let’s take a look at the <code>pushups</code> dataset. </p>
+
+<pre><code>data(pushups)
+View(pushups)
+help(pushups)
+</code></pre>
+
+<p>Now, we can view the equation of the regression line as well as the scatterplot with the regression line plotted. See Figure[Pushups]. </p>
+
+<pre><code>## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.4675 
+## 
+## Equation of Regression Line:
+## 
+## 	 weight = 247.5 + -0.8243 * pushups 
+## 
+## Residual Standard Error:	s   = 39.57 
+## R^2 (unadjusted):		R^2 = 0.2185
+</code></pre>
+
+<p><img src="/images/figure/xyweightpushups.png" alt="Pushups:  Scatterplot and Regression line for Pushups versus Weight Relationship" /> </p>
+
+<ul>
+  <li>
+    <p>What does the <strong>intercept</strong> <em>mean</em>?  247.4886 is the <em>predicted</em> weight of a GC football player who cannot do any pushups in 2 minutes.</p>
+  </li>
+  <li>
+    <p>What does the <strong>slope</strong> <em>mean</em>?  The <em>predicted</em> weight of a football player changes by -0.8243 pounds as the max number of pushups in two minutes increases by 1.  In other words, for every one pushup increase, the predicted weight of the football player decreases by -0.8243 pounds. This tells us that there is a <em>negative</em> association between max number of pushups and weight!</p>
+  </li>
+</ul>
+
+<p><strong>Note:</strong> The interpretation of the intercept doesn’t always make sense!  Consider, for example, what would happen if we used <code>weight</code> as the explanatory variable and <code>pushups</code> as the response.  See Figure[Slope/Intercept Interpretation].</p>
+
+<pre><code>## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.4675 
+## 
+## Equation of Regression Line:
+## 
+## 	 pushups = 97.69 + -0.2651 * weight 
+## 
+## Residual Standard Error:	s   = 22.44 
+## R^2 (unadjusted):		R^2 = 0.2185
+</code></pre>
+
+<p><img src="/images/figure/xypushupsweight.png" alt="Slope/Intercept Interpretation:  Slope and intercept interpretation for the regression line used to predict maximum number of pushups from weight of a football player." /> </p>
+
+<ul>
+  <li>
+    <p>Intercept Interpretation:  97.6857 is the <em>predicted</em> maximum number of pushups of a GC football player who weighs 0 pounds can do in 2 minutes.  This doesn’t make any logical sense!</p>
+  </li>
+  <li>
+    <p>Slope Interpretation:  The <em>predicted</em> maximum number of pushups that a football player can do in two minutes changes by -0.2651  as the weight of the football player increases by 1 pound.  In other words, for every one pound increase in weight, the predicted maximum number of pushups decreases by -0.2651. </p>
+  </li>
+</ul>
+
+<h4 id="how-well-does-our-regression-line-fit">How Well does our Regression Line fit?</h4>
+
+<p>If all the data in a scatterplot lie <em>on</em> the regression line, we say that our regression line perfectly explains the data.  However, this is rarely the case.  We usually have points that do not lie on the regression line.  Anywhere that this happens, we have <em>variation</em> that is not explained by the regression line.  If the data is not on a line, then a line will not be a <em>perfect</em> explanation of the data. </p>
+
+<p>One way we can measure this variation is the <strong>residual standard error, RSE</strong>.  This does exactly what it sounds like - it measures the <em>spread</em> of the residuals (those vertical distances between observations and the regression line).  This value is in the output of the <code>lmGC</code> function.  </p>
+
+<p>However, we run into a problem when using the <strong>residual standard error</strong> measurement to measure the variation in the plot.  The <strong>residual standard error</strong> for the <code>Height</code> and <code>RtSpan</code> data from <code>pennstate1</code> is 3.1486. </p>
+
+<pre><code>lmGC(Height~RtSpan,data=pennstate1)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  0.6314 
+## 
+## Equation of Regression Line:
+## 
+## 	 Height = 41.96 + 1.239 * RtSpan 
+## 
+## Residual Standard Error:	s   = 3.149 
+## R^2 (unadjusted):		R^2 = 0.3987
+</code></pre>
+
+<p>For this model, the unit of measure for height is inches.  Consider what happens when we change this model by converting the unit of measure for height to feet.  Take a look at the scatterplots and regression lines for these two models.  See Figure[Different Units].</p>
+
+<p><img src="/images/figure/unitconversionmodels1.png" alt="Different Units:  Compare the scatterplot and regression line for RtSpan (cm) vs. Height (inches) and the scatterplot and regression line for RtSpan (cm) vs. Height (feet)." /> <img src="/images/figure/unitconversionmodels2.png" alt="Different Units:  Compare the scatterplot and regression line for RtSpan (cm) vs. Height (inches) and the scatterplot and regression line for RtSpan (cm) vs. Height (feet)." /> </p>
+
+<p>This change in unit of the response variable does not affect the way the scatterplot of regression line looks.  The regression line did an equally good job of fitting the data, in both scatterplots.  It does, however, directly affect the value of the residuals.  The residuals in the first plot have a much larger value than the residuals in the second plot.  This causes the <em>spread</em> of the residuals (the <strong>residual standard error</strong>) to be bigger in the first plot.  Hence, residual standard error is not the best way of measuring the variation accounted for by the regression line.   </p>
+
+<p>Another measurement of the “explained variation” in the scatterplot is the <strong>squared correlation</strong>, $r^2$.  This also measures how well our regression line fits the data.  However, it tells us the <em>proportion</em> of variation in the response variable that is explained by the explanatory variable.  A change in unit (or scale) will not affect the value of $r^2$.  </p>
+
+<h4 id="properties-of-r2">Properties of $r^2$</h4>
+
+<ul>
+  <li>$r^2$ always has a value between 0 and 1.</li>
+  <li>$r^2=1$ implies perfect correlation between explanatory and response variables.</li>
+  <li>$r^2=0$ implies no correlation.</li>
+</ul>
+
+<p><strong>Beware</strong>:  A low $r^2$ value does not necessarily mean that there is <strong>no</strong> relationship between the explanatory variable and the response.  It might mean that a linear model is not an appropriate model!  So, a low $r^2$ value means one of two things for us:</p>
+
+<ul>
+  <li>There is a linear relationship between the variables, but there’s just alot of scatter in the data.</li>
+  <li>You might have the wrong model.  In other words, the data might not follow a linear pattern.  For example, consider the relationship we saw in the curvilinear <code>fuel</code> data from before.  See Figure[R-squared for Nonlinear Data].</li>
+</ul>
+
+<p><img src="/images/figure/rsquaredfuel.png" alt="R-squared for Nonlinear Data" /> </p>
+
+<pre><code>## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.1716 
+## 
+## Equation of Regression Line:
+## 
+## 	 efficiency = 11.06 + -0.01466 * speed 
+## 
+## Residual Standard Error:	s   = 3.905 
+## R^2 (unadjusted):		R^2 = 0.02945
+</code></pre>
+
+<p>Here, we get a small $r^2$ value.  However, there is certainly a relationship between <code>efficiency</code> and <code>speed</code> - just not a <em>linear</em> one!  It is always important that you visually examine the data before drawing conclusions based on certain statistics!</p>
+
+<h2 id="cautions">Cautions</h2>
+
+<h3 id="extrapolation">Extrapolation</h3>
+
+<p>The regression line we found for predicting <code>Height</code> from <code>RtSpan</code> using the <code>pennstate1</code> dataset, $\hat{y}=41.9593+1.2394x$. can be used for <strong>interpolation</strong>, i.e. predicting a height for a person that was not in the original dataset, but is within the range of right handspans covered by the dataset.  However, it is inappropriate to use this regression line to predict a height for someone with a hand span that is outside of the range covered by the dataset.</p>
+
+<blockquote>
+  <p><em>Definition:</em>  <strong>Extrapolation</strong> is using a regression line to predict $y$-values for
+$x$-values outside the observed $x$-values.</p>
+</blockquote>
+
+<p>Sultan Kosen holds the Guiness World Record for the tallest living male. (His right handspan measures 30.48 cm, which is considerably bigger than all of the hand-spans in our dataset.  If we extrapolate using the regression line from this dataset, then we would predict his height to be $\hat{y}=41.9593+1.2394\cdot 30.48=79.36$ inches $\approx$ 6’ 7.5”.  But he was really 8’ 3”!  The prediction based on extrapolation was not very accurate. </p>
+
+<h3 id="influential-observations">Influential Observations</h3>
+
+<blockquote>
+  <p><em>Definition:</em> <strong>Influential observations</strong> are observations which have a large effect on correlation and regression:</p>
+</blockquote>
+
+<ul>
+  <li>They have extreme x-values. </li>
+  <li>They inflate or deflate correlation. </li>
+  <li>Their affect the slope of the regression line.</li>
+</ul>
+
+<p>Investigate <strong>influential observations</strong> with the following app.</p>
+
+<pre><code>require(manipulate)
+Points2Watch()
+</code></pre>
+
+<h3 id="association-versus-causation">Association versus Causation</h3>
+
+<p>Two variables having a high positive (or high negative) correlation between two variables suggests that there is a linear association that exists between them.  However, correlation does <em>not</em> imply causation.  In other words, strong correlation does not imply that one variable <em>causes</em> the other.  </p>
+
+<p>Consider the variables <code>height</code> and <code>fastest</code> in the <code>m111survey</code> dataset.  The scatterplot and correlation coefficient suggest that taller people tend to have driven at a higher maximum speed.  See Figure[Height/Fastest Scatterplot].</p>
+
+<p><img src="/images/figure/fastestheightxy.png" alt="Height/Fastest Scatterplot" /> </p>
+
+<pre><code>cor(height~fastest,data=m111survey,use="na.or.complete")
+
+## [1] 0.1709
+</code></pre>
+
+<p>There a positive correlation between height and top speed.  However, this does not necessarily mean that being tall <em>causes</em> you to drive faster.  It’s certainly not the case that tall people can’t help but have a heavy foot!  There may be a confounding variable that is (at least partially) responsible for the observed association.  One possible confounder is <code>sex</code>.  See Figure[Height/Fastest by Sex].  This suggests that males tend to drive faster than females.  Since males also tend to be taller than females, this helps to explain the pattern we saw in the original scatterplot.</p>
+
+<p><img src="/images/figure/fastestheightxysex.png" alt="Height/Fastest by Sex:  Grouping shows that sex may be a confounding variable that helps to explain why taller people tend to drive faster." /> </p>
+
+<h3 id="simpsons-paradox">Simpson’s Paradox</h3>
+
+<p><strong>Recall</strong>:  Simpson’s Paradox occurs when the direction of the relationship between two variables is one way when you look at the aggregate data, but turns out the opposite way when you break up the data into subgroups based on a third variable.   <em>You saw this back in Chapter 3 with two categorical variables!</em></p>
+
+<p><strong>Simpson’s Paradox</strong> can arise with two numerical variables as well!</p>
+
+<p>Let’s look at a new dataset, <code>sat</code>. </p>
+
+<pre><code>data(sat)
+View(sat)
+help(sat)
+</code></pre>
+
+<p>We can describe the  relationship between <code>salary</code> (mean annual teacher salary by state in $1000s) and <code>sat</code> (sum of mean Verbal and mean Math scores by state) using the correlation coefficient, scatterplot, and regression line.   See Figure[SAT].  </p>
+
+<pre><code>with(sat,
+     cor(sat,salary,use="na.or.complete"))
+
+## [1] -0.4399
+
+ 
+ 
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.4399 
+## 
+## Equation of Regression Line:
+## 
+## 	 sat = 1159 + -5.54 * salary 
+## 
+## Residual Standard Error:	s   = 67.89 
+## R^2 (unadjusted):		R^2 = 0.1935
+</code></pre>
+
+<p><img src="/images/figure/satanalysis.png" alt="SAT:  Association between Average Annual Teacher Salary and Average Cumulative SAT Score (by state)" /> </p>
+
+<p>Our regression analysis suggests that as teachers are paid higher salaries, the average SAT score drops.  However, our intuition tells us that higher salaries would attract better teachers, who in turn would better prepare students for the SAT.  What’s going on here?</p>
+
+<p>Use the following app to investigate what happens when we take into account a third variable, <code>frac</code>.  This is the percentage of students in the state who take the SAT.</p>
+
+<pre><code>require(manipulate)
+DtrellScat(sat~salary|frac,data=sat)
+</code></pre>
+
+<p>We can see that within most subgroups, the slope of the regression line is positive, while the regression line for the overall data has a negative slope. </p>
+
+<p>How can we explain this paradox?  </p>
+
+<p><strong>First Observation:</strong>  It turns out that states where education is considered a high priority pay their teachers higher salaries.  But since education is a high priority in these states, a high proportion of students in these states want to go to college, so a high proportion of them take the SAT.  Similarly, states where education isn’t such an important part of the economy or the culture tend to pay their teachers less, and they also tend to have fewer students taking the SAT.  So we’ve got a <strong>positive</strong> association between <em>frac</em> and <strong>salary</strong>.</p>
+
+<p>Check this out in Figure[Frac/Salary Scatterplot].</p>
+
+<p><img src="/images/figure/salaryfracxy.png" alt="Frac/Salary Scatterplot:  Percentage of students in the state that take the SAT vs. the average annual teacher salary." /> </p>
+
+<p><strong>Second Observation</strong>:  When a high percentage of students in a state take the SAT, this pool of test-takers is bound to include both the very strong students and those who are not so strong, so the mean SAT score is liable to be low.  On the other hand, in states where fewer students take the SAT, the students who opt to take the test are likely to be highly motivated, definitely college-bound, very studious individuals.  This elite pool tends to boost the mean SAT score for the state.  So we’ve got a <strong>negative</strong> association between <strong>frac</strong> and <strong>sat</strong>.</p>
+
+<p>Again, check this out in Figure[Frac/SAT Scatterplot].</p>
+
+<p><img src="/images/figure/satfracxy.png" alt="Frac/SAT Scatterplot:  Percentage of students in the state that take the SAT vs. the average cumulative SAT score." /> </p>
+
+<p>Finally, put it together:  the positive association between <strong>salary</strong> and <strong>frac</strong> and the negative association between <strong>frac</strong> and <strong>sat</strong> results in the negative association between <strong>salary</strong> and <strong>sat</strong>.</p>
+
+<p>To put it in a nontechnical “nutshell”:  states where education is important tend to pay their teachers well, but they also “handicap” themselves by encouraging most students (including the weaker ones) to take tests like the SAT.  The handicap is so pronounced that higher values of <strong>salary</strong> tend to go along with lower values of <strong>sat</strong>.</p>
+
+<h2 id="thoughts-on-r">Thoughts on R</h2>
+
+<h3 id="new-r-functions">New R Functions</h3>
+
+<p>Know how to use these functions:</p>
+
+<ul>
+  <li><code>xyplot</code>  </li>
+  <li><code>cor</code>  </li>
+  <li><code>lmGC</code></li>
+</ul>
+
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://homerhanumat.github.io/book/ch4.html" data-via="" data-counturl="http://homerhanumat.github.io/book/ch4.html" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Chapters</h1>
+  <ul id="chapters">
+      <li class="post"><a href="ch1.html">Chapter 1</a></li>
+       <li class="post"><a href="ch2.html">Chapter 2</a></li>
+        <li class="post"><a href="ch3.html">Chapter 2</a></li>
+         <li class="post"><a href="ch4.html">Chapter 2</a></li>
+          <li class="post"><a href="ch5.html">Chapter 2</a></li>
+           <li class="post"><a href="ch6.html">Chapter 2</a></li>
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

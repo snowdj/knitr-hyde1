@@ -1,0 +1,877 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Design of Studies - A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Design of Studies Observational Studies and Experiments Why Perform Experiments? Completely Randomized Designs Randomized Block Designs Blocking &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/book/ch6.html">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/book/index.html">Book</a><li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article role="article">
+  
+  <header>
+    <h1 class="entry-title">Design of Studies</h1>
+    
+  </header>
+  
+  <ul id="markdown-toc">
+  <li><a href="#observational-studies-and-experiments">Observational Studies and Experiments</a></li>
+  <li><a href="#why-perform-experiments">Why Perform Experiments?</a></li>
+  <li><a href="#completely-randomized-designs">Completely Randomized Designs</a></li>
+  <li><a href="#randomized-block-designs">Randomized Block Designs</a>    <ul>
+      <li><a href="#blocking">Blocking</a></li>
+      <li><a href="#matched-pair-designs">Matched Pair Designs</a></li>
+    </ul>
+  </li>
+  <li><a href="#repeated-measure-designs">Repeated-Measure Designs</a></li>
+  <li><a href="#considerations-about-experiments">Considerations About Experiments</a>    <ul>
+      <li><a href="#reproducibility">Reproducibility</a></li>
+      <li><a href="#subjects-and-the-population">Subjects and the Population</a></li>
+      <li><a href="#statistical-significance">Statistical Significance</a></li>
+    </ul>
+  </li>
+  <li><a href="#terminology-for-experiments">Terminology for Experiments</a></li>
+  <li><a href="#thoughts-on-r">Thoughts on R</a>    <ul>
+      <li><a href="#new-r-functions">New R-functions</a></li>
+      <li><a href="#book-chapter-notation">“Book-Chapter” Notation</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="observational-studies-and-experiments">Observational Studies and Experiments</h2>
+
+<p>The <code>attitudes</code> data frame contains the results of a large-scale survey conducted at Georgetown College in the fall semester of 2001:</p>
+
+<pre><code>data(attitudes)
+View(attitudes)
+help(attitudes)
+</code></pre>
+
+<p>This dataset prompts many research questions concerning the relationship between two variables.  For example, the numerical variable <strong>sentence</strong> gives the sentence recommended for a hypothetical defendant who has been convicted for involuntary manslaughter in a drunk-driving incident.  Another variable—the factor <strong>major</strong>—records the type of major that the survey participant intends to pursue.  A Research Question on the relationship between these two variables might take the form:</p>
+
+<blockquote>
+  <p><em>Which type of major tends to be hardest on crime?</em></p>
+</blockquote>
+
+<p>Let’s quickly explore this question.  We can take a numerical approach:</p>
+
+<pre><code>favstats(sentence~major,data=attitudes)
+
+##            min    Q1 median    Q3 max  mean    sd   n missing
+## humanities   5 11.25     20 38.75  50 25.26 15.97  38       0
+## math.sci     5 20.00     30 50.00  50 30.49 15.65  77       0
+## pre.prof     3 14.00     25 32.50  50 25.02 15.05 107       1
+## social.sci   4 15.00     25 40.00  50 25.49 14.67  45       0
+</code></pre>
+
+<p>Comparing the means of the four major groups, it seems that math and science majors recommend sentences that are, on average, about five years longer than sentences recommended by the other three major groups.</p>
+
+<p>We can also take a graphical approach.  Figure [Sentence by Major] also indicates that math and science majors are harder on crime.  (Note, for instance, that their median is about five years above the medians for the other three groups.)</p>
+
+<p><img src="/images/figure/majorsent.png" alt="Sentence by Major.  The survey respondents are broken into four groups, accordng to the type of majors they intend to pursue." /> </p>
+
+<p>The data for this research question – the variables <strong>major</strong> and <strong>sentence</strong> – were gathered by means of an <em>observational study</em>:</p>
+
+<p>Observational Study</p>
+
+<p>:   In an <em>observational study</em> researchers simply observe or question the subjects.  In particular, they measure the values of the explanatory variable $X$ and measure the values of the response variable $Y$, for each subject.</p>
+
+<p>For each student in the survey, we measured the value of the variable <strong>major</strong> for each student by recording his/her choice, and observed the value of <strong>sentence</strong> by recording the sentence he/she recommended.  Thus, the Research Question at hand was addressed by means of an observational study.</p>
+
+<p>But not all of the variables in the <code>attitudes</code> data were simply observed.  From the Help file on <code>attitudes</code>, we learn that not all subjects received the same survey form.  In particular, in the question for the drunk-driving incident, some of the subjects got a form where the question was stated as follows:</p>
+
+<blockquote>
+  <p>You are on a jury for a manslaughter case in Lewistown, PA. The defendant has been found guilty, and in Pennsylvania it is part of the job of the jury to recommend a sentence to the judge. The facts of the case are as follows. The defendant, Tyrone Marcus Watson, a 35-year old native of Lewistown, was driving under the influence of alcohol on the evening of Tuesday July 17, 2001. At approximately 11:00 PM Watson drove through a red light, striking a pedestrian, Betsy Brockenheimer, a 20-year old resident of Lewistown. Brockenheimer was taken unconscious to the hospital and died of her injuries about one hour later. Watson did not flee the scene, nor did he resist arrest.</p>
+</blockquote>
+
+<blockquote>
+  <p>The prior police record for Mr. Watson is as follows: two minor traffic violations, and one previous arrest, five years ago, for DUI. No one was hurt in that incident.</p>
+</blockquote>
+
+<blockquote>
+  <p>Watson has now been convicted of DUI and manslaughter. The minimum jail term for this combination of offenses is two years; the maximum term is fifty years. In the blank below, write a number from 2 to 50 as your recommended length of sentence for Tyrone Marcus Watson.</p>
+</blockquote>
+
+<p>Other subjects received a survey form in which the details of the incident were exactly the same as in the question above, except that the defendant’s name was given as “William Shane Winchester.”  In other forms, the name of the victim varied:  “Latisha Dawes”” instead of “Betsy Brockenheimer.”  All told, there were four variants of the drunk-driving question:</p>
+
+<p><strong>Defendant’s Suggested Race</strong>  <strong>Victim’s Suggested Race</strong>
+——————————  —————————–
+Black                           Black
+Black                           White
+White                           Black
+White                           White
+——-                         ——–</p>
+
+<p>Table: Form-Variation in the Drunk-Driving Question</p>
+
+<p>The purpose of varying the names—and with the names, the suggested race of the person—was to investigate Research Questions like the following:</p>
+
+<blockquote>
+  <p><strong>Research Question 1</strong>:  <em>Does the suggested race of the defendant have an effect on the length of sentence a subject would recommend?</em></p>
+</blockquote>
+
+<blockquote>
+  <p><strong>Research Question 2</strong>:  <em>Does the suggested race of the victim have an effect on the length of sentence a subject would recommend for the defendant?</em></p>
+</blockquote>
+
+<p>The data we collected for these Research Questions does <strong>not</strong> constitute an observational study:  the subjects did not choose which type of form to fill out; instead the researchers (randomly) assigned forms to subjects. This makes the study an <em>experiment.</em></p>
+
+<p>Experiment</p>
+
+<p>:   In an <em>experiment</em>, researchers manipulate something and observe the effects of the manipulation on a response variable.</p>
+
+<p>:   Most commonly, the manipulation consists in assigning the values of an explanatory variable $X$ to the subjects.</p>
+
+<p>In Research Question 1 above, the explanatory variable is <strong>defrace</strong>, the race of the defendant that is suggested by the name given to him in the form.  (The response variable is <strong>sentence</strong>.)  Since researchers assigned the values of <strong>defrace</strong> to each subject, Research Question 1 is being addressed through an experiment.</p>
+
+<p>In Research Question 2 above, the explanatory variable is <strong>vicrace</strong>, the race of the victim that is suggested by the name given to her in the form.  (The response variable is <strong>sentence</strong>.)  Since researchers assigned the values of <strong>vicrace</strong> to each subject, Research Question 2 also is being addressed through an experiment.</p>
+
+<p>For further practice in distinguishing between experiments and observational studies, study the following examples:</p>
+
+<blockquote>
+  <p><strong>Example</strong>:  Researchers test whether zinc lozenges help people with colds recover more quickly than if they took no lozenges at all.  They gather 40 people who are suffering from a cold, and randomly choose 20 of them to take zinc lozenges.  The remaining 20 also take a lozenge, but it the lozenge is made of an inert substance that is known to have no effect on the body.</p>
+</blockquote>
+
+<p>In this situation, the explanatory variable is whether or not one takes a zinc lozenge, and the response variable is the time it takes to recover from the cold.  Since researchers randomly picked who would get a zinc lozenge, the values of the explanatory variable were assigned by the researchers.  This makes the study as experiment.</p>
+
+<blockquote>
+  <p><strong>Example</strong>:  Researchers gather a number of people.  They find that, of those who wear bifocals, 5% have colon cancer.  Of those who do not wear bifocals, only 1% have colon cancer.</p>
+</blockquote>
+
+<p>In the second situation, the Research Question of interest appears to concern the relationship between whether or not one wears bifocals and whether or not one gets colon cancer.  It’s not clear which variable—if either–is supposed to be the explanatory, but since neither variable had its values assigned to subjects (researchers did not make anyone wear bifocals, or give colon cancer to anyone!) the study is clearly just an observational study.</p>
+
+<h2 id="why-perform-experiments">Why Perform Experiments?</h2>
+
+<p>Because in an experiment researchers assign values of the explanatory variable $X$ to subjects, experiments can be difficult to perform.  For example, in the lozenge example above, most people would prefer to choose for themselves what medicine to take for a cold.  In an experiment, someone else assigns the treatment to you.  It’s difficult to recruit subjects for such a study!</p>
+
+<p>Why, then, do researchers go to the trouble to do experiments?  Why not just perform observational studies all of the time?</p>
+
+<p>The answer has to do with the distinction, introduced in Chapter Four, between association and causation.  We know already that two variables can be associated without there being a <em>causal</em> relationship between them.  But there are many situations in which we really do want to know if an observed association is due to a causal relationship.  Here are some examples:</p>
+
+<blockquote>
+  <ol>
+    <li>We may find that smokers tend to develop lung cancer at a higher rate than non-smokers; we would like to know whether smoking actually <em>causes</em> lung cancer.</li>
+  </ol>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>We may find that men drive faster than women, but we wonder whether a person’s sex is a causal factor in how fast he or she drives.</li>
+  </ol>
+</blockquote>
+
+<blockquote>
+  <ol>
+    <li>Bifocal wearers have colon cancer at a higher rate than do those who do not wear bifocals, but does this mean that wearing bifocals increases your risk of colon cancer?</li>
+  </ol>
+</blockquote>
+
+<p>Consider the last example above:  we don’t think that wearing bifocals causes lung cancer, because we know that folks who wear bifocals tend to be older than those who don’t, and we know that the risk of colon cancer increases with age.  Age is considered a <em>confounding variable</em> that explains the association between bifocal-wearing and colon cancer.</p>
+
+<p>Confounding Variable</p>
+
+<p>:   In a study with an explanatory variable $X$ and a response variable $Y$, the variable $Z$ is called a <em>confounding</em> variable if it meets the following three conditions:</p>
+
+<blockquote>
+  <ol>
+    <li>It is a third variable (different from X and different from Y);</li>
+    <li>It is associated with X, but not caused by X.</li>
+    <li>It is a causal factor in Y (is at least part of the cause of Y)</li>
+  </ol>
+</blockquote>
+
+<p>Thus, <strong>age</strong> (Z) is indeed a confounding variable in a study of the relationship between <strong>whether or not one wears bifiocals</strong> (X) and <strong>whether or not one has colon cancer</strong> (Y).  We know this because:</p>
+
+<ul>
+  <li><strong>Age</strong> is a third variable;</li>
+  <li><strong>Age</strong> causes bifocal wearing–older people have worse eysesight, and so choose to wear corrective lenses, including bifocals—and so <strong>age</strong> is associated with bifocal wearing.</li>
+  <li>
+    <p><strong>Age</strong> helps to cause colon cancer.</p>
+
+    <blockquote>
+      <p><strong>Note</strong>:  In Condition 2 in the definition of confounding variables we included the requirement that Z must not be caused by X.  The reason for doing this is that if Z were caused by X, then, since Z helps to cause Y, X would help to cause Y indirectly after all.  (We consider indirect causes to be legitimate causes; in fact, pretty much anything that we think of as a “cause” does its causal work indirectly.)</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p>A difficulty with observational studies is that because subjects come to you with the value of their X variable already in place, observational studies are pervasively subject to the possibility of confounding variables.  In the bifocal and colon cancer study, people choose whether or not to wear bifocals, and that choice is caused somewhat by their age.  Hence the two groups being compared in the study—the bifocal-wearers and the non-bifocal wearers—differ with respect to age.  Therefore we cannot attribute an observed difference in their colon cancer rates to the wearing of bifocals:  the difference is probably due to age (or to other variables associated with age).</p>
+
+<p>For another example, think back to the <strong>sat</strong> data, with which we attempted to study the relationship between teacher salary (X) and SAT score (Y) for states.  Although we observed an association (states that paid their teachers more tended to have lower SAT scores), we could not conclude that paying teachers more <em>causes</em> their students to perform worse:  the variable <strong>frac</strong> was a confounder.  After all,</p>
+
+<ul>
+  <li><strong>frac</strong> is a third variable (different from <strong>salary</strong> and from <strong>sat</strong>);</li>
+  <li>states where <strong>frac</strong> is high are states that tend to place value on education, so they are liable to pay their teachers well, so <strong>frac</strong> and <strong>salary</strong> are related;</li>
+  <li>It is likely that states with a high percentage of students taking the SAT have lower scores due to the presence in the testing pool of non-elite students, so <strong>frac</strong> helps to cause <strong>sat</strong>.</li>
+</ul>
+
+<p>Observational studies are not rendered worthless by the mere possibility of confounding variables, but they do make things more difficult for researchers, in at least two respects:</p>
+
+<ul>
+  <li>You have to identify possible confounders BEFORE you collect your data, so you can record the value of the possible confounder for each subject in the study.</li>
+  <li>You have to figure out how to <em>correct</em>  for the confounders.</li>
+</ul>
+
+<p>The second requirement can be pretty tough to satisfy.  One possible way to proceed is to break your data up into little groups, such that the values of the confounders are the same, or nearly the same, for the subjects in each group.  That’s what we did with the <strong>sat</strong> data:  recall the app:</p>
+
+<pre><code>require(manipulate)
+DtrellScat(sat~salary|frac,data=sat)
+</code></pre>
+
+<p>The problem with breaking up the data into small subsets and studying them separately is that any relationship you see between X and Y within a subset is based on a very small sample—too small by itself to provide much evidence for a relationship in the population.  Even if most of the subsets indicate the same relationship between X and Y, the fact that they were studied separately prevents us from synthesizing the results to infer a relationship between X and Y in the population at large.</p>
+
+<p>Hence we would prefer to have no confounding variables in our study at all.  In other words:</p>
+
+<blockquote>
+  <p><strong>An Ideal</strong>:  In an ideal world the different groups in the study would be exactly alike with respect to every variable that might help to cause the response variable Y, with the sole exception that the groups differ in their X-values.</p>
+</blockquote>
+
+<p>For example, in the bifocal study, you would prefer to compare two groups of people that are the same with respect to:</p>
+
+<ul>
+  <li>age,</li>
+  <li>diet,</li>
+  <li>exercise patterns,</li>
+  <li>genetic history,</li>
+  <li>and anything else that might affect the risk of colon cancer!</li>
+</ul>
+
+<p>The only way the groups would differ is that one group wears bifocals, and the other group—sometimes called the <em>control</em> group—does not.  If two such groups were to exhibit a statistically significant difference in their colon cancer rates, then that difference could be ascribed to the bifocals, and not to anything else:  there would be no confounding factors to worry about.</p>
+
+<h2 id="completely-randomized-designs">Completely Randomized Designs</h2>
+
+<p>Although this ideal cannot be attained in practice, it can be approximated fairly well, provided that you perform an experiment—that is, you assign subjects to their groups—and provided that you do so in an intelligent way.</p>
+
+<p>It may surprise you to learn that an “intelligent”” way makes heavy use of brute chance.  Essentially, we assign subjects to groups by <em>randomization</em>.</p>
+
+<p>What is randomization, exactly, and why is it so effective in making groups similar?  To see learn more about this consider again the following imaginary population:</p>
+
+<pre><code>data(imagpop)
+View(imagpop)
+help(imagpop)
+</code></pre>
+
+<p>Let’s say that the first 200 people in this population agree to be part of an experiment to see whether taking aspirin reduces the risk of heart disease.</p>
+
+<pre><code>AspHeartSubs &lt;- imagpop[1:200,]
+</code></pre>
+
+<p>The experimenters plan to choose 100 of the subjects at random, and assign them to take an aspirin each morning for ten years.  The remaining 100 subjects—the control group—are given a pill each morning that looks and tastes like aspirin, but has no effect on the body.  (Such a substance is called a <em>placebo</em>, and is used to keep the subjects unaware of which group they are in.  If subjects knew their group, this knowledge might determine lifestyle choices that in turn affect the risk of heart disease.  When subjects in an experiment don’t know their group, the experiment is said to be <em>single-blind.</em>)</p>
+
+<p>Together, the two groups are called the <em>treatment groups</em>, because they are treated differently:  one groups gets aspirin, the other does not.</p>
+
+<p>The X variable is whether or not the subject takes aspirin, and the Y variable is some measure of the heart-health of the subject.  The values of the X variable were assigned randomly to the subjects, so this experiment has what we call a <em>completely randomized</em> design.</p>
+
+<p>The R-function <code>RandomExp()</code> carries out the randomization:</p>
+
+<pre><code>Assignment &lt;- RandomExp(AspHeartSubs,
+                  sizes=c(100,100),
+                  groups=c("placebo","aspirin"))
+</code></pre>
+
+<p>You should take a look at the result:</p>
+
+<pre><code>View(Assignment)
+</code></pre>
+
+<p>As you can see, 100 of the subjects are assigned to the Placebo group, and the other 100 are assigned to the Aspirin group.  The assignment is done at random:  each subject was equally likely to be assigned to either group.</p>
+
+<p>Recall that we would like the treatment groups to be similar in every way, except that one group takes aspirin and the other does not.  In order to verify that they are reasonably similar, we can check to see whether the variable <strong>treat.grp</strong> is related to any of the other variables in the <code>Assignment</code> data frame.</p>
+
+<p>Do the treatment groups differ much with respect to <strong>sex</strong>  (i.e., is <strong>treat.grp</strong> related to <strong>sex</strong>)?  Let’s see:</p>
+
+<pre><code>SexGrp &lt;- xtabs(~treat.grp+sex,data=Assignment)
+rowPerc(SexGrp)
+
+##         female male Total
+## placebo     51   49   100
+## aspirin     56   44   100
+</code></pre>
+
+<p>The distribution of <strong>sex</strong> in the two treatment groups appears to be quite similar.</p>
+
+<p>Do the groups differ much with respect to income?  (Is <strong>treat.grp</strong> related to <strong>income</strong>?)  Let’s see:</p>
+
+<pre><code>favstats(income~treat.grp,data=Assignment)
+
+## Error: object 'Assignment' not found
+</code></pre>
+
+<p>The means and medians of the two groups appear to be quite similar.</p>
+
+<p>For further practice, pick another variable in the <code>Assignment</code> data frame, and see if the treatment groups differ much with respect to that variable.</p>
+
+<p>The randomization procedure is not perfect:  if you repeat the procedure many times:</p>
+
+<pre><code>Assignment &lt;- RandomExp(AspHeartSubs,
+                sizes=c(100,100),
+                groups=c("placebo","aspirin"))
+</code></pre>
+
+<p>From time to time you will discover that for one or two of the variables the treatment groups are somewhat different.  But on the whole it appears likely that for the most part the treatment groups will be pretty similar.</p>
+
+<p>When R was doing the randomization to create the <strong>treat.grp</strong> variable, it worked “blindly”:  it did not take into account the sex, income, etc. of any of the subjects.  This means that when researchers adopt a completely randomized design, they don’t have to keep track of <em>any</em> characteristics of their subjects – not even those characteristics that might be confounding factors.  Blind chance by itself is likely to produce similar treatment groups.</p>
+
+<p>Statistical theory tells us that, the larger the number of subjects, the more likely it is that the treatment groups will be similar, and the more similar they are likely to be!  That’s one reason why researchers like to get as many subjects as possible into each treatment group.  This principle is called <em>replication</em>:</p>
+
+<p>Replication</p>
+
+<p>:   An experiment is said to involve <em>replication</em> if each the treatment group contains more than one subject.  (The more subjects there are in each group, the more replication the experiment has.)</p>
+
+<h2 id="randomized-block-designs">Randomized Block Designs</h2>
+
+<p>So far we have looked at experiments with a completely randomized design.  This design works very well when you have a lot of subjects, because then you can get a lot of subjects into each treatment group.  Blind chance then guarantees—more or less—that the treatment groups will be similar.  When you don’t have a lot of subjects, however, things might not go so well.</p>
+
+<p>Suppose, for example, that you want to do an experiment to compare two weight-lifting programs (Program A and Program B), to see which one is more effective. You have 16 subjects in your group:</p>
+
+<pre><code>data(SmallExp)
+View(SmallExp)
+help(SmallExp)
+</code></pre>
+
+<p>Note that the sex and athletic status (athlete or not) of each subject has been recorded.</p>
+
+<p>Your plan is to break the subjects into two groups of size 8 each.  Group A will train with Program A for ten weeks, and Group B will train with Program B.  At the end of the ten-week period, you will measure the increase in strength for each subject.</p>
+
+<p>Let’s say you decide on a completely randomized design:</p>
+
+<pre><code>RandomExp(SmallExp,sizes=c(8,8),
+          groups=c("Program.A","Program.B"))
+</code></pre>
+
+<p>Perform the randomization several times by re-running the above code.  Are you <em>always</em> happy with the results, or do the treatment groups often look rather different with respect to sex and/or with respect to athletic status?</p>
+
+<p>When the number of subjects is small, randomization can easily produce dis-similar treatment groups.  If the treatment groups are dis-similar with respect to possible confounders (such as <strong>Sex</strong> and <strong>athlete</strong> in this study) then we have a problem.</p>
+
+<h3 id="blocking">Blocking</h3>
+
+<p>Accordingly, when an experiment is expected to have only a small number of subjects, researchers will often adopt a <em>randomized block design</em>.  This means that they carry out the following procedure:</p>
+
+<ol>
+  <li>For each subject, record the values of variables that you consider to be potential confounders.  In the current study, <strong>sex</strong> and <strong>athlete</strong> have been recorded.</li>
+  <li>Break the subjects into <em>blocks</em> based on combinations of values of the potential confounders.  In this study the blocks would be:
+    <ul>
+      <li>the four females who are athletes</li>
+      <li>the four females who are not athletes</li>
+      <li>the four males who are athletes</li>
+      <li>the four males who are not athletes</li>
+    </ul>
+  </li>
+  <li>Within each block randomly assign subjects to treatment groups.  In this study, for example, you would randomly pick two of the female athletes to be in Group A, with the other two going to Group B, and do the same for the other three blocks.</li>
+</ol>
+
+<p>Randomized blocking is accomplished with <code>RandomExp()</code> as follows:</p>
+
+<pre><code>RandomExp(SmallExp,sizes=c(8,8),
+          groups=c("Program.A","Program.B"),
+          blocks=c("sex","athlete"))
+</code></pre>
+
+<p>Re-run the randomization several times, and observe that:</p>
+
+<ul>
+  <li>In terms of the individuals, the treatment groups differ from one run to another.</li>
+  <li>But they are the same every time, as far as the values of <strong>sex</strong> and <strong>athlete</strong> are concerned.</li>
+</ul>
+
+<p>The basic idea of blocking is to ensure that—at least with respect to a few variables whose values you can record in advance—the two groups will be similar.  Naturally, the variables for which you would choose to block should be variables that are strongly associated with the response variable.  If you block for them, then the treatment groups are the same with respect to these variables and you will have reduced the number of confounding variables you need to worry about.</p>
+
+<p>As an example of a randomized block design, consider the <code>saltmarsh</code> data frame:</p>
+
+<pre><code>data(saltmarsh)
+View(saltmarsh)
+help(saltmarsh)
+</code></pre>
+
+<p>The data frame contains the results of an experiment to study the effects of salinity levels in soil on the growth of plants.  Researchers had access to four different fields of equal size at an agricultural research station.  They divided each field into six plots of equal size and treated each plot with one of six concentrations of salt, ranging from 10 to 35 parts per million.  They allowed plants to grow on the fields for a period of time, and then measured the total biomass of each plot.</p>
+
+<p>In this experiment the subjects are the plots—24 of them, all told, six in each field.  The explanatory variable is the salinity level <strong>salt</strong>, and the response variable is <strong>biomass</strong>.  Since the four fields probably contained different types of soil and were subject to differing environmental conditions, the field to which a plot belongs could have a considerable effect on plant growth:  hence it was considered important to block for “field”, and so each field was subdivided into six equal plots.  Within each field, the six levels of salinity were assigned randomly to the six plots in that field.  In the data frame, the field-variable is recorded as <strong>block</strong>.</p>
+
+<p>You can check directly that blocking was indeed performed:</p>
+
+<pre><code>xtabs(~salt+block,data=saltmarsh)
+
+##     block
+## salt Field1 Field2 Field3 Field4
+##   10      1      1      1      1
+##   15      1      1      1      1
+##   20      1      1      1      1
+##   25      1      1      1      1
+##   30      1      1      1      1
+##   35      1      1      1      1
+</code></pre>
+
+<p>Sure enough:  the six treatments groups (the salt levels) are distributed identically with respect to <strong>block</strong>.</p>
+
+<p>In order to address the Research Question, we note that the explanatory and response variables are both numerical, so a scatterplot could be an appropriate graphical tool.  Figure [Biomass and Salinity] shows the scatterplot, and indeed it does appear that there is a negative relationship between salinity-level and biomass.</p>
+
+<p><img src="/images/figure/saltmarshplot.png" alt="Biomass and Salinity.  The higher the concentration of salt, the lower the biomass in the plot." /> </p>
+
+<h3 id="matched-pair-designs">Matched Pair Designs</h3>
+
+<p>A <em>matched pair</em> design is really an extreme form of blocking.</p>
+
+<p>Suppose that you want to form two treatment groups:  Group A and Group B.   You pair up your subjects so that the members of each pair are as similar as possible to one another. Each pair is a considered to be a “block.”  Then for each pair, one member is assigned randomly to Group A, and the other is assigned to Group B.</p>
+
+<p>Here is a well-known example of a matched pair design.  Suppose you want to see which type of shoe sole, type A or type B, wears out more quickly, and say that you have 20 people who agree to participate in your experiment.  Each person has a pair of feet, and these forty feet constitute the “subjects” in the experiment.  The two members of any given pair of feet are pretty similar with respect how much wear they will put on a shoe—after all, both members of the pair belong to the same person, and hence are engaged in pretty nearly the same set of daily activities—so you randomly assign 10 of the subjects to wear a type-A sole on their left foot and a type-B sole on their right foot.  The other ten will do the reverse.  In this way, the members of each pair of feet has been assigned randomly to one of the treatment groups!  (Randomization is especially important here, because most people tend to favor one foot over the other.)</p>
+
+<h2 id="repeated-measure-designs">Repeated-Measure Designs</h2>
+
+<p>For the purposes of this course, an experiment is said to employ a <em>repeated-measure</em> design if the researchers make two or more similar measurements on each individual in the study, with a view to studying the differences between these measures.</p>
+
+<p>As an example, consider the data frame <code>labels</code>:</p>
+
+<pre><code>data(labels)
+View(labels)
+help(labels)
+</code></pre>
+
+<p>The <code>labels</code> data frame contains the results of an experiment conducted at Georgetown College by two students.  The students wanted to investigate whether one’s belief about the price of a brand item would, in and of itself, affect one’s perception of its quality.  Thirty fellow students served as subjects.  One at a time, each subject was brought into a room where two jars of peanut butter were placed on a table.  One jar had the well-known “Jiff” label, and the other had the Great Value label.  (Great Value is the Wal-Mart brand, and is considered “cheaper.”)  The subject tasted each peanut butter and rated it on a scale of 1 to 10.  Unknown to the subjects, both jars contained the exactly the same peanut butter:  the Great Value brand.</p>
+
+<p>In this experiment, the two similar measurements are the rating given to the jar of peanut butter that is labeled Jiff, and the rating given to the jar labeled Great Value.  What makes this repeated-measures study an experiment is not that researchers assigned the values of some explanatory variable to subjects, but rather that they manipulated the situation so the subjects believed that the experiment was a taste test to compare two different types of peanut butter, when it fact it was designed to compare their reactions to different labels on the SAME peanut butter.</p>
+
+<p>(<strong>Note</strong>:  Some people like to say that every experiment involves assigning the values of the X variable to subjects.  Such persons would maintain that in this experiment, the X variable is the kind of label (Jiff or Great Value), and that the experimenters were able to assign BOTH values of X to each subject.  When you think about it this way, the two treatment groups are quite similar indeed, because they are composed of exactly the same set of subjects!)</p>
+
+<p>When measures are repeated, there is always the possibility that the second measurement might depend in some way on the first.  In this case, the rating given to the peanut butter in the second jar tasted might be affected by the fact that the subject has recently tasted some peanut butter (from the first jar).  In order to wipe out the effects of any such dependence, it is good practice to randomly vary the order in which the measurements are made.  In this experiment, for example, you might determine in advance for each subject—by coin toss perhaps—whether he or she is to taste from the Jiff-labeled jar first or from the Great Value-labeled jar first.  (It is also good practice to record the order of tasting, though unfortunately the researchers did not do this.)</p>
+
+<p>We would like to see whether subjects tended to rate the jar labeled with the more expensive brand as more highly, on the whole, so we are interested in the difference of the repeated measures</p>
+
+<pre><code>diff &lt;- labels$jiffrating - labels$greatvaluerating
+</code></pre>
+
+<p>We can look at the difference in a variety of ways.  Numerically:</p>
+
+<pre><code>favstats(~diff)
+
+##  min Q1 median Q3 max  mean   sd  n missing
+##   -5  1    2.5  4   8 2.367 2.81 30       0
+</code></pre>
+
+<p>We see that the subjects rated the Jiff-labeled peanut butter an average of 2.37 points higher than they rated the peanut butter from the Great-Value-labeled jar.  A graphical approach is shown in Figure [Ratings Difference].</p>
+
+<p><img src="/images/figure/jiffgvhist.png" alt="Ratings Difference.  Most of the differences are positive, indicating that subjects usually rated the Jiff-labeled peanut butter more highly." /> </p>
+
+<p>A repeated-measures design appears to be the gold-standard among experiments, since your treatment groups are – in some sense – the same group.  But is it always feasible to perform a repeated-measures experiment?</p>
+
+<p>Consider, for example, the following (thankfully hypothetical) Knife-or-Gun study:</p>
+
+<pre><code>data(knifeorgunblock)
+View(knifeorgunblock)
+help(knifeorgunblock))
+</code></pre>
+
+<p>The Research Question was:</p>
+
+<blockquote>
+  <p><em>What will make you yell louder:  being killed with a knife or being killed with a gun?</em></p>
+</blockquote>
+
+<p>Would it have been feasible to perform this experiment with a repeated measures design?  Probably not:  once a subject is slain by one method, be it Knife or Gun, he/she probably will make no noise at all whilst being subjected to the subsequent method of slaying!  As a result, we would have only one useful measurement on each subject.  </p>
+
+<p>On a more serious note:</p>
+
+<blockquote>
+  <p>Consider the <code>attitudes</code> study, in which a completely randomized design was employed.  Suppose we had tried to run the study as a repeated measures experiment, giving each subject all of the different kinds of form, perhaps in some random order determined by a coin toss:  what would have happened?  Would the repeated-measures design have been any improvement over a completely randomized design?</p>
+</blockquote>
+
+<h2 id="considerations-about-experiments">Considerations About Experiments</h2>
+
+<h3 id="reproducibility">Reproducibility</h3>
+
+<p>When you do any sort of scientific work, you want your results to be <em>reproducible</em> as much as possible, so that others may see exactly how you obtained these results, and thereby check them.  Accordingly, when you are actually doing an experiment, even your randomization needs to be done in such a way that another person could reproduce it entirely.  In R this is accomplished by the <code>set.seed()</code> function.</p>
+
+<p>Consider the following small block of code:</p>
+
+<pre><code>set.seed(314159)
+RandomExp(SmallExp,sizes=c(8,8),
+          groups=c("Program.A","Program.B"),
+          blocks=c("sex","athlete"))
+</code></pre>
+
+<p>You will recognize the call to <code>RandomExp()</code> as the same call you performed earlier in the chapter, in order to randomize subjects into treatment groups after blocking for <strong>sex</strong> and <strong>athlete</strong>.  This time, however, the call to <code>RandomExp()</code> is preceded by a call to <code>set.seed()</code>.  This call “starts out” the randomization from a fixed point in R—called a <em>seed</em>—so that no matter how many times you run the above code chunk you will get the same results each time.</p>
+
+<p>The seed is the integer that is supplied to the <code>set.seed()</code> function.  This time, the seed was 314159:  the first few digits of the number $\pi$.  In general, you should choose a seed that stands for something familiar, so that others who examine your code can see that you did not just keep on trying out different seeds until you got the sort of results you wanted.</p>
+
+<h3 id="subjects-and-the-population">Subjects and the Population</h3>
+
+<p>So far we have highlighted a major advantage of experiments over observational studies, namely that in an experiment you have the opportunity to reduce or eliminate the effect of confounding factors by the appropriate use of such techniques as randomization, blocking, matched pairs, and so on.</p>
+
+<p>However, researchers wishing to perform experiments on human subjects face a problem that does not crop up—at least not in such an extreme form—in the course of conducting an observational study.  The problem is one of <em>consent</em>.  </p>
+
+<p>You can’t just <em>compel</em> people do one thing or another.  You can’t grab people at random off the street and assign a value of an explanatory variable to them:</p>
+
+<blockquote>
+  <p>“Hey, you, there!  Yes, you!  Come over here!  You are hereby inducted into my experiment.  Um, wait a minute while I flip this coin.  OK, it’s settled:  you will <em>__</em> [insert <code>smoke</code> if toss was heads, <code>not smoke</code> if toss was Tails] for the next twenty years!  Got it?”</p>
+</blockquote>
+
+<p>Since people must consent to be in an experiment, the set of people who are willing to be in the experiment may be quite different from the population at large. It is well known, for instance, that people who volunteer for medical experiments tend to be more educated and to have higher incomes than those who refuse to participate in such experiments.  Anyone who would consent to be part of the Knife or Gun experiment (see the previous section) would have to be stark raving mad—surely that makes them different from the general population.</p>
+
+<p>In general:</p>
+
+<blockquote>
+  <p>If the subjects differ from the general population in ways that are associated with how they respond to the different treatments available in the experiment, then the results of the experiment can at most be said to apply to the subjects themselves.</p>
+</blockquote>
+
+<p>In such a case we must exercise a great deal of caution when applying our results to some larger population.</p>
+
+<h3 id="statistical-significance">Statistical Significance</h3>
+
+<p>Even when the subjects are quite different from the population, and we are reduced to wondering whether the the treatments made a difference <em>for those subjects only</em>, statistical significance is still an issue.  Consider once again the Knife or Gun experiment.</p>
+
+<p>Who did yell louder, in the experiment:  the subjects who were killed by knife, or the subjects who were killed by gun?  Let’s see:</p>
+
+<pre><code>favstats(volume~means,data=knifeorgunblock)
+
+##        min    Q1 median    Q3  max  mean     sd  n missing
+## gun   40.3 45.92  53.25 59.93 64.5 53.00  8.761 10       0
+## knife 61.2 65.20  72.00 77.12 90.9 73.13 10.072 10       0
+</code></pre>
+
+<p>A nice graphical tool for small data sets is a strip plot, which we combine here with a violin plot (see Figure [Knife or Gun?]):</p>
+
+<p><img src="/images/figure/knifegunstripplot.png" alt="Knife or Gun?  Apparently those slain by Knife yell louder!" /> </p>
+
+<p>Hmm, it appears the subjects who were slain by knife yelled louder:  the volume-points, and their violin, is somewhat higher than the points and violin for those slain by a gun.</p>
+
+<p>But are the results statistically significant?  By this question we do NOT mean:</p>
+
+<blockquote>
+  <p>“Could the difference reasonably be ascribed to chance variation in the process of sampling subjects from the population?”</p>
+</blockquote>
+
+<p>These subjects aren’t a random sample from the population at all.  Maybe they were the ONLY 20 people in the world who would agree to be part of the experiment, so there was no chance at all involved in their selection.</p>
+
+<p>Instead, the question of statistical significance addresses the randomness that <em>was</em> at play in the experiment:  namely, the random assignment of subjects to Knife or Gun group.</p>
+
+<p>So we are REALLY asking:</p>
+
+<blockquote>
+  <p>“Is the observed difference in dying screams due to the means of slaying, or is is reasonable to believe that in the random process of assigning subjects to groups, a lot of naturally loud yellers just happened to get into the Knife group?”</p>
+</blockquote>
+
+<p>In any experiment where randomization was employed, the question of statistical significance is meaningful, and it can always be thought of as asking:</p>
+
+<blockquote>
+  <p>“Do the results indicate that X causes Y, or is reasonable to ascribe the observed difference between the treatment groups to chance variation in the assignment of the subjects to their groups?”</p>
+</blockquote>
+
+<p>See the GeekNotes for some preliminary assessment of statistical significance in some of the experiments discussed in this chapter.</p>
+
+<h2 id="terminology-for-experiments">Terminology for Experiments</h2>
+
+<p>Here follows a list of technical terms, associated with experiments and observational studies, that we would like you to know.  If a term has already been introduced, then it is simply listed below with its definition.  If it has not been discussed yet, then we offer a brief explanation and/or examples.</p>
+
+<p>Observational Study</p>
+
+<p>:   In an <em>observational study</em> researchers simply observe or question the subjects.  In particular, they measure the values of the explanatory variable $X$ and measure the values of the response variable $Y$, for each subject.</p>
+
+<p>Experiment</p>
+
+<p>:   In an <em>experiment</em> researchers manipulate something and observe the effects of the manipulation on a response variable.</p>
+
+<p>:   Most commonly, the manipulation consists in assigning the values of an explanatory variable of $X$ to the subjects.</p>
+
+<p>Confounding Variable</p>
+
+<p>:   In a study with an explanatory variable $X$ and a response variable $Y$, the variable $Z$ is called a <em>confounding</em> variable if it meets the following three conditions:</p>
+
+<blockquote>
+  <ol>
+    <li>It is a third variable (different from X and different from Y);</li>
+    <li>It is associated with X, but not caused by X.</li>
+    <li>It is a causal factor in Y (is at least part of the cause of Y)</li>
+  </ol>
+</blockquote>
+
+<p>Experimental Units</p>
+
+<p>:   The <em>experimental units</em> (also called the <em>individuals</em>) are the subjects in an experiment.</p>
+
+<p>Subjects do not have to be human beings, or animals.  Recall, for example, the matched-pair shoe experiment in which the subjects were the 40 feet of the twenty human participants!</p>
+
+<p>Treatment Groups</p>
+
+<p>:   The <em>treatment groups</em> of an experiment are the groups into which the subjects are divided.</p>
+
+<p>Control Group</p>
+
+<p>:   If one group in an experiment is not treated in any special way, or is present for comparative purposes, then this group is often called the <em>control group</em>.</p>
+
+<p>Single-Blind Experiment</p>
+
+<p>:   If the subjects in an experiment do not know which treatment group they are in, then the experiment is said to be <em>sinble-blinded</em>.</p>
+
+<p>:   If the people who measure the response variable do not know which groups the subjects are in, then the experiment is also-said to be <em>single-blinded</em>.</p>
+
+<p>Placebo</p>
+
+<p>:   A <em>placebo</em> is an inert substance given to subjects in the control group.  It resembles the substances given to subjects in the other treatment groups, and thus allows the experiment to be single-blinded.</p>
+
+<p>Double-Blinded Experiment</p>
+
+<p>:   If neither the subjects nor the people responsible for measuring the response variable know the group assignments of the subjects, then the experiment is said to be <em>double-blinded</em>.</p>
+
+<p>Blinding is useful as a means of reducing bias.  If subjects know their treatment group, then this knowledge can affect their behavior in ways that have a bearing on the response variable.  For example, in a study on the effectiveness of a vaccine against a particular diseases, subjects who know they are receiving the vaccine may behave more recklessly than subjects who know that they are in a control group (not receiving any vaccine).  These differences in behavior could bias the study against the vaccine.</p>
+
+<p>The people who are responsible for measuring the response variable could “skew” the measurements in one direction or another, if they have some stake in the outcome of the experiment.  Keeping these researchers in the dark as to the group assignment of subjects with whom they work can reduce bias that arises from a desire to have the experiment “succeed”.</p>
+
+<p>Replication</p>
+
+<p>:   An experiment is said to involve <em>replication</em> if each the treatment group contains more than one subject.  (The more subjects there are in each group, the more replication the experiment has.)</p>
+
+<p>Double-Dummy Design</p>
+
+<p>:   A <em>double-dummy</em> design is a procedure to blind an experiment, even when the treatments don’t resemble each other at all.</p>
+
+<p>A classic example of a double-dummy design is an experiment to compare two methods of delivering nicotine to the bodies of people who desire two quit smoking.  One method involves wearing a patch that delivers nicotine through the skin, and the other involves chewing gum that contains nicotine.  In a double-dummy experiment:</p>
+
+<ul>
+  <li>Members of the Patch Group wear a real nicotine patch, and chew a gum that looks and tastes like real nicotine gum but which actually contains no nicotine;</li>
+  <li>Members of the Gum Group chew real nicotine gum, and wear a patch that looks the same as a nicotine patch but which delivers no nicotine.</li>
+</ul>
+
+<p>In neither group would subjects be able to tell which group – Patch or Gum – they are in.</p>
+
+<h2 id="thoughts-on-r">Thoughts on R</h2>
+
+<h3 id="new-r-functions">New R-functions</h3>
+
+<p>Just one new R-function to learn:  <code>RandomExp()</code>, for completely randomized designs and for blocking. Here are some examples of its use.  Suppose you have a data frame called <code>MyData</code>, that contains the list of subjects, and possibly some other variables of interest for which you might like to block.</p>
+
+<p>For a completely randomized design into two groups with groups sizes $n<em>1$ and $n</em>2$, with group names “Group.A” and “Group.B”, use:</p>
+
+<pre><code>RandomExp(MyData,sizes=c(n1,n2),
+          groups=c("Group.A","Group.B")
+</code></pre>
+
+<p>For three groups (“Group.1”, “Group.2” and “Group.3”) with sizes $n<em>1$, $n</em>2$ and $n_3$, blocking with respect to the variable <strong>Var</strong>, use:</p>
+
+<pre><code>RandomExp(MyData,sizes=c(n1,n2,n3),
+    groups=c("Group.1","Group.2","Group.3"),
+    block="Var")
+</code></pre>
+
+<p>To block for two variables <strong>Var1</strong> and <strong>Var2</strong> at once, use:</p>
+
+<pre><code>RandomExp(MyData,sizes=c(n1,n2,n3),
+    groups=c("Group.1","Group.2","Group.3"),
+    block=c("Var1","Var2"))
+</code></pre>
+
+<p>Make sure that the group sizes sum to the number of rows in the data frame, and that the blocking variables are factors.</p>
+
+<h3 id="book-chapter-notation">“Book-Chapter” Notation</h3>
+
+<p>Sometimes you have to manipulate variables in a data frame directly, outside of the context of a function that takes formula-data input.  In such a case, you can use what we call “book-and-chapter” notation to help R locate the variables of interest.</p>
+
+<p>If variable <strong>Var</strong> is in data frame <code>MyData</code>, then R can locate it if you use a <code>$</code>-sign and write it as:</p>
+
+<blockquote>
+  <p><code>Mydata$Var</code></p>
+</blockquote>
+
+<p>For example, to compute the difference of two variables in <code>MyData</code>, you could use:</p>
+
+<pre><code>diff &lt;- MyData$Var1 - MyData$Var2
+</code></pre>
+
+<p>The data frame <code>MyData</code> is like a book, and the <code>$</code>-sign instructs R to look inside the “book” <code>MyData</code> at “chapters”
+ <strong>Var1</strong> and <strong>Var2</strong>.</p>
+
+
+  
+    <footer>
+      
+      
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://homerhanumat.github.io/book/ch6.html" data-via="" data-counturl="http://homerhanumat.github.io/book/ch6.html" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+      
+    </footer>
+  
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Chapters</h1>
+  <ul id="chapters">
+      <li class="post"><a href="ch1.html">Chapter 1</a></li>
+       <li class="post"><a href="ch2.html">Chapter 2</a></li>
+        <li class="post"><a href="ch3.html">Chapter 2</a></li>
+         <li class="post"><a href="ch4.html">Chapter 2</a></li>
+          <li class="post"><a href="ch5.html">Chapter 2</a></li>
+           <li class="post"><a href="ch6.html">Chapter 2</a></li>
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
