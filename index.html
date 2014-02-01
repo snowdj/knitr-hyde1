@@ -9,8 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="An R Markdown into HTML An R Markdown into HTML
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages ( &hellip;">
+  <meta name="description" content="Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,7 +103,6 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 <ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/book/index.html">Book</a><li>
   <li><a href="/about/index.html">About</a></li>
 </ul>
 
@@ -119,7 +117,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/01/19/newpost/">Going for R Markdown</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Pander/Pandoc for Pretty Conversion on the R Studio Server</a></h1>
     
     
       <p class="meta">
@@ -135,10 +133,10 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
   
 
 
-<time datetime="2014-01-19T00:00:00-05:00" pubdate data-updated="true"></time>
+<time datetime="2014-02-01T11:42:14-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
         
-           | <a href="/blog/2014/01/19/newpost/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/01/19/newpost/">Comments</a>
+           | <a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Comments</a>
         
       </p>
     
@@ -157,30 +155,29 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
   <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
 </head>
 <body>
-<nav id="TOC">
-<ul>
-<li><a href="#an-r-markdown-into-html">An R Markdown into HTML</a></li>
-</ul>
-</nav>
-<h1 id="an-r-markdown-into-html"><a href="#TOC">An R Markdown into HTML</a></h1>
-<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring web pages (click the <strong>Help</strong> toolbar button for more details on using R Markdown).</p>
-<p>When you click the <strong>Knit HTML</strong> button a web page will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:</p>
-<pre><code>summary(cars)
+<p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
+<p>But frankly the HTML output is a bit ugly. What if students want something that looks a bit better? What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
+<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane. The R package <code>pander</code> facilitates the use of Pander for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install these Pandoc and <code>pander</code> on the server. <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats: pdf, docx, odt, etc., as per your request.</p>
+<p>For pdf output, Pandoc first turns the converts the Markdown into \(\LaTeX\), so you will need to make sure that \(\LaTeX\) is installed on the server as well (some minimal version probably comes with the distribution). The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed. [<code>xelatex</code> came along with our CentOS R Studio server, but had to be installed.]</p>
+<p>Students would use Pandoc through the <code>Pandoc.convert()</code> function from the <code>pander</code> package. First, one knits the r Markdown document, simply in order to produce the Markdown document along the way. Then run something like:</p>
+<div class='bogus-wrapper'>
+<notextile>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require(pander)
+</span><span class='line'>Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S")</span></code></pre></td></tr></table></div></figure>
+</notextile>
+</div>
 
-##      speed           dist    
-##  Min.   : 4.0   Min.   :  2  
-##  1st Qu.:12.0   1st Qu.: 26  
-##  Median :15.0   Median : 36  
-##  Mean   :15.4   Mean   : 43  
-##  3rd Qu.:19.0   3rd Qu.: 56  
-##  Max.   :25.0   Max.   :120</code></pre>
-<p>You can also embed plots, for example:</p>
-<pre><code>plot(cars)</code></pre>
-<figure>
-<img src="/images/figure/carplot.png" alt="A plot of cars"><figcaption>A plot of cars</figcaption>
-</figure>
-<p>Also some math:</p>
-<p>\(\bar{x}=\frac{\sum{x_i}}{n}\)</p>
+<p>R complains bitterly in the console—apparently it attempts to open a preview window but cannot—but produces the desired file in the same directory as the Markdown file.</p>
+<p>We find that pdf and docx format both look rather nice, and boast a table of contents as well. The pdf centers plots, too (this is popular with students). Sadly, the code chunks do lose their background color under Pandoc’s default highlighting style of “pygments”. If you try for some other style, e.g.,</p>
+<div class='bogus-wrapper'>
+<notextile>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S --highlight-style="tango")</span></code></pre></td></tr></table></div></figure>
+</notextile>
+</div>
+<p>then in some installations of \(\LaTeX\), including the one on our server, there will be an error. We have not yet decided whether to bug the sysadmin to install a fuller version of \(\LaTeX\) in order to get overcome this difficulty.</p>
 </body>
 </html></div>
   
@@ -202,7 +199,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/01/19/newpost/">Going for R Markdown</a>
+        <a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Pander/Pandoc for Pretty Conversion on the R Studio Server</a>
       </li>
     
   </ul>
@@ -239,7 +236,23 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 
 
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101037539642604924807?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
 
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
+
+  </ul>
+</section>
 
   
 </aside>
