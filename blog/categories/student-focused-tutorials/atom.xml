@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[A Statistics Blog]]></title>
-  <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
+  <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
   <updated>2014-02-02T00:16:36-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
@@ -292,7 +292,7 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 ## P-Value = 0.1546
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/chisqtutnosim.png" alt="Graph of P-value, no simulation" /> </p>
+<p><img src="/images/figure/chisqtutnosim.png" alt="Graph of P-value, no simulation" /> </p>
 
 <p>Here is a case with simulation:</p>
 
@@ -326,38 +326,7 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 ## P-Value = 0.1572
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/chisqtutsim.png" alt="Graph of P-value, with simulation" /> </p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pander/Pandoc for Pretty Conversion on the R Studio Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
-    <updated>2014-02-01T11:42:14-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
-    <content type="html"><![CDATA[<p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
-
-<p>But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
-
-<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane.  The R package <code>pander</code> facilitates the use of Pander for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install these Pandoc and <code>pander</code> on the server.  <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats:  pdf, docx, odt, etc., as per your request.</p>
-
-<p>For pdf output, Pandoc first turns the converts the Markdown into $\LaTeX$, so you will need to make sure that $\LaTeX$ is installed on the server as well (some minimal version probably comes with the distribution).  The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed.  [<code>xelatex</code> came along with our CentOS R Studio server, but had to be installed.]</p>
-
-<p>Students would use Pandoc through the <code>Pandoc.convert()</code> function from the <code>pander</code> package.  First, one knits the r Markdown document, simply in order to produce the Markdown document along the way.  Then run something like:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">require(pander)
-</span><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S")</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>R complains bitterly in the console—apparently it attempts to open a preview window but cannot—but produces the desired file in the same directory as the Markdown file.</p>
-
-<p>We find that pdf and docx format both look rather nice, and boast a table of contents as well.  The pdf centers plots, too (this is popular with students).  Sadly, the code chunks do lose their background color under Pandoc’s default highlighting style of “pygments”.  If you try for some other style, e.g.,</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S --highlight-style="tango")</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>then in some installations of $\LaTeX$, including the one on our server, there will be an error.  We have not yet decided whether to bug the sysadmin to install a fuller version of $\LaTeX$ in order to get overcome this difficulty.</p>
+<p><img src="/images/figure/chisqtutsim.png" alt="Graph of P-value, with simulation" /> </p>
 
 ]]></content>
   </entry>
