@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Tech Note | A Statistics Blog]]></title>
-  <link href="http://homerhanumat.github.io/blog/categories/tech-note/atom.xml" rel="self"/>
+  <title><![CDATA[Category: R | A Statistics Blog]]></title>
+  <link href="http://homerhanumat.github.io/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
   <updated>2014-02-06T17:29:02-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
