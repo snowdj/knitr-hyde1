@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-08T20:15:10-05:00</updated>
+  <updated>2014-02-14T23:12:50-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,181 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[lmGC() Tutorial]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial/"/>
+    <updated>2014-02-15T15:00:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#formula-data-input">Formula-Data Input</a></li>
+  <li><a href="#prediction">Prediction</a></li>
+  <li><a href="#plotting">Plotting</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The <code>lmGC()</code> is a starter-tool for simple linear regression, when you are studying the relationship between two numerical variables, one of which you consider to be an explanatory or predictor variable and the other of which you think of as the response.  It’s only a starter-tool:  by the end of the course, or in later statistics courses, you will move on to R’s function <code>lm()</code>, which allows you to work with more than one explanatory variable and which provides additional useful information in its output.  Also, in <code>lm()</code> the explanatory variable(s) can even be factors!</p>
+
+<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo = "homerhanumat/tigerstats")
+</code></pre>
+
+<p>In this tutorial we will work with a couple of data sets:  <code>mtcars</code> from the <code>data</code> package that comes with the basic R installation, and <code>fuel</code> from the <code>tigerstats</code> package, so make sure you become familiar with them.  The following commands may be helpful in this regard:</p>
+
+<pre><code>data(mtcars)
+View(mtcars)
+help(mtcars)
+</code></pre>
+
+<p>For <code>fuel</code>:</p>
+
+<pre><code>data(fuel)
+View(fuel)
+help(fuel)
+</code></pre>
+
+<h2 id="formula-data-input">Formula-Data Input</h2>
+
+<p>Like many R functions, <code>lmGC()</code> accepts formula-data input.  The general command looks like:</p>
+
+<pre><code>lmGC(response ~ explanatory, data = DataFrame)
+</code></pre>
+
+<p>If you are interested in studying the relationship between the fuel efficiency of a car (<strong>mpg</strong> in the <code>mtcars</code> data frame, measured in miles per gallon) and its weight (<strong>wt</strong> in <code>mtcars</code>, measure din thousands of pounds), then you  can run:</p>
+
+<pre><code>lmGC(mpg ~ wt, data = mtcars)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.8677 
+## 
+## Equation of Regression Line:
+## 
+## 	 mpg = 37.29 + -5.345 * wt 
+## 
+## Residual Standard Error:	s   = 3.046 
+## R^2 (unadjusted):		R^2 = 0.7528
+</code></pre>
+
+<p>The output to the console is rather minimal.  You get:</p>
+
+<ul>
+  <li>the correlation coefficient $r$.  We need to look at a scatter plot to be really sure about it (for plots, see below), but at this point the value $r = -0.87$ indicates a fairly strong negative linear relationship between fuel efficiency and weight.</li>
+  <li>the equation of the regression line.  From the slope of -5.34, we see that for every thousand pound increase in the weight of a car, we predict a 5.34 mpg decrease in the fuel efficiency.</li>
+  <li>the residual standard error $s$.  As a rough rule of thumb, we figure that when we use the regression equation to predict the fuel efficiency of a car from its weight, that prediction is liable to be off by about $s$ miles per gallon, or so.</li>
+  <li>the unadjusted $R^2$.  We see here that about 75% of the variation in the fuel efficiency of the cars in the data set is accounted for by the variation in their weights.  since $R^2$ is fairly high, it seems that weight is a fairly decent predictor of fuel efficiency.</li>
+</ul>
+
+<h2 id="prediction">Prediction</h2>
+
+<p>When the value of the explanatory variable for an individual is known and you wish to predict the value of the response variable for that individual, you can use the <code>predict()</code> function.  Its arguments are the linear model that is created by <code>lmGC()</code>, and the value <code>x</code> of the explanatory variable.</p>
+
+<p>If you think that you might want to use <code>predict()</code>, you may first want to store the model in a variable, for example:</p>
+
+<pre><code>WeightEff &lt;- lmGC(mpg ~ wt, data = mtcars)
+</code></pre>
+
+<p>Then if you want to predict the fuel efficiency of a car that weights 3000 pounds, run this command:</p>
+
+<pre><code>predict(WeightEff, x = 3)
+
+## [1] 21.25
+</code></pre>
+
+<p>We predict that a 3000 pound car (from the time of the Motor Trend study that produced this data) would have a fuel efficiency of 21.25 mpg, give or take about 3.046 mpg or so.  (Note how we used $s$ as a rough give-or-take figure.)</p>
+
+<h2 id="plotting">Plotting</h2>
+
+<p>But we are getting ahead of ourselves!  In order to use linear models at all, we need to make sure that our data really do show a linear relationship.  The single best way to check this is to look at a scatterplot, so <code>lmGC()</code> comes equipped with a option to produce one:  just set the argument <code>graph</code> to <code>TRUE</code>, as follows:</p>
+
+<pre><code>lmGC(mpg ~ wt, data = mtcars, graph = TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.8677 
+## 
+## Equation of Regression Line:
+## 
+## 	 mpg = 37.29 + -5.345 * wt 
+## 
+## Residual Standard Error:	s   = 3.046 
+## R^2 (unadjusted):		R^2 = 0.7528
+</code></pre>
+
+<p><img src="/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
+
+<p>The scatterplot includes the regression line. Indeed, the cloud of point seems to follow a line fairly well.  The relationship may be thought of as linear, so using <code>lmGC()</code> for tasks like prediction does make sense, for this data.</p>
+
+<p>You can also perform some simple diagnostics, by setting the argument <code>diag</code> to <code>TRUE</code>:</p>
+
+<pre><code>lmGC(mpg ~ wt, data = mtcars, diag = TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.8677 
+## 
+## Equation of Regression Line:
+## 
+## 	 mpg = 37.29 + -5.345 * wt 
+## 
+## Residual Standard Error:	s   = 3.046 
+## R^2 (unadjusted):		R^2 = 0.7528
+</code></pre>
+
+<p><img src="/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
+
+<p>You get two graphs:</p>
+
+<ul>
+  <li>a density plot of the residuals.  If the distribution of the residuals is roughly bell-shaped, then you can actually employ a ``regression’’ version of the 68-95 Rule:  when you make a prediction using the regression line, there is a about a 68% chance that your predcition will be wtthin one $s$ of the actual $y$-value, and about a 95% chance that ti will be within $2s$ of the actual $y$-value.  <em>Neat!</em></li>
+  <li>A plot of the residuals vs, the <code>fitted</code> $y$-values (the $y$-coordinates of the points on the original scatterplot).  If the points exhibit a linear relationship with about the same amount of scatter all the way along the regression line, then this plot should look like a random cloud of points.  In this case, it confirms that our linear model is appropriate to the data.</li>
+</ul>
+
+<p>On the other hand, consider <code>fuel</code> data frame, which shows the results of a study where a British Ford Escort was driven at various speed along a standard course, and the fuel efficiency (in kilometers traveled per liter of fuel consumed) was recorded at each speed.  Let’s try a linear model with <strong>speed</strong> as explanatory and <strong>efficiency</strong> as the response, with some diagnostic plots attached:</p>
+
+<pre><code>lmGC(efficiency ~ speed, data = fuel, diag = TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.1716 
+## 
+## Equation of Regression Line:
+## 
+## 	 efficiency = 11.06 + -0.0147 * speed 
+## 
+## Residual Standard Error:	s   = 3.905 
+## R^2 (unadjusted):		R^2 = 0.0295
+</code></pre>
+
+<p><img src="/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
+
+<p>The residuals have a roughly-bell-shaped distribution, but the residual plot is clearly patterned.  Something is amiss!  Let’s look at a scatterplot of the data:</p>
+
+<pre><code>xyplot(efficiency~speed,data=fuel,
+       xlab="speed (kilometers/hour",
+       ylab="fuel effiency (liters/100km",
+       pch=19,col="blue",type=c("p","r"),
+       main="Speed and Fuel Efficiency\nfor a British Ford Escort")
+</code></pre>
+
+<p><img src="/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
+
+<p>The relationship is strongly curvilinear:  it makes no sense to use the regression line (shown in the plot above) to study the relationship between these two variables!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[chisq.testGC() Tutorial]]></title>
