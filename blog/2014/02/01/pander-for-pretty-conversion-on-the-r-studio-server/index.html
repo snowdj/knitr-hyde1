@@ -144,9 +144,9 @@
 
 <p>But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
 
-<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane.  The R package <code>pander</code> facilitates the use of Pander for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install these Pandoc and <code>pander</code> on the server.  <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats:  pdf, docx, odt, etc., as per your request.</p>
+<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane.  The R package <code>pander</code> facilitates the use of Pandoc for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install Pandoc and <code>pander</code> on the server.  <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats:  pdf, docx, odt, etc., as per your request.</p>
 
-<p>For pdf output, Pandoc first turns the converts the Markdown into $\LaTeX$, so you will need to make sure that $\LaTeX$ is installed on the server as well (some minimal version probably comes with the distribution).  The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed.  [<code>xelatex</code> came along with our CentOS R Studio server, but had to be installed.]</p>
+<p>For pdf output, Pandoc first turns the converts the Markdown into $\LaTeX$, so you will need to make sure that $\LaTeX$ is installed on the server as well (some minimal version probably comes with the distribution).  The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed.  [<code>xelatex</code> came along with our CentOS R Studio server, but had to be configured.]</p>
 
 <p>Students would use Pandoc through the <code>Pandoc.convert()</code> function from the <code>pander</code> package.  First, one knits the r Markdown document, simply in order to produce the Markdown document along the way.  Then run something like:</p>
 
@@ -160,7 +160,9 @@
 <p>We find that pdf and docx format both look rather nice, and boast a table of contents as well.  The pdf centers plots, too (this is popular with students).  Sadly, the code chunks do lose their background color under Pandoc’s default highlighting style of “pygments”.  If you try for some other style, e.g.,</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S --highlight-style="tango")</span></code></pre></td></tr></table></div></figure></notextile></div>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", 
+</span><span class="line">  options="-S --highlight-style="tango")</span></code></pre></td></tr></table></div></figure></notextile></div>
 <p>then in some installations of $\LaTeX$, including the one on our server, there will be an error.  We have not yet decided whether to bug the sysadmin to install a fuller version of $\LaTeX$ in order to get overcome this difficulty.</p>
 
 </div>
@@ -232,6 +234,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic's Favstats()</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/15/lmGCtutorial/">lmGC() Tutorial</a>
       </li>
     
@@ -297,7 +303,7 @@
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (2)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (3)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
 
   </ul>
