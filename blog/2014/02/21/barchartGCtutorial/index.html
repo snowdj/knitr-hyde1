@@ -130,7 +130,7 @@
   
 
 
-<time datetime="2014-02-21T16:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+<time datetime="2014-02-21T15:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
@@ -190,14 +190,16 @@ help(m111survey)
 
 <p>To look see a bar chart for the tallies of the factor variable <strong>seat</strong>:</p>
 
-<pre><code>barchartGC(~seat, data = m111survey, type = "frequency", main = "Barchart of Seating Preference")
+<pre><code>barchartGC(~seat,data=m111survey,type="frequency",
+           main="Barchart of Seating Preference")
 </code></pre>
 
 <p><img src="/images/figure/barchartseatfreq.png" alt="plot of chunk barchartseatfreq" /> </p>
 
 <p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts:</p>
 
-<pre><code>barchartGC(~seat, data = m111survey, type = "percent", main = "Barchart of Seating Preference")
+<pre><code>barchartGC(~seat,data=m111survey,type="percent",
+           main="Barchart of Seating Preference")
 </code></pre>
 
 <p><img src="/images/figure/barchartseatperc.png" alt="plot of chunk barchartseatperc" /> </p>
@@ -214,16 +216,19 @@ Seat
 
 <p>Then you can just enter the table:</p>
 
-<pre><code>barchartGC(Seat, type = "percent", main = "Barchart of Seating Preference")
+<pre><code>barchartGC(Seat,type="percent",
+           main="Barchart of Seating Preference")
 </code></pre>
 
 <p><img src="/images/figure/barchartseattab.png" alt="plot of chunk barchartseattab" /> </p>
 
 <h2 id="two-factor-variables">Two Factor Variables</h2>
 
-<p>You can also use <code>barchartGC()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data inoput as follows:</p>
+<p>You can also use <code>barchartGC()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data input as follows:</p>
 
-<pre><code>barchartGC(~sex + seat, data = m111survey, type = "percent", main = "Sex and Seating Preference at Georgetown")
+<pre><code>barchartGC(~sex+seat,data=m111survey,
+           type="percent",
+           main="Sex and Seating Preference at Georgetown")
 </code></pre>
 
 <p><img src="/images/figure/barchartsexseat.png" alt="plot of chunk barchartsexseat" /> </p>
@@ -241,7 +246,8 @@ SexSeat
 
 <p>Here is the bar chart from the two-way table:</p>
 
-<pre><code>barchartGC(SexSeat, type = "percent", main = "Sex and Seating Preference at Georgetown")
+<pre><code>barchartGC(SexSeat,type="percent",
+           main="Sex and Seating Preference at Georgetown")
 </code></pre>
 
 <p><img src="/images/figure/barchartsexseattab.png" alt="plot of chunk barchartsexseattab" /> </p>
@@ -250,7 +256,8 @@ SexSeat
 
 <p>Bar charts are for factor variables, not for numerical variables.  Look what happens when you ask for a bar chart of <strong>fastest</strong>:</p>
 
-<pre><code>barchartGC(~fastest, data = m111survey, main = "Fastest Speed Ever Driven")
+<pre><code>barchartGC(~fastest,data=m111survey,
+           main="Fastest Speed Ever Driven")
 </code></pre>
 
 <p><img src="/images/figure/barchartfastest.png" alt="plot of chunk barchartfastest" /> </p>
@@ -278,7 +285,7 @@ SexSeat
   
 
 
-<time datetime="2014-02-21T16:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+<time datetime="2014-02-21T15:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
       
 
 <span class="categories">
@@ -303,8 +310,10 @@ SexSeat
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/21/favstatstutorial/" title="Previous Post: Tutorial on mosaic's favstats()">&laquo; Tutorial on mosaic's favstats()</a>
+        <a class="basic-alignment left" href="/blog/2014/02/15/lmGCtutorial/" title="Previous Post: lmGC() Tutorial">&laquo; lmGC() Tutorial</a>
       
+      
+        <a class="basic-alignment right" href="/blog/2014/02/21/favstatstutorial/" title="Next Post: Tutorial on mosaic's favstats()">Tutorial on mosaic's favstats() &raquo;</a>
       
     </p>
   </footer>
@@ -325,11 +334,11 @@ SexSeat
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a>
+        <a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic's Favstats()</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic's Favstats()</a>
+        <a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a>
       </li>
     
       <li class="post">
