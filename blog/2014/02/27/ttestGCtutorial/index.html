@@ -1,0 +1,1230 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>ttestGC() Tutorial - A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Preliminaries One Mean, From Data Frame (Read This!!) Confidence Interval Only Interval and Test Graph of the P-Value Limiting Output One Mean, From &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">ttestGC() Tutorial</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T15:00:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</a>    <ul>
+      <li><a href="#confidence-interval-only">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test">Interval and Test</a></li>
+      <li><a href="#graph-of-the-p-value">Graph of the P-Value</a></li>
+      <li><a href="#limiting-output">Limiting Output</a></li>
+    </ul>
+  </li>
+  <li><a href="#one-mean-from-summary-data">One Mean, From Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-1">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-1">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-means-data-frame">Difference of Two Means, Data Frame</a>    <ul>
+      <li><a href="#confidence-interval-only-2">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-2">Interval and Test</a></li>
+      <li><a href="#order-of-the-groups">Order of the Groups</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-means-summary-data">Difference of Two Means, Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-3">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-3">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#mean-of-differences">Mean of Differences</a>    <ul>
+      <li><a href="#both-variables-in-the-data-frame">Both Variables in the Data Frame</a>        <ul>
+          <li><a href="#confidence-interval-only-4">Confidence Interval Only</a></li>
+          <li><a href="#interval-and-test-4">Interval and Test</a></li>
+        </ul>
+      </li>
+      <li><a href="#the-difference-is-in-the-data-frame">The Difference is in the Data Frame</a>        <ul>
+          <li><a href="#confidence-interval-only-5">Confidence Interval Only</a></li>
+          <li><a href="#interval-and-test-5">Interval and Test</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>You use <code>ttestGC()</code> for inferential procedures regarding:</p>
+
+<ul>
+  <li>one population mean $\mu$;</li>
+  <li>the difference of two population means, $\mu<em>1 - \mu</em>2$;</li>
+  <li>the mean $\mu_d$ of paired differences in a population.</li>
+</ul>
+
+<p>The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</h2>
+
+<p>Read this section carefully.  It talks about:</p>
+
+<ul>
+  <li>levels of confidence,</li>
+  <li>types of Alternative Hypothesis,</li>
+  <li>graphs of the P-value, and</li>
+  <li>an option to limit output to the console</li>
+</ul>
+
+<p>in ways that apply to all uses of <code>ttestGC()</code>.</p>
+
+<h3 id="confidence-interval-only">Confidence Interval Only</h3>
+
+<p>In the <code>m111survey</code> data from the <code>tigerstats</code> package, suppose you want a 95%-confidence interval for:</p>
+
+<blockquote>
+  <p>$\mu =$ the mean fastest speed ever driven, for all GC students.</p>
+</blockquote>
+
+<p>Use the function:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984
+</code></pre>
+
+<p>To get any other level of confidence, you need to use the <code>conf.level</code> argument, indicating your desired level of confidence in decimal (not percentage) form.</p>
+
+<p>For example, for a 90%-confidence interval for $\mu$, use</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,conf.level=0.90)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 90% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           101.771329          110.031488
+</code></pre>
+
+<h3 id="interval-and-test">Interval and Test</h3>
+
+<p>If you want a test of significance as well as the confidence interval, then</p>
+
+<ul>
+  <li>use the <code>mu</code> argument to set what the Null Hypothesis thinks that the value of $\mu$ is;</li>
+  <li>use the <code>alternative</code> argument to specify the Alternative Hypothesis.</li>
+</ul>
+
+<p>For example, if the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &gt; 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           101.771329          Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu &gt; 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.009974
+</code></pre>
+
+<p>If the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &lt; 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="less")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           -Inf                110.031488           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu &lt; 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.99
+</code></pre>
+
+<p>If the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu \neq 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu != 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<p>But note that the default value of <code>alternative</code> is “two.sided”, so if you want you could just leave it out and still get a two-sided test:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100)
+</code></pre>
+
+<h3 id="graph-of-the-p-value">Graph of the P-Value</h3>
+
+<p>Anytime you want, you can get a graph of the $P$-value for your test, simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided",graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu != 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<p><img src="/images/figure/ttesttutonemean2sided.png" alt="plot of chunk ttesttutonemean2sided" /> </p>
+
+<h3 id="limiting-output">Limiting Output</h3>
+
+<p>Sometimes you don’t need R to print so much information to the console.  If you want only the basics (such as a confidence interval, the test statistic and $P$-value), then set the <code>verbose</code> argument to <code>FALSE</code>:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided",verbose=FALSE)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<h2 id="one-mean-from-summary-data">One Mean, From Summary Data</h2>
+
+<h3 id="confidence-interval-only-1">Confidence Interval Only</h3>
+
+<p>Say that you have taken a simple random sample from some large population, and:</p>
+
+<ul>
+  <li>the sample mean is $\bar{x}=30$,</li>
+  <li>the sample standard deviation is $s=4$,</li>
+  <li>the sample size was $n=40$.</li>
+</ul>
+
+<p>You don’t have the raw data present in a data frame, but you have enough summary data to use <code>ttestGC()</code>.  You just have to set some new arguments:</p>
+
+<ul>
+  <li>set <code>mean</code> to the sample mean;</li>
+  <li>set <code>sd</code> to the sample standard deviation;</li>
+  <li>set <code>n</code> to the sample size.</li>
+</ul>
+
+<p>So if you only want a 95%-confidence interval for $\mu$. use:</p>
+
+<pre><code>ttestGC(mean=30,sd=4,n=40)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  mean sd  n
+##    30  4 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 30 
+## SE(x.bar):	 0.6325 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           28.720738           31.279262
+</code></pre>
+
+<h3 id="interval-and-test-1">Interval and Test</h3>
+
+<p>If you also want to do a test of significance, again specify <code>mu</code> and <code>alternative</code>.  For example, to test the hypotheses</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 32$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &lt; 32$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>ttestGC(mean=30,sd=4,n=40,
+        mu=32,alternative="less")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  mean sd  n
+##    30  4 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 30 
+## SE(x.bar):	 0.6325 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           -Inf                31.065609            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 32 
+## 	H_a:  mu &lt; 32 
+## 
+## 	Test Statistic:		t = -3.162 
+## 	Degrees of Freedom:	  39 
+## 	P-value:		P = 0.001514
+</code></pre>
+
+<h2 id="difference-of-two-means-data-frame">Difference of Two Means, Data Frame</h2>
+
+<h3 id="confidence-interval-only-2">Confidence Interval Only</h3>
+
+<p>Suppose</p>
+
+<blockquote>
+  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC females</p>
+</blockquote>
+
+<blockquote>
+  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC males</p>
+</blockquote>
+
+<p>If you desire, say, an 85%-confidence interval for $\mu<em>1 - \mu</em>2$, then use:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+        conf.level=0.85)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##  female 100.0 17.61 40
+##    male 113.5 22.57 31
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 -13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 85% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -20.579953          -6.223273
+</code></pre>
+
+<h3 id="interval-and-test-2">Interval and Test</h3>
+
+<p>If you want a 95%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H<em>0:  \mu</em>1 - \mu_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu<em>1 - \mu</em>2 \neq 0$</p>
+</blockquote>
+
+<p>then use:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+      mu=0)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##  female 100.0 17.61 40
+##    male 113.5 22.57 31
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 -13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -23.254640          -3.548586            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 != 0 
+## 
+## 	Test Statistic:		t = -2.725 
+## 	Degrees of Freedom:	  55.49 
+## 	P-value:		P = 0.008579
+</code></pre>
+
+<p>Notice that this time:</p>
+
+<ul>
+  <li>you specified the Null’s belief about the value of $\mu<em>1-\mu</em>2$ using the <code>mu</code> argument;</li>
+  <li>you did not have to set <code>conf.level</code> to 0.95 (the default value of the argument is 0.95 already);</li>
+  <li>you did not have to specify the two-sided alternative (the default value of <code>alternative</code> is already “two.sided”).</li>
+</ul>
+
+<h3 id="order-of-the-groups">Order of the Groups</h3>
+
+<p>Suppose that in the previous situation you had defined:</p>
+
+<blockquote>
+  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC males</p>
+</blockquote>
+
+<blockquote>
+  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC females</p>
+</blockquote>
+
+<p>Then for you, the first population is all GC males and the second population is all GC females.  In order to guarantee that R abides by your choice, use the argument <code>first</code>:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+      mu=0,first="male")
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##    male 113.5 22.57 31
+##  female 100.0 17.61 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           3.548586            23.254640            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 != 0 
+## 
+## 	Test Statistic:		t = 2.725 
+## 	Degrees of Freedom:	  55.49 
+## 	P-value:		P = 0.008579
+</code></pre>
+
+<h2 id="difference-of-two-means-summary-data">Difference of Two Means, Summary Data</h2>
+
+<h3 id="confidence-interval-only-3">Confidence Interval Only</h3>
+
+<p>Suppose that you have taken two independent samples from two populations (or performed a completely randomized experiment with two treatment groups), and you have the following summary data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Group</th>
+      <th style="text-align: right">$\bar{x}$</th>
+      <th style="text-align: right">$s$</th>
+      <th style="text-align: right">$n$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">group one</td>
+      <td style="text-align: right">32</td>
+      <td style="text-align: right">4.2</td>
+      <td style="text-align: right">33</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">group two</td>
+      <td style="text-align: right">30</td>
+      <td style="text-align: right">5.1</td>
+      <td style="text-align: right">42</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You need to provide the summary data to the arguments <code>mean</code>, <code>sd</code> and <code>n</code>, as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
+
+<p>For a 95%-confidence interval for $\mu<em>1 - \mu</em>2$, use:</p>
+
+<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42))
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	Results from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##    group mean  sd  n
+##  Group 1   32 4.2 33
+##  Group 2   30 5.1 42
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 2 
+## SE(mu1.hat - mu2.hat):	 1.074 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -0.140898           4.140898
+</code></pre>
+
+<h3 id="interval-and-test-3">Interval and Test</h3>
+
+<p>If you want a 90%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H<em>0:  \mu</em>1 - \mu_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu<em>1 - \mu</em>2 &gt; 0$</p>
+</blockquote>
+
+<p>Suppose you also want a graph of the $P$-value.  Then use:</p>
+
+<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42),
+        mu=0,alternative="greater",
+        conf.level=0.90,graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	Results from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##    group mean  sd  n
+##  Group 1   32 4.2 33
+##  Group 2   30 5.1 42
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 2 
+## SE(mu1.hat - mu2.hat):	 1.074 
+## 
+## 90% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           0.610797            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 &gt; 0 
+## 
+## 	Test Statistic:		t = 1.862 
+## 	Degrees of Freedom:	  72.82 
+## 	P-value:		P = 0.03333
+</code></pre>
+
+<p><img src="/images/figure/ttesttut2meanssummary.png" alt="plot of chunk ttesttut2meanssummary" /> </p>
+
+<h2 id="mean-of-differences">Mean of Differences</h2>
+
+<h3 id="both-variables-in-the-data-frame">Both Variables in the Data Frame</h3>
+
+<h4 id="confidence-interval-only-4">Confidence Interval Only</h4>
+
+<p>Suppose that</p>
+
+<blockquote>
+  <p>$\mu_d =$ mean difference (ideal height minus actual height) for all Georgetown College student.</p>
+</blockquote>
+
+<p>Both of the relevant variables—<strong>ideal_ht</strong> and <strong>height</strong>—are present in the <code>m111survey</code> data frame.</p>
+
+<p>If you want a 95%-confidence interval for $\mu_d$, then use:</p>
+
+<pre><code>ttestGC(~ideal_ht - height,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for the Difference of Means mu-d:
+## 	 height minus ideal_ht 
+## 
+## 
+## Descriptive Results:
+## 
+##         Difference mean.difference sd.difference  n
+##  ideal_ht - height           1.946         3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu-d:	 1.946 
+## SE(d.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu-d:
+## 
+##           lower.bound         upper.bound          
+##           1.175528            2.715776
+</code></pre>
+
+<p>Note how the “~” character signals the presence of a formula.</p>
+
+<h4 id="interval-and-test-4">Interval and Test</h4>
+
+<p>In order to test:</p>
+
+<blockquote>
+  <p>$H_0:  \mu_d = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_d &gt; 0$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>ttestGC(~ideal_ht - height,data=m111survey,
+        mu=0,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for the Difference of Means mu-d:
+## 	 height minus ideal_ht 
+## 
+## 
+## Descriptive Results:
+## 
+##         Difference mean.difference sd.difference  n
+##  ideal_ht - height           1.946         3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu-d:	 1.946 
+## SE(d.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu-d:
+## 
+##           lower.bound         upper.bound          
+##           1.302075            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu-d = 0 
+## 	H_a:  mu-d &gt; 0 
+## 
+## 	Test Statistic:		t = 5.041 
+## 	Degrees of Freedom:	  68 
+## 	P-value:		P = 1.826e-06
+</code></pre>
+
+<h3 id="the-difference-is-in-the-data-frame">The Difference is in the Data Frame</h3>
+
+<p>Sometimes the difference of the two relevant numerical variables is included in the data frame as another variable:  such is the case for <code>m111survey</code>, where the difference is recorded as the variable <strong>diff.ideal.act.</strong></p>
+
+<p>If you would like to use this difference, then Work just as if you were studying one population mean $\mu$.</p>
+
+<h4 id="confidence-interval-only-5">Confidence Interval Only</h4>
+
+<p>Thus, for a 95%-confidence interval for $\mu_d$ we could also have done:</p>
+
+<pre><code>ttestGC(~diff.ideal.act.,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##         variable  mean    sd  n
+##  diff.ideal.act. 1.946 3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 1.946 
+## SE(x.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           1.175528            2.715776
+</code></pre>
+
+<h4 id="interval-and-test-5">Interval and Test</h4>
+
+<p>For a test of</p>
+
+<blockquote>
+  <p>$H_0:  \mu_d = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_d &gt; 0$</p>
+</blockquote>
+
+<p>we could have done:</p>
+
+<pre><code>ttestGC(~diff.ideal.act.,data=m111survey,
+        mu=0,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##         variable  mean    sd  n
+##  diff.ideal.act. 1.946 3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 1.946 
+## SE(x.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           1.302075            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 0 
+## 	H_a:  mu &gt; 0 
+## 
+## 	Test Statistic:		t = 5.041 
+## 	Degrees of Freedom:	  68 
+## 	P-value:		P = 1.826e-06
+</code></pre>
+
+<p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act</strong> recorded the difference of a pair of measurements.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Homer White</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-27T15:00:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/26/pnormGCtutorial/" title="Previous Post: pnormGC() Tutorial">&laquo; pnormGC() Tutorial</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/ttestGCtutorial/">ttestGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/pbinomGCtutorial/">pbinomGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic's Favstats()</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'homerhanumat',
+            count: 2,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101037539642604924807?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (7)</a></li>
+<li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Useful Links</h1>
+  <ul id="links">
+      <li class="post"><a href="http://www.r-bloggers.com" target="_blank">R-Bloggers</a></li>
+      <li class="post"><a href="http://mosaic-web.org/" target="_blank">Project Mosaic</a></li>
+      <li class="post"><a href="http://rainandrhino.org", target="_blank">My Elementary Course</a></li> 
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p float>
+  2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+<p>      
+  <span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></span><span style="color:black">This work is licensed under a </span><a style="color:black" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-26T19:32:26-05:00</updated>
+  <updated>2014-02-27T16:48:00-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,899 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[ttestGC() Tutorial]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/"/>
+    <updated>2014-02-27T15:00:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</a>    <ul>
+      <li><a href="#confidence-interval-only">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test">Interval and Test</a></li>
+      <li><a href="#graph-of-the-p-value">Graph of the P-Value</a></li>
+      <li><a href="#limiting-output">Limiting Output</a></li>
+    </ul>
+  </li>
+  <li><a href="#one-mean-from-summary-data">One Mean, From Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-1">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-1">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-means-data-frame">Difference of Two Means, Data Frame</a>    <ul>
+      <li><a href="#confidence-interval-only-2">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-2">Interval and Test</a></li>
+      <li><a href="#order-of-the-groups">Order of the Groups</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-means-summary-data">Difference of Two Means, Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-3">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-3">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#mean-of-differences">Mean of Differences</a>    <ul>
+      <li><a href="#both-variables-in-the-data-frame">Both Variables in the Data Frame</a>        <ul>
+          <li><a href="#confidence-interval-only-4">Confidence Interval Only</a></li>
+          <li><a href="#interval-and-test-4">Interval and Test</a></li>
+        </ul>
+      </li>
+      <li><a href="#the-difference-is-in-the-data-frame">The Difference is in the Data Frame</a>        <ul>
+          <li><a href="#confidence-interval-only-5">Confidence Interval Only</a></li>
+          <li><a href="#interval-and-test-5">Interval and Test</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>You use <code>ttestGC()</code> for inferential procedures regarding:</p>
+
+<ul>
+  <li>one population mean $\mu$;</li>
+  <li>the difference of two population means, $\mu<em>1 - \mu</em>2$;</li>
+  <li>the mean $\mu_d$ of paired differences in a population.</li>
+</ul>
+
+<p>The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</h2>
+
+<p>Read this section carefully.  It talks about:</p>
+
+<ul>
+  <li>levels of confidence,</li>
+  <li>types of Alternative Hypothesis,</li>
+  <li>graphs of the P-value, and</li>
+  <li>an option to limit output to the console</li>
+</ul>
+
+<p>in ways that apply to all uses of <code>ttestGC()</code>.</p>
+
+<h3 id="confidence-interval-only">Confidence Interval Only</h3>
+
+<p>In the <code>m111survey</code> data from the <code>tigerstats</code> package, suppose you want a 95%-confidence interval for:</p>
+
+<blockquote>
+  <p>$\mu =$ the mean fastest speed ever driven, for all GC students.</p>
+</blockquote>
+
+<p>Use the function:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984
+</code></pre>
+
+<p>To get any other level of confidence, you need to use the <code>conf.level</code> argument, indicating your desired level of confidence in decimal (not percentage) form.</p>
+
+<p>For example, for a 90%-confidence interval for $\mu$, use</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,conf.level=0.90)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 90% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           101.771329          110.031488
+</code></pre>
+
+<h3 id="interval-and-test">Interval and Test</h3>
+
+<p>If you want a test of significance as well as the confidence interval, then</p>
+
+<ul>
+  <li>use the <code>mu</code> argument to set what the Null Hypothesis thinks that the value of $\mu$ is;</li>
+  <li>use the <code>alternative</code> argument to specify the Alternative Hypothesis.</li>
+</ul>
+
+<p>For example, if the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &gt; 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           101.771329          Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu &gt; 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.009974
+</code></pre>
+
+<p>If the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &lt; 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="less")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           -Inf                110.031488           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu &lt; 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.99
+</code></pre>
+
+<p>If the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu \neq 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu != 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<p>But note that the default value of <code>alternative</code> is “two.sided”, so if you want you could just leave it out and still get a two-sided test:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100)
+</code></pre>
+
+<h3 id="graph-of-the-p-value">Graph of the P-Value</h3>
+
+<p>Anytime you want, you can get a graph of the $P$-value for your test, simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided",graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu != 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<p><img src="/images/figure/ttesttutonemean2sided.png" alt="plot of chunk ttesttutonemean2sided" /> </p>
+
+<h3 id="limiting-output">Limiting Output</h3>
+
+<p>Sometimes you don’t need R to print so much information to the console.  If you want only the basics (such as a confidence interval, the test statistic and $P$-value), then set the <code>verbose</code> argument to <code>FALSE</code>:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided",verbose=FALSE)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<h2 id="one-mean-from-summary-data">One Mean, From Summary Data</h2>
+
+<h3 id="confidence-interval-only-1">Confidence Interval Only</h3>
+
+<p>Say that you have taken a simple random sample from some large population, and:</p>
+
+<ul>
+  <li>the sample mean is $\bar{x}=30$,</li>
+  <li>the sample standard deviation is $s=4$,</li>
+  <li>the sample size was $n=40$.</li>
+</ul>
+
+<p>You don’t have the raw data present in a data frame, but you have enough summary data to use <code>ttestGC()</code>.  You just have to set some new arguments:</p>
+
+<ul>
+  <li>set <code>mean</code> to the sample mean;</li>
+  <li>set <code>sd</code> to the sample standard deviation;</li>
+  <li>set <code>n</code> to the sample size.</li>
+</ul>
+
+<p>So if you only want a 95%-confidence interval for $\mu$. use:</p>
+
+<pre><code>ttestGC(mean=30,sd=4,n=40)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  mean sd  n
+##    30  4 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 30 
+## SE(x.bar):	 0.6325 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           28.720738           31.279262
+</code></pre>
+
+<h3 id="interval-and-test-1">Interval and Test</h3>
+
+<p>If you also want to do a test of significance, again specify <code>mu</code> and <code>alternative</code>.  For example, to test the hypotheses</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 32$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &lt; 32$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>ttestGC(mean=30,sd=4,n=40,
+        mu=32,alternative="less")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  mean sd  n
+##    30  4 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 30 
+## SE(x.bar):	 0.6325 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           -Inf                31.065609            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 32 
+## 	H_a:  mu &lt; 32 
+## 
+## 	Test Statistic:		t = -3.162 
+## 	Degrees of Freedom:	  39 
+## 	P-value:		P = 0.001514
+</code></pre>
+
+<h2 id="difference-of-two-means-data-frame">Difference of Two Means, Data Frame</h2>
+
+<h3 id="confidence-interval-only-2">Confidence Interval Only</h3>
+
+<p>Suppose</p>
+
+<blockquote>
+  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC females</p>
+</blockquote>
+
+<blockquote>
+  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC males</p>
+</blockquote>
+
+<p>If you desire, say, an 85%-confidence interval for $\mu<em>1 - \mu</em>2$, then use:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+        conf.level=0.85)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##  female 100.0 17.61 40
+##    male 113.5 22.57 31
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 -13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 85% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -20.579953          -6.223273
+</code></pre>
+
+<h3 id="interval-and-test-2">Interval and Test</h3>
+
+<p>If you want a 95%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H<em>0:  \mu</em>1 - \mu_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu<em>1 - \mu</em>2 \neq 0$</p>
+</blockquote>
+
+<p>then use:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+      mu=0)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##  female 100.0 17.61 40
+##    male 113.5 22.57 31
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 -13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -23.254640          -3.548586            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 != 0 
+## 
+## 	Test Statistic:		t = -2.725 
+## 	Degrees of Freedom:	  55.49 
+## 	P-value:		P = 0.008579
+</code></pre>
+
+<p>Notice that this time:</p>
+
+<ul>
+  <li>you specified the Null’s belief about the value of $\mu<em>1-\mu</em>2$ using the <code>mu</code> argument;</li>
+  <li>you did not have to set <code>conf.level</code> to 0.95 (the default value of the argument is 0.95 already);</li>
+  <li>you did not have to specify the two-sided alternative (the default value of <code>alternative</code> is already “two.sided”).</li>
+</ul>
+
+<h3 id="order-of-the-groups">Order of the Groups</h3>
+
+<p>Suppose that in the previous situation you had defined:</p>
+
+<blockquote>
+  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC males</p>
+</blockquote>
+
+<blockquote>
+  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC females</p>
+</blockquote>
+
+<p>Then for you, the first population is all GC males and the second population is all GC females.  In order to guarantee that R abides by your choice, use the argument <code>first</code>:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+      mu=0,first="male")
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##    male 113.5 22.57 31
+##  female 100.0 17.61 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           3.548586            23.254640            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 != 0 
+## 
+## 	Test Statistic:		t = 2.725 
+## 	Degrees of Freedom:	  55.49 
+## 	P-value:		P = 0.008579
+</code></pre>
+
+<h2 id="difference-of-two-means-summary-data">Difference of Two Means, Summary Data</h2>
+
+<h3 id="confidence-interval-only-3">Confidence Interval Only</h3>
+
+<p>Suppose that you have taken two independent samples from two populations (or performed a completely randomized experiment with two treatment groups), and you have the following summary data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Group</th>
+      <th style="text-align: right">$\bar{x}$</th>
+      <th style="text-align: right">$s$</th>
+      <th style="text-align: right">$n$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">group one</td>
+      <td style="text-align: right">32</td>
+      <td style="text-align: right">4.2</td>
+      <td style="text-align: right">33</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">group two</td>
+      <td style="text-align: right">30</td>
+      <td style="text-align: right">5.1</td>
+      <td style="text-align: right">42</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You need to provide the summary data to the arguments <code>mean</code>, <code>sd</code> and <code>n</code>, as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
+
+<p>For a 95%-confidence interval for $\mu<em>1 - \mu</em>2$, use:</p>
+
+<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42))
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	Results from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##    group mean  sd  n
+##  Group 1   32 4.2 33
+##  Group 2   30 5.1 42
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 2 
+## SE(mu1.hat - mu2.hat):	 1.074 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -0.140898           4.140898
+</code></pre>
+
+<h3 id="interval-and-test-3">Interval and Test</h3>
+
+<p>If you want a 90%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H<em>0:  \mu</em>1 - \mu_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu<em>1 - \mu</em>2 &gt; 0$</p>
+</blockquote>
+
+<p>Suppose you also want a graph of the $P$-value.  Then use:</p>
+
+<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42),
+        mu=0,alternative="greater",
+        conf.level=0.90,graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	Results from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##    group mean  sd  n
+##  Group 1   32 4.2 33
+##  Group 2   30 5.1 42
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 2 
+## SE(mu1.hat - mu2.hat):	 1.074 
+## 
+## 90% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           0.610797            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 &gt; 0 
+## 
+## 	Test Statistic:		t = 1.862 
+## 	Degrees of Freedom:	  72.82 
+## 	P-value:		P = 0.03333
+</code></pre>
+
+<p><img src="/images/figure/ttesttut2meanssummary.png" alt="plot of chunk ttesttut2meanssummary" /> </p>
+
+<h2 id="mean-of-differences">Mean of Differences</h2>
+
+<h3 id="both-variables-in-the-data-frame">Both Variables in the Data Frame</h3>
+
+<h4 id="confidence-interval-only-4">Confidence Interval Only</h4>
+
+<p>Suppose that</p>
+
+<blockquote>
+  <p>$\mu_d =$ mean difference (ideal height minus actual height) for all Georgetown College student.</p>
+</blockquote>
+
+<p>Both of the relevant variables—<strong>ideal_ht</strong> and <strong>height</strong>—are present in the <code>m111survey</code> data frame.</p>
+
+<p>If you want a 95%-confidence interval for $\mu_d$, then use:</p>
+
+<pre><code>ttestGC(~ideal_ht - height,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for the Difference of Means mu-d:
+## 	 height minus ideal_ht 
+## 
+## 
+## Descriptive Results:
+## 
+##         Difference mean.difference sd.difference  n
+##  ideal_ht - height           1.946         3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu-d:	 1.946 
+## SE(d.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu-d:
+## 
+##           lower.bound         upper.bound          
+##           1.175528            2.715776
+</code></pre>
+
+<p>Note how the “~” character signals the presence of a formula.</p>
+
+<h4 id="interval-and-test-4">Interval and Test</h4>
+
+<p>In order to test:</p>
+
+<blockquote>
+  <p>$H_0:  \mu_d = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_d &gt; 0$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>ttestGC(~ideal_ht - height,data=m111survey,
+        mu=0,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for the Difference of Means mu-d:
+## 	 height minus ideal_ht 
+## 
+## 
+## Descriptive Results:
+## 
+##         Difference mean.difference sd.difference  n
+##  ideal_ht - height           1.946         3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu-d:	 1.946 
+## SE(d.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu-d:
+## 
+##           lower.bound         upper.bound          
+##           1.302075            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu-d = 0 
+## 	H_a:  mu-d &gt; 0 
+## 
+## 	Test Statistic:		t = 5.041 
+## 	Degrees of Freedom:	  68 
+## 	P-value:		P = 1.826e-06
+</code></pre>
+
+<h3 id="the-difference-is-in-the-data-frame">The Difference is in the Data Frame</h3>
+
+<p>Sometimes the difference of the two relevant numerical variables is included in the data frame as another variable:  such is the case for <code>m111survey</code>, where the difference is recorded as the variable <strong>diff.ideal.act.</strong></p>
+
+<p>If you would like to use this difference, then Work just as if you were studying one population mean $\mu$.</p>
+
+<h4 id="confidence-interval-only-5">Confidence Interval Only</h4>
+
+<p>Thus, for a 95%-confidence interval for $\mu_d$ we could also have done:</p>
+
+<pre><code>ttestGC(~diff.ideal.act.,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##         variable  mean    sd  n
+##  diff.ideal.act. 1.946 3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 1.946 
+## SE(x.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           1.175528            2.715776
+</code></pre>
+
+<h4 id="interval-and-test-5">Interval and Test</h4>
+
+<p>For a test of</p>
+
+<blockquote>
+  <p>$H_0:  \mu_d = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_d &gt; 0$</p>
+</blockquote>
+
+<p>we could have done:</p>
+
+<pre><code>ttestGC(~diff.ideal.act.,data=m111survey,
+        mu=0,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##         variable  mean    sd  n
+##  diff.ideal.act. 1.946 3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 1.946 
+## SE(x.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           1.302075            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 0 
+## 	H_a:  mu &gt; 0 
+## 
+## 	Test Statistic:		t = 5.041 
+## 	Degrees of Freedom:	  68 
+## 	P-value:		P = 1.826e-06
+</code></pre>
+
+<p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act</strong> recorded the difference of a pair of measurements.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[pnormGC() Tutorial]]></title>
@@ -624,181 +1517,6 @@ help(m111survey)
 ## Error: non-numeric argument to binary operator
 </code></pre>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[lmGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial/"/>
-    <updated>2014-02-15T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#formula-data-input">Formula-Data Input</a></li>
-  <li><a href="#prediction">Prediction</a></li>
-  <li><a href="#plotting">Plotting</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>The <code>lmGC()</code> is a starter-tool for simple linear regression, when you are studying the relationship between two numerical variables, one of which you consider to be an explanatory or predictor variable and the other of which you think of as the response.  It’s only a starter-tool:  by the end of the course, or in later statistics courses, you will move on to R’s function <code>lm()</code>, which allows you to work with more than one explanatory variable and which provides additional useful information in its output.  Also, in <code>lm()</code> the explanatory variable(s) can even be factors!</p>
-
-<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo = "homerhanumat/tigerstats")
-</code></pre>
-
-<p>In this tutorial we will work with a couple of data sets:  <code>mtcars</code> from the <code>data</code> package that comes with the basic R installation, and <code>fuel</code> from the <code>tigerstats</code> package, so make sure you become familiar with them.  The following commands may be helpful in this regard:</p>
-
-<pre><code>data(mtcars)
-View(mtcars)
-help(mtcars)
-</code></pre>
-
-<p>For <code>fuel</code>:</p>
-
-<pre><code>data(fuel)
-View(fuel)
-help(fuel)
-</code></pre>
-
-<h2 id="formula-data-input">Formula-Data Input</h2>
-
-<p>Like many R functions, <code>lmGC()</code> accepts formula-data input.  The general command looks like:</p>
-
-<pre><code>lmGC(response ~ explanatory, data = DataFrame)
-</code></pre>
-
-<p>If you are interested in studying the relationship between the fuel efficiency of a car (<strong>mpg</strong> in the <code>mtcars</code> data frame, measured in miles per gallon) and its weight (<strong>wt</strong> in <code>mtcars</code>, measure din thousands of pounds), then you  can run:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p>The output to the console is rather minimal.  You get:</p>
-
-<ul>
-  <li>the correlation coefficient $r$.  We need to look at a scatter plot to be really sure about it (for plots, see below), but at this point the value $r = -0.87$ indicates a fairly strong negative linear relationship between fuel efficiency and weight.</li>
-  <li>the equation of the regression line.  From the slope of -5.34, we see that for every thousand pound increase in the weight of a car, we predict a 5.34 mpg decrease in the fuel efficiency.</li>
-  <li>the residual standard error $s$.  As a rough rule of thumb, we figure that when we use the regression equation to predict the fuel efficiency of a car from its weight, that prediction is liable to be off by about $s$ miles per gallon, or so.</li>
-  <li>the unadjusted $R^2$.  We see here that about 75% of the variation in the fuel efficiency of the cars in the data set is accounted for by the variation in their weights.  since $R^2$ is fairly high, it seems that weight is a fairly decent predictor of fuel efficiency.</li>
-</ul>
-
-<h2 id="prediction">Prediction</h2>
-
-<p>When the value of the explanatory variable for an individual is known and you wish to predict the value of the response variable for that individual, you can use the <code>predict()</code> function.  Its arguments are the linear model that is created by <code>lmGC()</code>, and the value <code>x</code> of the explanatory variable.</p>
-
-<p>If you think that you might want to use <code>predict()</code>, you may first want to store the model in a variable, for example:</p>
-
-<pre><code>WeightEff &lt;- lmGC(mpg ~ wt, data = mtcars)
-</code></pre>
-
-<p>Then if you want to predict the fuel efficiency of a car that weights 3000 pounds, run this command:</p>
-
-<pre><code>predict(WeightEff, x = 3)
-
-## [1] 21.25
-</code></pre>
-
-<p>We predict that a 3000 pound car (from the time of the Motor Trend study that produced this data) would have a fuel efficiency of 21.25 mpg, give or take about 3.046 mpg or so.  (Note how we used $s$ as a rough give-or-take figure.)</p>
-
-<h2 id="plotting">Plotting</h2>
-
-<p>But we are getting ahead of ourselves!  In order to use linear models at all, we need to make sure that our data really do show a linear relationship.  The single best way to check this is to look at a scatterplot, so <code>lmGC()</code> comes equipped with a option to produce one:  just set the argument <code>graph</code> to <code>TRUE</code>, as follows:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars, graph = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p><img src="/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
-
-<p>The scatterplot includes the regression line. Indeed, the cloud of point seems to follow a line fairly well.  The relationship may be thought of as linear, so using <code>lmGC()</code> for tasks like prediction does make sense, for this data.</p>
-
-<p>You can also perform some simple diagnostics, by setting the argument <code>diag</code> to <code>TRUE</code>:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars, diag = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p><img src="/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
-
-<p>You get two graphs:</p>
-
-<ul>
-  <li>a density plot of the residuals.  If the distribution of the residuals is roughly bell-shaped, then you can actually employ a ``regression’’ version of the 68-95 Rule:  when you make a prediction using the regression line, there is a about a 68% chance that your predcition will be wtthin one $s$ of the actual $y$-value, and about a 95% chance that ti will be within $2s$ of the actual $y$-value.  <em>Neat!</em></li>
-  <li>A plot of the residuals vs, the <code>fitted</code> $y$-values (the $y$-coordinates of the points on the original scatterplot).  If the points exhibit a linear relationship with about the same amount of scatter all the way along the regression line, then this plot should look like a random cloud of points.  In this case, it confirms that our linear model is appropriate to the data.</li>
-</ul>
-
-<p>On the other hand, consider <code>fuel</code> data frame, which shows the results of a study where a British Ford Escort was driven at various speed along a standard course, and the fuel efficiency (in kilometers traveled per liter of fuel consumed) was recorded at each speed.  Let’s try a linear model with <strong>speed</strong> as explanatory and <strong>efficiency</strong> as the response, with some diagnostic plots attached:</p>
-
-<pre><code>lmGC(efficiency ~ speed, data = fuel, diag = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.1716 
-## 
-## Equation of Regression Line:
-## 
-## 	 efficiency = 11.06 + -0.0147 * speed 
-## 
-## Residual Standard Error:	s   = 3.905 
-## R^2 (unadjusted):		R^2 = 0.0295
-</code></pre>
-
-<p><img src="/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
-
-<p>The residuals have a roughly-bell-shaped distribution, but the residual plot is clearly patterned.  Something is amiss!  Let’s look at a scatterplot of the data:</p>
-
-<pre><code>xyplot(efficiency~speed,data=fuel,
-       xlab="speed (kilometers/hour",
-       ylab="fuel effiency (liters/100km",
-       pch=19,col="blue",type=c("p","r"),
-       main="Speed and Fuel Efficiency\nfor a British Ford Escort")
-</code></pre>
-
-<p><img src="/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
-
-<p>The relationship is strongly curvilinear:  it makes no sense to use the regression line (shown in the plot above) to study the relationship between these two variables!</p>
 ]]></content>
   </entry>
   
