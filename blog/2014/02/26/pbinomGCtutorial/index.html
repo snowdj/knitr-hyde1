@@ -211,7 +211,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <p>would give us the chance of $X$ being at least 11, which is not what we want.</p>
 
-<p>However, since $X$ can only take on whole number values, $X \geq 10$ means exactly the same thing as $X &gt; 9$, so what we really should ask for is:</p>
+<p>However, since $X$ can only take on whole number values, $X \geq 10$ means exactly the same thing as $X &gt; 9$, what we really should ask for is:</p>
 
 <pre><code>pbinomGC(bound=9,region="above",
          size=20,prob=0.3,graph=TRUE)
@@ -222,7 +222,7 @@ install_github(repo="homerhanumat/tigerstats")
 <pre><code>## [1] 0.04796
 </code></pre>
 
-<p>The shaded area starts at 10, just like we want.</p>
+<p>The shaded area starts at 10, as desired.</p>
 
 <p>It’s a good idea to keep asking for a graph along with your output, so you can check that R is giving you exactly the probability that you need.</p>
 
@@ -230,7 +230,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <p>For this case we also have to be careful.</p>
 
-<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability of at less than 6 successes, i.e.:</p>
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability of less than 6 successes, i.e.:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 P(X < 6). %]]></script>
@@ -290,7 +290,7 @@ P(X < 6). %]]></script>
 
 <script type="math/tex; mode=display">P(6 \leq X \leq 6),</script>
 
-<p>so we can ask for:</p>
+<p>so you can ask for:</p>
 
 <pre><code>pbinomGC(bound=c(6,6),region="between",
          size=20,prob=0.3,graph=TRUE)
@@ -370,6 +370,8 @@ P(X < 7 \textbf{ or } X > 9). %]]></script>
         <a class="basic-alignment left" href="/blog/2014/02/21/barchartGCtutorial/" title="Previous Post: barchartGC() Tutorial">&laquo; barchartGC() Tutorial</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/02/26/pnormGCtutorial/" title="Next Post: pnormGC() Tutorial">pnormGC() Tutorial &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -389,6 +391,10 @@ P(X < 7 \textbf{ or } X > 9). %]]></script>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/26/pbinomGCtutorial/">pbinomGC() Tutorial</a>
       </li>
     
@@ -402,10 +408,6 @@ P(X < 7 \textbf{ or } X > 9). %]]></script>
     
       <li class="post">
         <a href="/blog/2014/02/15/lmGCtutorial/">lmGC() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/01/chisqtestGCtutorial/">chisq.testGC() Tutorial</a>
       </li>
     
   </ul>
@@ -456,7 +458,7 @@ P(X < 7 \textbf{ or } X > 9). %]]></script>
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (5)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (6)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
 
   </ul>
