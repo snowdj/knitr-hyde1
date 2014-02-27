@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-27T16:48:00-05:00</updated>
+  <updated>2014-02-27T17:31:09-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -64,7 +64,7 @@
 
 <ul>
   <li>one population mean $\mu$;</li>
-  <li>the difference of two population means, $\mu<em>1 - \mu</em>2$;</li>
+  <li>the difference of two population means, $\mu_1 - \mu_2$;</li>
   <li>the mean $\mu_d$ of paired differences in a population.</li>
 </ul>
 
@@ -472,7 +472,7 @@ install_github(repo="homerhanumat/tigerstats")
   <p>$\mu_2 =$ mean fastest speed ever driven, by all GC males</p>
 </blockquote>
 
-<p>If you desire, say, an 85%-confidence interval for $\mu<em>1 - \mu</em>2$, then use:</p>
+<p>If you desire, say, an 85%-confidence interval for $\mu_1 - \mu_2$, then use:</p>
 
 <pre><code>ttestGC(fastest~sex,data=m111survey,
         conf.level=0.85)
@@ -504,14 +504,14 @@ install_github(repo="homerhanumat/tigerstats")
 
 <h3 id="interval-and-test-2">Interval and Test</h3>
 
-<p>If you want a 95%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
+<p>If you want a 95%-confidence interval for $\mu_1 - \mu_2$ and you would like to test the hypotheses:</p>
 
 <blockquote>
-  <p>$H<em>0:  \mu</em>1 - \mu_2 = 0$</p>
+  <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu<em>1 - \mu</em>2 \neq 0$</p>
+  <p>$H_a: \mu_1 - \mu_2 \neq 0$</p>
 </blockquote>
 
 <p>then use:</p>
@@ -622,30 +622,30 @@ install_github(repo="homerhanumat/tigerstats")
   <thead>
     <tr>
       <th style="text-align: center">Group</th>
-      <th style="text-align: right">$\bar{x}$</th>
-      <th style="text-align: right">$s$</th>
-      <th style="text-align: right">$n$</th>
+      <th style="text-align: center">$\bar{x}$</th>
+      <th style="text-align: center">$s$</th>
+      <th style="text-align: center">$n$</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: center">group one</td>
-      <td style="text-align: right">32</td>
-      <td style="text-align: right">4.2</td>
-      <td style="text-align: right">33</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">4.2</td>
+      <td style="text-align: center">33</td>
     </tr>
     <tr>
       <td style="text-align: center">group two</td>
-      <td style="text-align: right">30</td>
-      <td style="text-align: right">5.1</td>
-      <td style="text-align: right">42</td>
+      <td style="text-align: center">30</td>
+      <td style="text-align: center">5.1</td>
+      <td style="text-align: center">42</td>
     </tr>
   </tbody>
 </table>
 
 <p>You need to provide the summary data to the arguments <code>mean</code>, <code>sd</code> and <code>n</code>, as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
 
-<p>For a 95%-confidence interval for $\mu<em>1 - \mu</em>2$, use:</p>
+<p>For a 95%-confidence interval for $\mu_1 - \mu_2$, use:</p>
 
 <pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42))
 
@@ -679,11 +679,11 @@ install_github(repo="homerhanumat/tigerstats")
 <p>If you want a 90%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
 
 <blockquote>
-  <p>$H<em>0:  \mu</em>1 - \mu_2 = 0$</p>
+  <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu<em>1 - \mu</em>2 &gt; 0$</p>
+  <p>$H_a: \mu_1 - \mu_2 &gt; 0$</p>
 </blockquote>
 
 <p>Suppose you also want a graph of the $P$-value.  Then use:</p>
