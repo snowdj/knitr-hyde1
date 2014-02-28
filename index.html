@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Numerical Variable Numerical and Factor Variable Warning Preliminaries The function bwplot() makes box-and-whisker plots for &hellip;">
+  <meta name="description" content="Preliminaries Basic Scatterplot Including a Regression Line Playing With Points Preliminaries The function xyplot() makes scatterplots to indicate &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,135 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/28/xyplottutorial/">Tutorial on Lattice&#8217;s Xyplot()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T17:30:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/28/xyplottutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#basic-scatterplot">Basic Scatterplot</a></li>
+  <li><a href="#including-a-regression-line">Including a Regression Line</a></li>
+  <li><a href="#playing-with-points">Playing With Points</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The function <code>xyplot()</code> makes scatterplots to indicate the relationship between two numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>xyplot()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="basic-scatterplot">Basic Scatterplot</h2>
+
+<p>Suppose you want to know:</p>
+
+<blockquote>
+  <p><em>Do students with higher GPA’s tend to drive more slowly than students with lower GPA’s?</em></p>
+</blockquote>
+
+<p>If so, then you might check to see if numerical variable <strong>fastest</strong> (in the <code>m111survey</code> data frame from the <code>tigerstats</code> package) is realted to the numerical variable <code>GPA</code>.  Then you can make a scatterplot as follows:</p>
+
+<pre><code>xyplot(fastest~GPA,data=m111survey,
+       xlab="grade point average",
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Grade Point Average")
+</code></pre>
+
+<p><img src="/images/figure/xytutfastestgpa.png" alt="plot of chunk xytutfastestgpa" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis;</li>
+  <li>the <code>ylab</code> argument to label the vertical axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph;</li>
+  <li>the “\n” to make two lines in the title (useful if you have a long title).</li>
+</ul>
+
+<p>When we think of one variable as explanatory and the other as the response, it is common to put the explanatory on the horizontal axis and the response on the vertical axis.  This is accomplished by the formula</p>
+
+<script type="math/tex; mode=display">response \sim explanatory</script>
+
+<h2 id="including-a-regression-line">Including a Regression Line</h2>
+
+<p>If you want desire a regression line along with your scatterplot, use the argument <code>type</code>, as follows:</p>
+
+<pre><code>xyplot(fastest~GPA,data=m111survey,
+       xlab="grade point average",
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Grade Point Average",
+       type=c("p","r"))
+</code></pre>
+
+<p><img src="/images/figure/xytutfastestgpareg.png" alt="plot of chunk xytutfastestgpareg" /> </p>
+
+<p>The list given by <code>c("p","r")</code> tells <code>xyplot()</code> that we want both the points (“p”) and a regression line (“r”).</p>
+
+<h2 id="playing-with-points">Playing With Points</h2>
+
+<p>You can vary the type of point using the <code>pch</code> argument, and the color of the points with the <code>col</code> argument.  For example:</p>
+
+<pre><code>xyplot(fastest~GPA,data=m111survey,
+       xlab="grade point average",
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Grade Point Average",
+       pch=19,col="blue")
+</code></pre>
+
+<p><img src="/images/figure/xytutfastestgpapoints.png" alt="plot of chunk xytutfastestgpapoints" /> </p>
+
+<p>There are 25 different values for <code>pch</code>:  the integers 1 through 25.</p>
+
+<p>There are many, many values for <code>col</code>.  You can explore 657 of them with the command:</p>
+
+<pre><code>colors()
+</code></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3224,354 +3353,6 @@ help(fuel)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/01/chisqtestGCtutorial/">chisq.testGC() Tutorial</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-01T15:00:00-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/01/chisqtestGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/01/chisqtestGCtutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#formula-data-input">Formula-Data Input</a></li>
-  <li><a href="#two-way-table-input">Two-Way Table Input</a></li>
-  <li><a href="#a-table-from-summary-data">A Table From Summary Data</a></li>
-  <li><a href="#simulation">Simulation</a>    <ul>
-      <li><a href="#explanatory-tallies-fixed">Explanatory Tallies Fixed</a></li>
-      <li><a href="#explanatory-tallies-random">Explanatory Tallies Random</a></li>
-      <li><a href="#both-tallies-fixed">Both Tallies Fixed</a></li>
-    </ul>
-  </li>
-  <li><a href="#graphs-of-the-p-value">Graphs of the P-Value</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>You use the $\chi^2$-test when you are addressing the inferential aspect of a research question about the relationship between two factor variables.  That is, you want to know whether any relationship between the two variables that you might have observed in your data is real or could reasonably be explained as chance variation in the process that resulted in the data.</p>
-
-<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<h2 id="formula-data-input">Formula-Data Input</h2>
-
-<p>When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the <code>mat111survey</code> data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:</p>
-
-<pre><code>chisq.testGC(~sex + seat, data = m111survey)
-
-## Pearson's Chi-squared test 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></pre>
-
-<h2 id="two-way-table-input">Two-Way Table Input</h2>
-
-<p>Sometimes you already have a two-way table on hand:</p>
-
-<pre><code>SexSeat &lt;- xtabs(~sex + seat, data = m111survey)
-SexSeat
-
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-</code></pre>
-
-<p>In that case you can save yourself some typing by entering the table in place of the formula and the <code>data</code> arguments:</p>
-
-<pre><code>chisq.testGC(SexSeat)
-</code></pre>
-
-<h2 id="a-table-from-summary-data">A Table From Summary Data</h2>
-
-<p>Remember:  if you are given summary data, only, then you can construct a nice two-way table and enter it into <code>chisquare.testGC()</code>.  Suppose that you want this two-way table:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: center">Front</th>
-      <th style="text-align: center">Middle</th>
-      <th style="text-align: center">Back</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Female</td>
-      <td style="text-align: center">19</td>
-      <td style="text-align: center">16</td>
-      <td style="text-align: center">5</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Male</td>
-      <td style="text-align: center">8</td>
-      <td style="text-align: center">16</td>
-      <td style="text-align: center">7</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>You can get it as follows:</p>
-
-<pre><code>MySexSeat &lt;- rbind(female = c(19, 16, 5), male = c(8, 16, 7))
-colnames(MySexSeat) &lt;- c("front", "middle", "back")
-</code></pre>
-
-<p>Let’s just check to see that this worked:</p>
-
-<pre><code>MySexSeat
-
-##        front middle back
-## female    19     16    5
-## male       8     16    7
-</code></pre>
-
-<p>Then you can enter <code>MySexSeat</code> into the function:</p>
-
-<pre><code>chisq.testGC(MySexSeat)
-</code></pre>
-
-<h2 id="simulation">Simulation</h2>
-
-<p>When the Null’s expected counts are low, <code>chisq.testGC()</code> delivers a warning and suggest the use of simulation to compute the $P$-value.  You do this by way of the argument <code>simulate.p.value</code>, and you have three options:</p>
-
-<ul>
-  <li><code>simulate.p.value = "fixed"</code></li>
-  <li><code>simulate.p.value = "random"</code></li>
-  <li><code>simulate.p.value = "TRUE"</code></li>
-</ul>
-
-<h3 id="explanatory-tallies-fixed">Explanatory Tallies Fixed</h3>
-
-<p>Suppose that the objects under study are not a random sample from some larger population, and that the way chance comes into the production of the data is through random variation in all of the other factors—besides the explanatory variable— that might be associated with the response variable.  Then since the items being observed are fixed, the tally of values for the explanatory variable are fixed.  The response values for these items are the product of chance, but only through random variation in those other factors.</p>
-
-<p>The study from the <code>ledgejump</code> data frame was an example of this.  The 21 incidents were fixed, so there were nine cold-weather incidents and 12 warm-weather incidents, no matter what.  The crowd behavior at each incident, however is still a matter of chance.</p>
-
-<p>In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:</p>
-
-<pre><code>chisq.testGC(~weather + crowd.behavior, data = ledgejump, simulate.p.value = "fixed", 
-    B = 2500)
-
-## Pearson's chi-squared test with simulated p-value, fixed effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##        crowd.behavior
-## weather baiting polite
-##    cool       2      7
-##    warm       8      4
-## 
-## Counts Expected by Null:
-##        crowd.behavior
-## weather baiting polite
-##    cool    4.29   4.71
-##    warm    5.71   6.29
-## 
-## Contributions to the chi-square statistic:
-##        crowd.behavior
-## weather baiting polite
-##    cool    1.22   1.11
-##    warm    0.91   0.83
-## 
-## 
-## Chi-Square Statistic = 4.073 
-## Degrees of Freedom of the table = 1 
-## P-Value = 0.0496
-</code></pre>
-
-<p>You can set <code>B</code>, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the $P$-value, having been determined by random resampling, will vary from one run of the function to another.</p>
-
-<h3 id="explanatory-tallies-random">Explanatory Tallies Random</h3>
-
-<p>In the <code>m111survey</code> study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set <code>simulate.p.value</code> to “random”:</p>
-
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, simulate.p.value = "random", B = 2500)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1684
-</code></pre>
-
-<h3 id="both-tallies-fixed">Both Tallies Fixed</h3>
-
-<p>If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set <code>simulate.p.value</code> to “TRUE”.  This invokes R’s standard method for resampling:</p>
-
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, simulate.p.value = TRUE, B = 2500)
-
-## Pearson's Chi-squared test with simulated p-value
-## 	 (based on 2500 replicates) 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1703
-</code></pre>
-
-<p>It’s not easy to understand why R would adopt such a method, but it does have a long and honored history.  If you are ever in doubt about how to simulate, just use this third option.</p>
-
-<h2 id="graphs-of-the-p-value">Graphs of the P-Value</h2>
-
-<p>You can get a graph of the $P$-value in the plot window by setting the argument <code>graph</code> to TRUE.  When you did not simulate, the graph shows a density curve for the $\chi^2$ random variable with the relevant degrees of freedom.  When you simulate, the graph is a histogram of the resampled $\chi^2$-statistics.</p>
-
-<p>Here is a case with no simulation:</p>
-
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, graph = TRUE)
-
-## Pearson's Chi-squared test 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></pre>
-
-<p><img src="/images/figure/chisqtutnosim.png" alt="Graph of P-value, no simulation" /> </p>
-
-<p>Here is a case with simulation:</p>
-
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, simulate.p.value = "random", B = 2500, 
-    graph = TRUE)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1572
-</code></pre>
-
-<p><img src="/images/figure/chisqtutsim.png" alt="Graph of P-value, with simulation" /> </p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -3587,6 +3368,10 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/28/xyplottutorial/">Tutorial on Lattice&#8217;s Xyplot()</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/28/bwplottutorial/">Tutorial on Lattice&#8217;s Bwplot()</a>
       </li>
     
@@ -3600,10 +3385,6 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
     
       <li class="post">
         <a href="/blog/2014/02/27/ttestGCtutorial/">ttestGC() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a>
       </li>
     
   </ul>
@@ -3654,7 +3435,7 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (10)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (11)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
 
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-28T11:14:20-05:00</updated>
+  <updated>2014-02-28T15:40:43-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tutorial on Lattice's Xyplot()]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial/"/>
+    <updated>2014-02-28T17:30:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#basic-scatterplot">Basic Scatterplot</a></li>
+  <li><a href="#including-a-regression-line">Including a Regression Line</a></li>
+  <li><a href="#playing-with-points">Playing With Points</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The function <code>xyplot()</code> makes scatterplots to indicate the relationship between two numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>xyplot()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="basic-scatterplot">Basic Scatterplot</h2>
+
+<p>Suppose you want to know:</p>
+
+<blockquote>
+  <p><em>Do students with higher GPA’s tend to drive more slowly than students with lower GPA’s?</em></p>
+</blockquote>
+
+<p>If so, then you might check to see if numerical variable <strong>fastest</strong> (in the <code>m111survey</code> data frame from the <code>tigerstats</code> package) is realted to the numerical variable <code>GPA</code>.  Then you can make a scatterplot as follows:</p>
+
+<pre><code>xyplot(fastest~GPA,data=m111survey,
+       xlab="grade point average",
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Grade Point Average")
+</code></pre>
+
+<p><img src="/images/figure/xytutfastestgpa.png" alt="plot of chunk xytutfastestgpa" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis;</li>
+  <li>the <code>ylab</code> argument to label the vertical axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph;</li>
+  <li>the “\n” to make two lines in the title (useful if you have a long title).</li>
+</ul>
+
+<p>When we think of one variable as explanatory and the other as the response, it is common to put the explanatory on the horizontal axis and the response on the vertical axis.  This is accomplished by the formula</p>
+
+<script type="math/tex; mode=display">response \sim explanatory</script>
+
+<h2 id="including-a-regression-line">Including a Regression Line</h2>
+
+<p>If you want desire a regression line along with your scatterplot, use the argument <code>type</code>, as follows:</p>
+
+<pre><code>xyplot(fastest~GPA,data=m111survey,
+       xlab="grade point average",
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Grade Point Average",
+       type=c("p","r"))
+</code></pre>
+
+<p><img src="/images/figure/xytutfastestgpareg.png" alt="plot of chunk xytutfastestgpareg" /> </p>
+
+<p>The list given by <code>c("p","r")</code> tells <code>xyplot()</code> that we want both the points (“p”) and a regression line (“r”).</p>
+
+<h2 id="playing-with-points">Playing With Points</h2>
+
+<p>You can vary the type of point using the <code>pch</code> argument, and the color of the points with the <code>col</code> argument.  For example:</p>
+
+<pre><code>xyplot(fastest~GPA,data=m111survey,
+       xlab="grade point average",
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Grade Point Average",
+       pch=19,col="blue")
+</code></pre>
+
+<p><img src="/images/figure/xytutfastestgpapoints.png" alt="plot of chunk xytutfastestgpapoints" /> </p>
+
+<p>There are 25 different values for <code>pch</code>:  the integers 1 through 25.</p>
+
+<p>There are many, many values for <code>col</code>.  You can explore 657 of them with the command:</p>
+
+<pre><code>colors()
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Bwplot()]]></title>
@@ -2063,165 +2162,6 @@ install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
 <p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act.</strong> recorded the difference of a pair of measurements.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[pnormGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/26/pnormGCtutorial/"/>
-    <updated>2014-02-26T16:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/26/pnormGCtutorial</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#finding-px--x">Finding P(X &lt; x)</a></li>
-  <li><a href="#find-px--x">Find P(X &gt; x)</a></li>
-  <li><a href="#finding-pa--x--b">Finding P(a &lt; X &lt; b)</a></li>
-  <li><a href="#outside-probabilities">“Outside” Probabilities</a></li>
-  <li><a href="#non-strict-inequalities">Non-Strict Inequalities</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p><code>pnormGC()</code> provides a direct way to compute probabilities for normal random variables, along with graphs for the probabilities, if you want them.  The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="finding-px--x">Finding P(X &lt; x)</h2>
-
-<p>Suppose that you have a normal random variable $X$ with mean $\mu=70$ and standard deviation $\sigma=3$, and you would like to find the chance that $X$ will turn out to be less than 66.  In other words, you are looking for:</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-P(X < 66). %]]&gt;</script>
-
-<p>Then run this command:</p>
-
-<pre><code>pnormGC(bound=66,region="below",mean=70,sd=3)
-
-## [1] 0.09121
-</code></pre>
-
-<p>Note carefully what the arguments mean, here:</p>
-
-<ul>
-  <li><code>bound=66</code> tells <code>pnormGC()</code> where to stop</li>
-  <li><code>region="below"</code> takes care of the “less than” part of the requested probability</li>
-  <li><code>mean=70</code> specifies the mean $\mu$ of $X$</li>
-  <li><code>sd=3</code> specifies the standard deviation $\sigma$ of $X$</li>
-</ul>
-
-<p>If you would like to see a graph of the probability distribution of $X$ along with a shaded area that represents the requested probability, then you can set the argument <code>graph</code> to <code>TRUE</code>:</p>
-
-<pre><code>pnormGC(bound=66,region="below",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutless66.png" alt="plot of chunk normtutless66" /> </p>
-
-<pre><code>## [1] 0.09121
-</code></pre>
-
-<p>You should ask for a graph until you are confident of being able to use <code>pnormGC()</code> to get exactly the probability that you want.</p>
-
-<h2 id="find-px--x">Find P(X &gt; x)</h2>
-
-<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that $X$ is greater than 69, i.e.:</p>
-
-<script type="math/tex; mode=display">P(X > 69).</script>
-
-<p>Ask for:</p>
-
-<pre><code>pnormGC(bound=69,region="above",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutgreater69.png" alt="plot of chunk normtutgreater69" /> </p>
-
-<pre><code>## [1] 0.6306
-</code></pre>
-
-<h2 id="finding-pa--x--b">Finding P(a &lt; X &lt; b)</h2>
-
-<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that $X$ is between 68 and 72, i.e.:</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-P(68 < X < 72). %]]&gt;</script>
-
-<p>Ask for:</p>
-
-<pre><code>pnormGC(bound=c(68,72),region="between",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutbetween.png" alt="plot of chunk normtutbetween" /> </p>
-
-<pre><code>## [1] 0.495
-</code></pre>
-
-<p>Observe that since there are two numbers—68 and 72—that are boundaries, we have to specify both of them for <code>pnormGC()</code> in the form of a list <code>c(68,72)</code>.</p>
-
-<h2 id="outside-probabilities">“Outside” Probabilities</h2>
-
-<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that either $X$ is less than 66 OR that $X$ is more than 73.  Then we are looking for:</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-P(X < 66 \textbf{ or } X > 73). %]]&gt;</script>
-
-<p>We can find this with the command:</p>
-
-<pre><code>pnormGC(bound=c(66,73),region="outside",
-         mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/mormtutout.png" alt="plot of chunk mormtutout" /> </p>
-
-<pre><code>## [1] 0.2499
-</code></pre>
-
-<p>Again observe that there are two numbers—66 and 73—that make the boundaries, so supply both of them to the <code>bound</code> argument as a list:  <code>c(66,72)</code>.</p>
-
-<h2 id="non-strict-inequalities">Non-Strict Inequalities</h2>
-
-<p>Suppose that for the same random variable $X \sim norm(70,3)$, you want the probability that $X$ will turn out to be <em>no more than</em> 66, i.e., you want:</p>
-
-<script type="math/tex; mode=display">P(X \leq 66).</script>
-
-<p>You get this with exactly the same function call that gives you $P(X &lt; 66)$, namely:</p>
-
-<pre><code>pnormGC(bound=66,region="below",
-        mean=70,sd=3)
-</code></pre>
-
-<p>Remember why?  Normal random variables are <em>continuous</em> random variables, and for any continuous random variable the chance that it is <em>exactly</em> equal to any particular value is zero.  For example, the probability that $X$ is exactly equal to 66 is given by:</p>
-
-<pre><code>pnormGC(bound=c(66,66),region="between",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutequal.png" alt="plot of chunk normtutequal" /> </p>
-
-<pre><code>## [1] 0
-</code></pre>
-
-<p>The probability of getting exactly 66 is given by the area of the line segment under the curve over 66.  But the area of a line segment—if you think of it as a “rectangle”” with zero width—is zero!</p>
-
-<p>When you ask for</p>
-
-<script type="math/tex; mode=display">P(X \leq 66)</script>
-
-<p>as opposed to</p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-P(X < 66), %]]&gt;</script>
-
-<p>you are adding on just the chance of $X$ being exactly 66.  Since this extra chance is zero, you get the same probability as you did with the strict inequality.</p>
-
 ]]></content>
   </entry>
   
