@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>ttestGC() Tutorial - A Statistics Blog</title>
+  <title>proptestGC() Tutorial - A Statistics Blog</title>
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Mean, From Data Frame (Read This!!) Confidence Interval Only Interval and Test Graph of the P-Value Limiting Output One Mean, From &hellip;">
+  <meta name="description" content="Preliminaries One Proportion, From Data Frame (Read This!!) Confidence Interval Only Interval and Test Graph of the P-Value Limiting Output One &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial">
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/28/proptestGCtutorial">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
@@ -114,7 +114,7 @@
   
   <header>
     
-      <h1 class="entry-title">ttestGC() Tutorial</h1>
+      <h1 class="entry-title">proptestGC() Tutorial</h1>
     
     
       <p class="meta">
@@ -130,7 +130,7 @@
   
 
 
-<time datetime="2014-02-27T15:00:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+<time datetime="2014-02-28T16:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
@@ -142,52 +142,38 @@
 
 <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</a>    <ul>
+  <li><a href="#one-proportion-from-data-frame-read-this">One Proportion, From Data Frame (Read This!!)</a>    <ul>
       <li><a href="#confidence-interval-only">Confidence Interval Only</a></li>
       <li><a href="#interval-and-test">Interval and Test</a></li>
       <li><a href="#graph-of-the-p-value">Graph of the P-Value</a></li>
       <li><a href="#limiting-output">Limiting Output</a></li>
     </ul>
   </li>
-  <li><a href="#one-mean-from-summary-data">One Mean, From Summary Data</a>    <ul>
+  <li><a href="#one-proportion-from-summary-data">One Proportion, From Summary Data</a>    <ul>
       <li><a href="#confidence-interval-only-1">Confidence Interval Only</a></li>
       <li><a href="#interval-and-test-1">Interval and Test</a></li>
     </ul>
   </li>
-  <li><a href="#difference-of-two-means-data-frame">Difference of Two Means, Data Frame</a>    <ul>
+  <li><a href="#difference-of-two-proportions-data-frame">Difference of Two Proportions, Data Frame</a>    <ul>
       <li><a href="#confidence-interval-only-2">Confidence Interval Only</a></li>
       <li><a href="#interval-and-test-2">Interval and Test</a></li>
       <li><a href="#order-of-the-groups">Order of the Groups</a></li>
     </ul>
   </li>
-  <li><a href="#difference-of-two-means-summary-data">Difference of Two Means, Summary Data</a>    <ul>
+  <li><a href="#difference-of-two-proportions-summary-data">Difference of Two Proportions, Summary Data</a>    <ul>
       <li><a href="#confidence-interval-only-3">Confidence Interval Only</a></li>
       <li><a href="#interval-and-test-3">Interval and Test</a></li>
-    </ul>
-  </li>
-  <li><a href="#mean-of-differences">Mean of Differences</a>    <ul>
-      <li><a href="#both-variables-in-the-data-frame">Both Variables in the Data Frame</a>        <ul>
-          <li><a href="#confidence-interval-only-4">Confidence Interval Only</a></li>
-          <li><a href="#interval-and-test-4">Interval and Test</a></li>
-        </ul>
-      </li>
-      <li><a href="#the-difference-is-in-the-data-frame">The Difference is in the Data Frame</a>        <ul>
-          <li><a href="#confidence-interval-only-5">Confidence Interval Only</a></li>
-          <li><a href="#interval-and-test-5">Interval and Test</a></li>
-        </ul>
-      </li>
     </ul>
   </li>
 </ul>
 
 <h2 id="preliminaries">Preliminaries</h2>
 
-<p>You use <code>ttestGC()</code> for inferential procedures regarding:</p>
+<p>You use <code>proptestGC()</code> for inferential procedures regarding:</p>
 
 <ul>
-  <li>one population mean $\mu$;</li>
-  <li>the difference of two population means, $\mu_1 - \mu_2$;</li>
-  <li>the mean $\mu_d$ of paired differences in a population.</li>
+  <li>one population proportion $p$;</li>
+  <li>the difference of two population proportions, $p_1 - p_2$.</li>
 </ul>
 
 <p>The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
@@ -201,79 +187,88 @@
 install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
-<h2 id="one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</h2>
+<h2 id="one-proportion-from-data-frame-read-this">One Proportion, From Data Frame (Read This!!)</h2>
 
-<p>Read this section carefully.  It talks about:</p>
+<p>In inference procedures regarding one proportion, <code>binomtestGC()</code> is preferred over <code>proptestGC()</code>, especially at smaller sample sizes.  Nevertheless, read this section carefully.  It talks about:</p>
 
 <ul>
+  <li>what to count as a “success”,</li>
   <li>levels of confidence,</li>
   <li>types of Alternative Hypothesis,</li>
   <li>graphs of the P-value, and</li>
   <li>an option to limit output to the console</li>
 </ul>
 
-<p>in ways that apply to all uses of <code>ttestGC()</code>.</p>
+<p>in ways that apply to all uses of <code>proptestGC()</code>.</p>
 
 <h3 id="confidence-interval-only">Confidence Interval Only</h3>
 
 <p>In the <code>m111survey</code> data from the <code>tigerstats</code> package, suppose you want a 95%-confidence interval for:</p>
 
 <blockquote>
-  <p>$\mu =$ the mean fastest speed ever driven, for all GC students.</p>
+  <p>$p =$ the proportion of all Georgetown College students who are female.</p>
 </blockquote>
 
 <p>Use the function:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey)
+<pre><code>proptestGC(~sex,data=m111survey,
+           success="female")
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  variable  mean    sd  n
-##   fastest 105.9 20.88 71
+##  female  n estimated.prop
+##      40 71         0.5634
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 105.9 
-## SE(x.bar):	 2.478 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           100.959833          110.842984
+##           0.448016            0.678745
 </code></pre>
+
+<p>Note that the <code>success</code> argument is set to “female” in order to make the function recognize $p$ as the population proportion of <em>females</em>, rather than the proportion of males (or of some other value of the variable in question).</p>
 
 <p>To get any other level of confidence, you need to use the <code>conf.level</code> argument, indicating your desired level of confidence in decimal (not percentage) form.</p>
 
 <p>For example, for a 90%-confidence interval for $\mu$, use</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,conf.level=0.90)
+<pre><code>proptestGC(~sex,data=m111survey,
+           success="female",conf.level=0.90)
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  variable  mean    sd  n
-##   fastest 105.9 20.88 71
+##  female  n estimated.prop
+##      40 71         0.5634
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 105.9 
-## SE(x.bar):	 2.478 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
 ## 
-## 90% Confidence Interval for mu:
+## 90% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           101.771329          110.031488
+##           0.466564            0.660197
 </code></pre>
 
 <h3 id="interval-and-test">Interval and Test</h3>
@@ -281,404 +276,411 @@ install_github(repo="homerhanumat/tigerstats")
 <p>If you want a test of significance as well as the confidence interval, then</p>
 
 <ul>
-  <li>use the <code>mu</code> argument to set what the Null Hypothesis thinks that the value of $\mu$ is;</li>
+  <li>use the <code>p</code> argument to set what the Null Hypothesis thinks that the value of $p$ is;</li>
   <li>use the <code>alternative</code> argument to specify the Alternative Hypothesis.</li>
 </ul>
 
 <p>For example, if the hypotheses are:</p>
 
 <blockquote>
-  <p>$H_0:  \mu = 100$</p>
+  <p>$H_0:  p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu &gt; 100$</p>
+  <p>$H_a: p &gt; 0.50$</p>
 </blockquote>
 
 <p>Then use:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="greater")
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+           success="female",alternative="greater")
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  variable  mean    sd  n
-##   fastest 105.9 20.88 71
+##  female  n estimated.prop
+##      40 71         0.5634
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 105.9 
-## SE(x.bar):	 2.478 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           101.771329          Inf                  
+##           0.466564            1.000000             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu = 100 
-## 	H_a:  mu &gt; 100 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &gt; 0.5 
 ## 
-## 	Test Statistic:		t = 2.382 
-## 	Degrees of Freedom:	  70 
-## 	P-value:		P = 0.009974
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.1692
 </code></pre>
 
 <p>If the hypotheses are:</p>
 
 <blockquote>
-  <p>$H_0:  \mu = 100$</p>
+  <p>$H_0:  p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu &lt; 100$</p>
+  <p>$H_a: p &lt; 0.50$</p>
 </blockquote>
 
 <p>Then use:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="less")
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+           success="female",alternative="less")
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  variable  mean    sd  n
-##   fastest 105.9 20.88 71
+##  female  n estimated.prop
+##      40 71         0.5634
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 105.9 
-## SE(x.bar):	 2.478 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           -Inf                110.031488           
+##           0.000000            0.660197             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu = 100 
-## 	H_a:  mu &lt; 100 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
 ## 
-## 	Test Statistic:		t = 2.382 
-## 	Degrees of Freedom:	  70 
-## 	P-value:		P = 0.99
+## 	Test Statistic:		z = 1.196 
+## 	P-value:		P = 0.8842
 </code></pre>
 
 <p>If the hypotheses are:</p>
 
 <blockquote>
-  <p>$H_0:  \mu = 100$</p>
+  <p>$H_0:  p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu \neq 100$</p>
+  <p>$H_a: p \neq 0.50$</p>
 </blockquote>
 
 <p>Then use:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
-        alternative="two.sided")
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+        success="female",alternative="two.sided")
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  variable  mean    sd  n
-##   fastest 105.9 20.88 71
+##  female  n estimated.prop
+##      40 71         0.5634
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 105.9 
-## SE(x.bar):	 2.478 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           100.959833          110.842984           
+##           0.448016            0.678745             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu = 100 
-## 	H_a:  mu != 100 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
 ## 
-## 	Test Statistic:		t = 2.382 
-## 	Degrees of Freedom:	  70 
-## 	P-value:		P = 0.01995
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.3385
 </code></pre>
 
 <p>But note that the default value of <code>alternative</code> is “two.sided”, so if you want you could just leave it out and still get a two-sided test:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,mu=100)
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+           success="female")
 </code></pre>
 
 <h3 id="graph-of-the-p-value">Graph of the P-Value</h3>
 
 <p>Anytime you want, you can get a graph of the $P$-value for your test, simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
-        alternative="two.sided",graph=TRUE)
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+        success="female",graph=TRUE)
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  variable  mean    sd  n
-##   fastest 105.9 20.88 71
+##  female  n estimated.prop
+##      40 71         0.5634
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 105.9 
-## SE(x.bar):	 2.478 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           100.959833          110.842984           
+##           0.448016            0.678745             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu = 100 
-## 	H_a:  mu != 100 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
 ## 
-## 	Test Statistic:		t = 2.382 
-## 	Degrees of Freedom:	  70 
-## 	P-value:		P = 0.01995
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.3385
 </code></pre>
 
-<p><img src="/images/figure/ttesttutonemean2sided.png" alt="plot of chunk ttesttutonemean2sided" /> </p>
+<p><img src="/images/figure/proptesttutoneprop2sided.png" alt="plot of chunk proptesttutoneprop2sided" /> </p>
 
 <h3 id="limiting-output">Limiting Output</h3>
 
 <p>Sometimes you don’t need R to print so much information to the console.  If you want only the basics (such as a confidence interval, the test statistic and $P$-value), then set the <code>verbose</code> argument to <code>FALSE</code>:</p>
 
-<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
-        alternative="two.sided",verbose=FALSE)
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+        success="female",verbose=FALSE)
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
-## 95% Confidence Interval for mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           100.959833          110.842984           
+##           0.448016            0.678745             
 ## 
-## 	Test Statistic:		t = 2.382 
-## 	Degrees of Freedom:	  70 
-## 	P-value:		P = 0.01995
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.3385
 </code></pre>
 
-<h2 id="one-mean-from-summary-data">One Mean, From Summary Data</h2>
+<h2 id="one-proportion-from-summary-data">One Proportion, From Summary Data</h2>
+
+<p>Again note that <code>binomtestGC()</code> is preferred in this situation, especially at smaller sample sizes.</p>
 
 <h3 id="confidence-interval-only-1">Confidence Interval Only</h3>
 
-<p>Say that you have taken a simple random sample from some large population, and:</p>
+<p>Say that you have taken a simple random sample of size $n=2500$ from the population of all registered voters in the U.S., and you find that 1325 of them favor the Affordable Care Act.  Suppose that you would like to make a confidence interval for</p>
+
+<blockquote>
+  <p>$p =$ the proportion of all registered voters in the U.S. who support the Act.</p>
+</blockquote>
+
+<p>You don’t have the raw data present in a data frame, but you have enough summary data to use <code>proptestGC()</code>.  You just have to set some new arguments:</p>
 
 <ul>
-  <li>the sample mean is $\bar{x}=30$,</li>
-  <li>the sample standard deviation is $s=4$,</li>
-  <li>the sample size was $n=40$.</li>
+  <li>set <code>x</code> to 1325, the number of “successes” you are counting up;</li>
+  <li>set <code>n</code> to 2500, the sample size.</li>
 </ul>
 
-<p>You don’t have the raw data present in a data frame, but you have enough summary data to use <code>ttestGC()</code>.  You just have to set some new arguments:</p>
+<p>So if you only want a 95%-confidence interval for $p$. use:</p>
 
-<ul>
-  <li>set <code>mean</code> to the sample mean;</li>
-  <li>set <code>sd</code> to the sample standard deviation;</li>
-  <li>set <code>n</code> to the sample size.</li>
-</ul>
-
-<p>So if you only want a 95%-confidence interval for $\mu$. use:</p>
-
-<pre><code>ttestGC(mean=30,sd=4,n=40)
+<pre><code>proptestGC(x=1325,n=2500)
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Results based on Summary Data
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  mean sd  n
-##    30  4 40
+##  successes    n estimated.prop
+##       1325 2500           0.53
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 30 
-## SE(x.bar):	 0.6325 
+## Estimate of p:	 0.53 
+## SE(p.hat):	 0.009982 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           28.720738           31.279262
+##           0.510436            0.549564
 </code></pre>
 
 <h3 id="interval-and-test-1">Interval and Test</h3>
 
-<p>If you also want to do a test of significance, again specify <code>mu</code> and <code>alternative</code>.  For example, to test the hypotheses</p>
+<p>If you also want to do a test of significance, again specify <code>p</code> and <code>alternative</code>.  For example, to test the hypotheses</p>
 
 <blockquote>
-  <p>$H_0:  \mu = 32$</p>
+  <p>$H_0:  p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu &lt; 32$</p>
+  <p>$H_a: p &lt; 0.50$</p>
 </blockquote>
 
 <p>use:</p>
 
-<pre><code>ttestGC(mean=30,sd=4,n=40,
-        mu=32,alternative="less")
+<pre><code>proptestGC(x=1325,n=2500,
+        p=0.50,,alternative="less")
 
 ## 
 ## 
-## Inferential Procedures for One Mean mu:
+## Inferential Procedures for a Single Proportion p:
+## 	Results based on Summary Data
+## 	Continuity Correction Applied to Test Statistic
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##  mean sd  n
-##    30  4 40
+##  successes    n estimated.prop
+##       1325 2500           0.53
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu:	 30 
-## SE(x.bar):	 0.6325 
+## Estimate of p:	 0.53 
+## SE(p.hat):	 0.009982 
 ## 
-## 95% Confidence Interval for mu:
+## 95% Confidence Interval for p:
 ## 
 ##           lower.bound         upper.bound          
-##           -Inf                31.065609            
+##           0.000000            0.546419             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu = 32 
-## 	H_a:  mu &lt; 32 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
 ## 
-## 	Test Statistic:		t = -3.162 
-## 	Degrees of Freedom:	  39 
-## 	P-value:		P = 0.001514
+## 	Test Statistic:		z = 3.025 
+## 	P-value:		P = 0.9988
 </code></pre>
 
-<h2 id="difference-of-two-means-data-frame">Difference of Two Means, Data Frame</h2>
+<h2 id="difference-of-two-proportions-data-frame">Difference of Two Proportions, Data Frame</h2>
 
 <h3 id="confidence-interval-only-2">Confidence Interval Only</h3>
 
 <p>Suppose</p>
 
 <blockquote>
-  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC females</p>
+  <p>$p_1 =$ proportion of all GC females who believe they get enough sleep</p>
 </blockquote>
 
 <blockquote>
-  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC males</p>
+  <p>$p_2 =$ proportion of all GC males who believe they get enough sleep</p>
 </blockquote>
 
-<p>If you desire, say, an 85%-confidence interval for $\mu_1 - \mu_2$, then use:</p>
+<p>If you desire, say, an 85%-confidence interval for $p_1 - p_2$, then use:</p>
 
-<pre><code>ttestGC(fastest~sex,data=m111survey,
-        conf.level=0.85)
+<pre><code>proptestGC(~sex+enough_Sleep,data=m111survey,
+        success="yes",conf.level=0.85)
 
 ## 
 ## 
-## Inferential Procedures for the Difference of Two Means mu1-mu2:
-## 	(Welch's Approximation Used for Degrees of Freedom)
-## 	 fastest grouped by sex 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	 enough_Sleep grouped by sex 
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##   group  mean    sd  n
-##  female 100.0 17.61 40
-##    male 113.5 22.57 31
+##        yes  n estimated.prop
+## female  14 40         0.3500
+## male    11 31         0.3548
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu1-mu2:	 -13.4 
-## SE(mu1.hat - mu2.hat):	 4.918 
+## Estimate of p1-p2:	 -0.004839 
+## SE(p1.hat - p2.hat):	 0.1143 
 ## 
-## 85% Confidence Interval for mu1-mu2:
+## 85% Confidence Interval for p1-p2:
 ## 
 ##           lower.bound         upper.bound          
-##           -20.579953          -6.223273
+##           -0.169426           0.159749
 </code></pre>
 
 <h3 id="interval-and-test-2">Interval and Test</h3>
 
-<p>If you want a 95%-confidence interval for $\mu_1 - \mu_2$ and you would like to test the hypotheses:</p>
+<p>If you want a 95%-confidence interval for $p_1 - p_2$ and you would like to test the hypotheses:</p>
 
 <blockquote>
-  <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
+  <p>$H_0:  p_1 - p_2 = 0$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu_1 - \mu_2 \neq 0$</p>
+  <p>$H_a: p_1 - p_2 \neq 0$</p>
 </blockquote>
 
 <p>then use:</p>
 
-<pre><code>ttestGC(fastest~sex,data=m111survey,
-      mu=0)
+<pre><code>proptestGC(~sex+enough_Sleep,data=m111survey,
+      success="yes",p=0)
 
 ## 
 ## 
-## Inferential Procedures for the Difference of Two Means mu1-mu2:
-## 	(Welch's Approximation Used for Degrees of Freedom)
-## 	 fastest grouped by sex 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	 enough_Sleep grouped by sex 
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##   group  mean    sd  n
-##  female 100.0 17.61 40
-##    male 113.5 22.57 31
+##        yes  n estimated.prop
+## female  14 40         0.3500
+## male    11 31         0.3548
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu1-mu2:	 -13.4 
-## SE(mu1.hat - mu2.hat):	 4.918 
+## Estimate of p1-p2:	 -0.004839 
+## SE(p1.hat - p2.hat):	 0.1143 
 ## 
-## 95% Confidence Interval for mu1-mu2:
+## 95% Confidence Interval for p1-p2:
 ## 
 ##           lower.bound         upper.bound          
-##           -23.254640          -3.548586            
+##           -0.228929           0.219252             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu1-mu2 = 0 
-## 	H_a:  mu1-mu2 != 0 
+## 	H_0:  p1-p2 = 0
+## 	H_a:  p1-p2 != 0
 ## 
-## 	Test Statistic:		t = -2.725 
-## 	Degrees of Freedom:	  55.49 
-## 	P-value:		P = 0.008579
+## 	Test Statistic:		z = -0.04232 
+## 	P-value:		P = 0.9662
 </code></pre>
 
 <p>Notice that this time:</p>
 
 <ul>
-  <li>you specified the Null’s belief about the value of $\mu<em>1-\mu</em>2$ using the <code>mu</code> argument;</li>
+  <li>you specified the Null’s belief about the value of $p_1-p_2$ using the <code>p</code> argument;</li>
   <li>you did not have to set <code>conf.level</code> to 0.95 (the default value of the argument is 0.95 already);</li>
   <li>you did not have to specify the two-sided alternative (the default value of <code>alternative</code> is already “two.sided”).</li>
 </ul>
@@ -688,53 +690,51 @@ install_github(repo="homerhanumat/tigerstats")
 <p>Suppose that in the previous situation you had defined:</p>
 
 <blockquote>
-  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC males</p>
+  <p>$p_1 =$ proportion of all GC males who believe they get enough sleep</p>
 </blockquote>
 
 <blockquote>
-  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC females</p>
+  <p>$p_2 =$ proportion of all GC females who believe they get enough sleep</p>
 </blockquote>
 
 <p>Then for you, the first population is all GC males and the second population is all GC females.  In order to guarantee that R abides by your choice, use the argument <code>first</code>:</p>
 
-<pre><code>ttestGC(fastest~sex,data=m111survey,
-      mu=0,first="male")
+<pre><code>proptestGC(~sex+enough_Sleep,data=m111survey,
+      success="yes",p=0,first="male")
 
 ## 
 ## 
-## Inferential Procedures for the Difference of Two Means mu1-mu2:
-## 	(Welch's Approximation Used for Degrees of Freedom)
-## 	 fastest grouped by sex 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	 enough_Sleep grouped by sex 
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##   group  mean    sd  n
-##    male 113.5 22.57 31
-##  female 100.0 17.61 40
+##        yes  n estimated.prop
+## male    11 31         0.3548
+## female  14 40         0.3500
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu1-mu2:	 13.4 
-## SE(mu1.hat - mu2.hat):	 4.918 
+## Estimate of p1-p2:	 0.004839 
+## SE(p1.hat - p2.hat):	 0.1143 
 ## 
-## 95% Confidence Interval for mu1-mu2:
+## 95% Confidence Interval for p1-p2:
 ## 
 ##           lower.bound         upper.bound          
-##           3.548586            23.254640            
+##           -0.219252           0.228929             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu1-mu2 = 0 
-## 	H_a:  mu1-mu2 != 0 
+## 	H_0:  p1-p2 = 0
+## 	H_a:  p1-p2 != 0
 ## 
-## 	Test Statistic:		t = 2.725 
-## 	Degrees of Freedom:	  55.49 
-## 	P-value:		P = 0.008579
+## 	Test Statistic:		z = 0.04232 
+## 	P-value:		P = 0.9662
 </code></pre>
 
-<h2 id="difference-of-two-means-summary-data">Difference of Two Means, Summary Data</h2>
+<h2 id="difference-of-two-proportions-summary-data">Difference of Two Proportions, Summary Data</h2>
 
 <h3 id="confidence-interval-only-3">Confidence Interval Only</h3>
 
@@ -744,287 +744,105 @@ install_github(repo="homerhanumat/tigerstats")
   <thead>
     <tr>
       <th style="text-align: center">Group</th>
-      <th style="text-align: center">$\bar{x}$</th>
-      <th style="text-align: center">$s$</th>
-      <th style="text-align: center">$n$</th>
+      <th style="text-align: center">Success Count</th>
+      <th style="text-align: center">Sample Size</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align: center">group one</td>
-      <td style="text-align: center">32</td>
-      <td style="text-align: center">4.2</td>
-      <td style="text-align: center">33</td>
+      <td style="text-align: center">1325</td>
+      <td style="text-align: center">2500</td>
     </tr>
     <tr>
       <td style="text-align: center">group two</td>
-      <td style="text-align: center">30</td>
-      <td style="text-align: center">5.1</td>
-      <td style="text-align: center">42</td>
+      <td style="text-align: center">905</td>
+      <td style="text-align: center">1800</td>
     </tr>
   </tbody>
 </table>
 
-<p>You need to provide the summary data to the arguments <code>mean</code>, <code>sd</code> and <code>n</code>, as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
+<p>You need to provide the summary data to the arguments <code>x</code> and <code>n</code> as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
 
-<p>For a 95%-confidence interval for $\mu_1 - \mu_2$, use:</p>
+<p>For a 95%-confidence interval for $p_1 - p_2$, use:</p>
 
-<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42))
+<pre><code>proptestGC(x=c(1325,905),n=c(2500,1800))
 
 ## 
 ## 
-## Inferential Procedures for the Difference of Two Means mu1-mu2:
-## 	(Welch's Approximation Used for Degrees of Freedom)
-## 	Results from summary data.
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	Results taken from summary data.
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##    group mean  sd  n
-##  Group 1   32 4.2 33
-##  Group 2   30 5.1 42
+##         successes    n estimated.prop
+## Group 1      1325 2500         0.5300
+## Group 2       905 1800         0.5028
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu1-mu2:	 2 
-## SE(mu1.hat - mu2.hat):	 1.074 
+## Estimate of p1-p2:	 0.02722 
+## SE(p1.hat - p2.hat):	 0.01544 
 ## 
-## 95% Confidence Interval for mu1-mu2:
+## 95% Confidence Interval for p1-p2:
 ## 
 ##           lower.bound         upper.bound          
-##           -0.140898           4.140898
+##           -0.003048           0.057492
 </code></pre>
 
 <h3 id="interval-and-test-3">Interval and Test</h3>
 
-<p>Suppose that you want a 90%-confidence interval for $\mu_1 - \mu_2$ and that you would like to test the hypotheses:</p>
+<p>Suppose that you want a 90%-confidence interval for $p_1 - p_2$ and that you would like to test the hypotheses:</p>
 
 <blockquote>
-  <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
+  <p>$H_0:  p_1 - p_2 = 0$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a: \mu_1 - \mu_2 &gt; 0$</p>
+  <p>$H_a: p_1 - p_2 &gt; 0$</p>
 </blockquote>
 
-<p>Suppose also that want a graph of the $P$-value.  Then use:</p>
+<p>Suppose also that you want a graph of the $P$-value.  Then use:</p>
 
-<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42),
-        mu=0,alternative="greater",
-        conf.level=0.90,graph=TRUE)
+<pre><code>proptestGC(x=c(1325,905),n=c(2500,1800),
+           p=0,conf.level=0.90,graph=TRUE)
 
 ## 
 ## 
-## Inferential Procedures for the Difference of Two Means mu1-mu2:
-## 	(Welch's Approximation Used for Degrees of Freedom)
-## 	Results from summary data.
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	Results taken from summary data.
 ## 
 ## 
 ## Descriptive Results:
 ## 
-##    group mean  sd  n
-##  Group 1   32 4.2 33
-##  Group 2   30 5.1 42
+##         successes    n estimated.prop
+## Group 1      1325 2500         0.5300
+## Group 2       905 1800         0.5028
 ## 
 ## 
 ## Inferential Results:
 ## 
-## Estimate of mu1-mu2:	 2 
-## SE(mu1.hat - mu2.hat):	 1.074 
+## Estimate of p1-p2:	 0.02722 
+## SE(p1.hat - p2.hat):	 0.01544 
 ## 
-## 90% Confidence Interval for mu1-mu2:
+## 90% Confidence Interval for p1-p2:
 ## 
 ##           lower.bound         upper.bound          
-##           0.610797            Inf                  
+##           0.001819            0.052626             
 ## 
 ## Test of Significance:
 ## 
-## 	H_0:  mu1-mu2 = 0 
-## 	H_a:  mu1-mu2 &gt; 0 
+## 	H_0:  p1-p2 = 0
+## 	H_a:  p1-p2 != 0
 ## 
-## 	Test Statistic:		t = 1.862 
-## 	Degrees of Freedom:	  72.82 
-## 	P-value:		P = 0.03333
+## 	Test Statistic:		z = 1.763 
+## 	P-value:		P = 0.07797
 </code></pre>
 
-<p><img src="/images/figure/ttesttut2meanssummary.png" alt="plot of chunk ttesttut2meanssummary" /> </p>
+<p><img src="/images/figure/proptesttut2propssummary.png" alt="plot of chunk proptesttut2propssummary" /> </p>
 
-<h2 id="mean-of-differences">Mean of Differences</h2>
-
-<h3 id="both-variables-in-the-data-frame">Both Variables in the Data Frame</h3>
-
-<h4 id="confidence-interval-only-4">Confidence Interval Only</h4>
-
-<p>Suppose that</p>
-
-<blockquote>
-  <p>$\mu_d =$ mean difference (ideal height minus actual height) for all Georgetown College student.</p>
-</blockquote>
-
-<p>Both of the relevant variables—<strong>ideal_ht</strong> and <strong>height</strong>—are present in the <code>m111survey</code> data frame.</p>
-
-<p>If you want a 95%-confidence interval for $\mu_d$, then use:</p>
-
-<pre><code>ttestGC(~ideal_ht - height,data=m111survey)
-
-## 
-## 
-## Inferential Procedures for the Difference of Means mu-d:
-## 	 height minus ideal_ht 
-## 
-## 
-## Descriptive Results:
-## 
-##         Difference mean.difference sd.difference  n
-##  ideal_ht - height           1.946         3.206 69
-## 
-## 
-## Inferential Results:
-## 
-## Estimate of mu-d:	 1.946 
-## SE(d.bar):	 0.3859 
-## 
-## 95% Confidence Interval for mu-d:
-## 
-##           lower.bound         upper.bound          
-##           1.175528            2.715776
-</code></pre>
-
-<p>Note how the “~” character signals the presence of a formula.</p>
-
-<h4 id="interval-and-test-4">Interval and Test</h4>
-
-<p>In order to test:</p>
-
-<blockquote>
-  <p>$H_0:  \mu_d = 0$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a: \mu_d &gt; 0$</p>
-</blockquote>
-
-<p>use:</p>
-
-<pre><code>ttestGC(~ideal_ht - height,data=m111survey,
-        mu=0,alternative="greater")
-
-## 
-## 
-## Inferential Procedures for the Difference of Means mu-d:
-## 	 height minus ideal_ht 
-## 
-## 
-## Descriptive Results:
-## 
-##         Difference mean.difference sd.difference  n
-##  ideal_ht - height           1.946         3.206 69
-## 
-## 
-## Inferential Results:
-## 
-## Estimate of mu-d:	 1.946 
-## SE(d.bar):	 0.3859 
-## 
-## 95% Confidence Interval for mu-d:
-## 
-##           lower.bound         upper.bound          
-##           1.302075            Inf                  
-## 
-## Test of Significance:
-## 
-## 	H_0:  mu-d = 0 
-## 	H_a:  mu-d &gt; 0 
-## 
-## 	Test Statistic:		t = 5.041 
-## 	Degrees of Freedom:	  68 
-## 	P-value:		P = 1.826e-06
-</code></pre>
-
-<h3 id="the-difference-is-in-the-data-frame">The Difference is in the Data Frame</h3>
-
-<p>Sometimes the difference of the two relevant numerical variables is included in the data frame as another variable:  such is the case for <code>m111survey</code>, where the difference is recorded as the variable <strong>diff.ideal.act.</strong></p>
-
-<p>If you would like to use this difference, then Work just as if you were studying one population mean $\mu$.</p>
-
-<h4 id="confidence-interval-only-5">Confidence Interval Only</h4>
-
-<p>Thus, for a 95%-confidence interval for $\mu_d$ we could also have done:</p>
-
-<pre><code>ttestGC(~diff.ideal.act.,data=m111survey)
-
-## 
-## 
-## Inferential Procedures for One Mean mu:
-## 
-## 
-## Descriptive Results:
-## 
-##         variable  mean    sd  n
-##  diff.ideal.act. 1.946 3.206 69
-## 
-## 
-## Inferential Results:
-## 
-## Estimate of mu:	 1.946 
-## SE(x.bar):	 0.3859 
-## 
-## 95% Confidence Interval for mu:
-## 
-##           lower.bound         upper.bound          
-##           1.175528            2.715776
-</code></pre>
-
-<h4 id="interval-and-test-5">Interval and Test</h4>
-
-<p>For a test of</p>
-
-<blockquote>
-  <p>$H_0:  \mu_d = 0$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a: \mu_d &gt; 0$</p>
-</blockquote>
-
-<p>we could have done:</p>
-
-<pre><code>ttestGC(~diff.ideal.act.,data=m111survey,
-        mu=0,alternative="greater")
-
-## 
-## 
-## Inferential Procedures for One Mean mu:
-## 
-## 
-## Descriptive Results:
-## 
-##         variable  mean    sd  n
-##  diff.ideal.act. 1.946 3.206 69
-## 
-## 
-## Inferential Results:
-## 
-## Estimate of mu:	 1.946 
-## SE(x.bar):	 0.3859 
-## 
-## 95% Confidence Interval for mu:
-## 
-##           lower.bound         upper.bound          
-##           1.302075            Inf                  
-## 
-## Test of Significance:
-## 
-## 	H_0:  mu = 0 
-## 	H_a:  mu &gt; 0 
-## 
-## 	Test Statistic:		t = 5.041 
-## 	Degrees of Freedom:	  68 
-## 	P-value:		P = 1.826e-06
-</code></pre>
-
-<p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act.</strong> recorded the difference of a pair of measurements.</p>
 </div>
 
 
@@ -1047,7 +865,7 @@ install_github(repo="homerhanumat/tigerstats")
   
 
 
-<time datetime="2014-02-27T15:00:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
+<time datetime="2014-02-28T16:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -1070,10 +888,8 @@ install_github(repo="homerhanumat/tigerstats")
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/26/pnormGCtutorial/" title="Previous Post: pnormGC() Tutorial">&laquo; pnormGC() Tutorial</a>
+        <a class="basic-alignment left" href="/blog/2014/02/28/binomtestGCtutorial/" title="Previous Post: binomtestGC() Tutorial">&laquo; binomtestGC() Tutorial</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/28/binomtestGCtutorial/" title="Next Post: binomtestGC() Tutorial">binomtestGC() Tutorial &raquo;</a>
       
     </p>
   </footer>
@@ -1198,8 +1014,8 @@ install_github(repo="homerhanumat/tigerstats")
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/';
-        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/';
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/28/proptestGCtutorial/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/28/proptestGCtutorial/';
         var disqus_script = 'embed.js';
       
     (function () {
