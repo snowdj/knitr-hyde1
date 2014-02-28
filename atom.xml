@@ -4,7 +4,7 @@
   <title><![CDATA[A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-28T15:40:43-05:00</updated>
+  <updated>2014-02-28T16:52:42-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,135 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tutorial on Lattice's Densityplot()]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial/"/>
+    <updated>2014-02-28T17:45:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a>    <ul>
+      <li><a href="#side-by-side-plots">Side-by-Side Plots</a></li>
+      <li><a href="#plots-in-the-same-panel">Plots in the Same Panel</a></li>
+    </ul>
+  </li>
+  <li><a href="#from-and-to">From and To</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The function <code>densityplot()</code> is used to study the distribution of a numerical variable.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>densityplot()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-numerical-variable">One Numerical Variable</h2>
+
+<p>In the <code>m11survey</code> data frame from the <code>tigerstats</code> package, suppose that you want to study the distribution of <strong>fastest</strong>, the fastest speed on has ever driven.  You can do so with the following command:</p>
+
+<pre><code>densityplot(~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven")
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/dentutfastest.png" alt="plot of chunk dentutfastest" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
+</ul>
+
+<p>If you do not want to see the “rug” of individual data values at the bottom of the plot, set the argument <code>plot.points</code> to <code>FALSE</code>:</p>
+
+<pre><code>densityplot(~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven",
+       plot.points=FALSE)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/dentutfastestnorug.png" alt="plot of chunk dentutfastestnorug" /> </p>
+
+<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
+
+<p>Suppose you want to know:</p>
+
+<blockquote>
+  <p><em>Who tends to drive faster:  guys or gals?</em></p>
+</blockquote>
+
+<p>Then you might wish to study the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  You can use density plots in two ways in order to perform such a study.</p>
+
+<h3 id="side-by-side-plots">Side-by-Side Plots</h3>
+
+<pre><code>densityplot(~fastest|sex,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex")
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/dentutfastestsexcond.png" alt="plot of chunk dentutfastestsexcond" /> </p>
+
+<p>Note that to produce side-by-side plots, you “condition” on the factor variable with the formula:</p>
+
+<script type="math/tex; mode=display">\sim numerical \vert factor</script>
+
+<p>Note also the use of “\n” to split the title into two lines:  this is a useful trick when the title is long.</p>
+
+<h3 id="plots-in-the-same-panel">Plots in the Same Panel</h3>
+
+<p>You can get a density plot for each value of the factor variable and have all of the plots appear in the same panel.  This is accomplished with the <code>groups</code> argument:</p>
+
+<pre><code>densityplot(~fastest,data=m111survey,
+       groups=sex,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex",
+       plot.points=FALSE,
+       auto.key=TRUE)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/dentutfastestsexgroups.png" alt="plot of chunk dentutfastestsexgroups" /> </p>
+
+<p>Note the use of the <code>auto,key</code> argument to produce the legend at the top, so that the reader can tell which plot goes with which sex.</p>
+
+<p>Many people think that grouped density plots allow for easier comparison than side-by-side plots do—at least if the number of groups is small.</p>
+
+<h2 id="from-and-to">From and To</h2>
+
+<p>In the <code>imagpop</code> data frame, the variable <strong>kkardashtemp</strong> records the rating given, by each individual in the data frame, for the celebrity Kim Kardashian.  The possible rating range from 0 to 100.</p>
+
+<p>Let’s make a density plot of this variable:</p>
+
+<pre><code>densityplot(~kkardashtemp,data=imagpop,
+            plot.points=FALSE)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/dentutkkard.png" alt="plot of chunk dentutkkard" /> </p>
+
+<p>The function <code>densityplot()</code> has no way of knowing that <strong>kkardashtemp</strong> must lie between 0 and 100, so from the available data it infers that there is some possibility for a rating to be below 0 or above 100.  If you want to inform <code>denistyplot()</code> of the known limits, then use the <code>from</code> and <code>to</code> arguments, as follows:</p>
+
+<pre><code>densityplot(~kkardashtemp,data=imagpop,
+            plot.points=FALSE,
+            from=0,to=100)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/dentutkkardfromto.png" alt="plot of chunk dentutkkardfromto" /> </p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Xyplot()]]></title>
