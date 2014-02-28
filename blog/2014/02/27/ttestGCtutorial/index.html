@@ -798,7 +798,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <h3 id="interval-and-test-3">Interval and Test</h3>
 
-<p>If you want a 90%-confidence interval for $\mu<em>1 - \mu</em>2$ and you would like to test the hypotheses:</p>
+<p>Suppose that you want a 90%-confidence interval for $\mu_1 - \mu_2$ and that you would like to test the hypotheses:</p>
 
 <blockquote>
   <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
@@ -808,7 +808,7 @@ install_github(repo="homerhanumat/tigerstats")
   <p>$H_a: \mu_1 - \mu_2 &gt; 0$</p>
 </blockquote>
 
-<p>Suppose you also want a graph of the $P$-value.  Then use:</p>
+<p>Suppose also that want a graph of the $P$-value.  Then use:</p>
 
 <pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42),
         mu=0,alternative="greater",
@@ -1024,7 +1024,7 @@ install_github(repo="homerhanumat/tigerstats")
 ## 	P-value:		P = 1.826e-06
 </code></pre>
 
-<p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act</strong> recorded the difference of a pair of measurements.</p>
+<p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act.</strong> recorded the difference of a pair of measurements.</p>
 </div>
 
 
@@ -1073,6 +1073,8 @@ install_github(repo="homerhanumat/tigerstats")
         <a class="basic-alignment left" href="/blog/2014/02/26/pnormGCtutorial/" title="Previous Post: pnormGC() Tutorial">&laquo; pnormGC() Tutorial</a>
       
       
+        <a class="basic-alignment right" href="/blog/2014/02/28/binomtestGCtutorial/" title="Next Post: binomtestGC() Tutorial">binomtestGC() Tutorial &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -1092,6 +1094,10 @@ install_github(repo="homerhanumat/tigerstats")
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/02/28/binomtestGCtutorial/">binomtestGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/27/ttestGCtutorial/">ttestGC() Tutorial</a>
       </li>
     
@@ -1105,10 +1111,6 @@ install_github(repo="homerhanumat/tigerstats")
     
       <li class="post">
         <a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic's Favstats()</a>
       </li>
     
   </ul>
@@ -1159,7 +1161,7 @@ install_github(repo="homerhanumat/tigerstats")
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (7)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (8)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
 
   </ul>

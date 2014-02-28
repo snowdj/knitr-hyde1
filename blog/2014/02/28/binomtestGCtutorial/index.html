@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>binomtestGC() Tutorial - A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Preliminaries Working from a Data Frame Setting the Confidence Level Significance Tests A Graph of the $P$-Value Working with Summary Data Want Less &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">binomtestGC() Tutorial</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T15:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#working-from-a-data-frame">Working from a Data Frame</a></li>
+  <li><a href="#setting-the-confidence-level">Setting the Confidence Level</a></li>
+  <li><a href="#significance-tests">Significance Tests</a></li>
+  <li><a href="#a-graph-of-the-p-value">A Graph of the $P$-Value</a></li>
+  <li><a href="#working-with-summary-data">Working with Summary Data</a></li>
+  <li><a href="#want-less-output">Want Less Output?</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>You use <code>binomtestGC()</code> for inferential procedures regarding one population proportion $p$.  The function <code>proptestGC()</code> can also handle this analysis, but <code>binomtestGC()</code> computes exact $P$-values rather than employing the (sometimes crude) normal approximation, and it also uses a somewhat more sophisticated method to compute confidence intervals.</p>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="working-from-a-data-frame">Working from a Data Frame</h2>
+
+<p>Let</p>
+
+<blockquote>
+  <p>$p =$ the proportion of all Georgetown College students who are female</p>
+</blockquote>
+
+<p>Suppose that you would like a 95%-confidence interval for $p$.  Since <strong>sex</strong> is present as a variable in the <code>m111survey</code> data frame, so you can use formula-data input in the usual way to direct the attention of <code>binomtestGC()</code> to <strong>sex</strong> as the data.</p>
+
+<p>However, when the function looks at <strong>sex</strong>, it sees the values “female” and “male”.  It needs to be told which of them to count as a “success” when it computes the sample proportion $\hat{p}$.  You do this with the <code>success</code> argument.</p>
+
+<p>So you use:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="female")
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  40 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.440455            0.680850
+</code></pre>
+
+<p>Note that you did not have to specify a confidence level:  by default, the function returns a 95%-confidence interval.</p>
+
+<h2 id="setting-the-confidence-level">Setting the Confidence Level</h2>
+
+<p>You can get intervals with other levels of confidence besides 95%, simply by setting the argument <code>conf.level</code> to the desired level (expressed as a proportion, rather than as a percentage).</p>
+
+<p>For example, if you want a 90%-confidence interval for $p$, then you use:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="female",conf.level=0.90)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  40 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.0589 
+## 
+## 90% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.458929            0.663741
+</code></pre>
+
+<h2 id="significance-tests">Significance Tests</h2>
+
+<p>Let’s now let</p>
+
+<blockquote>
+  <p>$p =$ the proportion of all Georgetown College students who are male</p>
+</blockquote>
+
+<p>(Notice that, for variety’s sake, we have switched to counting up males.)</p>
+
+<p>Suppose that we want to perform a test of significance.  Then we would use:</p>
+
+<ul>
+  <li>the argument <code>p</code> to indicate the belief of the Null Hypothesis as to the value of $p$;</li>
+  <li>the argument <code>alternative</code> to specify the direction of the Alternative Hypothesis.  The possible values of this argument are:
+    <ul>
+      <li>“less”</li>
+      <li>“greater”</li>
+      <li>“two.sided” (the default value)</li>
+    </ul>
+  </li>
+</ul>
+
+<p>For example, if we want to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0 : p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a : p &lt; 0.50$</p>
+</blockquote>
+
+<p>then we use</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            alternative="less")
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.000000            0.541071             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
+## 
+## 	P-value:		P = 0.1712
+</code></pre>
+
+<p>To test the hypotheses</p>
+
+<blockquote>
+  <p>$H_0 : p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a : p &gt; 0.50$</p>
+</blockquote>
+
+<p>then we use</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            alternative="greater")
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.336259            1.000000             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &gt; 0.5 
+## 
+## 	P-value:		P = 0.8825
+</code></pre>
+
+<p>If we want a two-side test</p>
+
+<blockquote>
+  <p>$H_0 : p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a : p \neq 0.50$</p>
+</blockquote>
+
+<p>then we use</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.319150            0.559545             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
+## 
+## 	P-value:		P = 0.3425
+</code></pre>
+
+<p>Note that there is no need to specify an alternative, since the default value of <code>alternative</code> is “two.sided”.</p>
+
+<h2 id="a-graph-of-the-p-value">A Graph of the $P$-Value</h2>
+
+<p>Fro a one-sided test, we can get a graph of the $P$-value simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            alternative="less",
+            graph=TRUE)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.000000            0.541071             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
+## 
+## 	P-value:		P = 0.1712
+</code></pre>
+
+<p><img src="/images/figure/binomtesttutsexless.png" alt="plot of chunk binomtesttutsexless" /> </p>
+
+<p>For a two-sided test, the function gets the $P$-value by doubling an appropriate one-sided $P$-value, so no graph represents the $P$-value very well.  Hence the function will refuse to provide a graph in that case.</p>
+
+<h2 id="working-with-summary-data">Working with Summary Data</h2>
+
+<p>Suppose that in a poll of 2500 randomly selected registered voters, 1325 of them indicated support for the Affordable Care Act.  Suppose that we want a confidence interval for $p$, the proportion of all registered voters who favor the Act, and a two-sided test of significance with the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0 : p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a : p \neq 0.50$</p>
+</blockquote>
+
+<p>We do not have raw data from a data frame, but the summary information we are given will suffice for <code>binomtestGC()</code>.  We need only:</p>
+
+<ul>
+  <li>set the argument <code>x</code> to the number of successes (the count of people who said they support the Act), and</li>
+  <li>set the argument <code>n</code> to the sample size.</li>
+</ul>
+
+<p>Hence we use:</p>
+
+<pre><code>binomtestGC(x=1325,n=2500,p=0.50)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Results based on Summary Data
+## 
+## 
+## Descriptive Results:  1325 successes in 2500 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.53 
+## SE(p.hat):	 0.01 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.510210            0.549719             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
+## 
+## 	P-value:		P = 0.0029
+</code></pre>
+
+<h2 id="want-less-output">Want Less Output?</h2>
+
+<p>Sometimes you don’t need to see quite so much output to the console. If you only wantf the basics (confidence interval for $p$ and $P$-value for your test), then set the argument <code>verbose</code> to <code>FALSE</code>.</p>
+
+<p>For example, if you want a 90%-confidence interval and a two-sided test then try:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            verbose=FALSE)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.319150            0.559545             
+## 
+## 	P-value:		P = 0.3425
+</code></pre>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Homer White</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T15:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/27/ttestGCtutorial/" title="Previous Post: ttestGC() Tutorial">&laquo; ttestGC() Tutorial</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/28/binomtestGCtutorial/">binomtestGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/ttestGCtutorial/">ttestGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/26/pbinomGCtutorial/">pbinomGC() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'homerhanumat',
+            count: 2,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101037539642604924807?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (8)</a></li>
+<li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Useful Links</h1>
+  <ul id="links">
+      <li class="post"><a href="http://www.r-bloggers.com" target="_blank">R-Bloggers</a></li>
+      <li class="post"><a href="http://mosaic-web.org/" target="_blank">Project Mosaic</a></li>
+      <li class="post"><a href="http://rainandrhino.org", target="_blank">My Elementary Course</a></li> 
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p float>
+  2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+<p>      
+  <span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></span><span style="color:black">This work is licensed under a </span><a style="color:black" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
