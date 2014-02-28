@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: Tech Note - A Statistics Blog</title>
+  <title>Tutorial on Lattice's Bwplot() - A Statistics Blog</title>
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Category: Tech Note">
+  <meta name="description" content="Preliminaries One Numerical Variable Numerical and Factor Variable Warning Preliminaries The function bwplot() makes box-and-whisker plots for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://homerhanumat.github.ioblog/categories/tech-note">
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
@@ -110,36 +110,188 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Tech Note</h1>
+    
+      <h1 class="entry-title">Tutorial on Lattice's Bwplot()</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T17:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
+  <li><a href="#warning">Warning</a></li>
+</ul>
 
-  
-  <h2>2014</h2>
+<h2 id="preliminaries">Preliminaries</h2>
 
-<article>
-  
-<h1><a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Pander/Pandoc for Pretty Conversion on the R Studio Server</a></h1>
-<time datetime="2014-02-01T11:42:14-05:00" pubdate><span class='month'>Feb</span> <span class='day'>01</span> <span class='year'>2014</span></time>
+<p>The function <code>bwplot()</code> makes box-and-whisker plots for numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/r/'>R</a>, <a class='category' href='/blog/categories/tech-note/'>Tech Note</a></span>
-</footer>
+<pre><code>require(tigerstats)
+</code></pre>
 
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>bwplot()</code>, then make sure you load lattice:</p>
 
-</article>
+<pre><code>require(lattice)
+</code></pre>
 
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-numerical-variable">One Numerical Variable</h2>
+
+<p>For a box-and-whisker plot of the fastest speeds ever driven by students in the <code>m111survey</code> data frame, use the command:</p>
+
+<pre><code>bwplot(~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
+</ul>
+
+<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
+
+<p>Say you want to know:</p>
+
+<blockquote>
+  <p><em>Who tends to drive faster:  the guys or the gals?</em></p>
+</blockquote>
+
+<p>Then you are studying the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  <code>bwplot()</code> will break the fastest speeds up by sex and parallel box-and-whisker plots, if you run the following command:</p>
+
+<pre><code>bwplot(fastest~sex,data=m111survey,
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
+
+<p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
+
+<p>If you prefer your box-and-whisker plots to be horizontal, then you can reverse the order of the variables in the formula:</p>
+
+<pre><code>bwplot(sex~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
+
+<h2 id="warning">Warning</h2>
+
+<p>Box-and-Whisker plots are great for studying:</p>
+
+<ul>
+  <li>one numerical variable</li>
+  <li>the relationship between a numerical variable and a factor variable.</li>
+</ul>
+
+<p>However, if you try to study the relationship between two numerical variables with <code>bwplot()</code>, you will get bizarre results.</p>
+
+<p>For example, suppose you want to study the relationship between fastest speed ever driven (<strong>fastest</strong>) and the grade point average (<strong>GPA</strong>) of the subjects in <code>m111survey</code>:</p>
+
+<pre><code>bwplot(fastest~GPA,data=m111survey,
+       ylab="speed (mph)",
+       xbal="grade-point average",
+       main="Fastes Speed Ever Driven,\nby Grade-Point Average")
+</code></pre>
+
+<p><img src="/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
+
+<p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
+
+<p>Use <code>xyplot()</code> (scatterplots) to study the relationship between two numerical variables.</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Homer White</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T17:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/02/28/proptestGCtutorial/" title="Previous Post: proptestGC() Tutorial">&laquo; proptestGC() Tutorial</a>
+      
+      
+    </p>
+  </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -253,7 +405,10 @@
       var disqus_shortname = 'homerhanumatgithubio';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

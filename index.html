@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Proportion, From Data Frame (Read This!!) Confidence Interval Only Interval and Test Graph of the P-Value Limiting Output One &hellip;">
+  <meta name="description" content="Preliminaries One Numerical Variable Numerical and Factor Variable Warning Preliminaries The function bwplot() makes box-and-whisker plots for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,139 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/28/bwplottutorial/">Tutorial on Lattice&#8217;s Bwplot()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T17:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/28/bwplottutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
+  <li><a href="#warning">Warning</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The function <code>bwplot()</code> makes box-and-whisker plots for numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>bwplot()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-numerical-variable">One Numerical Variable</h2>
+
+<p>For a box-and-whisker plot of the fastest speeds ever driven by students in the <code>m111survey</code> data frame, use the command:</p>
+
+<pre><code>bwplot(~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
+</ul>
+
+<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
+
+<p>Say you want to know:</p>
+
+<blockquote>
+  <p><em>Who tends to drive faster:  the guys or the gals?</em></p>
+</blockquote>
+
+<p>Then you are studying the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  <code>bwplot()</code> will break the fastest speeds up by sex and parallel box-and-whisker plots, if you run the following command:</p>
+
+<pre><code>bwplot(fastest~sex,data=m111survey,
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
+
+<p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
+
+<p>If you prefer your box-and-whisker plots to be horizontal, then you can reverse the order of the variables in the formula:</p>
+
+<pre><code>bwplot(sex~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
+
+<h2 id="warning">Warning</h2>
+
+<p>Box-and-Whisker plots are great for studying:</p>
+
+<ul>
+  <li>one numerical variable</li>
+  <li>the relationship between a numerical variable and a factor variable.</li>
+</ul>
+
+<p>However, if you try to study the relationship between two numerical variables with <code>bwplot()</code>, you will get bizarre results.</p>
+
+<p>For example, suppose you want to study the relationship between fastest speed ever driven (<strong>fastest</strong>) and the grade point average (<strong>GPA</strong>) of the subjects in <code>m111survey</code>:</p>
+
+<pre><code>bwplot(fastest~GPA,data=m111survey,
+       ylab="speed (mph)",
+       xbal="grade-point average",
+       main="Fastes Speed Ever Driven,\nby Grade-Point Average")
+</code></pre>
+
+<p><img src="/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
+
+<p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
+
+<p>Use <code>xyplot()</code> (scatterplots) to study the relationship between two numerical variables.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -3439,70 +3572,9 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Pander/Pandoc for Pretty Conversion on the R Studio Server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-01T11:42:14-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
-
-<p>But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
-
-<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane.  The R package <code>pander</code> facilitates the use of Pandoc for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install Pandoc and <code>pander</code> on the server.  <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats:  pdf, docx, odt, etc., as per your request.</p>
-
-<p>For pdf output, Pandoc first turns the converts the Markdown into $\LaTeX$, so you will need to make sure that $\LaTeX$ is installed on the server as well (some minimal version probably comes with the distribution).  The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed.  [<code>xelatex</code> came along with our CentOS R Studio server, but had to be configured.]</p>
-
-<p>Students would use Pandoc through the <code>Pandoc.convert()</code> function from the <code>pander</code> package.  First, one knits the r Markdown document, simply in order to produce the Markdown document along the way.  Then run something like:</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">require(pander)
-</span><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S")</span></code></pre></td></tr></table></div></figure></notextile></div>
-
-<p>R complains bitterly in the console—apparently it attempts to open a preview window but cannot—but produces the desired file in the same directory as the Markdown file.</p>
-
-<p>We find that pdf and docx format both look rather nice, and boast a table of contents as well.  The pdf centers plots, too (this is popular with students).  Sadly, the code chunks do lose their background color under Pandoc’s default highlighting style of “pygments”.  If you try for some other style, e.g.,</p>
-
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", 
-</span><span class="line">  options="-S --highlight-style="tango")</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>then in some installations of $\LaTeX$, including the one on our server, there will be an error.  We have not yet decided whether to bug the sysadmin to install a fuller version of $\LaTeX$ in order to get overcome this difficulty.</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -3513,6 +3585,10 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/28/bwplottutorial/">Tutorial on Lattice&#8217;s Bwplot()</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2014/02/28/proptestGCtutorial/">proptestGC() Tutorial</a>
@@ -3528,10 +3604,6 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
     
       <li class="post">
         <a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/26/pbinomGCtutorial/">pbinomGC() Tutorial</a>
       </li>
     
   </ul>
@@ -3582,7 +3654,7 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (1)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (9)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (10)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
 
   </ul>
