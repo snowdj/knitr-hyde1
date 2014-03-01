@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>chisq.testGC() Tutorial - A Statistics Blog</title>
+  <title>chisqtestGC() Tutorial - A Statistics Blog</title>
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries Formula-Data Input Two-Way Table Input A Table From Summary Data Simulation Explanatory Tallies Fixed Explanatory Tallies Random Both &hellip;">
+  <meta name="description" content="Preliminaries Two Factor Variables (Association) Formula-Data Input Two-Way Table Input A Table From Summary Data Simulation Explanatory Tallies &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -114,7 +114,7 @@
   
   <header>
     
-      <h1 class="entry-title">chisq.testGC() Tutorial</h1>
+      <h1 class="entry-title">chisqtestGC() Tutorial</h1>
     
     
       <p class="meta">
@@ -142,32 +142,48 @@
 
 <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#formula-data-input">Formula-Data Input</a></li>
-  <li><a href="#two-way-table-input">Two-Way Table Input</a></li>
-  <li><a href="#a-table-from-summary-data">A Table From Summary Data</a></li>
-  <li><a href="#simulation">Simulation</a>    <ul>
-      <li><a href="#explanatory-tallies-fixed">Explanatory Tallies Fixed</a></li>
-      <li><a href="#explanatory-tallies-random">Explanatory Tallies Random</a></li>
-      <li><a href="#both-tallies-fixed">Both Tallies Fixed</a></li>
+  <li><a href="#two-factor-variables-association">Two Factor Variables (Association)</a>    <ul>
+      <li><a href="#formula-data-input">Formula-Data Input</a></li>
+      <li><a href="#two-way-table-input">Two-Way Table Input</a></li>
+      <li><a href="#a-table-from-summary-data">A Table From Summary Data</a></li>
+      <li><a href="#simulation">Simulation</a>        <ul>
+          <li><a href="#explanatory-tallies-fixed">Explanatory Tallies Fixed</a></li>
+          <li><a href="#explanatory-tallies-random">Explanatory Tallies Random</a></li>
+          <li><a href="#both-tallies-fixed">Both Tallies Fixed</a></li>
+        </ul>
+      </li>
+      <li><a href="#graphs-of-the-p-value">Graphs of the P-Value</a></li>
     </ul>
   </li>
-  <li><a href="#graphs-of-the-p-value">Graphs of the P-Value</a></li>
+  <li><a href="#one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</a>    <ul>
+      <li><a href="#formula-data-input-1">Formula-Data Input</a></li>
+      <li><a href="#summary-data">Summary Data</a></li>
+      <li><a href="#simulation-1">Simulation</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="preliminaries">Preliminaries</h2>
 
-<p>You use the $\chi^2$-test when you are addressing the inferential aspect of a research question about the relationship between two factor variables.  That is, you want to know whether any relationship between the two variables that you might have observed in your data is real or could reasonably be explained as chance variation in the process that resulted in the data.</p>
+<p>You use the $\chi^2$-test when you are addressing the inferential aspect of research questions about:</p>
+
+<ul>
+  <li>the relationship between two factor variables (test for association);</li>
+  <li>the distribution of one factor variable (goodness-of-fit test).</li>
+</ul>
 
 <p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
 
 <pre><code>require(tigerstats)
 </code></pre>
 
-<h2 id="formula-data-input">Formula-Data Input</h2>
+<h2 id="two-factor-variables-association">Two Factor Variables (Association)</h2>
+
+<h3 id="formula-data-input">Formula-Data Input</h3>
 
 <p>When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the <code>mat111survey</code> data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:</p>
 
-<pre><code>chisq.testGC(~sex + seat, data = m111survey)
+<pre><code>chisqtestGC(~sex+seat,data=m111survey)
 
 ## Pearson's Chi-squared test 
 ## 
@@ -195,11 +211,11 @@
 ## P-Value = 0.1546
 </code></pre>
 
-<h2 id="two-way-table-input">Two-Way Table Input</h2>
+<h3 id="two-way-table-input">Two-Way Table Input</h3>
 
 <p>Sometimes you already have a two-way table on hand:</p>
 
-<pre><code>SexSeat &lt;- xtabs(~sex + seat, data = m111survey)
+<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
 SexSeat
 
 ##         seat
@@ -210,12 +226,12 @@ SexSeat
 
 <p>In that case you can save yourself some typing by entering the table in place of the formula and the <code>data</code> arguments:</p>
 
-<pre><code>chisq.testGC(SexSeat)
+<pre><code>chisqtestGC(SexSeat)
 </code></pre>
 
-<h2 id="a-table-from-summary-data">A Table From Summary Data</h2>
+<h3 id="a-table-from-summary-data">A Table From Summary Data</h3>
 
-<p>Remember:  if you are given summary data, only, then you can construct a nice two-way table and enter it into <code>chisquare.testGC()</code>.  Suppose that you want this two-way table:</p>
+<p>Remember:  if you are given summary data, only, then you can construct a nice two-way table and enter it into <code>chisquaretestGC()</code>.  Suppose that you want this two-way table:</p>
 
 <table>
   <thead>
@@ -244,8 +260,8 @@ SexSeat
 
 <p>You can get it as follows:</p>
 
-<pre><code>MySexSeat &lt;- rbind(female = c(19, 16, 5), male = c(8, 16, 7))
-colnames(MySexSeat) &lt;- c("front", "middle", "back")
+<pre><code>MySexSeat &lt;- rbind(female=c(19,16,5),male=c(8,16,7))
+colnames(MySexSeat) &lt;- c("front","middle","back")
 </code></pre>
 
 <p>Let’s just check to see that this worked:</p>
@@ -259,12 +275,12 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 
 <p>Then you can enter <code>MySexSeat</code> into the function:</p>
 
-<pre><code>chisq.testGC(MySexSeat)
+<pre><code>chisqtestGC(MySexSeat)
 </code></pre>
 
-<h2 id="simulation">Simulation</h2>
+<h3 id="simulation">Simulation</h3>
 
-<p>When the Null’s expected counts are low, <code>chisq.testGC()</code> delivers a warning and suggest the use of simulation to compute the $P$-value.  You do this by way of the argument <code>simulate.p.value</code>, and you have three options:</p>
+<p>When the Null’s expected counts are low, <code>chisqtestGC()</code> delivers a warning and suggests the use of simulation to compute the $P$-value.  You do this by way of the argument <code>simulate.p.value</code>, and you have three options:</p>
 
 <ul>
   <li><code>simulate.p.value = "fixed"</code></li>
@@ -272,7 +288,7 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
   <li><code>simulate.p.value = "TRUE"</code></li>
 </ul>
 
-<h3 id="explanatory-tallies-fixed">Explanatory Tallies Fixed</h3>
+<h4 id="explanatory-tallies-fixed">Explanatory Tallies Fixed</h4>
 
 <p>Suppose that the objects under study are not a random sample from some larger population, and that the way chance comes into the production of the data is through random variation in all of the other factors—besides the explanatory variable— that might be associated with the response variable.  Then since the items being observed are fixed, the tally of values for the explanatory variable are fixed.  The response values for these items are the product of chance, but only through random variation in those other factors.</p>
 
@@ -280,8 +296,8 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 
 <p>In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:</p>
 
-<pre><code>chisq.testGC(~weather + crowd.behavior, data = ledgejump, simulate.p.value = "fixed", 
-    B = 2500)
+<pre><code>chisqtestGC(~weather+crowd.behavior,data=ledgejump,
+             simulate.p.value="fixed",B=2500)
 
 ## Pearson's chi-squared test with simulated p-value, fixed effects
 ## 	 (based on 2500 resamples)
@@ -312,11 +328,12 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 
 <p>You can set <code>B</code>, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the $P$-value, having been determined by random resampling, will vary from one run of the function to another.</p>
 
-<h3 id="explanatory-tallies-random">Explanatory Tallies Random</h3>
+<h4 id="explanatory-tallies-random">Explanatory Tallies Random</h4>
 
 <p>In the <code>m111survey</code> study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set <code>simulate.p.value</code> to “random”:</p>
 
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, simulate.p.value = "random", B = 2500)
+<pre><code>chisqtestGC(~sex+seat,data=m111survey,
+             simulate.p.value="random",B=2500)
 
 ## Pearson's chi-squared test with simulated p-value, random effects
 ## 	 (based on 2500 resamples)
@@ -345,11 +362,12 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 ## P-Value = 0.1684
 </code></pre>
 
-<h3 id="both-tallies-fixed">Both Tallies Fixed</h3>
+<h4 id="both-tallies-fixed">Both Tallies Fixed</h4>
 
 <p>If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set <code>simulate.p.value</code> to “TRUE”.  This invokes R’s standard method for resampling:</p>
 
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, simulate.p.value = TRUE, B = 2500)
+<pre><code>chisq.testGC(~sex+seat,data=m111survey,
+             simulate.p.value=TRUE,B=2500)
 
 ## Pearson's Chi-squared test with simulated p-value
 ## 	 (based on 2500 replicates) 
@@ -378,15 +396,15 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 ## P-Value = 0.1703
 </code></pre>
 
-<p>It’s not easy to understand why R would adopt such a method, but it does have a long and honored history.  If you are ever in doubt about how to simulate, just use this third option.</p>
+<p>It’s not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.</p>
 
-<h2 id="graphs-of-the-p-value">Graphs of the P-Value</h2>
+<h3 id="graphs-of-the-p-value">Graphs of the P-Value</h3>
 
 <p>You can get a graph of the $P$-value in the plot window by setting the argument <code>graph</code> to TRUE.  When you did not simulate, the graph shows a density curve for the $\chi^2$ random variable with the relevant degrees of freedom.  When you simulate, the graph is a histogram of the resampled $\chi^2$-statistics.</p>
 
 <p>Here is a case with no simulation:</p>
 
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, graph = TRUE)
+<pre><code>chisq.testGC(~sex+seat,data=m111survey,graph=TRUE)
 
 ## Pearson's Chi-squared test 
 ## 
@@ -418,8 +436,8 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 
 <p>Here is a case with simulation:</p>
 
-<pre><code>chisq.testGC(~sex + seat, data = m111survey, simulate.p.value = "random", B = 2500, 
-    graph = TRUE)
+<pre><code>chisq.testGC(~sex+seat,data=m111survey,
+             simulate.p.value="random",B=2500,graph=TRUE)
 
 ## Pearson's chi-squared test with simulated p-value, random effects
 ## 	 (based on 2500 resamples)
@@ -449,6 +467,130 @@ colnames(MySexSeat) &lt;- c("front", "middle", "back")
 </code></pre>
 
 <p><img src="/images/figure/chisqtutsim.png" alt="Graph of P-value, with simulation" /> </p>
+
+<h2 id="one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</h2>
+
+<h3 id="formula-data-input-1">Formula-Data Input</h3>
+
+<p>The variable <strong>seat</strong> in the <code>m111survey</code> data frame indicates the classroom seating preference of each person in the survey.  Suppose we want to know whether or not the sample data provide strong evidence that seating preference in the Georgetown College population is not uniformly distributed among the three possible options (Front, Middle, and Back).  That is, letting</p>
+
+<blockquote>
+  <p>$p_f =$ proportion of all GC students who prefer the front,</p>
+</blockquote>
+
+<blockquote>
+  <p>$p_m =$ proportion of all GC students who prefer the middle,</p>
+</blockquote>
+
+<blockquote>
+  <p>$p_b =$ proportion of all GC students who prefer the back,</p>
+</blockquote>
+
+<p>we want to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0:$  $p_f = 1/3$ and $p_m = 1/3$ and $p_b = 1/3$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a:$  at least one of the above proportions is not $1/3$</p>
+</blockquote>
+
+<p>We can do so using the $/chi^2$-test for goodness of fit.  The argument <code>p</code> will give what the Null distribution believes to be the distribution of the variable <strong>seat</strong> in the Georgetown College population:</p>
+
+<pre><code>chisqtestGC(~seat,data=m111survey,
+            p=c(1/3,1/3,1/3),
+            graph=TRUE)
+
+## Chi-squared test for given probabilities 
+## 
+##          observed counts Expected by Null contribution to chisq statistic
+## 1_front               27            23.67                            0.47
+## 2_middle              32            23.67                            2.93
+## 3_back                12            23.67                            5.75
+## 
+## 
+## Chi-Square Statistic = 9.155 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.0103
+</code></pre>
+
+<p><img src="/images/figure/chisqtutseatgraph.png" alt="plot of chunk chisqtutseatgraph" /> </p>
+
+<h3 id="summary-data">Summary Data</h3>
+
+<p>Suppose that the data had only come to us in summary form:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Front</th>
+      <th style="text-align: center">Middle</th>
+      <th style="text-align: center">Back</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">27</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">12</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We could still perform the test, by making a table and storing it as an R-object:</p>
+
+<pre><code>Seat &lt;- c(front=27,middle=32,back=12)
+Seat
+
+##  front middle   back 
+##     27     32     12
+</code></pre>
+
+<p>Then we could perform the test using <code>Seat</code>:</p>
+
+<pre><code>chisqtestGC(Seat,p=c(1/3,1/3,1/3))
+
+## Chi-squared test for given probabilities 
+## 
+##        observed counts Expected by Null contribution to chisq statistic
+## front               27            23.67                            0.47
+## middle              32            23.67                            2.93
+## back                12            23.67                            5.75
+## 
+## 
+## Chi-Square Statistic = 9.155 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.0103
+</code></pre>
+
+<h3 id="simulation-1">Simulation</h3>
+
+<p>When expected cell counts fall below 5, <code>chisqtestGC()</code> issues a warning and suggests the use of simulation.  We can perform simulation at any time, though.</p>
+
+<p>For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting <code>simulate.p.value</code> to <code>TRUE</code>.  Of course we also need to set the number <code>B</code> of resamples.</p>
+
+<pre><code>set.seed(678910)
+chisqtestGC(~seat,data=m111survey,
+            p=c(1/3,1/3,1/3),
+            simulate.p.value=TRUE,
+            B=2500,graph=TRUE)
+
+## Pearson's chi-squared test with simulated p-value 
+## 	 (based on 2500 resamples)
+## 
+##          observed counts Expected by Null contribution to chisq statistic
+## 1_front               27            23.67                            0.47
+## 2_middle              32            23.67                            2.93
+## 3_back                12            23.67                            5.75
+## 
+## 
+## Chi-Square Statistic = 9.155 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.0112
+</code></pre>
+
+<p><img src="/images/figure/chisqtutseatsim.png" alt="plot of chunk chisqtutseatsim" /> </p>
 
 </div>
 
