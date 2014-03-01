@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-28T16:52:42-05:00</updated>
+  <updated>2014-02-28T19:46:28-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,132 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tutorial on Lattice's Histogram()]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial/"/>
+    <updated>2014-02-28T17:50:00-05:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
+  <li><a href="#controlling-breaks">Controlling Breaks</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The function <code>histogram()</code> is used to study the distribution of a numerical variable.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>histogram()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<p>In this tutorial we will also use a function from the <code>mosaic</code> package, so let’s make sure it is loaded:</p>
+
+<pre><code>require(mosaic)
+</code></pre>
+
+<h2 id="one-numerical-variable">One Numerical Variable</h2>
+
+<p>In the <code>m11survey</code> data frame from the <code>tigerstats</code> package, suppose that you want to study the distribution of <strong>fastest</strong>, the fastest speed one has ever driven.  You can do so with the following command:</p>
+
+<pre><code>histogram(~fastest,data=m111survey,
+       type="density",
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven")
+</code></pre>
+
+<p><img src="/images/figure/histtutfastest.png" alt="plot of chunk histtutfastest" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph;</li>
+  <li>the <code>type</code> argument to make a density histogram (we like this type the most, but other possible types are “count” and “percent”).</li>
+</ul>
+
+<h2 id="controlling-breaks">Controlling Breaks</h2>
+
+<p>One of the most important ways to customize a histogram is to to set your own values for the left and right-hand boundaries of the rectangles.</p>
+
+<p>In order to accomplish this, you should first know the range of your data values.  You can find this quickly using the <code>favstats()</code> function from package <code>mosaic</code>:</p>
+
+<pre><code>favstats(~fastest,data=m111survey)
+
+##  min   Q1 median    Q3 max  mean    sd  n missing
+##   60 90.5    102 119.5 190 105.9 20.88 71       0
+</code></pre>
+
+<p>The minimum fastest speed is 60 mph, and the maximum fastest speed is 190 mph.</p>
+
+<p>One possible choice for rectangle boundaries is to have the left-most rectangle begin at sixty, and then have each rectangle be 10 mph wide at the base, finally reaching a rectangle that ends at 190 mph.  In other words, we want the rectangle boundaries to be:</p>
+
+<script type="math/tex; mode=display">60,70,80,90,100,110,120,130,140,150,160,170,280,190.</script>
+
+<p>These numbers will be the “breaks” for the rectangles in our histogram.  We can set these breaks by putting them, as a list, into the <code>breaks</code> argument of the <code>histogram()</code> function, as follows:</p>
+
+<pre><code>histogram(~fastest,data=m111survey,
+       type="density",
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven",
+       breaks=c(60,70,80,90,100,110,120,130,
+                140,150,160,170,180,190))
+</code></pre>
+
+<p><img src="/images/figure/histtutfastestbreaks10.png" alt="plot of chunk histtutfastestbreaks10" /> </p>
+
+<p>You can accomplish the same thing with less typing, if you make use of the <code>seq()</code> function:</p>
+
+<pre><code>histogram(~fastest,data=m111survey,
+       type="density",
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven",
+       breaks=seq(from=60,to=190,by=10))
+</code></pre>
+
+<p><img src="/images/figure/histtutfastestbreaks10seq.png" alt="plot of chunk histtutfastestbreaks10seq" /> </p>
+
+<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
+
+<p>Suppose you want to know:</p>
+
+<blockquote>
+  <p><em>Who tends to drive faster:  guys or gals?</em></p>
+</blockquote>
+
+<p>Then you might wish to study the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  You can use histograms in order to perform such a study.</p>
+
+<p>Try this code:</p>
+
+<pre><code>histogram(~fastest|sex,data=m111survey,
+       type="density",
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex",
+       breaks=seq(from=60,to=190,by=10))
+</code></pre>
+
+<p><img src="/images/figure/histtutfastestsexcond.png" alt="plot of chunk histtutfastestsexcond" /> </p>
+
+<p>Note that to produce side-by-side histograms, you “condition” on the factor variable with the formula:</p>
+
+<script type="math/tex; mode=display">\sim numerical \vert factor</script>
+
+<p>Note also the use of “\n” to split the title into two lines:  this is a useful trick when the title is long.</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Densityplot()]]></title>
@@ -49,7 +175,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <h2 id="one-numerical-variable">One Numerical Variable</h2>
 
-<p>In the <code>m11survey</code> data frame from the <code>tigerstats</code> package, suppose that you want to study the distribution of <strong>fastest</strong>, the fastest speed on has ever driven.  You can do so with the following command:</p>
+<p>In the <code>m11survey</code> data frame from the <code>tigerstats</code> package, suppose that you want to study the distribution of <strong>fastest</strong>, the fastest speed one has ever driven.  You can do so with the following command:</p>
 
 <pre><code>densityplot(~fastest,data=m111survey,
        xlab="speed (mph)",
@@ -120,7 +246,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <h2 id="from-and-to">From and To</h2>
 
-<p>In the <code>imagpop</code> data frame, the variable <strong>kkardashtemp</strong> records the rating given, by each individual in the data frame, for the celebrity Kim Kardashian.  The possible rating range from 0 to 100.</p>
+<p>In the <code>imagpop</code> data frame, the variable <strong>kkardashtemp</strong> records the rating given, by each individual in the data frame, for the celebrity Kim Kardashian.  The possible ratings range from 0 to 100.</p>
 
 <p>Let’s make a density plot of this variable:</p>
 
@@ -1051,352 +1177,6 @@ install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
 <p><img src="/images/figure/proptesttut2propssummary.png" alt="plot of chunk proptesttut2propssummary" /> </p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[binomtestGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial/"/>
-    <updated>2014-02-28T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#working-from-a-data-frame">Working from a Data Frame</a></li>
-  <li><a href="#setting-the-confidence-level">Setting the Confidence Level</a></li>
-  <li><a href="#significance-tests">Significance Tests</a></li>
-  <li><a href="#a-graph-of-the-p-value">A Graph of the $P$-Value</a></li>
-  <li><a href="#working-with-summary-data">Working with Summary Data</a></li>
-  <li><a href="#want-less-output">Want Less Output?</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>You use <code>binomtestGC()</code> for inferential procedures regarding one population proportion $p$.  The function <code>proptestGC()</code> can also handle this analysis, but <code>binomtestGC()</code> computes exact $P$-values rather than employing the (sometimes crude) normal approximation, and it also uses a somewhat more sophisticated method to compute confidence intervals.</p>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="working-from-a-data-frame">Working from a Data Frame</h2>
-
-<p>Let</p>
-
-<blockquote>
-  <p>$p =$ the proportion of all Georgetown College students who are female</p>
-</blockquote>
-
-<p>Suppose that you would like a 95%-confidence interval for $p$.  Since <strong>sex</strong> is present as a variable in the <code>m111survey</code> data frame, so you can use formula-data input in the usual way to direct the attention of <code>binomtestGC()</code> to <strong>sex</strong> as the data.</p>
-
-<p>However, when the function looks at <strong>sex</strong>, it sees the values “female” and “male”.  It needs to be told which of them to count as a “success” when it computes the sample proportion $\hat{p}$.  You do this with the <code>success</code> argument.</p>
-
-<p>So you use:</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="female")
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 
-## 
-## Descriptive Results:  40 successes in 71 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.5634 
-## SE(p.hat):	 0.0589 
-## 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.440455            0.680850
-</code></pre>
-
-<p>Note that you did not have to specify a confidence level:  by default, the function returns a 95%-confidence interval.</p>
-
-<h2 id="setting-the-confidence-level">Setting the Confidence Level</h2>
-
-<p>You can get intervals with other levels of confidence besides 95%, simply by setting the argument <code>conf.level</code> to the desired level (expressed as a proportion, rather than as a percentage).</p>
-
-<p>For example, if you want a 90%-confidence interval for $p$, then you use:</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="female",conf.level=0.90)
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 
-## 
-## Descriptive Results:  40 successes in 71 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.5634 
-## SE(p.hat):	 0.0589 
-## 
-## 90% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.458929            0.663741
-</code></pre>
-
-<h2 id="significance-tests">Significance Tests</h2>
-
-<p>Let’s now let</p>
-
-<blockquote>
-  <p>$p =$ the proportion of all Georgetown College students who are male</p>
-</blockquote>
-
-<p>(Notice that, for variety’s sake, we have switched to counting up males.)</p>
-
-<p>Suppose that we want to perform a test of significance.  Then we would use:</p>
-
-<ul>
-  <li>the argument <code>p</code> to indicate the belief of the Null Hypothesis as to the value of $p$;</li>
-  <li>the argument <code>alternative</code> to specify the direction of the Alternative Hypothesis.  The possible values of this argument are:
-    <ul>
-      <li>“less”</li>
-      <li>“greater”</li>
-      <li>“two.sided” (the default value)</li>
-    </ul>
-  </li>
-</ul>
-
-<p>For example, if we want to test the hypotheses:</p>
-
-<blockquote>
-  <p>$H_0 : p = 0.50$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a : p &lt; 0.50$</p>
-</blockquote>
-
-<p>then we use</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="male",p=0.50,
-            alternative="less")
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 
-## 
-## Descriptive Results:  31 successes in 71 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.4366 
-## SE(p.hat):	 0.0589 
-## 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.000000            0.541071             
-## 
-## Test of Significance:
-## 
-## 	H_0:  p = 0.5 
-## 	H_a:  p &lt; 0.5 
-## 
-## 	P-value:		P = 0.1712
-</code></pre>
-
-<p>To test the hypotheses</p>
-
-<blockquote>
-  <p>$H_0 : p = 0.50$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a : p &gt; 0.50$</p>
-</blockquote>
-
-<p>then we use</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="male",p=0.50,
-            alternative="greater")
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 
-## 
-## Descriptive Results:  31 successes in 71 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.4366 
-## SE(p.hat):	 0.0589 
-## 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.336259            1.000000             
-## 
-## Test of Significance:
-## 
-## 	H_0:  p = 0.5 
-## 	H_a:  p &gt; 0.5 
-## 
-## 	P-value:		P = 0.8825
-</code></pre>
-
-<p>If we want a two-side test</p>
-
-<blockquote>
-  <p>$H_0 : p = 0.50$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a : p \neq 0.50$</p>
-</blockquote>
-
-<p>then we use</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="male",p=0.50)
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 
-## 
-## Descriptive Results:  31 successes in 71 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.4366 
-## SE(p.hat):	 0.0589 
-## 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.319150            0.559545             
-## 
-## Test of Significance:
-## 
-## 	H_0:  p = 0.5 
-## 	H_a:  p != 0.5 
-## 
-## 	P-value:		P = 0.3425
-</code></pre>
-
-<p>Note that there is no need to specify an alternative, since the default value of <code>alternative</code> is “two.sided”.</p>
-
-<h2 id="a-graph-of-the-p-value">A Graph of the $P$-Value</h2>
-
-<p>Fro a one-sided test, we can get a graph of the $P$-value simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="male",p=0.50,
-            alternative="less",
-            graph=TRUE)
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 
-## 
-## Descriptive Results:  31 successes in 71 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.4366 
-## SE(p.hat):	 0.0589 
-## 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.000000            0.541071             
-## 
-## Test of Significance:
-## 
-## 	H_0:  p = 0.5 
-## 	H_a:  p &lt; 0.5 
-## 
-## 	P-value:		P = 0.1712
-</code></pre>
-
-<p><img src="/images/figure/binomtesttutsexless.png" alt="plot of chunk binomtesttutsexless" /> </p>
-
-<p>For a two-sided test, the function gets the $P$-value by doubling an appropriate one-sided $P$-value, so no graph represents the $P$-value very well.  Hence the function will refuse to provide a graph in that case.</p>
-
-<h2 id="working-with-summary-data">Working with Summary Data</h2>
-
-<p>Suppose that in a poll of 2500 randomly selected registered voters, 1325 of them indicated support for the Affordable Care Act.  Suppose that we want a confidence interval for $p$, the proportion of all registered voters who favor the Act, and a two-sided test of significance with the hypotheses:</p>
-
-<blockquote>
-  <p>$H_0 : p = 0.50$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a : p \neq 0.50$</p>
-</blockquote>
-
-<p>We do not have raw data from a data frame, but the summary information we are given will suffice for <code>binomtestGC()</code>.  We need only:</p>
-
-<ul>
-  <li>set the argument <code>x</code> to the number of successes (the count of people who said they support the Act), and</li>
-  <li>set the argument <code>n</code> to the sample size.</li>
-</ul>
-
-<p>Hence we use:</p>
-
-<pre><code>binomtestGC(x=1325,n=2500,p=0.50)
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Results based on Summary Data
-## 
-## 
-## Descriptive Results:  1325 successes in 2500 trials
-## 
-## Inferential Results:
-## 
-## Estimate of p:	 0.53 
-## SE(p.hat):	 0.01 
-## 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.510210            0.549719             
-## 
-## Test of Significance:
-## 
-## 	H_0:  p = 0.5 
-## 	H_a:  p != 0.5 
-## 
-## 	P-value:		P = 0.0029
-</code></pre>
-
-<h2 id="want-less-output">Want Less Output?</h2>
-
-<p>Sometimes you don’t need to see quite so much output to the console. If you only wantf the basics (confidence interval for $p$ and $P$-value for your test), then set the argument <code>verbose</code> to <code>FALSE</code>.</p>
-
-<p>For example, if you want a 90%-confidence interval and a two-sided test then try:</p>
-
-<pre><code>binomtestGC(~sex,data=m111survey,
-            success="male",p=0.50,
-            verbose=FALSE)
-
-## 
-## Exact Binomial Procedures for a Single Proportion p:
-## 	Variable under study is sex 
-## 95% Confidence Interval for p:
-## 
-##           lower.bound         upper.bound          
-##           0.319150            0.559545             
-## 
-## 	P-value:		P = 0.3425
-</code></pre>
 
 ]]></content>
   </entry>

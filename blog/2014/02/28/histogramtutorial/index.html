@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Tutorial on Lattice's Densityplot() - A Statistics Blog</title>
+  <title>Tutorial on Lattice's Histogram() - A Statistics Blog</title>
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Numerical Variable Numerical and Factor Variable Side-by-Side Plots Plots in the Same Panel From and To Preliminaries The function &hellip;">
+  <meta name="description" content="Preliminaries One Numerical Variable Controlling Breaks Numerical and Factor Variable Preliminaries The function histogram() is used to study the &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial">
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
@@ -114,7 +114,7 @@
   
   <header>
     
-      <h1 class="entry-title">Tutorial on Lattice's Densityplot()</h1>
+      <h1 class="entry-title">Tutorial on Lattice's Histogram()</h1>
     
     
       <p class="meta">
@@ -130,7 +130,7 @@
   
 
 
-<time datetime="2014-02-28T17:45:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+<time datetime="2014-02-28T17:50:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
@@ -143,22 +143,18 @@
 <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
-  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a>    <ul>
-      <li><a href="#side-by-side-plots">Side-by-Side Plots</a></li>
-      <li><a href="#plots-in-the-same-panel">Plots in the Same Panel</a></li>
-    </ul>
-  </li>
-  <li><a href="#from-and-to">From and To</a></li>
+  <li><a href="#controlling-breaks">Controlling Breaks</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
 </ul>
 
 <h2 id="preliminaries">Preliminaries</h2>
 
-<p>The function <code>densityplot()</code> is used to study the distribution of a numerical variable.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+<p>The function <code>histogram()</code> is used to study the distribution of a numerical variable.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
 
 <pre><code>require(tigerstats)
 </code></pre>
 
-<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>densityplot()</code>, then make sure you load lattice:</p>
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>histogram()</code>, then make sure you load lattice:</p>
 
 <pre><code>require(lattice)
 </code></pre>
@@ -169,33 +165,71 @@
 install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
+<p>In this tutorial we will also use a function from the <code>mosaic</code> package, so let’s make sure it is loaded:</p>
+
+<pre><code>require(mosaic)
+</code></pre>
+
 <h2 id="one-numerical-variable">One Numerical Variable</h2>
 
 <p>In the <code>m11survey</code> data frame from the <code>tigerstats</code> package, suppose that you want to study the distribution of <strong>fastest</strong>, the fastest speed one has ever driven.  You can do so with the following command:</p>
 
-<pre><code>densityplot(~fastest,data=m111survey,
+<pre><code>histogram(~fastest,data=m111survey,
+       type="density",
        xlab="speed (mph)",
        main="Fastest Speed Ever Driven")
 </code></pre>
 
-<p><img src="/images/figure/dentutfastest.png" alt="plot of chunk dentutfastest" /> </p>
+<p><img src="/images/figure/histtutfastest.png" alt="plot of chunk histtutfastest" /> </p>
 
 <p>Note the use of:</p>
 
 <ul>
   <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
-  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph;</li>
+  <li>the <code>type</code> argument to make a density histogram (we like this type the most, but other possible types are “count” and “percent”).</li>
 </ul>
 
-<p>If you do not want to see the “rug” of individual data values at the bottom of the plot, set the argument <code>plot.points</code> to <code>FALSE</code>:</p>
+<h2 id="controlling-breaks">Controlling Breaks</h2>
 
-<pre><code>densityplot(~fastest,data=m111survey,
-       xlab="speed (mph)",
-       main="Fastest Speed Ever Driven",
-       plot.points=FALSE)
+<p>One of the most important ways to customize a histogram is to to set your own values for the left and right-hand boundaries of the rectangles.</p>
+
+<p>In order to accomplish this, you should first know the range of your data values.  You can find this quickly using the <code>favstats()</code> function from package <code>mosaic</code>:</p>
+
+<pre><code>favstats(~fastest,data=m111survey)
+
+##  min   Q1 median    Q3 max  mean    sd  n missing
+##   60 90.5    102 119.5 190 105.9 20.88 71       0
 </code></pre>
 
-<p><img src="/images/figure/dentutfastestnorug.png" alt="plot of chunk dentutfastestnorug" /> </p>
+<p>The minimum fastest speed is 60 mph, and the maximum fastest speed is 190 mph.</p>
+
+<p>One possible choice for rectangle boundaries is to have the left-most rectangle begin at sixty, and then have each rectangle be 10 mph wide at the base, finally reaching a rectangle that ends at 190 mph.  In other words, we want the rectangle boundaries to be:</p>
+
+<script type="math/tex; mode=display">60,70,80,90,100,110,120,130,140,150,160,170,280,190.</script>
+
+<p>These numbers will be the “breaks” for the rectangles in our histogram.  We can set these breaks by putting them, as a list, into the <code>breaks</code> argument of the <code>histogram()</code> function, as follows:</p>
+
+<pre><code>histogram(~fastest,data=m111survey,
+       type="density",
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven",
+       breaks=c(60,70,80,90,100,110,120,130,
+                140,150,160,170,180,190))
+</code></pre>
+
+<p><img src="/images/figure/histtutfastestbreaks10.png" alt="plot of chunk histtutfastestbreaks10" /> </p>
+
+<p>You can accomplish the same thing with less typing, if you make use of the <code>seq()</code> function:</p>
+
+<pre><code>histogram(~fastest,data=m111survey,
+       type="density",
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven",
+       breaks=seq(from=60,to=190,by=10))
+</code></pre>
+
+<p><img src="/images/figure/histtutfastestbreaks10seq.png" alt="plot of chunk histtutfastestbreaks10seq" /> </p>
 
 <h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
 
@@ -205,61 +239,24 @@ install_github(repo="homerhanumat/tigerstats")
   <p><em>Who tends to drive faster:  guys or gals?</em></p>
 </blockquote>
 
-<p>Then you might wish to study the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  You can use density plots in two ways in order to perform such a study.</p>
+<p>Then you might wish to study the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  You can use histograms in order to perform such a study.</p>
 
-<h3 id="side-by-side-plots">Side-by-Side Plots</h3>
+<p>Try this code:</p>
 
-<pre><code>densityplot(~fastest|sex,data=m111survey,
+<pre><code>histogram(~fastest|sex,data=m111survey,
+       type="density",
        xlab="speed (mph)",
-       main="Fastest Speed Ever Driven,\nby Sex")
+       main="Fastest Speed Ever Driven,\nby Sex",
+       breaks=seq(from=60,to=190,by=10))
 </code></pre>
 
-<p><img src="/images/figure/dentutfastestsexcond.png" alt="plot of chunk dentutfastestsexcond" /> </p>
+<p><img src="/images/figure/histtutfastestsexcond.png" alt="plot of chunk histtutfastestsexcond" /> </p>
 
-<p>Note that to produce side-by-side plots, you “condition” on the factor variable with the formula:</p>
+<p>Note that to produce side-by-side histograms, you “condition” on the factor variable with the formula:</p>
 
 <script type="math/tex; mode=display">\sim numerical \vert factor</script>
 
 <p>Note also the use of “\n” to split the title into two lines:  this is a useful trick when the title is long.</p>
-
-<h3 id="plots-in-the-same-panel">Plots in the Same Panel</h3>
-
-<p>You can get a density plot for each value of the factor variable and have all of the plots appear in the same panel.  This is accomplished with the <code>groups</code> argument:</p>
-
-<pre><code>densityplot(~fastest,data=m111survey,
-       groups=sex,
-       xlab="speed (mph)",
-       main="Fastest Speed Ever Driven,\nby Sex",
-       plot.points=FALSE,
-       auto.key=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/dentutfastestsexgroups.png" alt="plot of chunk dentutfastestsexgroups" /> </p>
-
-<p>Note the use of the <code>auto,key</code> argument to produce the legend at the top, so that the reader can tell which plot goes with which sex.</p>
-
-<p>Many people think that grouped density plots allow for easier comparison than side-by-side plots do—at least if the number of groups is small.</p>
-
-<h2 id="from-and-to">From and To</h2>
-
-<p>In the <code>imagpop</code> data frame, the variable <strong>kkardashtemp</strong> records the rating given, by each individual in the data frame, for the celebrity Kim Kardashian.  The possible ratings range from 0 to 100.</p>
-
-<p>Let’s make a density plot of this variable:</p>
-
-<pre><code>densityplot(~kkardashtemp,data=imagpop,
-            plot.points=FALSE)
-</code></pre>
-
-<p><img src="/images/figure/dentutkkard.png" alt="plot of chunk dentutkkard" /> </p>
-
-<p>The function <code>densityplot()</code> has no way of knowing that <strong>kkardashtemp</strong> must lie between 0 and 100, so from the available data it infers that there is some possibility for a rating to be below 0 or above 100.  If you want to inform <code>denistyplot()</code> of the known limits, then use the <code>from</code> and <code>to</code> arguments, as follows:</p>
-
-<pre><code>densityplot(~kkardashtemp,data=imagpop,
-            plot.points=FALSE,
-            from=0,to=100)
-</code></pre>
-
-<p><img src="/images/figure/dentutkkardfromto.png" alt="plot of chunk dentutkkardfromto" /> </p>
 
 </div>
 
@@ -283,7 +280,7 @@ install_github(repo="homerhanumat/tigerstats")
   
 
 
-<time datetime="2014-02-28T17:45:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+<time datetime="2014-02-28T17:50:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
       
 
 <span class="categories">
@@ -306,10 +303,8 @@ install_github(repo="homerhanumat/tigerstats")
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/28/xyplottutorial/" title="Previous Post: Tutorial on lattice's xyplot()">&laquo; Tutorial on lattice's xyplot()</a>
+        <a class="basic-alignment left" href="/blog/2014/02/28/densityplottutorial/" title="Previous Post: Tutorial on lattice's densityplot()">&laquo; Tutorial on lattice's densityplot()</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/02/28/histogramtutorial/" title="Next Post: Tutorial on lattice's histogram()">Tutorial on lattice's histogram() &raquo;</a>
       
     </p>
   </footer>
@@ -434,8 +429,8 @@ install_github(repo="homerhanumat/tigerstats")
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial/';
-        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial/';
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial/';
         var disqus_script = 'embed.js';
       
     (function () {
