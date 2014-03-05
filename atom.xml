@@ -4,7 +4,7 @@
   <title><![CDATA[A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-02-28T23:40:07-05:00</updated>
+  <updated>2014-03-04T20:04:42-05:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -3093,9 +3093,9 @@ help(m111survey)
 
 <pre><code>favstats(fastest ~ sex, data = m111survey)
 
-##        min Q1 median    Q3 max  mean    sd  n missing
-## female  60 90     95 110.0 145 100.0 17.61 40       0
-## male    85 99    110 122.5 190 113.5 22.57 31       0
+##   .group min Q1 median    Q3 max  mean    sd  n missing
+## 1 female  60 90     95 110.0 145 100.0 17.61 40       0
+## 2   male  85 99    110 122.5 190 113.5 22.57 31       0
 </code></pre>
 
 <p>The first row of the output gives a summary of the conditional distribution of <strong>fastest</strong>, given that <strong>sex</strong> is female.</p>
@@ -3106,16 +3106,24 @@ help(m111survey)
 
 <h2 id="limiting-the-output">Limiting the Output</h2>
 
-<p>Sometimes you want just a few of the numbers from <code>favstats()</code>.  If you would like to display only those numbers you can do so using brackets “[” and “]”, along with a list of the names of the columns you want to see.  For example, to display only the means and the standard deviations for <strong>fastest</strong> broken down by <strong>sex</strong>, ask for:</p>
+<p>Sometimes you want just a few of the numbers from <code>favstats()</code>.  If you would like to display only those numbers you can do so using brackets “[” and “]”, along with a list of the names of the columns you want to see.  For example, to display only the means and the standard deviations for <strong>fastest</strong>, ask for:</p>
 
-<pre><code>favstats(fastest ~ sex, data = m111survey)[c("mean", "sd")]
+<pre><code>favstats(fastest, data = m111survey)[c("mean", "sd")]
 
-##         mean    sd
-## female 100.0 17.61
-## male   113.5 22.57
+##   mean    sd
+##  105.9 20.88
 </code></pre>
 
 <p>The brackets are R’s way of locating particular parts of an object.  If you want to display more than one column, make sure to combine their names (in quotes) in a list with the <code>c()</code> function, as shown above.</p>
+
+<p>When you are breaking a numerical variable into groups, you will probably also want to see the group names:  this requires the addition of the column named <code>.group</code>.  Therefore, to see just the mean and the standard deviation for <strong>fastest</strong> broken down by <strong>sex</strong>, ask for:</p>
+
+<pre><code>favstats(fastest ~ sex, data = m111survey)[c(".group", "mean", "sd")]
+
+##   .group  mean    sd
+## 1 female 100.0 17.61
+## 2   male 113.5 22.57
+</code></pre>
 
 <h2 id="warning">Warning</h2>
 
