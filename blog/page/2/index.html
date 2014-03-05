@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Factor Variable Two Factor Variables Warning Preliminaries barchartGC() provides quick-and-easy bar charts for the graphical &hellip;">
+  <meta name="description" content="Preliminaries One Numerical Variable Numerical and Factor Variable Warning Preliminaries The function bwplot() makes box-and-whisker plots for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -117,7 +117,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/28/bwplottutorial/">Tutorial on Lattice&#8217;s Bwplot()</a></h1>
     
     
       <p class="meta">
@@ -133,10 +133,10 @@
   
 
 
-<time datetime="2014-02-21T16:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+<time datetime="2014-02-28T17:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
         
-           | <a href="/blog/2014/02/21/barchartGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/21/barchartGCtutorial/">Comments</a>
+           | <a href="/blog/2014/02/28/bwplottutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/">Comments</a>
         
       </p>
     
@@ -145,127 +145,99 @@
 
   <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#one-factor-variable">One Factor Variable</a></li>
-  <li><a href="#two-factor-variables">Two Factor Variables</a></li>
+  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
   <li><a href="#warning">Warning</a></li>
 </ul>
 
 <h2 id="preliminaries">Preliminaries</h2>
 
-<p><code>barchartGC()</code> provides quick-and-easy bar charts for the graphical exploration of factor variables.  The function comes from the <code>tigerstats</code> package and we will use some data from the <code>tigerstats</code> as well, so make sure that <code>tigerstats</code> is loaded:</p>
+<p>The function <code>bwplot()</code> makes box-and-whisker plots for numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
 
 <pre><code>require(tigerstats)
 </code></pre>
 
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>bwplot()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
 
 <pre><code>require(devtools)
 install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
-<p>In this tutorial we will work with the <code>m111survey</code> data frame from <code>tigerstats</code> package.  If you are not yet familiar with this data, then run:</p>
+<h2 id="one-numerical-variable">One Numerical Variable</h2>
 
-<pre><code>data(m111survey)
-View(m111survey)
-help(m111survey)
+<p>For a box-and-whisker plot of the fastest speeds ever driven by students in the <code>m111survey</code> data frame, use the command:</p>
+
+<pre><code>bwplot(~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven")
 </code></pre>
 
-<p>Remember that you can also learn about the types of each variable in the data frame with the <code>str()</code> function:</p>
+<p><img src="/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
 
-<pre><code>str(m111survey)
+<p>Note the use of:</p>
 
-## 'data.frame':	71 obs. of  12 variables:
-##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
-##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
-##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
-##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
-##  $ weight_feel    : Factor w/ 3 levels "1_underweight",..: 1 2 2 1 1 3 2 2 2 3 ...
-##  $ love_first     : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 1 1 1 ...
-##  $ extra_life     : Factor w/ 2 levels "no","yes": 2 2 1 1 2 1 2 2 2 1 ...
-##  $ seat           : Factor w/ 3 levels "1_front","2_middle",..: 1 2 2 1 3 1 1 3 3 2 ...
-##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
-##  $ enough_Sleep   : Factor w/ 2 levels "no","yes": 1 1 1 1 1 2 1 2 1 2 ...
-##  $ sex            : Factor w/ 2 levels "female","male": 2 2 1 1 2 2 2 2 1 1 ...
-##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
+</ul>
+
+<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
+
+<p>Say you want to know:</p>
+
+<blockquote>
+  <p><em>Who tends to drive faster:  the guys or the gals?</em></p>
+</blockquote>
+
+<p>Then you are studying the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  <code>bwplot()</code> will break the fastest speeds up by sex and parallel box-and-whisker plots, if you run the following command:</p>
+
+<pre><code>bwplot(fastest~sex,data=m111survey,
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
 </code></pre>
 
-<h2 id="one-factor-variable">One Factor Variable</h2>
+<p><img src="/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
 
-<p>To look see a bar chart for the tallies of the factor variable <strong>seat</strong>:</p>
+<p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
 
-<pre><code>barchartGC(~seat,data=m111survey,type="frequency",
-           main="Barchart of Seating Preference")
+<p>If you prefer your box-and-whisker plots to be horizontal, then you can reverse the order of the variables in the formula:</p>
+
+<pre><code>bwplot(sex~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
 </code></pre>
 
-<p><img src="/images/figure/barchartseatfreq.png" alt="plot of chunk barchartseatfreq" /> </p>
-
-<p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts:</p>
-
-<pre><code>barchartGC(~seat,data=m111survey,type="percent",
-           main="Barchart of Seating Preference")
-</code></pre>
-
-<p><img src="/images/figure/barchartseatperc.png" alt="plot of chunk barchartseatperc" /> </p>
-
-<p>If you have a table of the counts for a variable, then you can enter it directly.  For example, suppose you have already made:</p>
-
-<pre><code>Seat &lt;- xtabs(~seat,data=m111survey)
-Seat
-
-## seat
-##  1_front 2_middle   3_back 
-##       27       32       12
-</code></pre>
-
-<p>Then you can just enter the table:</p>
-
-<pre><code>barchartGC(Seat,type="percent",
-           main="Barchart of Seating Preference")
-</code></pre>
-
-<p><img src="/images/figure/barchartseattab.png" alt="plot of chunk barchartseattab" /> </p>
-
-<h2 id="two-factor-variables">Two Factor Variables</h2>
-
-<p>You can also use <code>barchartGC()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data input as follows:</p>
-
-<pre><code>barchartGC(~sex+seat,data=m111survey,
-           type="percent",
-           main="Sex and Seating Preference\nat Georgetown")
-</code></pre>
-
-<p><img src="/images/figure/barchartsexseat.png" alt="plot of chunk barchartsexseat" /> </p>
-
-<p>Again, if you happen to have already made a two-way table, then you can just enter it:</p>
-
-<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
-SexSeat
-
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-</code></pre>
-
-<p>Here is the bar chart from the two-way table:</p>
-
-<pre><code>barchartGC(SexSeat,type="percent",
-           main="Sex and Seating Preference\nat Georgetown")
-</code></pre>
-
-<p><img src="/images/figure/barchartsexseattab.png" alt="plot of chunk barchartsexseattab" /> </p>
+<p><img src="/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
 
 <h2 id="warning">Warning</h2>
 
-<p>Bar charts are for factor variables, not for numerical variables.  Look what happens when you ask for a bar chart of <strong>fastest</strong>:</p>
+<p>Box-and-Whisker plots are great for studying:</p>
 
-<pre><code>barchartGC(~fastest,data=m111survey,
-           main="Fastest Speed Ever Driven")
+<ul>
+  <li>one numerical variable</li>
+  <li>the relationship between a numerical variable and a factor variable.</li>
+</ul>
+
+<p>However, if you try to study the relationship between two numerical variables with <code>bwplot()</code>, you will get bizarre results.</p>
+
+<p>For example, suppose you want to study the relationship between fastest speed ever driven (<strong>fastest</strong>) and the grade point average (<strong>GPA</strong>) of the subjects in <code>m111survey</code>:</p>
+
+<pre><code>bwplot(fastest~GPA,data=m111survey,
+       ylab="speed (mph)",
+       xbal="grade-point average",
+       main="Fastes Speed Ever Driven,\nby Grade-Point Average")
 </code></pre>
 
-<p><img src="/images/figure/barchartfastest.png" alt="plot of chunk barchartfastest" /> </p>
+<p><img src="/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
 
-<p>R tries to accommodate your request, but it ends up making something that resembles a very amateurish histogram.  R draws a separate bar for each speed that appears in the data, making for a very “busy” graph.  Worse yet, consecutive speeds are equally spaced from each other, even though the differences between consecutive speeds vary.  For example, the spacing between the 90 ans 91 mph bars is the same as the spacing between the 160 and 190 mph bars.  This is very misleading!</p>
+<p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
+
+<p>Use <code>xyplot()</code> (scatterplots) to study the relationship between two numerical variables.</p>
 </div>
   
   
@@ -278,7 +250,7 @@ SexSeat
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic&#8217;s Favstats()</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/28/proptestGCtutorial/">proptestGC() Tutorial</a></h1>
     
     
       <p class="meta">
@@ -294,182 +266,10 @@ SexSeat
   
 
 
-<time datetime="2014-02-21T15:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+<time datetime="2014-02-28T16:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
         
-           | <a href="/blog/2014/02/21/favstatstutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/21/favstatstutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#studying-one-numerical-variable">Studying One Numerical Variable</a></li>
-  <li><a href="#studying-the-relationship-between-a-numerical-variable-and-a-factor-variable">Studying the Relationship Between a Numerical Variable and a Factor Variable</a></li>
-  <li><a href="#limiting-the-output">Limiting the Output</a></li>
-  <li><a href="#warning">Warning</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p><code>favstats()</code> comes from the <code>mosaic</code> package and we will use some data from the <code>tigerstats</code> package, so make sure that both are loaded:</p>
-
-<pre><code>require(mosaic)
-require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo = "homerhanumat/tigerstats")
-</code></pre>
-
-<p>In this tutorial we will work with the <code>m111survey</code> data frame from <code>tigerstats</code> package.  If you are not yet familiar with this data, then run:</p>
-
-<pre><code>data(m111survey)
-View(m111survey)
-help(m111survey)
-</code></pre>
-
-<p>Remember that you can also learn about the types of each variable in the data frame with the <code>str()</code> function:</p>
-
-<pre><code>str(m111survey)
-
-## 'data.frame':	71 obs. of  12 variables:
-##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
-##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
-##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
-##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
-##  $ weight_feel    : Factor w/ 3 levels "1_underweight",..: 1 2 2 1 1 3 2 2 2 3 ...
-##  $ love_first     : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 1 1 1 ...
-##  $ extra_life     : Factor w/ 2 levels "no","yes": 2 2 1 1 2 1 2 2 2 1 ...
-##  $ seat           : Factor w/ 3 levels "1_front","2_middle",..: 1 2 2 1 3 1 1 3 3 2 ...
-##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
-##  $ enough_Sleep   : Factor w/ 2 levels "no","yes": 1 1 1 1 1 2 1 2 1 2 ...
-##  $ sex            : Factor w/ 2 levels "female","male": 2 2 1 1 2 2 2 2 1 1 ...
-##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...
-</code></pre>
-
-<h2 id="studying-one-numerical-variable">Studying One Numerical Variable</h2>
-
-<p>“favstats” is short for “favorite statistics”:  it will give you the some of the most popular summary statistics for numerical variables.</p>
-
-<p>Suppose, for example, that you want to know how fast people in the <code>m111survey</code> sample tend to drive, when they drive their fastest. The you want to study the numerical variable <strong>fastest</strong>:  the fastest speed each person claims to have ever driven, measured in miles per hour.  Just try <code>favstats()</code> with the usual formula-data input:</p>
-
-<pre><code>favstats(~fastest, data = m111survey)
-
-##  min   Q1 median    Q3 max  mean    sd  n missing
-##   60 90.5    102 119.5 190 105.9 20.88 71       0
-</code></pre>
-
-<p>Remember what each of the statistics tells you:</p>
-
-<ul>
-  <li>The minimum fastest speed drive by anyone in the survery was 60 mph.</li>
-  <li>The maximum fastest speed was 190 mph.</li>
-  <li>About 25% of the survey participants drove less than 90.5 mph (the First Quartile)</li>
-  <li>About 75% percent of the survey participants drove less than 119.5 mph (the Third Quartile)</li>
-  <li>About 50% of the participants drove less than 102 mph (the median)</li>
-  <li>The mean speed for this sample of students was about 105.9 mph …</li>
-  <li>… give or take about 20.9 mph or so (the standard deviation).</li>
-</ul>
-
-<p>We also see that</p>
-
-<ul>
-  <li>71 people answered the question about fastest speed;</li>
-  <li>Nobody did not answer (missing = 0).</li>
-</ul>
-
-<h2 id="studying-the-relationship-between-a-numerical-variable-and-a-factor-variable">Studying the Relationship Between a Numerical Variable and a Factor Variable</h2>
-
-<p>Studying the relationship between a numerical variable and factor variable involves what is popularly known as “breaking the data into groups” based on the values of the factor variable.  More formally, we obtain the conditional distributions of the numerical variable given the various possible values of the factor variable, and look for difference between these distributions.  If we see large differences. then we know that the factor variable “makes a difference” in the likely values of the numerical variable, i.e., the two variable are related.</p>
-
-<p>For example we might want to know if the fastest speed one drives might be related to one’s sex.  The relevant variables in <code>m111survey</code> are then the numerical <strong>fastest</strong> and the factor variable <strong>sex</strong>.</p>
-
-<p>In formula-data input for <code>favstats()</code> the formula always follows the format:</p>
-
-<script type="math/tex; mode=display">numerical \sim factor.</script>
-
-<p>So we run the following command:</p>
-
-<pre><code>favstats(fastest ~ sex, data = m111survey)
-
-##   .group min Q1 median    Q3 max  mean    sd  n missing
-## 1 female  60 90     95 110.0 145 100.0 17.61 40       0
-## 2   male  85 99    110 122.5 190 113.5 22.57 31       0
-</code></pre>
-
-<p>The first row of the output gives a summary of the conditional distribution of <strong>fastest</strong>, given that <strong>sex</strong> is female.</p>
-
-<p>The second row summarizes the conditional distribution of <strong>fastest</strong>, given that <strong>sex</strong> is male.</p>
-
-<p>The two conditional distribution are not the same.  For example, we see that on average females drove about 100 mph, whereas the guys drove about 113.4 mph.  The guys appear to drive faster than the gals:  for this sample of students, fastest speed drive does indeed appear to be related to sex.</p>
-
-<h2 id="limiting-the-output">Limiting the Output</h2>
-
-<p>Sometimes you want just a few of the numbers from <code>favstats()</code>.  If you would like to display only those numbers you can do so using brackets “[” and “]”, along with a list of the names of the columns you want to see.  For example, to display only the means and the standard deviations for <strong>fastest</strong>, ask for:</p>
-
-<pre><code>favstats(fastest, data = m111survey)[c("mean", "sd")]
-
-##   mean    sd
-##  105.9 20.88
-</code></pre>
-
-<p>The brackets are R’s way of locating particular parts of an object.  If you want to display more than one column, make sure to combine their names (in quotes) in a list with the <code>c()</code> function, as shown above.</p>
-
-<p>When you are breaking a numerical variable into groups, you will probably also want to see the group names:  this requires the addition of the column named <code>.group</code>.  Therefore, to see just the mean and the standard deviation for <strong>fastest</strong> broken down by <strong>sex</strong>, ask for:</p>
-
-<pre><code>favstats(fastest ~ sex, data = m111survey)[c(".group", "mean", "sd")]
-
-##   .group  mean    sd
-## 1 female 100.0 17.61
-## 2   male 113.5 22.57
-</code></pre>
-
-<h2 id="warning">Warning</h2>
-
-<p><code>favstats()</code> specializes in numerical variables:  it won’t help you to study a factor variable by itself.  Look what happens when you try to use it to study the factor variable <strong>sex</strong>:</p>
-
-<pre><code>favstats(~sex, data = m111survey)
-
-## Error: non-numeric argument to binary operator
-</code></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/15/lmGCtutorial/">lmGC() Tutorial</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-15T15:00:00-05:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/15/lmGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial/">Comments</a>
+           | <a href="/blog/2014/02/28/proptestGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/proptestGCtutorial/">Comments</a>
         
       </p>
     
@@ -478,171 +278,707 @@ help(m111survey)
 
   <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#formula-data-input">Formula-Data Input</a></li>
-  <li><a href="#prediction">Prediction</a></li>
-  <li><a href="#plotting">Plotting</a></li>
+  <li><a href="#one-proportion-from-data-frame-read-this">One Proportion, From Data Frame (Read This!!)</a>    <ul>
+      <li><a href="#confidence-interval-only">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test">Interval and Test</a></li>
+      <li><a href="#graph-of-the-p-value">Graph of the P-Value</a></li>
+      <li><a href="#limiting-output">Limiting Output</a></li>
+    </ul>
+  </li>
+  <li><a href="#one-proportion-from-summary-data">One Proportion, From Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-1">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-1">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-proportions-data-frame">Difference of Two Proportions, Data Frame</a>    <ul>
+      <li><a href="#confidence-interval-only-2">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-2">Interval and Test</a></li>
+      <li><a href="#order-of-the-groups">Order of the Groups</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-proportions-summary-data">Difference of Two Proportions, Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-3">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-3">Interval and Test</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="preliminaries">Preliminaries</h2>
 
-<p>The <code>lmGC()</code> is a starter-tool for simple linear regression, when you are studying the relationship between two numerical variables, one of which you consider to be an explanatory or predictor variable and the other of which you think of as the response.  It’s only a starter-tool:  by the end of the course, or in later statistics courses, you will move on to R’s function <code>lm()</code>, which allows you to work with more than one explanatory variable and which provides additional useful information in its output.  Also, in <code>lm()</code> the explanatory variable(s) can even be factors!</p>
+<p>You use <code>proptestGC()</code> for inferential procedures regarding:</p>
 
-<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
+<ul>
+  <li>one population proportion $p$;</li>
+  <li>the difference of two population proportions, $p_1 - p_2$.</li>
+</ul>
+
+<p>The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
 
 <pre><code>require(tigerstats)
 </code></pre>
 
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
 
 <pre><code>require(devtools)
-install_github(repo = "homerhanumat/tigerstats")
+install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
-<p>In this tutorial we will work with a couple of data sets:  <code>mtcars</code> from the <code>data</code> package that comes with the basic R installation, and <code>fuel</code> from the <code>tigerstats</code> package, so make sure you become familiar with them.  The following commands may be helpful in this regard:</p>
+<h2 id="one-proportion-from-data-frame-read-this">One Proportion, From Data Frame (Read This!!)</h2>
 
-<pre><code>data(mtcars)
-View(mtcars)
-help(mtcars)
-</code></pre>
-
-<p>For <code>fuel</code>:</p>
-
-<pre><code>data(fuel)
-View(fuel)
-help(fuel)
-</code></pre>
-
-<h2 id="formula-data-input">Formula-Data Input</h2>
-
-<p>Like many R functions, <code>lmGC()</code> accepts formula-data input.  The general command looks like:</p>
-
-<pre><code>lmGC(response ~ explanatory, data = DataFrame)
-</code></pre>
-
-<p>If you are interested in studying the relationship between the fuel efficiency of a car (<strong>mpg</strong> in the <code>mtcars</code> data frame, measured in miles per gallon) and its weight (<strong>wt</strong> in <code>mtcars</code>, measure din thousands of pounds), then you  can run:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p>The output to the console is rather minimal.  You get:</p>
+<p>In inference procedures regarding one proportion, <code>binomtestGC()</code> is preferred over <code>proptestGC()</code>, especially at smaller sample sizes.  Nevertheless, read this section carefully.  It talks about:</p>
 
 <ul>
-  <li>the correlation coefficient $r$.  We need to look at a scatter plot to be really sure about it (for plots, see below), but at this point the value $r = -0.87$ indicates a fairly strong negative linear relationship between fuel efficiency and weight.</li>
-  <li>the equation of the regression line.  From the slope of -5.34, we see that for every thousand pound increase in the weight of a car, we predict a 5.34 mpg decrease in the fuel efficiency.</li>
-  <li>the residual standard error $s$.  As a rough rule of thumb, we figure that when we use the regression equation to predict the fuel efficiency of a car from its weight, that prediction is liable to be off by about $s$ miles per gallon, or so.</li>
-  <li>the unadjusted $R^2$.  We see here that about 75% of the variation in the fuel efficiency of the cars in the data set is accounted for by the variation in their weights.  since $R^2$ is fairly high, it seems that weight is a fairly decent predictor of fuel efficiency.</li>
+  <li>what to count as a “success”,</li>
+  <li>levels of confidence,</li>
+  <li>types of Alternative Hypothesis,</li>
+  <li>graphs of the P-value, and</li>
+  <li>an option to limit output to the console</li>
 </ul>
 
-<h2 id="prediction">Prediction</h2>
+<p>in ways that apply to all uses of <code>proptestGC()</code>.</p>
 
-<p>When the value of the explanatory variable for an individual is known and you wish to predict the value of the response variable for that individual, you can use the <code>predict()</code> function.  Its arguments are the linear model that is created by <code>lmGC()</code>, and the value <code>x</code> of the explanatory variable.</p>
+<h3 id="confidence-interval-only">Confidence Interval Only</h3>
 
-<p>If you think that you might want to use <code>predict()</code>, you may first want to store the model in a variable, for example:</p>
+<p>In the <code>m111survey</code> data from the <code>tigerstats</code> package, suppose you want a 95%-confidence interval for:</p>
 
-<pre><code>WeightEff &lt;- lmGC(mpg ~ wt, data = mtcars)
+<blockquote>
+  <p>$p =$ the proportion of all Georgetown College students who are female.</p>
+</blockquote>
+
+<p>Use the function:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,
+           success="female")
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  female  n estimated.prop
+##      40 71         0.5634
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.448016            0.678745
 </code></pre>
 
-<p>Then if you want to predict the fuel efficiency of a car that weights 3000 pounds, run this command:</p>
+<p>Note that the <code>success</code> argument is set to “female” in order to make the function recognize $p$ as the population proportion of <em>females</em>, rather than the proportion of males (or of some other value of the variable in question).</p>
 
-<pre><code>predict(WeightEff, x = 3)
+<p>To get any other level of confidence, you need to use the <code>conf.level</code> argument, indicating your desired level of confidence in decimal (not percentage) form.</p>
 
-## [1] 21.25
+<p>For example, for a 90%-confidence interval for $\mu$, use</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,
+           success="female",conf.level=0.90)
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  female  n estimated.prop
+##      40 71         0.5634
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
+## 
+## 90% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.466564            0.660197
 </code></pre>
 
-<p>We predict that a 3000 pound car (from the time of the Motor Trend study that produced this data) would have a fuel efficiency of 21.25 mpg, give or take about 3.046 mpg or so.  (Note how we used $s$ as a rough give-or-take figure.)</p>
+<h3 id="interval-and-test">Interval and Test</h3>
 
-<h2 id="plotting">Plotting</h2>
-
-<p>But we are getting ahead of ourselves!  In order to use linear models at all, we need to make sure that our data really do show a linear relationship.  The single best way to check this is to look at a scatterplot, so <code>lmGC()</code> comes equipped with a option to produce one:  just set the argument <code>graph</code> to <code>TRUE</code>, as follows:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars, graph = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p><img src="/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
-
-<p>The scatterplot includes the regression line. Indeed, the cloud of point seems to follow a line fairly well.  The relationship may be thought of as linear, so using <code>lmGC()</code> for tasks like prediction does make sense, for this data.</p>
-
-<p>You can also perform some simple diagnostics, by setting the argument <code>diag</code> to <code>TRUE</code>:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars, diag = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p><img src="/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
-
-<p>You get two graphs:</p>
+<p>If you want a test of significance as well as the confidence interval, then</p>
 
 <ul>
-  <li>a density plot of the residuals.  If the distribution of the residuals is roughly bell-shaped, then you can actually employ a &#8220;regression’’ version of the 68-95 Rule:  when you make a prediction using the regression line, there is a about a 68% chance that your predcition will be wtthin one $s$ of the actual $y$-value, and about a 95% chance that ti will be within $2s$ of the actual $y$-value.  <em>Neat!</em></li>
-  <li>A plot of the residuals vs, the <code>fitted</code> $y$-values (the $y$-coordinates of the points on the original scatterplot).  If the points exhibit a linear relationship with about the same amount of scatter all the way along the regression line, then this plot should look like a random cloud of points.  In this case, it confirms that our linear model is appropriate to the data.</li>
+  <li>use the <code>p</code> argument to set what the Null Hypothesis thinks that the value of $p$ is;</li>
+  <li>use the <code>alternative</code> argument to specify the Alternative Hypothesis.</li>
 </ul>
 
-<p>On the other hand, consider <code>fuel</code> data frame, which shows the results of a study where a British Ford Escort was driven at various speed along a standard course, and the fuel efficiency (in kilometers traveled per liter of fuel consumed) was recorded at each speed.  Let’s try a linear model with <strong>speed</strong> as explanatory and <strong>efficiency</strong> as the response, with some diagnostic plots attached:</p>
+<p>For example, if the hypotheses are:</p>
 
-<pre><code>lmGC(efficiency ~ speed, data = fuel, diag = TRUE)
+<blockquote>
+  <p>$H_0:  p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: p &gt; 0.50$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+           success="female",alternative="greater")
 
 ## 
-## 			Simple Linear Regression
 ## 
-## Correlation coefficient r =  -0.1716 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
 ## 
-## Equation of Regression Line:
 ## 
-## 	 efficiency = 11.06 + -0.0147 * speed 
+## Descriptive Results:
 ## 
-## Residual Standard Error:	s   = 3.905 
-## R^2 (unadjusted):		R^2 = 0.0295
+##  female  n estimated.prop
+##      40 71         0.5634
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.466564            1.000000             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &gt; 0.5 
+## 
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.1692
 </code></pre>
 
-<p><img src="/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
+<p>If the hypotheses are:</p>
 
-<p>The residuals have a roughly-bell-shaped distribution, but the residual plot is clearly patterned.  Something is amiss!  Let’s look at a scatterplot of the data:</p>
+<blockquote>
+  <p>$H_0:  p = 0.50$</p>
+</blockquote>
 
-<pre><code>xyplot(efficiency~speed,data=fuel,
-       xlab="speed (kilometers/hour",
-       ylab="fuel effiency (liters/100km",
-       pch=19,col="blue",type=c("p","r"),
-       main="Speed and Fuel Efficiency\nfor a British Ford Escort")
+<blockquote>
+  <p>$H_a: p &lt; 0.50$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+           success="female",alternative="less")
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  female  n estimated.prop
+##      40 71         0.5634
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.000000            0.660197             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
+## 
+## 	Test Statistic:		z = 1.196 
+## 	P-value:		P = 0.8842
 </code></pre>
 
-<p><img src="/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
+<p>If the hypotheses are:</p>
 
-<p>The relationship is strongly curvilinear:  it makes no sense to use the regression line (shown in the plot above) to study the relationship between these two variables!</p>
+<blockquote>
+  <p>$H_0:  p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: p \neq 0.50$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+        success="female",alternative="two.sided")
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  female  n estimated.prop
+##      40 71         0.5634
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.448016            0.678745             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
+## 
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.3385
+</code></pre>
+
+<p>But note that the default value of <code>alternative</code> is “two.sided”, so if you want you could just leave it out and still get a two-sided test:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+           success="female")
+</code></pre>
+
+<h3 id="graph-of-the-p-value">Graph of the P-Value</h3>
+
+<p>Anytime you want, you can get a graph of the $P$-value for your test, simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+        success="female",graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  female  n estimated.prop
+##      40 71         0.5634
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.05886 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.448016            0.678745             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
+## 
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.3385
+</code></pre>
+
+<p><img src="/images/figure/proptesttutoneprop2sided.png" alt="plot of chunk proptesttutoneprop2sided" /> </p>
+
+<h3 id="limiting-output">Limiting Output</h3>
+
+<p>Sometimes you don’t need R to print so much information to the console.  If you want only the basics (such as a confidence interval, the test statistic and $P$-value), then set the <code>verbose</code> argument to <code>FALSE</code>:</p>
+
+<pre><code>proptestGC(~sex,data=m111survey,p=0.50,
+        success="female",verbose=FALSE)
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 	Continuity Correction Applied to Test Statistic
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.448016            0.678745             
+## 
+## 	Test Statistic:		z = 0.9571 
+## 	P-value:		P = 0.3385
+</code></pre>
+
+<h2 id="one-proportion-from-summary-data">One Proportion, From Summary Data</h2>
+
+<p>Again note that <code>binomtestGC()</code> is preferred in this situation, especially at smaller sample sizes.</p>
+
+<h3 id="confidence-interval-only-1">Confidence Interval Only</h3>
+
+<p>Say that you have taken a simple random sample of size $n=2500$ from the population of all registered voters in the U.S., and you find that 1325 of them favor the Affordable Care Act.  Suppose that you would like to make a confidence interval for</p>
+
+<blockquote>
+  <p>$p =$ the proportion of all registered voters in the U.S. who support the Act.</p>
+</blockquote>
+
+<p>You don’t have the raw data present in a data frame, but you have enough summary data to use <code>proptestGC()</code>.  You just have to set some new arguments:</p>
+
+<ul>
+  <li>set <code>x</code> to 1325, the number of “successes” you are counting up;</li>
+  <li>set <code>n</code> to 2500, the sample size.</li>
+</ul>
+
+<p>So if you only want a 95%-confidence interval for $p$. use:</p>
+
+<pre><code>proptestGC(x=1325,n=2500)
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Results based on Summary Data
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  successes    n estimated.prop
+##       1325 2500           0.53
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.53 
+## SE(p.hat):	 0.009982 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.510436            0.549564
+</code></pre>
+
+<h3 id="interval-and-test-1">Interval and Test</h3>
+
+<p>If you also want to do a test of significance, again specify <code>p</code> and <code>alternative</code>.  For example, to test the hypotheses</p>
+
+<blockquote>
+  <p>$H_0:  p = 0.50$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: p &lt; 0.50$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>proptestGC(x=1325,n=2500,
+        p=0.50,,alternative="less")
+
+## 
+## 
+## Inferential Procedures for a Single Proportion p:
+## 	Results based on Summary Data
+## 	Continuity Correction Applied to Test Statistic
+## 
+## 
+## Descriptive Results:
+## 
+##  successes    n estimated.prop
+##       1325 2500           0.53
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.53 
+## SE(p.hat):	 0.009982 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.000000            0.546419             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
+## 
+## 	Test Statistic:		z = 3.025 
+## 	P-value:		P = 0.9988
+</code></pre>
+
+<h2 id="difference-of-two-proportions-data-frame">Difference of Two Proportions, Data Frame</h2>
+
+<h3 id="confidence-interval-only-2">Confidence Interval Only</h3>
+
+<p>Suppose</p>
+
+<blockquote>
+  <p>$p_1 =$ proportion of all GC females who believe they get enough sleep</p>
+</blockquote>
+
+<blockquote>
+  <p>$p_2 =$ proportion of all GC males who believe they get enough sleep</p>
+</blockquote>
+
+<p>If you desire, say, an 85%-confidence interval for $p_1 - p_2$, then use:</p>
+
+<pre><code>proptestGC(~sex+enough_Sleep,data=m111survey,
+        success="yes",conf.level=0.85)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	 enough_Sleep grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##        yes  n estimated.prop
+## female  14 40         0.3500
+## male    11 31         0.3548
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p1-p2:	 -0.004839 
+## SE(p1.hat - p2.hat):	 0.1143 
+## 
+## 85% Confidence Interval for p1-p2:
+## 
+##           lower.bound         upper.bound          
+##           -0.169426           0.159749
+</code></pre>
+
+<h3 id="interval-and-test-2">Interval and Test</h3>
+
+<p>If you want a 95%-confidence interval for $p_1 - p_2$ and you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0:  p_1 - p_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: p_1 - p_2 \neq 0$</p>
+</blockquote>
+
+<p>then use:</p>
+
+<pre><code>proptestGC(~sex+enough_Sleep,data=m111survey,
+      success="yes",p=0)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	 enough_Sleep grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##        yes  n estimated.prop
+## female  14 40         0.3500
+## male    11 31         0.3548
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p1-p2:	 -0.004839 
+## SE(p1.hat - p2.hat):	 0.1143 
+## 
+## 95% Confidence Interval for p1-p2:
+## 
+##           lower.bound         upper.bound          
+##           -0.228929           0.219252             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p1-p2 = 0
+## 	H_a:  p1-p2 != 0
+## 
+## 	Test Statistic:		z = -0.04232 
+## 	P-value:		P = 0.9662
+</code></pre>
+
+<p>Notice that this time:</p>
+
+<ul>
+  <li>you specified the Null’s belief about the value of $p_1-p_2$ using the <code>p</code> argument;</li>
+  <li>you did not have to set <code>conf.level</code> to 0.95 (the default value of the argument is 0.95 already);</li>
+  <li>you did not have to specify the two-sided alternative (the default value of <code>alternative</code> is already “two.sided”).</li>
+</ul>
+
+<h3 id="order-of-the-groups">Order of the Groups</h3>
+
+<p>Suppose that in the previous situation you had defined:</p>
+
+<blockquote>
+  <p>$p_1 =$ proportion of all GC males who believe they get enough sleep</p>
+</blockquote>
+
+<blockquote>
+  <p>$p_2 =$ proportion of all GC females who believe they get enough sleep</p>
+</blockquote>
+
+<p>Then for you, the first population is all GC males and the second population is all GC females.  In order to guarantee that R abides by your choice, use the argument <code>first</code>:</p>
+
+<pre><code>proptestGC(~sex+enough_Sleep,data=m111survey,
+      success="yes",p=0,first="male")
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	 enough_Sleep grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##        yes  n estimated.prop
+## male    11 31         0.3548
+## female  14 40         0.3500
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p1-p2:	 0.004839 
+## SE(p1.hat - p2.hat):	 0.1143 
+## 
+## 95% Confidence Interval for p1-p2:
+## 
+##           lower.bound         upper.bound          
+##           -0.219252           0.228929             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p1-p2 = 0
+## 	H_a:  p1-p2 != 0
+## 
+## 	Test Statistic:		z = 0.04232 
+## 	P-value:		P = 0.9662
+</code></pre>
+
+<h2 id="difference-of-two-proportions-summary-data">Difference of Two Proportions, Summary Data</h2>
+
+<h3 id="confidence-interval-only-3">Confidence Interval Only</h3>
+
+<p>Suppose that you have taken two independent samples from two populations (or performed a completely randomized experiment with two treatment groups), and you have the following summary data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Group</th>
+      <th style="text-align: center">Success Count</th>
+      <th style="text-align: center">Sample Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">group one</td>
+      <td style="text-align: center">1325</td>
+      <td style="text-align: center">2500</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">group two</td>
+      <td style="text-align: center">905</td>
+      <td style="text-align: center">1800</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You need to provide the summary data to the arguments <code>x</code> and <code>n</code> as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
+
+<p>For a 95%-confidence interval for $p_1 - p_2$, use:</p>
+
+<pre><code>proptestGC(x=c(1325,905),n=c(2500,1800))
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	Results taken from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##         successes    n estimated.prop
+## Group 1      1325 2500         0.5300
+## Group 2       905 1800         0.5028
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p1-p2:	 0.02722 
+## SE(p1.hat - p2.hat):	 0.01544 
+## 
+## 95% Confidence Interval for p1-p2:
+## 
+##           lower.bound         upper.bound          
+##           -0.003048           0.057492
+</code></pre>
+
+<h3 id="interval-and-test-3">Interval and Test</h3>
+
+<p>Suppose that you want a 90%-confidence interval for $p_1 - p_2$ and that you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0:  p_1 - p_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: p_1 - p_2 &gt; 0$</p>
+</blockquote>
+
+<p>Suppose also that you want a graph of the $P$-value.  Then use:</p>
+
+<pre><code>proptestGC(x=c(1325,905),n=c(2500,1800),
+           p=0,conf.level=0.90,graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Proportions p1-p2:
+## 	Results taken from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##         successes    n estimated.prop
+## Group 1      1325 2500         0.5300
+## Group 2       905 1800         0.5028
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of p1-p2:	 0.02722 
+## SE(p1.hat - p2.hat):	 0.01544 
+## 
+## 90% Confidence Interval for p1-p2:
+## 
+##           lower.bound         upper.bound          
+##           0.001819            0.052626             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p1-p2 = 0
+## 	H_a:  p1-p2 != 0
+## 
+## 	Test Statistic:		z = 1.763 
+## 	P-value:		P = 0.07797
+</code></pre>
+
+<p><img src="/images/figure/proptesttut2propssummary.png" alt="plot of chunk proptesttut2propssummary" /> </p>
+
 </div>
   
   
@@ -655,7 +991,7 @@ help(fuel)
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/01/chisqtestGCtutorial/">chisqtestGC() Tutorial</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/28/binomtestGCtutorial/">binomtestGC() Tutorial</a></h1>
     
     
       <p class="meta">
@@ -671,10 +1007,10 @@ help(fuel)
   
 
 
-<time datetime="2014-02-01T15:00:00-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
+<time datetime="2014-02-28T15:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
         
-           | <a href="/blog/2014/02/01/chisqtestGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/01/chisqtestGCtutorial/">Comments</a>
+           | <a href="/blog/2014/02/28/binomtestGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial/">Comments</a>
         
       </p>
     
@@ -683,475 +1019,340 @@ help(fuel)
 
   <div class="entry-content"><ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#two-factor-variables-association">Two Factor Variables (Association)</a>    <ul>
-      <li><a href="#formula-data-input">Formula-Data Input</a></li>
-      <li><a href="#two-way-table-input">Two-Way Table Input</a></li>
-      <li><a href="#a-table-from-summary-data">A Table From Summary Data</a></li>
-      <li><a href="#simulation">Simulation</a>        <ul>
-          <li><a href="#explanatory-tallies-fixed">Explanatory Tallies Fixed</a></li>
-          <li><a href="#explanatory-tallies-random">Explanatory Tallies Random</a></li>
-          <li><a href="#both-tallies-fixed">Both Tallies Fixed</a></li>
-        </ul>
-      </li>
-      <li><a href="#graphs-of-the-p-value">Graphs of the P-Value</a></li>
-    </ul>
-  </li>
-  <li><a href="#one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</a>    <ul>
-      <li><a href="#formula-data-input-1">Formula-Data Input</a></li>
-      <li><a href="#summary-data">Summary Data</a></li>
-      <li><a href="#simulation-1">Simulation</a></li>
-    </ul>
-  </li>
+  <li><a href="#working-from-a-data-frame">Working from a Data Frame</a></li>
+  <li><a href="#setting-the-confidence-level">Setting the Confidence Level</a></li>
+  <li><a href="#significance-tests">Significance Tests</a></li>
+  <li><a href="#a-graph-of-the-p-value">A Graph of the $P$-Value</a></li>
+  <li><a href="#working-with-summary-data">Working with Summary Data</a></li>
   <li><a href="#want-less-output">Want Less Output?</a></li>
 </ul>
 
 <h2 id="preliminaries">Preliminaries</h2>
 
-<p>You use the $\chi^2$-test when you are addressing the inferential aspect of research questions about:</p>
+<p>You use <code>binomtestGC()</code> for inferential procedures regarding one population proportion $p$.  The function <code>proptestGC()</code> can also handle this analysis, but <code>binomtestGC()</code> computes exact $P$-values rather than employing the (sometimes crude) normal approximation, and it also uses a somewhat more sophisticated method to compute confidence intervals.</p>
 
-<ul>
-  <li>the relationship between two factor variables (test for association);</li>
-  <li>the distribution of one factor variable (goodness-of-fit test).</li>
-</ul>
-
-<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
 
 <pre><code>require(devtools)
 install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
-<h2 id="two-factor-variables-association">Two Factor Variables (Association)</h2>
+<h2 id="working-from-a-data-frame">Working from a Data Frame</h2>
 
-<h3 id="formula-data-input">Formula-Data Input</h3>
+<p>Let</p>
 
-<p>When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the <code>mat111survey</code> data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:</p>
+<blockquote>
+  <p>$p =$ the proportion of all Georgetown College students who are female</p>
+</blockquote>
 
-<pre><code>chisqtestGC(~sex+seat,data=m111survey)
+<p>Suppose that you would like a 95%-confidence interval for $p$.  Since <strong>sex</strong> is present as a variable in the <code>m111survey</code> data frame, so you can use formula-data input in the usual way to direct the attention of <code>binomtestGC()</code> to <strong>sex</strong> as the data.</p>
 
-## Pearson's Chi-squared test 
+<p>However, when the function looks at <strong>sex</strong>, it sees the values “female” and “male”.  It needs to be told which of them to count as a “success” when it computes the sample proportion $\hat{p}$.  You do this with the <code>success</code> argument.</p>
+
+<p>So you use:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="female")
+
 ## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
 ## 
 ## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
+## Descriptive Results:  40 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.440455            0.680850
 </code></pre>
 
-<h3 id="two-way-table-input">Two-Way Table Input</h3>
+<p>Note that you did not have to specify a confidence level:  by default, the function returns a 95%-confidence interval.</p>
 
-<p>Sometimes you already have a two-way table on hand:</p>
+<h2 id="setting-the-confidence-level">Setting the Confidence Level</h2>
 
-<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
-SexSeat
+<p>You can get intervals with other levels of confidence besides 95%, simply by setting the argument <code>conf.level</code> to the desired level (expressed as a proportion, rather than as a percentage).</p>
 
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
+<p>For example, if you want a 90%-confidence interval for $p$, then you use:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="female",conf.level=0.90)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  40 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.5634 
+## SE(p.hat):	 0.0589 
+## 
+## 90% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.458929            0.663741
 </code></pre>
 
-<p>In that case you can save yourself some typing by entering the table in place of the formula and the <code>data</code> arguments:</p>
+<h2 id="significance-tests">Significance Tests</h2>
 
-<pre><code>chisqtestGC(SexSeat)
-</code></pre>
+<p>Let’s now let</p>
 
-<h3 id="a-table-from-summary-data">A Table From Summary Data</h3>
+<blockquote>
+  <p>$p =$ the proportion of all Georgetown College students who are male</p>
+</blockquote>
 
-<p>Remember:  if you are given summary data, only, then you can construct a nice two-way table and enter it into <code>chisquaretestGC()</code>.  Suppose that you want this two-way table:</p>
+<p>(Notice that, for variety’s sake, we have switched to counting up males.)</p>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: center">Front</th>
-      <th style="text-align: center">Middle</th>
-      <th style="text-align: center">Back</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Female</td>
-      <td style="text-align: center">19</td>
-      <td style="text-align: center">16</td>
-      <td style="text-align: center">5</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Male</td>
-      <td style="text-align: center">8</td>
-      <td style="text-align: center">16</td>
-      <td style="text-align: center">7</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>You can get it as follows:</p>
-
-<pre><code>MySexSeat &lt;- rbind(female=c(19,16,5),male=c(8,16,7))
-colnames(MySexSeat) &lt;- c("front","middle","back")
-</code></pre>
-
-<p>Let’s just check to see that this worked:</p>
-
-<pre><code>MySexSeat
-
-##        front middle back
-## female    19     16    5
-## male       8     16    7
-</code></pre>
-
-<p>Then you can enter <code>MySexSeat</code> into the function:</p>
-
-<pre><code>chisqtestGC(MySexSeat)
-</code></pre>
-
-<h3 id="simulation">Simulation</h3>
-
-<p>When the Null’s expected counts are low, <code>chisqtestGC()</code> delivers a warning and suggests the use of simulation to compute the $P$-value.  You do this by way of the argument <code>simulate.p.value</code>, and you have three options:</p>
+<p>Suppose that we want to perform a test of significance.  Then we would use:</p>
 
 <ul>
-  <li><code>simulate.p.value = "fixed"</code></li>
-  <li><code>simulate.p.value = "random"</code></li>
-  <li><code>simulate.p.value = "TRUE"</code></li>
+  <li>the argument <code>p</code> to indicate the belief of the Null Hypothesis as to the value of $p$;</li>
+  <li>the argument <code>alternative</code> to specify the direction of the Alternative Hypothesis.  The possible values of this argument are:
+    <ul>
+      <li>“less”</li>
+      <li>“greater”</li>
+      <li>“two.sided” (the default value)</li>
+    </ul>
+  </li>
 </ul>
 
-<h4 id="explanatory-tallies-fixed">Explanatory Tallies Fixed</h4>
-
-<p>Suppose that the objects under study are not a random sample from some larger population, and that the way chance comes into the production of the data is through random variation in all of the other factors—besides the explanatory variable— that might be associated with the response variable.  Then since the items being observed are fixed, the tally of values for the explanatory variable are fixed.  The response values for these items are the product of chance, but only through random variation in those other factors.</p>
-
-<p>The study from the <code>ledgejump</code> data frame was an example of this.  The 21 incidents were fixed, so there were nine cold-weather incidents and 12 warm-weather incidents, no matter what.  The crowd behavior at each incident, however is still a matter of chance.</p>
-
-<p>In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:</p>
-
-<pre><code>chisqtestGC(~weather+crowd.behavior,data=ledgejump,
-             simulate.p.value="fixed",B=2500)
-
-## Pearson's chi-squared test with simulated p-value, fixed effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##        crowd.behavior
-## weather baiting polite
-##    cool       2      7
-##    warm       8      4
-## 
-## Counts Expected by Null:
-##        crowd.behavior
-## weather baiting polite
-##    cool    4.29   4.71
-##    warm    5.71   6.29
-## 
-## Contributions to the chi-square statistic:
-##        crowd.behavior
-## weather baiting polite
-##    cool    1.22   1.11
-##    warm    0.91   0.83
-## 
-## 
-## Chi-Square Statistic = 4.073 
-## Degrees of Freedom of the table = 1 
-## P-Value = 0.0496
-</code></pre>
-
-<p>You can set <code>B</code>, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the $P$-value, having been determined by random resampling, will vary from one run of the function to another.</p>
-
-<h4 id="explanatory-tallies-random">Explanatory Tallies Random</h4>
-
-<p>In the <code>m111survey</code> study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set <code>simulate.p.value</code> to “random”:</p>
-
-<pre><code>chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value="random",B=2500)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1684
-</code></pre>
-
-<h4 id="both-tallies-fixed">Both Tallies Fixed</h4>
-
-<p>If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set <code>simulate.p.value</code> to “TRUE”.  This invokes R’s standard method for resampling:</p>
-
-<pre><code>chisq.testGC(~sex+seat,data=m111survey,
-             simulate.p.value=TRUE,B=2500)
-
-## Pearson's Chi-squared test with simulated p-value
-## 	 (based on 2500 replicates) 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1703
-</code></pre>
-
-<p>It’s not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.</p>
-
-<h3 id="graphs-of-the-p-value">Graphs of the P-Value</h3>
-
-<p>You can get a graph of the $P$-value in the plot window by setting the argument <code>graph</code> to TRUE.  When you did not simulate, the graph shows a density curve for the $\chi^2$ random variable with the relevant degrees of freedom.  When you simulate, the graph is a histogram of the resampled $\chi^2$-statistics.</p>
-
-<p>Here is a case with no simulation:</p>
-
-<pre><code>chisq.testGC(~sex+seat,data=m111survey,graph=TRUE)
-
-## Pearson's Chi-squared test 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></pre>
-
-<p><img src="/images/figure/chisqtutnosim.png" alt="Graph of P-value, no simulation" /> </p>
-
-<p>Here is a case with simulation:</p>
-
-<pre><code>chisq.testGC(~sex+seat,data=m111survey,
-             simulate.p.value="random",B=2500,graph=TRUE)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1572
-</code></pre>
-
-<p><img src="/images/figure/chisqtutsim.png" alt="Graph of P-value, with simulation" /> </p>
-
-<h2 id="one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</h2>
-
-<h3 id="formula-data-input-1">Formula-Data Input</h3>
-
-<p>The variable <strong>seat</strong> in the <code>m111survey</code> data frame indicates the classroom seating preference of each person in the survey.  Suppose we want to know whether or not the sample data provide strong evidence that seating preference in the Georgetown College population is not uniformly distributed among the three possible options (Front, Middle, and Back).  That is, letting</p>
+<p>For example, if we want to test the hypotheses:</p>
 
 <blockquote>
-  <p>$p_f =$ proportion of all GC students who prefer the front,</p>
+  <p>$H_0 : p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$p_m =$ proportion of all GC students who prefer the middle,</p>
+  <p>$H_a : p &lt; 0.50$</p>
+</blockquote>
+
+<p>then we use</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            alternative="less")
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.000000            0.541071             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
+## 
+## 	P-value:		P = 0.1712
+</code></pre>
+
+<p>To test the hypotheses</p>
+
+<blockquote>
+  <p>$H_0 : p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$p_b =$ proportion of all GC students who prefer the back,</p>
+  <p>$H_a : p &gt; 0.50$</p>
 </blockquote>
 
-<p>we want to test the hypotheses:</p>
+<p>then we use</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            alternative="greater")
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.336259            1.000000             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &gt; 0.5 
+## 
+## 	P-value:		P = 0.8825
+</code></pre>
+
+<p>If we want a two-side test</p>
 
 <blockquote>
-  <p>$H_0:$  $p_f = 1/3$ and $p_m = 1/3$ and $p_b = 1/3$</p>
+  <p>$H_0 : p = 0.50$</p>
 </blockquote>
 
 <blockquote>
-  <p>$H_a:$  at least one of the above proportions is not $1/3$</p>
+  <p>$H_a : p \neq 0.50$</p>
 </blockquote>
 
-<p>We can do so using the $\chi^2$-test for goodness of fit.  The argument <code>p</code> will give what the Null Hypothesis believes to be the distribution of the variable <strong>seat</strong> in the Georgetown College population:</p>
+<p>then we use</p>
 
-<pre><code>chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 
+## 
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.319150            0.559545             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
+## 
+## 	P-value:		P = 0.3425
+</code></pre>
+
+<p>Note that there is no need to specify an alternative, since the default value of <code>alternative</code> is “two.sided”.</p>
+
+<h2 id="a-graph-of-the-p-value">A Graph of the $P$-Value</h2>
+
+<p>Fro a one-sided test, we can get a graph of the $P$-value simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
+            alternative="less",
             graph=TRUE)
 
-## Chi-squared test for given probabilities 
 ## 
-##          observed counts Expected by Null contribution to chisq statistic
-## 1_front               27            23.67                            0.47
-## 2_middle              32            23.67                            2.93
-## 3_back                12            23.67                            5.75
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
 ## 
 ## 
-## Chi-Square Statistic = 9.155 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
+## Descriptive Results:  31 successes in 71 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.4366 
+## SE(p.hat):	 0.0589 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.000000            0.541071             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p &lt; 0.5 
+## 
+## 	P-value:		P = 0.1712
 </code></pre>
 
-<p><img src="/images/figure/chisqtutseatgraph.png" alt="plot of chunk chisqtutseatgraph" /> </p>
+<p><img src="/images/figure/binomtesttutsexless.png" alt="plot of chunk binomtesttutsexless" /> </p>
 
-<h3 id="summary-data">Summary Data</h3>
+<p>For a two-sided test, the function gets the $P$-value by doubling an appropriate one-sided $P$-value, so no graph represents the $P$-value very well.  Hence the function will refuse to provide a graph in that case.</p>
 
-<p>Suppose that the data had only come to us in summary form:</p>
+<h2 id="working-with-summary-data">Working with Summary Data</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">Front</th>
-      <th style="text-align: center">Middle</th>
-      <th style="text-align: center">Back</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">27</td>
-      <td style="text-align: center">32</td>
-      <td style="text-align: center">12</td>
-    </tr>
-  </tbody>
-</table>
+<p>Suppose that in a poll of 2500 randomly selected registered voters, 1325 of them indicated support for the Affordable Care Act.  Suppose that we want a confidence interval for $p$, the proportion of all registered voters who favor the Act, and a two-sided test of significance with the hypotheses:</p>
 
-<p>We could still perform the test, by making a table and storing it as an R-object:</p>
+<blockquote>
+  <p>$H_0 : p = 0.50$</p>
+</blockquote>
 
-<pre><code>Seat &lt;- c(front=27,middle=32,back=12)
-Seat
+<blockquote>
+  <p>$H_a : p \neq 0.50$</p>
+</blockquote>
 
-##  front middle   back 
-##     27     32     12
+<p>We do not have raw data from a data frame, but the summary information we are given will suffice for <code>binomtestGC()</code>.  We need only:</p>
+
+<ul>
+  <li>set the argument <code>x</code> to the number of successes (the count of people who said they support the Act), and</li>
+  <li>set the argument <code>n</code> to the sample size.</li>
+</ul>
+
+<p>Hence we use:</p>
+
+<pre><code>binomtestGC(x=1325,n=2500,p=0.50)
+
+## 
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Results based on Summary Data
+## 
+## 
+## Descriptive Results:  1325 successes in 2500 trials
+## 
+## Inferential Results:
+## 
+## Estimate of p:	 0.53 
+## SE(p.hat):	 0.01 
+## 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.510210            0.549719             
+## 
+## Test of Significance:
+## 
+## 	H_0:  p = 0.5 
+## 	H_a:  p != 0.5 
+## 
+## 	P-value:		P = 0.0029
 </code></pre>
-
-<p>Then we could perform the test using <code>Seat</code>:</p>
-
-<pre><code>chisqtestGC(Seat,p=c(1/3,1/3,1/3))
-
-## Chi-squared test for given probabilities 
-## 
-##        observed counts Expected by Null contribution to chisq statistic
-## front               27            23.67                            0.47
-## middle              32            23.67                            2.93
-## back                12            23.67                            5.75
-## 
-## 
-## Chi-Square Statistic = 9.155 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-</code></pre>
-
-<h3 id="simulation-1">Simulation</h3>
-
-<p>When expected cell counts fall below 5, <code>chisqtestGC()</code> issues a warning and suggests the use of simulation.  We can perform simulation at any time, though.</p>
-
-<p>For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting <code>simulate.p.value</code> to <code>TRUE</code>.  Of course we also need to set the number <code>B</code> of resamples.</p>
-
-<pre><code>set.seed(678910)
-chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            simulate.p.value=TRUE,
-            B=2500,graph=TRUE)
-
-## Pearson's chi-squared test with simulated p-value 
-## 	 (based on 2500 resamples)
-## 
-##          observed counts Expected by Null contribution to chisq statistic
-## 1_front               27            23.67                            0.47
-## 2_middle              32            23.67                            2.93
-## 3_back                12            23.67                            5.75
-## 
-## 
-## Chi-Square Statistic = 9.155 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.0112
-</code></pre>
-
-<p><img src="/images/figure/chisqtutseatsim.png" alt="plot of chunk chisqtutseatsim" /> </p>
 
 <h2 id="want-less-output">Want Less Output?</h2>
 
-<p>If you do not wnat to see quite so much output to the console and are only interested in the essentials for reporting a $\chi^2$-test, then set the argument <code>verbose</code> to <code>FALSE</code>:</p>
+<p>Sometimes you don’t need to see quite so much output to the console. If you only wantf the basics (confidence interval for $p$ and $P$-value for your test), then set the argument <code>verbose</code> to <code>FALSE</code>.</p>
 
-<pre><code>chisqtestGC(~sex+seat,data=m111survey,
+<p>For example, if you want a 90%-confidence interval and a two-sided test then try:</p>
+
+<pre><code>binomtestGC(~sex,data=m111survey,
+            success="male",p=0.50,
             verbose=FALSE)
 
-## Pearson's Chi-squared test 
 ## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
+## Exact Binomial Procedures for a Single Proportion p:
+## 	Variable under study is sex 
+## 95% Confidence Interval for p:
+## 
+##           lower.bound         upper.bound          
+##           0.319150            0.559545             
+## 
+## 	P-value:		P = 0.3425
 </code></pre>
 
 </div>
@@ -1166,7 +1367,7 @@ chisqtestGC(~seat,data=m111survey,
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Pander/Pandoc for Pretty Conversion on the R Studio Server</a></h1>
+      <h1 class="entry-title"><a href="/blog/2014/02/27/ttestGCtutorial/">ttestGC() Tutorial</a></h1>
     
     
       <p class="meta">
@@ -1182,41 +1383,901 @@ chisqtestGC(~seat,data=m111survey,
   
 
 
-<time datetime="2014-02-01T11:42:14-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
+<time datetime="2014-02-27T15:00:00-05:00" pubdate data-updated="true">Feb 27<span>th</span>, 2014</time>
         
-           | <a href="/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/">Comments</a>
+           | <a href="/blog/2014/02/27/ttestGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</a>    <ul>
+      <li><a href="#confidence-interval-only">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test">Interval and Test</a></li>
+      <li><a href="#graph-of-the-p-value">Graph of the P-Value</a></li>
+      <li><a href="#limiting-output">Limiting Output</a></li>
+    </ul>
+  </li>
+  <li><a href="#one-mean-from-summary-data">One Mean, From Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-1">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-1">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-means-data-frame">Difference of Two Means, Data Frame</a>    <ul>
+      <li><a href="#confidence-interval-only-2">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-2">Interval and Test</a></li>
+      <li><a href="#order-of-the-groups">Order of the Groups</a></li>
+    </ul>
+  </li>
+  <li><a href="#difference-of-two-means-summary-data">Difference of Two Means, Summary Data</a>    <ul>
+      <li><a href="#confidence-interval-only-3">Confidence Interval Only</a></li>
+      <li><a href="#interval-and-test-3">Interval and Test</a></li>
+    </ul>
+  </li>
+  <li><a href="#mean-of-differences">Mean of Differences</a>    <ul>
+      <li><a href="#both-variables-in-the-data-frame">Both Variables in the Data Frame</a>        <ul>
+          <li><a href="#confidence-interval-only-4">Confidence Interval Only</a></li>
+          <li><a href="#interval-and-test-4">Interval and Test</a></li>
+        </ul>
+      </li>
+      <li><a href="#the-difference-is-in-the-data-frame">The Difference is in the Data Frame</a>        <ul>
+          <li><a href="#confidence-interval-only-5">Confidence Interval Only</a></li>
+          <li><a href="#interval-and-test-5">Interval and Test</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-<p>But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
+<h2 id="preliminaries">Preliminaries</h2>
 
-<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane.  The R package <code>pander</code> facilitates the use of Pandoc for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install Pandoc and <code>pander</code> on the server.  <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats:  pdf, docx, odt, etc., as per your request.</p>
+<p>You use <code>ttestGC()</code> for inferential procedures regarding:</p>
 
-<p>For pdf output, Pandoc first turns the converts the Markdown into $\LaTeX$, so you will need to make sure that $\LaTeX$ is installed on the server as well (some minimal version probably comes with the distribution).  The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed.  [<code>xelatex</code> came along with our CentOS R Studio server, but had to be configured.]</p>
+<ul>
+  <li>one population mean $\mu$;</li>
+  <li>the difference of two population means, $\mu_1 - \mu_2$;</li>
+  <li>the mean $\mu_d$ of paired differences in a population.</li>
+</ul>
 
-<p>Students would use Pandoc through the <code>Pandoc.convert()</code> function from the <code>pander</code> package.  First, one knits the r Markdown document, simply in order to produce the Markdown document along the way.  Then run something like:</p>
+<p>The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">require(pander)
-</span><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", options="-S")</span></code></pre></td></tr></table></div></figure></notextile></div>
+<pre><code>require(tigerstats)
+</code></pre>
 
-<p>R complains bitterly in the console—apparently it attempts to open a preview window but cannot—but produces the desired file in the same directory as the Markdown file.</p>
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
 
-<p>We find that pdf and docx format both look rather nice, and boast a table of contents as well.  The pdf centers plots, too (this is popular with students).  Sadly, the code chunks do lose their background color under Pandoc’s default highlighting style of “pygments”.  If you try for some other style, e.g.,</p>
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class=""><span class="line">Pandoc.convert(f="path/to/MyReport.md", format="pdf", 
-</span><span class="line">  options="-S --highlight-style="tango")</span></code></pre></td></tr></table></div></figure></notextile></div>
-<p>then in some installations of $\LaTeX$, including the one on our server, there will be an error.  We have not yet decided whether to bug the sysadmin to install a fuller version of $\LaTeX$ in order to get overcome this difficulty.</p>
+<h2 id="one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</h2>
 
+<p>Read this section carefully.  It talks about:</p>
+
+<ul>
+  <li>levels of confidence,</li>
+  <li>types of Alternative Hypothesis,</li>
+  <li>graphs of the P-value, and</li>
+  <li>an option to limit output to the console</li>
+</ul>
+
+<p>in ways that apply to all uses of <code>ttestGC()</code>.</p>
+
+<h3 id="confidence-interval-only">Confidence Interval Only</h3>
+
+<p>In the <code>m111survey</code> data from the <code>tigerstats</code> package, suppose you want a 95%-confidence interval for:</p>
+
+<blockquote>
+  <p>$\mu =$ the mean fastest speed ever driven, for all GC students.</p>
+</blockquote>
+
+<p>Use the function:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984
+</code></pre>
+
+<p>To get any other level of confidence, you need to use the <code>conf.level</code> argument, indicating your desired level of confidence in decimal (not percentage) form.</p>
+
+<p>For example, for a 90%-confidence interval for $\mu$, use</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,conf.level=0.90)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 90% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           101.771329          110.031488
+</code></pre>
+
+<h3 id="interval-and-test">Interval and Test</h3>
+
+<p>If you want a test of significance as well as the confidence interval, then</p>
+
+<ul>
+  <li>use the <code>mu</code> argument to set what the Null Hypothesis thinks that the value of $\mu$ is;</li>
+  <li>use the <code>alternative</code> argument to specify the Alternative Hypothesis.</li>
+</ul>
+
+<p>For example, if the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &gt; 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           101.771329          Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu &gt; 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.009974
+</code></pre>
+
+<p>If the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &lt; 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,alternative="less")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           -Inf                110.031488           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu &lt; 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.99
+</code></pre>
+
+<p>If the hypotheses are:</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 100$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu \neq 100$</p>
+</blockquote>
+
+<p>Then use:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu != 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<p>But note that the default value of <code>alternative</code> is “two.sided”, so if you want you could just leave it out and still get a two-sided test:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100)
+</code></pre>
+
+<h3 id="graph-of-the-p-value">Graph of the P-Value</h3>
+
+<p>Anytime you want, you can get a graph of the $P$-value for your test, simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided",graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  variable  mean    sd  n
+##   fastest 105.9 20.88 71
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 105.9 
+## SE(x.bar):	 2.478 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 100 
+## 	H_a:  mu != 100 
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<p><img src="/images/figure/ttesttutonemean2sided.png" alt="plot of chunk ttesttutonemean2sided" /> </p>
+
+<h3 id="limiting-output">Limiting Output</h3>
+
+<p>Sometimes you don’t need R to print so much information to the console.  If you want only the basics (such as a confidence interval, the test statistic and $P$-value), then set the <code>verbose</code> argument to <code>FALSE</code>:</p>
+
+<pre><code>ttestGC(~fastest,data=m111survey,mu=100,
+        alternative="two.sided",verbose=FALSE)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           100.959833          110.842984           
+## 
+## 	Test Statistic:		t = 2.382 
+## 	Degrees of Freedom:	  70 
+## 	P-value:		P = 0.01995
+</code></pre>
+
+<h2 id="one-mean-from-summary-data">One Mean, From Summary Data</h2>
+
+<h3 id="confidence-interval-only-1">Confidence Interval Only</h3>
+
+<p>Say that you have taken a simple random sample from some large population, and:</p>
+
+<ul>
+  <li>the sample mean is $\bar{x}=30$,</li>
+  <li>the sample standard deviation is $s=4$,</li>
+  <li>the sample size was $n=40$.</li>
+</ul>
+
+<p>You don’t have the raw data present in a data frame, but you have enough summary data to use <code>ttestGC()</code>.  You just have to set some new arguments:</p>
+
+<ul>
+  <li>set <code>mean</code> to the sample mean;</li>
+  <li>set <code>sd</code> to the sample standard deviation;</li>
+  <li>set <code>n</code> to the sample size.</li>
+</ul>
+
+<p>So if you only want a 95%-confidence interval for $\mu$. use:</p>
+
+<pre><code>ttestGC(mean=30,sd=4,n=40)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  mean sd  n
+##    30  4 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 30 
+## SE(x.bar):	 0.6325 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           28.720738           31.279262
+</code></pre>
+
+<h3 id="interval-and-test-1">Interval and Test</h3>
+
+<p>If you also want to do a test of significance, again specify <code>mu</code> and <code>alternative</code>.  For example, to test the hypotheses</p>
+
+<blockquote>
+  <p>$H_0:  \mu = 32$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu &lt; 32$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>ttestGC(mean=30,sd=4,n=40,
+        mu=32,alternative="less")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##  mean sd  n
+##    30  4 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 30 
+## SE(x.bar):	 0.6325 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           -Inf                31.065609            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 32 
+## 	H_a:  mu &lt; 32 
+## 
+## 	Test Statistic:		t = -3.162 
+## 	Degrees of Freedom:	  39 
+## 	P-value:		P = 0.001514
+</code></pre>
+
+<h2 id="difference-of-two-means-data-frame">Difference of Two Means, Data Frame</h2>
+
+<h3 id="confidence-interval-only-2">Confidence Interval Only</h3>
+
+<p>Suppose</p>
+
+<blockquote>
+  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC females</p>
+</blockquote>
+
+<blockquote>
+  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC males</p>
+</blockquote>
+
+<p>If you desire, say, an 85%-confidence interval for $\mu_1 - \mu_2$, then use:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+        conf.level=0.85)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##  female 100.0 17.61 40
+##    male 113.5 22.57 31
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 -13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 85% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -20.579953          -6.223273
+</code></pre>
+
+<h3 id="interval-and-test-2">Interval and Test</h3>
+
+<p>If you want a 95%-confidence interval for $\mu_1 - \mu_2$ and you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_1 - \mu_2 \neq 0$</p>
+</blockquote>
+
+<p>then use:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+      mu=0)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##  female 100.0 17.61 40
+##    male 113.5 22.57 31
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 -13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -23.254640          -3.548586            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 != 0 
+## 
+## 	Test Statistic:		t = -2.725 
+## 	Degrees of Freedom:	  55.49 
+## 	P-value:		P = 0.008579
+</code></pre>
+
+<p>Notice that this time:</p>
+
+<ul>
+  <li>you specified the Null’s belief about the value of $\mu<em>1-\mu</em>2$ using the <code>mu</code> argument;</li>
+  <li>you did not have to set <code>conf.level</code> to 0.95 (the default value of the argument is 0.95 already);</li>
+  <li>you did not have to specify the two-sided alternative (the default value of <code>alternative</code> is already “two.sided”).</li>
+</ul>
+
+<h3 id="order-of-the-groups">Order of the Groups</h3>
+
+<p>Suppose that in the previous situation you had defined:</p>
+
+<blockquote>
+  <p>$\mu_1 =$ mean fastest speed ever driven, by all GC males</p>
+</blockquote>
+
+<blockquote>
+  <p>$\mu_2 =$ mean fastest speed ever driven, by all GC females</p>
+</blockquote>
+
+<p>Then for you, the first population is all GC males and the second population is all GC females.  In order to guarantee that R abides by your choice, use the argument <code>first</code>:</p>
+
+<pre><code>ttestGC(fastest~sex,data=m111survey,
+      mu=0,first="male")
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	 fastest grouped by sex 
+## 
+## 
+## Descriptive Results:
+## 
+##   group  mean    sd  n
+##    male 113.5 22.57 31
+##  female 100.0 17.61 40
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 13.4 
+## SE(mu1.hat - mu2.hat):	 4.918 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           3.548586            23.254640            
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 != 0 
+## 
+## 	Test Statistic:		t = 2.725 
+## 	Degrees of Freedom:	  55.49 
+## 	P-value:		P = 0.008579
+</code></pre>
+
+<h2 id="difference-of-two-means-summary-data">Difference of Two Means, Summary Data</h2>
+
+<h3 id="confidence-interval-only-3">Confidence Interval Only</h3>
+
+<p>Suppose that you have taken two independent samples from two populations (or performed a completely randomized experiment with two treatment groups), and you have the following summary data:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Group</th>
+      <th style="text-align: center">$\bar{x}$</th>
+      <th style="text-align: center">$s$</th>
+      <th style="text-align: center">$n$</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">group one</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">4.2</td>
+      <td style="text-align: center">33</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">group two</td>
+      <td style="text-align: center">30</td>
+      <td style="text-align: center">5.1</td>
+      <td style="text-align: center">42</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You need to provide the summary data to the arguments <code>mean</code>, <code>sd</code> and <code>n</code>, as lists using the <code>c()</code> function.  In each list, data from the first group should come first.</p>
+
+<p>For a 95%-confidence interval for $\mu_1 - \mu_2$, use:</p>
+
+<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42))
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	Results from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##    group mean  sd  n
+##  Group 1   32 4.2 33
+##  Group 2   30 5.1 42
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 2 
+## SE(mu1.hat - mu2.hat):	 1.074 
+## 
+## 95% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           -0.140898           4.140898
+</code></pre>
+
+<h3 id="interval-and-test-3">Interval and Test</h3>
+
+<p>Suppose that you want a 90%-confidence interval for $\mu_1 - \mu_2$ and that you would like to test the hypotheses:</p>
+
+<blockquote>
+  <p>$H_0:  \mu_1 - \mu_2 = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_1 - \mu_2 &gt; 0$</p>
+</blockquote>
+
+<p>Suppose also that want a graph of the $P$-value.  Then use:</p>
+
+<pre><code>ttestGC(mean=c(32,30),sd=c(4.2,5.1),n=c(33,42),
+        mu=0,alternative="greater",
+        conf.level=0.90,graph=TRUE)
+
+## 
+## 
+## Inferential Procedures for the Difference of Two Means mu1-mu2:
+## 	(Welch's Approximation Used for Degrees of Freedom)
+## 	Results from summary data.
+## 
+## 
+## Descriptive Results:
+## 
+##    group mean  sd  n
+##  Group 1   32 4.2 33
+##  Group 2   30 5.1 42
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu1-mu2:	 2 
+## SE(mu1.hat - mu2.hat):	 1.074 
+## 
+## 90% Confidence Interval for mu1-mu2:
+## 
+##           lower.bound         upper.bound          
+##           0.610797            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu1-mu2 = 0 
+## 	H_a:  mu1-mu2 &gt; 0 
+## 
+## 	Test Statistic:		t = 1.862 
+## 	Degrees of Freedom:	  72.82 
+## 	P-value:		P = 0.03333
+</code></pre>
+
+<p><img src="/images/figure/ttesttut2meanssummary.png" alt="plot of chunk ttesttut2meanssummary" /> </p>
+
+<h2 id="mean-of-differences">Mean of Differences</h2>
+
+<h3 id="both-variables-in-the-data-frame">Both Variables in the Data Frame</h3>
+
+<h4 id="confidence-interval-only-4">Confidence Interval Only</h4>
+
+<p>Suppose that</p>
+
+<blockquote>
+  <p>$\mu_d =$ mean difference (ideal height minus actual height) for all Georgetown College student.</p>
+</blockquote>
+
+<p>Both of the relevant variables—<strong>ideal_ht</strong> and <strong>height</strong>—are present in the <code>m111survey</code> data frame.</p>
+
+<p>If you want a 95%-confidence interval for $\mu_d$, then use:</p>
+
+<pre><code>ttestGC(~ideal_ht - height,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for the Difference of Means mu-d:
+## 	 height minus ideal_ht 
+## 
+## 
+## Descriptive Results:
+## 
+##         Difference mean.difference sd.difference  n
+##  ideal_ht - height           1.946         3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu-d:	 1.946 
+## SE(d.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu-d:
+## 
+##           lower.bound         upper.bound          
+##           1.175528            2.715776
+</code></pre>
+
+<p>Note how the “~” character signals the presence of a formula.</p>
+
+<h4 id="interval-and-test-4">Interval and Test</h4>
+
+<p>In order to test:</p>
+
+<blockquote>
+  <p>$H_0:  \mu_d = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_d &gt; 0$</p>
+</blockquote>
+
+<p>use:</p>
+
+<pre><code>ttestGC(~ideal_ht - height,data=m111survey,
+        mu=0,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for the Difference of Means mu-d:
+## 	 height minus ideal_ht 
+## 
+## 
+## Descriptive Results:
+## 
+##         Difference mean.difference sd.difference  n
+##  ideal_ht - height           1.946         3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu-d:	 1.946 
+## SE(d.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu-d:
+## 
+##           lower.bound         upper.bound          
+##           1.302075            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu-d = 0 
+## 	H_a:  mu-d &gt; 0 
+## 
+## 	Test Statistic:		t = 5.041 
+## 	Degrees of Freedom:	  68 
+## 	P-value:		P = 1.826e-06
+</code></pre>
+
+<h3 id="the-difference-is-in-the-data-frame">The Difference is in the Data Frame</h3>
+
+<p>Sometimes the difference of the two relevant numerical variables is included in the data frame as another variable:  such is the case for <code>m111survey</code>, where the difference is recorded as the variable <strong>diff.ideal.act.</strong></p>
+
+<p>If you would like to use this difference, then Work just as if you were studying one population mean $\mu$.</p>
+
+<h4 id="confidence-interval-only-5">Confidence Interval Only</h4>
+
+<p>Thus, for a 95%-confidence interval for $\mu_d$ we could also have done:</p>
+
+<pre><code>ttestGC(~diff.ideal.act.,data=m111survey)
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##         variable  mean    sd  n
+##  diff.ideal.act. 1.946 3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 1.946 
+## SE(x.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           1.175528            2.715776
+</code></pre>
+
+<h4 id="interval-and-test-5">Interval and Test</h4>
+
+<p>For a test of</p>
+
+<blockquote>
+  <p>$H_0:  \mu_d = 0$</p>
+</blockquote>
+
+<blockquote>
+  <p>$H_a: \mu_d &gt; 0$</p>
+</blockquote>
+
+<p>we could have done:</p>
+
+<pre><code>ttestGC(~diff.ideal.act.,data=m111survey,
+        mu=0,alternative="greater")
+
+## 
+## 
+## Inferential Procedures for One Mean mu:
+## 
+## 
+## Descriptive Results:
+## 
+##         variable  mean    sd  n
+##  diff.ideal.act. 1.946 3.206 69
+## 
+## 
+## Inferential Results:
+## 
+## Estimate of mu:	 1.946 
+## SE(x.bar):	 0.3859 
+## 
+## 95% Confidence Interval for mu:
+## 
+##           lower.bound         upper.bound          
+##           1.302075            Inf                  
+## 
+## Test of Significance:
+## 
+## 	H_0:  mu = 0 
+## 	H_a:  mu &gt; 0 
+## 
+## 	Test Statistic:		t = 5.041 
+## 	Degrees of Freedom:	  68 
+## 	P-value:		P = 1.826e-06
+</code></pre>
+
+<p>Note that in its statement of hypotheses, R identifies the parameter of interest as $\mu$ rather than as $\mu_d$.  It had no way of knowing that <strong>diff.ideal.act.</strong> recorded the difference of a pair of measurements.</p>
 </div>
   
   
@@ -1225,6 +2286,8 @@ chisqtestGC(~seat,data=m111survey,
     </article>
   
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
