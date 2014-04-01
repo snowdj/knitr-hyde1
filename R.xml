@@ -4,7 +4,7 @@
   <title>A Statistics Blog - R</title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-03-16T15:16:12-04:00</updated>
+  <updated>2014-04-01T07:18:30-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name>Homer White</name>
@@ -12,6 +12,166 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title>Five Reasons to Teach Elementary Statistics With R:  #1</title>
+    <link href="http://homerhanumat.github.io/blog/2014/03/31/tigerstatsintro/"/>
+    <updated>2014-03-31T21:00:00-04:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/03/31/tigerstatsintro</id>
+    <content type="html">&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#reason-1&#8211;package-mosaic&quot;&gt;Reason #1:  Package &lt;code&gt;mosaic&lt;/code&gt;&lt;/a&gt;    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#keeping-simple-things-simple&quot;&gt;Keeping Simple Things Simple&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#flow-control-for-the-masses&quot;&gt;Flow-Control for the Masses&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#there-is-much-more&quot;&gt;There is Much More&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#references&quot;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;This is is first in a projected five-part series of posts aimed at colleagues who teach elementary statistics.&lt;/p&gt;
+
+&lt;p&gt;I can’t remember exactly how I first made acquaintance with R, but it’s been an important part of my teaching/consulting life since at least 2007, when I used it for the first time in an upper-level undergraduate statistics class.  As of last Fall all of our statistics classes—even the elementary ones—are based on R.  We may never return to a ground-up GUI platform.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.&lt;/p&gt;
+
+&lt;h2 id=&quot;reason-1&#8211;package-mosaic&quot;&gt;Reason #1:  Package &lt;code&gt;mosaic&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;This package is a product of the NSF-funded &lt;a href=&quot;http://mosaic-web.org/&quot;&gt;Project Mosaic&lt;/a&gt;, led by Nick Horton, Daniel Kaplan and Randall Pruim.  It’s on CRAN, but you might want to keep up with the very latest releases on Github:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require(devtools)
+install_github(repo=&quot;pruim/mosaic&quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;mosaic&lt;/code&gt; aims to flatten the learning curve for elementary students by gentling down the coding aspects of the R experience.  With &lt;code&gt;mosaic&lt;/code&gt;:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;students need to know relatively few R-functions in order to thrive in the introductory course;&lt;/li&gt;
+  &lt;li&gt;many of the these functions are “wrappers” for standard R-functions, and provide a fairly uniform interface for user input;&lt;/li&gt;
+  &lt;li&gt;the package provides tools that mostly obviate the need for students to deal with R as a programming language:
+    &lt;ul&gt;
+      &lt;li&gt;the students don’t have to write their own functions;&lt;/li&gt;
+      &lt;li&gt;they don’t need to think much about the different types of R objects;&lt;/li&gt;
+      &lt;li&gt;they don’t even need to learn about flow-control structures.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;keeping-simple-things-simple&quot;&gt;Keeping Simple Things Simple&lt;/h3&gt;
+
+&lt;p&gt;R can make the easy stuff surprisingly tricky for beginners:  suppose for example, that you want numerical summaries of a particular numerical variable, broken down by the values of some factor variable.  Standard procedure in R would be to write your own anonymous function as an argument for &lt;code&gt;aggregate()&lt;/code&gt;, thus:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;aggregate(mpg~cyl,data=mtcars,
+    FUN=function(x) c(mean=mean(x),sd=sd(x)))
+
+##   cyl mpg.mean mpg.sd
+## 1   4   26.664  4.510
+## 2   6   19.743  1.454
+## 3   8   15.100  2.560
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;mosaic&lt;/code&gt; skirts the problem by providing wrapper functions for aggregation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require(mosaic)
+
+ 
+
+mean(mpg~cyl,data=mtcars)
+
+##     4     6     8 
+## 26.66 19.74 15.10
+
+sd(mpg~cyl,data=mtcars)
+
+##     4     6     8 
+## 4.510 1.454 2.560
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;One can attain even more simplicity, at only a small cost in flexibility, by sticking to &lt;code&gt;mosaic&lt;/code&gt;’s &lt;code&gt;favstats()&lt;/code&gt; as a one-stop shop:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;favstats(mpg~cyl,data= mtcars)
+
+##   .group  min    Q1 median    Q3  max  mean    sd  n missing
+## 1      4 21.4 22.80   26.0 30.40 33.9 26.66 4.510 11       0
+## 2      6 17.8 18.65   19.7 21.00 21.4 19.74 1.454  7       0
+## 3      8 10.4 14.40   15.2 16.25 19.2 15.10 2.560 14       0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;flow-control-for-the-masses&quot;&gt;Flow-Control for the Masses&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;mosaic&lt;/code&gt; includes powerful wrapper functions that permit extensive work with re-sampling and simulation, without the need to learn flow-control.  Here follows a &lt;code&gt;mosaic&lt;/code&gt;-style implementation of a permutation test.&lt;/p&gt;
+
+&lt;p&gt;Consider the data frame &lt;code&gt;Pseudoscorpions&lt;/code&gt; from the &lt;code&gt;abd&lt;/code&gt; package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;require(abd)
+data(Pseudoscorpions)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;Pseudoscorpions&lt;/code&gt; contains the results of an experiment on 36 female Pseudoscorpions:  each one was either mated twice with a single male (&lt;code&gt;SM&lt;/code&gt;) or was mated with two males, one time each (&lt;code&gt;DM&lt;/code&gt;), receiving about the same total amount of sperm under either treatment.  The idea was to see whether an increase in genetic diversity of sperm sources increases the number of successful broods a female produces during her lifetime.&lt;/p&gt;
+
+&lt;p&gt;Here are some descriptive results:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;favstats(successful.broods~treatment,
+    data=Pseudoscorpions)[c(&quot;.group&quot;,&quot;mean&quot;,&quot;sd&quot;)]
+
+##   .group  mean    sd
+## 1     DM 3.625 1.962
+## 2     SM 2.200 1.609
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For the permutation test, we first compute and store the observed difference between the sample means:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;obsDiff &amp;lt;- compareMean(successful.broods~treatment,
+    data=Pseudoscorpions)
+obsDiff
+
+## [1] -1.425
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Next, we create an empirical Null distribution with &lt;code&gt;shuffle()&lt;/code&gt; (the random permutation function) and &lt;code&gt;do()&lt;/code&gt; (a for-loop wrapper):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set.seed(12345)
+nullDist &amp;lt;- do(2500)*(
+  compareMean(successful.broods~shuffle(treatment),
+      data=Pseudoscorpions))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, we call &lt;code&gt;statTally()&lt;/code&gt; for numerical and graphical analysis of the results:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;statTally(obsDiff,nullDist)
+
+## Null distribution appears to be asymmetric. (p = 1.07e-05)
+## 
+## Test statistic applied to sample data =  -1.425
+## 
+## Quantiles of test statistic applied to random data:
+
+##    50%    90%    95%    99% 
+## 0.0375 0.8250 1.0500 1.3875
+
+## 
+## Of the random samples
+## 
+## 	13 ( 0.52 % ) had test stats = -1.425
+## 
+## 	23 ( 0.92 % ) had test stats &amp;lt; -1.425
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://homerhanumat.github.io/images/figure/reason1hist.png&quot; alt=&quot;plot of chunk reason1hist&quot; /&gt; &lt;/p&gt;
+
+&lt;p&gt;We seem to have fairly strong evidence ($P \approx 1.7\%$) that mating with more males increases the number of successful broods.&lt;/p&gt;
+
+&lt;h3 id=&quot;there-is-much-more&quot;&gt;There is Much More&lt;/h3&gt;
+
+&lt;p&gt;I have only scratched the surface of the &lt;code&gt;mosaic&lt;/code&gt; package, which is rich enough to support statistics instruction in both elementary and advanced courses.  The &lt;code&gt;mosaic&lt;/code&gt; authors provide extensive instructor resources in the package vignettes, and frequently offer workshops and short-courses, especially through events sponsored by the &lt;a href=&quot;https://www.causeweb.org/&quot;&gt;Consortium for the Advancement of Undergraduate Statistics Education&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next week I’ll introduce a supplementary package that is intended for students who might require even more simplicity, and that aligns their R experience with a particular set of teaching objectives.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;p&gt;The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s &lt;em&gt;The Analysis of Biological Data&lt;/em&gt; (Roberts and Company Publishers; First Edition, 1st Edition July 2008).&lt;/p&gt;
+</content>
+  </entry>
   
   <entry>
     <title>Pander/Pandoc for Pretty Conversion on the R Studio Server</title>
