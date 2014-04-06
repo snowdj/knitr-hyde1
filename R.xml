@@ -4,7 +4,7 @@
   <title>A Statistics Blog - R</title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-01T07:18:30-04:00</updated>
+  <updated>2014-04-05T23:34:41-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name>Homer White</name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title>Five Reasons to Teach Elementary Statistics With R:  #1</title>
-    <link href="http://homerhanumat.github.io/blog/2014/03/31/tigerstatsintro/"/>
-    <updated>2014-03-31T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/03/31/tigerstatsintro</id>
+    <link href="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/"/>
+    <updated>2014-04-05T19:30:00-04:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro</id>
     <content type="html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#reason-1&#8211;package-mosaic&quot;&gt;Reason #1:  Package &lt;code&gt;mosaic&lt;/code&gt;&lt;/a&gt;    &lt;ul&gt;

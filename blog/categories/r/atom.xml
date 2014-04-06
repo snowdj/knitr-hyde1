@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-01T07:18:30-04:00</updated>
+  <updated>2014-04-05T23:34:41-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #1]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/03/31/tigerstatsintro/"/>
-    <updated>2014-03-31T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/03/31/tigerstatsintro</id>
+    <link href="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/"/>
+    <updated>2014-04-05T19:30:00-04:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
