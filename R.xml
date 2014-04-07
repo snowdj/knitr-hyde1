@@ -4,7 +4,7 @@
   <title>A Statistics Blog - R</title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-05T23:34:41-04:00</updated>
+  <updated>2014-04-07T08:45:44-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name>Homer White</name>
@@ -40,7 +40,7 @@
 &lt;p&gt;This package is a product of the NSF-funded &lt;a href=&quot;http://mosaic-web.org/&quot;&gt;Project Mosaic&lt;/a&gt;, led by Nick Horton, Daniel Kaplan and Randall Pruim.  It’s on CRAN, but you might want to keep up with the very latest releases on Github:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;require(devtools)
-install_github(repo=&quot;pruim/mosaic&quot;)
+install_github(repo=&quot;rpruim/mosaic&quot;)
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;mosaic&lt;/code&gt; aims to flatten the learning curve for elementary students by gentling down the coding aspects of the R experience.  With &lt;code&gt;mosaic&lt;/code&gt;:&lt;/p&gt;
