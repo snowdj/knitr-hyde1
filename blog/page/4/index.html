@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Factor Variable Two Factor Variables Warning Preliminaries barchartGC() provides quick-and-easy bar charts for the graphical &hellip;">
+  <meta name="description" content="Preliminaries Finding P(X &lt;= x) Find P(X &gt;= x) Strict Inequalities: Finding P(X &lt; x) Strict Inequalities: Finding P(X &gt; x) Finding P(a & &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,226 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/26/pbinomGCtutorial/">pbinomGC() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T15:00:00-05:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/26/pbinomGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/26/pbinomGCtutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#finding-px--x">Finding P(X &lt;= x)</a></li>
+  <li><a href="#find-px--x">Find P(X &gt;= x)</a></li>
+  <li><a href="#strict-inequalities--finding-px--x">Strict Inequalities:  Finding P(X &lt; x)</a></li>
+  <li><a href="#strict-inequalities--finding-px--x-1">Strict Inequalities:  Finding P(X &gt; x)</a></li>
+  <li><a href="#finding-pa--x--b">Finding P(a &lt;= X &lt;= b)</a></li>
+  <li><a href="#finding-px--x-1">Finding P(X = x)</a></li>
+  <li><a href="#outside-probabilities">“Outside” Probabilities</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>pbinomGC()</code> provides a direct way to compute probabilities for binomial random variables, along with graphs for the probabilities, if you want them.  The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="finding-px--x">Finding P(X &lt;= x)</h2>
+
+<p>Suppose that you have a binomial random variable with $n=20$ trials, and chance of success $p=0.3$ on each trial, and you would like to find the chance of getting 8 or fewer successes in your 20 trials.  In other words (letting $X$ stand for the binomial random variable), you are looking for:</p>
+
+<script type="math/tex; mode=display">P(X \leq 8).</script>
+
+<p>Then run this command:</p>
+
+<pre><code>pbinomGC(bound=8,region="below",size=20,prob=0.3)
+
+## [1] 0.8867
+</code></pre>
+
+<p>Note carefully what the arguments mean, here:</p>
+
+<ul>
+  <li><code>bound=8</code> tells where to stop</li>
+  <li><code>region="below"</code> takes care of the “less than” part of the requested probability</li>
+  <li><code>size=20</code> tells <code>pbinomGC()</code> the number of trials for $X$</li>
+  <li><code>prob=0.3</code> tells <code>pbinomGC()</code> the chance of success on each trial</li>
+</ul>
+
+<p>If you would like to see a graph of the probability distribution of $X$ along with a shaded area that represents the requested probability, then you can set the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>pbinomGC(bound=8,region="below",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutleq8.png" alt="plot of chunk binomtutleq8" /> </p>
+
+<pre><code>## [1] 0.8867
+</code></pre>
+
+<h2 id="find-px--x">Find P(X &gt;= x)</h2>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability of at least 10 successes, i.e.:</p>
+
+<script type="math/tex; mode=display">P(X \geq 10).</script>
+
+<p>When we want to go “above” a given number, <code>pbinomGC()</code> will <em>not</em> include that number in its computation of probabilities, so asking for</p>
+
+<pre><code>pbinomGC(bound=10,region="above",
+         size=20,prob=0.3)
+</code></pre>
+
+<p>would give us the chance of $X$ being at least 11, which is not what we want.</p>
+
+<p>However, since $X$ can only take on whole number values, $X \geq 10$ means exactly the same thing as $X &gt; 9$, what we really should ask for is:</p>
+
+<pre><code>pbinomGC(bound=9,region="above",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutgeq10.png" alt="plot of chunk binomtutgeq10" /> </p>
+
+<pre><code>## [1] 0.04796
+</code></pre>
+
+<p>The shaded area starts at 10, as desired.</p>
+
+<p>It’s a good idea to keep asking for a graph along with your output, so you can check that R is giving you exactly the probability that you need.</p>
+
+<h2 id="strict-inequalities--finding-px--x">Strict Inequalities:  Finding P(X &lt; x)</h2>
+
+<p>For this case we also have to be careful.</p>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability of less than 6 successes, i.e.:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 6). %]]></script>
+
+<p>Since $X$ is a discrete random variable with whole number values, $X &lt; 6$ means exactly the same thing thing as $X \leq 5$.  <code>pbinomGC()</code> includes the bound in the probability that it computes, so we have stop at 5, rather than at 6.  We use the command:</p>
+
+<pre><code>pbinomGC(bound=5,region="below",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutless6.png" alt="plot of chunk binomtutless6" /> </p>
+
+<pre><code>## [1] 0.4164
+</code></pre>
+
+<h2 id="strict-inequalities--finding-px--x-1">Strict Inequalities:  Finding P(X &gt; x)</h2>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability that the number of successes will be more than 7.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">P(X > 7).</script>
+
+<p>This is easy again.  Since <code>pbinomGC()</code> does not include the bound when <code>region</code> is “above”, we only need to ask for:</p>
+
+<pre><code>pbinomGC(bound=7,region="above",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutgreater7.png" alt="plot of chunk binomtutgreater7" /> </p>
+
+<pre><code>## [1] 0.2277
+</code></pre>
+
+<h2 id="finding-pa--x--b">Finding P(a &lt;= X &lt;= b)</h2>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability that the number of successes will be at least 6 but no more than 10.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">P(6 \leq X \leq 10).</script>
+
+<p>We can find this with the command:</p>
+
+<pre><code>pbinomGC(bound=c(6,10),region="between",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutbetwee.png" alt="plot of chunk binomtutbetwee" /> </p>
+
+<pre><code>## [1] 0.5665
+</code></pre>
+
+<p>Notice that there are no two numbers—6 and 10—that make the boundaries, so we must supply both of them to the <code>bound</code> argument as a list:  <code>c(6,10)</code>.  Also note that when <code>region="between"</code>, <code>pbinomGC()</code> includes <em>both</em> of the bounds in its computation of probabilities.</p>
+
+<h2 id="finding-px--x-1">Finding P(X = x)</h2>
+
+<p>To find the chance of $X$ being <em>exactly</em> a particular value, you can employ a little trick.</p>
+
+<p>For example, for the same random variable $X \sim binom(20,0.3)$, suppose we want the chance of exactly 6 successes.  This is very same thing as</p>
+
+<script type="math/tex; mode=display">P(6 \leq X \leq 6),</script>
+
+<p>so you can ask for:</p>
+
+<pre><code>pbinomGC(bound=c(6,6),region="between",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutequal.png" alt="plot of chunk binomtutequal" /> </p>
+
+<pre><code>## [1] 0.1916
+</code></pre>
+
+<h2 id="outside-probabilities">“Outside” Probabilities</h2>
+
+<p>This case does not occur very often.</p>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability that you either get less than 7 successes OR you get more than 9 successes.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 7 \textbf{ or } X > 9). %]]></script>
+
+<p>You can find this with the command:</p>
+
+<pre><code>pbinomGC(bound=c(7,9),region="outside",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutout.png" alt="plot of chunk binomtutout" /> </p>
+
+<pre><code>## [1] 0.656
+</code></pre>
+
+<p>Notice that there are two numbers—7 and 9—that make the boundaries, so we must supply both of them to the <code>bound</code> argument as a list:  <code>c(6,10)</code>.  Notice also that when <code>region</code> is set to “outside”, <code>pbinomGC()</code> excludes both bounds.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -650,517 +870,6 @@ help(fuel)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/01/chisqtestGCtutorial/">chisqtestGC() Tutorial</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-01T15:00:00-05:00" pubdate data-updated="true">Feb 1<span>st</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/01/chisqtestGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/01/chisqtestGCtutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#two-factor-variables-association">Two Factor Variables (Association)</a>    <ul>
-      <li><a href="#formula-data-input">Formula-Data Input</a></li>
-      <li><a href="#two-way-table-input">Two-Way Table Input</a></li>
-      <li><a href="#a-table-from-summary-data">A Table From Summary Data</a></li>
-      <li><a href="#simulation">Simulation</a>        <ul>
-          <li><a href="#explanatory-tallies-fixed">Explanatory Tallies Fixed</a></li>
-          <li><a href="#explanatory-tallies-random">Explanatory Tallies Random</a></li>
-          <li><a href="#both-tallies-fixed">Both Tallies Fixed</a></li>
-        </ul>
-      </li>
-      <li><a href="#graphs-of-the-p-value">Graphs of the P-Value</a></li>
-    </ul>
-  </li>
-  <li><a href="#one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</a>    <ul>
-      <li><a href="#formula-data-input-1">Formula-Data Input</a></li>
-      <li><a href="#summary-data">Summary Data</a></li>
-      <li><a href="#simulation-1">Simulation</a></li>
-    </ul>
-  </li>
-  <li><a href="#want-less-output">Want Less Output?</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>You use the $\chi^2$-test when you are addressing the inferential aspect of research questions about:</p>
-
-<ul>
-  <li>the relationship between two factor variables (test for association);</li>
-  <li>the distribution of one factor variable (goodness-of-fit test).</li>
-</ul>
-
-<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="two-factor-variables-association">Two Factor Variables (Association)</h2>
-
-<h3 id="formula-data-input">Formula-Data Input</h3>
-
-<p>When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the <code>mat111survey</code> data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:</p>
-
-<pre><code>chisqtestGC(~sex+seat,data=m111survey)
-
-## Pearson's Chi-squared test 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></pre>
-
-<h3 id="two-way-table-input">Two-Way Table Input</h3>
-
-<p>Sometimes you already have a two-way table on hand:</p>
-
-<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
-SexSeat
-
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-</code></pre>
-
-<p>In that case you can save yourself some typing by entering the table in place of the formula and the <code>data</code> arguments:</p>
-
-<pre><code>chisqtestGC(SexSeat)
-</code></pre>
-
-<h3 id="a-table-from-summary-data">A Table From Summary Data</h3>
-
-<p>Remember:  if you are given summary data, only, then you can construct a nice two-way table and enter it into <code>chisquaretestGC()</code>.  Suppose that you want this two-way table:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: left"> </th>
-      <th style="text-align: center">Front</th>
-      <th style="text-align: center">Middle</th>
-      <th style="text-align: center">Back</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Female</td>
-      <td style="text-align: center">19</td>
-      <td style="text-align: center">16</td>
-      <td style="text-align: center">5</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Male</td>
-      <td style="text-align: center">8</td>
-      <td style="text-align: center">16</td>
-      <td style="text-align: center">7</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>You can get it as follows:</p>
-
-<pre><code>MySexSeat &lt;- rbind(female=c(19,16,5),male=c(8,16,7))
-colnames(MySexSeat) &lt;- c("front","middle","back")
-</code></pre>
-
-<p>Let’s just check to see that this worked:</p>
-
-<pre><code>MySexSeat
-
-##        front middle back
-## female    19     16    5
-## male       8     16    7
-</code></pre>
-
-<p>Then you can enter <code>MySexSeat</code> into the function:</p>
-
-<pre><code>chisqtestGC(MySexSeat)
-</code></pre>
-
-<h3 id="simulation">Simulation</h3>
-
-<p>When the Null’s expected counts are low, <code>chisqtestGC()</code> delivers a warning and suggests the use of simulation to compute the $P$-value.  You do this by way of the argument <code>simulate.p.value</code>, and you have three options:</p>
-
-<ul>
-  <li><code>simulate.p.value = "fixed"</code></li>
-  <li><code>simulate.p.value = "random"</code></li>
-  <li><code>simulate.p.value = "TRUE"</code></li>
-</ul>
-
-<h4 id="explanatory-tallies-fixed">Explanatory Tallies Fixed</h4>
-
-<p>Suppose that the objects under study are not a random sample from some larger population, and that the way chance comes into the production of the data is through random variation in all of the other factors—besides the explanatory variable— that might be associated with the response variable.  Then since the items being observed are fixed, the tally of values for the explanatory variable are fixed.  The response values for these items are the product of chance, but only through random variation in those other factors.</p>
-
-<p>The study from the <code>ledgejump</code> data frame was an example of this.  The 21 incidents were fixed, so there were nine cold-weather incidents and 12 warm-weather incidents, no matter what.  The crowd behavior at each incident, however is still a matter of chance.</p>
-
-<p>In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:</p>
-
-<pre><code>chisqtestGC(~weather+crowd.behavior,data=ledgejump,
-             simulate.p.value="fixed",B=2500)
-
-## Pearson's chi-squared test with simulated p-value, fixed effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##        crowd.behavior
-## weather baiting polite
-##    cool       2      7
-##    warm       8      4
-## 
-## Counts Expected by Null:
-##        crowd.behavior
-## weather baiting polite
-##    cool    4.29   4.71
-##    warm    5.71   6.29
-## 
-## Contributions to the chi-square statistic:
-##        crowd.behavior
-## weather baiting polite
-##    cool    1.22   1.11
-##    warm    0.91   0.83
-## 
-## 
-## Chi-Square Statistic = 4.073 
-## Degrees of Freedom of the table = 1 
-## P-Value = 0.0496
-</code></pre>
-
-<p>You can set <code>B</code>, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the $P$-value, having been determined by random resampling, will vary from one run of the function to another.</p>
-
-<h4 id="explanatory-tallies-random">Explanatory Tallies Random</h4>
-
-<p>In the <code>m111survey</code> study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set <code>simulate.p.value</code> to “random”:</p>
-
-<pre><code>chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value="random",B=2500)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1684
-</code></pre>
-
-<h4 id="both-tallies-fixed">Both Tallies Fixed</h4>
-
-<p>If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set <code>simulate.p.value</code> to “TRUE”.  This invokes R’s standard method for resampling:</p>
-
-<pre><code>chisq.testGC(~sex+seat,data=m111survey,
-             simulate.p.value=TRUE,B=2500)
-
-## Pearson's Chi-squared test with simulated p-value
-## 	 (based on 2500 replicates) 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1703
-</code></pre>
-
-<p>It’s not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.</p>
-
-<h3 id="graphs-of-the-p-value">Graphs of the P-Value</h3>
-
-<p>You can get a graph of the $P$-value in the plot window by setting the argument <code>graph</code> to TRUE.  When you did not simulate, the graph shows a density curve for the $\chi^2$ random variable with the relevant degrees of freedom.  When you simulate, the graph is a histogram of the resampled $\chi^2$-statistics.</p>
-
-<p>Here is a case with no simulation:</p>
-
-<pre><code>chisq.testGC(~sex+seat,data=m111survey,graph=TRUE)
-
-## Pearson's Chi-squared test 
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></pre>
-
-<p><img src="/images/figure/chisqtutnosim.png" alt="Graph of P-value, no simulation" /> </p>
-
-<p>Here is a case with simulation:</p>
-
-<pre><code>chisq.testGC(~sex+seat,data=m111survey,
-             simulate.p.value="random",B=2500,graph=TRUE)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 2500 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1572
-</code></pre>
-
-<p><img src="/images/figure/chisqtutsim.png" alt="Graph of P-value, with simulation" /> </p>
-
-<h2 id="one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</h2>
-
-<h3 id="formula-data-input-1">Formula-Data Input</h3>
-
-<p>The variable <strong>seat</strong> in the <code>m111survey</code> data frame indicates the classroom seating preference of each person in the survey.  Suppose we want to know whether or not the sample data provide strong evidence that seating preference in the Georgetown College population is not uniformly distributed among the three possible options (Front, Middle, and Back).  That is, letting</p>
-
-<blockquote>
-  <p>$p_f =$ proportion of all GC students who prefer the front,</p>
-</blockquote>
-
-<blockquote>
-  <p>$p_m =$ proportion of all GC students who prefer the middle,</p>
-</blockquote>
-
-<blockquote>
-  <p>$p_b =$ proportion of all GC students who prefer the back,</p>
-</blockquote>
-
-<p>we want to test the hypotheses:</p>
-
-<blockquote>
-  <p>$H_0:$  $p_f = 1/3$ and $p_m = 1/3$ and $p_b = 1/3$</p>
-</blockquote>
-
-<blockquote>
-  <p>$H_a:$  at least one of the above proportions is not $1/3$</p>
-</blockquote>
-
-<p>We can do so using the $\chi^2$-test for goodness of fit.  The argument <code>p</code> will give what the Null Hypothesis believes to be the distribution of the variable <strong>seat</strong> in the Georgetown College population:</p>
-
-<pre><code>chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            graph=TRUE)
-
-## Chi-squared test for given probabilities 
-## 
-##          observed counts Expected by Null contribution to chisq statistic
-## 1_front               27            23.67                            0.47
-## 2_middle              32            23.67                            2.93
-## 3_back                12            23.67                            5.75
-## 
-## 
-## Chi-Square Statistic = 9.155 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-</code></pre>
-
-<p><img src="/images/figure/chisqtutseatgraph.png" alt="plot of chunk chisqtutseatgraph" /> </p>
-
-<h3 id="summary-data">Summary Data</h3>
-
-<p>Suppose that the data had only come to us in summary form:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align: center">Front</th>
-      <th style="text-align: center">Middle</th>
-      <th style="text-align: center">Back</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: center">27</td>
-      <td style="text-align: center">32</td>
-      <td style="text-align: center">12</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>We could still perform the test, by making a table and storing it as an R-object:</p>
-
-<pre><code>Seat &lt;- c(front=27,middle=32,back=12)
-Seat
-
-##  front middle   back 
-##     27     32     12
-</code></pre>
-
-<p>Then we could perform the test using <code>Seat</code>:</p>
-
-<pre><code>chisqtestGC(Seat,p=c(1/3,1/3,1/3))
-
-## Chi-squared test for given probabilities 
-## 
-##        observed counts Expected by Null contribution to chisq statistic
-## front               27            23.67                            0.47
-## middle              32            23.67                            2.93
-## back                12            23.67                            5.75
-## 
-## 
-## Chi-Square Statistic = 9.155 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-</code></pre>
-
-<h3 id="simulation-1">Simulation</h3>
-
-<p>When expected cell counts fall below 5, <code>chisqtestGC()</code> issues a warning and suggests the use of simulation.  We can perform simulation at any time, though.</p>
-
-<p>For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting <code>simulate.p.value</code> to <code>TRUE</code>.  Of course we also need to set the number <code>B</code> of resamples.</p>
-
-<pre><code>set.seed(678910)
-chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            simulate.p.value=TRUE,
-            B=2500,graph=TRUE)
-
-## Pearson's chi-squared test with simulated p-value 
-## 	 (based on 2500 resamples)
-## 
-##          observed counts Expected by Null contribution to chisq statistic
-## 1_front               27            23.67                            0.47
-## 2_middle              32            23.67                            2.93
-## 3_back                12            23.67                            5.75
-## 
-## 
-## Chi-Square Statistic = 9.155 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.0112
-</code></pre>
-
-<p><img src="/images/figure/chisqtutseatsim.png" alt="plot of chunk chisqtutseatsim" /> </p>
-
-<h2 id="want-less-output">Want Less Output?</h2>
-
-<p>If you do not wnat to see quite so much output to the console and are only interested in the essentials for reporting a $\chi^2$-test, then set the argument <code>verbose</code> to <code>FALSE</code>:</p>
-
-<pre><code>chisqtestGC(~sex+seat,data=m111survey,
-            verbose=FALSE)
-
-## Pearson's Chi-squared test 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></pre>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/5/">&larr; Older</a>
@@ -1178,6 +887,10 @@ chisqtestGC(~seat,data=m111survey,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/08/reasons-to-teach-with-R-2/">Five Reasons to Teach Elementary Statistics With R: #2</a>
       </li>
     
@@ -1191,10 +904,6 @@ chisqtestGC(~seat,data=m111survey,
     
       <li class="post">
         <a href="/blog/2014/02/28/histogramtutorial/">Tutorial on Lattice&#8217;s Histogram()</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/28/densityplottutorial/">Tutorial on Lattice&#8217;s Densityplot()</a>
       </li>
     
   </ul>
@@ -1247,6 +956,7 @@ chisqtestGC(~seat,data=m111survey,
     <li class='category'><a href='/blog/categories/r/'>R (3)</a></li>
 <li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (14)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (1)</a></li>
+<li class='category'><a href='/blog/categories/tech-note/'>Tech_Note (1)</a></li>
 
   </ul>
 </section>
