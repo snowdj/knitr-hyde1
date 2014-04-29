@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Proportion, From Data Frame (Read This!!) Confidence Interval Only Interval and Test Graph of the P-Value Limiting Output One &hellip;">
+  <meta name="description" content="Preliminaries One Numerical Variable Numerical and Factor Variable Warning Preliminaries The function bwplot() makes box-and-whisker plots for &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,139 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/28/bwplottutorial/">Tutorial on Lattice&#8217;s Bwplot()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T17:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/28/bwplottutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
+  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
+  <li><a href="#warning">Warning</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The function <code>bwplot()</code> makes box-and-whisker plots for numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>bwplot()</code>, then make sure you load lattice:</p>
+
+<pre><code>require(lattice)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-numerical-variable">One Numerical Variable</h2>
+
+<p>For a box-and-whisker plot of the fastest speeds ever driven by students in the <code>m111survey</code> data frame, use the command:</p>
+
+<pre><code>bwplot(~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
+
+<p>Note the use of:</p>
+
+<ul>
+  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
+  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
+</ul>
+
+<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
+
+<p>Say you want to know:</p>
+
+<blockquote>
+  <p><em>Who tends to drive faster:  the guys or the gals?</em></p>
+</blockquote>
+
+<p>Then you are studying the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  <code>bwplot()</code> will break the fastest speeds up by sex and parallel box-and-whisker plots, if you run the following command:</p>
+
+<pre><code>bwplot(fastest~sex,data=m111survey,
+       ylab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
+
+<p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
+
+<p>If you prefer your box-and-whisker plots to be horizontal, then you can reverse the order of the variables in the formula:</p>
+
+<pre><code>bwplot(sex~fastest,data=m111survey,
+       xlab="speed (mph)",
+       main="Fastest Speed Ever Driven,\nby Sex of Subject")
+</code></pre>
+
+<p><img src="/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
+
+<h2 id="warning">Warning</h2>
+
+<p>Box-and-Whisker plots are great for studying:</p>
+
+<ul>
+  <li>one numerical variable</li>
+  <li>the relationship between a numerical variable and a factor variable.</li>
+</ul>
+
+<p>However, if you try to study the relationship between two numerical variables with <code>bwplot()</code>, you will get bizarre results.</p>
+
+<p>For example, suppose you want to study the relationship between fastest speed ever driven (<strong>fastest</strong>) and the grade point average (<strong>GPA</strong>) of the subjects in <code>m111survey</code>:</p>
+
+<pre><code>bwplot(fastest~GPA,data=m111survey,
+       ylab="speed (mph)",
+       xbal="grade-point average",
+       main="Fastes Speed Ever Driven,\nby Grade-Point Average")
+</code></pre>
+
+<p><img src="/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
+
+<p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
+
+<p>Use <code>xyplot()</code> (scatterplots) to study the relationship between two numerical variables.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2152,195 +2285,6 @@ install_github(repo="homerhanumat/tigerstats")
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-26T16:00:00-05:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/26/pnormGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/26/pnormGCtutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#finding-px--x">Finding P(X &lt; x)</a></li>
-  <li><a href="#find-px--x">Find P(X &gt; x)</a></li>
-  <li><a href="#finding-pa--x--b">Finding P(a &lt; X &lt; b)</a></li>
-  <li><a href="#outside-probabilities">“Outside” Probabilities</a></li>
-  <li><a href="#non-strict-inequalities">Non-Strict Inequalities</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p><code>pnormGC()</code> provides a direct way to compute probabilities for normal random variables, along with graphs for the probabilities, if you want them.  The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="finding-px--x">Finding P(X &lt; x)</h2>
-
-<p>Suppose that you have a normal random variable $X$ with mean $\mu=70$ and standard deviation $\sigma=3$, and you would like to find the chance that $X$ will turn out to be less than 66.  In other words, you are looking for:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P(X < 66). %]]></script>
-
-<p>Then run this command:</p>
-
-<pre><code>pnormGC(bound=66,region="below",mean=70,sd=3)
-
-## [1] 0.09121
-</code></pre>
-
-<p>Note carefully what the arguments mean, here:</p>
-
-<ul>
-  <li><code>bound=66</code> tells <code>pnormGC()</code> where to stop</li>
-  <li><code>region="below"</code> takes care of the “less than” part of the requested probability</li>
-  <li><code>mean=70</code> specifies the mean $\mu$ of $X$</li>
-  <li><code>sd=3</code> specifies the standard deviation $\sigma$ of $X$</li>
-</ul>
-
-<p>If you would like to see a graph of the probability distribution of $X$ along with a shaded area that represents the requested probability, then you can set the argument <code>graph</code> to <code>TRUE</code>:</p>
-
-<pre><code>pnormGC(bound=66,region="below",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutless66.png" alt="plot of chunk normtutless66" /> </p>
-
-<pre><code>## [1] 0.09121
-</code></pre>
-
-<p>You should ask for a graph until you are confident of being able to use <code>pnormGC()</code> to get exactly the probability that you want.</p>
-
-<h2 id="find-px--x">Find P(X &gt; x)</h2>
-
-<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that $X$ is greater than 69, i.e.:</p>
-
-<script type="math/tex; mode=display">P(X > 69).</script>
-
-<p>Ask for:</p>
-
-<pre><code>pnormGC(bound=69,region="above",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutgreater69.png" alt="plot of chunk normtutgreater69" /> </p>
-
-<pre><code>## [1] 0.6306
-</code></pre>
-
-<h2 id="finding-pa--x--b">Finding P(a &lt; X &lt; b)</h2>
-
-<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that $X$ is between 68 and 72, i.e.:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P(68 < X < 72). %]]></script>
-
-<p>Ask for:</p>
-
-<pre><code>pnormGC(bound=c(68,72),region="between",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutbetween.png" alt="plot of chunk normtutbetween" /> </p>
-
-<pre><code>## [1] 0.495
-</code></pre>
-
-<p>Observe that since there are two numbers—68 and 72—that are boundaries, we have to specify both of them for <code>pnormGC()</code> in the form of a list <code>c(68,72)</code>.</p>
-
-<h2 id="outside-probabilities">“Outside” Probabilities</h2>
-
-<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that either $X$ is less than 66 OR that $X$ is more than 73.  Then we are looking for:</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P(X < 66 \textbf{ or } X > 73). %]]></script>
-
-<p>We can find this with the command:</p>
-
-<pre><code>pnormGC(bound=c(66,73),region="outside",
-         mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/mormtutout.png" alt="plot of chunk mormtutout" /> </p>
-
-<pre><code>## [1] 0.2499
-</code></pre>
-
-<p>Again observe that there are two numbers—66 and 73—that make the boundaries, so supply both of them to the <code>bound</code> argument as a list:  <code>c(66,72)</code>.</p>
-
-<h2 id="non-strict-inequalities">Non-Strict Inequalities</h2>
-
-<p>Suppose that for the same random variable $X \sim norm(70,3)$, you want the probability that $X$ will turn out to be <em>no more than</em> 66, i.e., you want:</p>
-
-<script type="math/tex; mode=display">P(X \leq 66).</script>
-
-<p>You get this with exactly the same function call that gives you $P(X &lt; 66)$, namely:</p>
-
-<pre><code>pnormGC(bound=66,region="below",
-        mean=70,sd=3)
-</code></pre>
-
-<p>Remember why?  Normal random variables are <em>continuous</em> random variables, and for any continuous random variable the chance that it is <em>exactly</em> equal to any particular value is zero.  For example, the probability that $X$ is exactly equal to 66 is given by:</p>
-
-<pre><code>pnormGC(bound=c(66,66),region="between",
-        mean=70,sd=3,graph=TRUE)
-</code></pre>
-
-<p><img src="/images/figure/normtutequal.png" alt="plot of chunk normtutequal" /> </p>
-
-<pre><code>## [1] 0
-</code></pre>
-
-<p>The probability of getting exactly 66 is given by the area of the line segment under the curve over 66.  But the area of a line segment—if you think of it as a “rectangle”” with zero width—is zero!</p>
-
-<p>When you ask for</p>
-
-<script type="math/tex; mode=display">P(X \leq 66)</script>
-
-<p>as opposed to</p>
-
-<script type="math/tex; mode=display">% <![CDATA[
-P(X < 66), %]]></script>
-
-<p>you are adding on just the chance of $X$ being exactly 66.  Since this extra chance is zero, you get the same probability as you did with the strict inequality.</p>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/4/">&larr; Older</a>
@@ -2358,6 +2302,10 @@ P(X < 66), %]]></script>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
       </li>
     
@@ -2371,10 +2319,6 @@ P(X < 66), %]]></script>
     
       <li class="post">
         <a href="/blog/2014/02/28/xtabstutorial/">Xtabs() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/28/histogramtutorial/">Tutorial on Lattice&#8217;s Histogram()</a>
       </li>
     
   </ul>
@@ -2425,7 +2369,7 @@ P(X < 66), %]]></script>
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (3)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (14)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (2)</a></li>
 
   </ul>

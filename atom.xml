@@ -4,7 +4,7 @@
   <title><![CDATA[A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-13T00:14:17-04:00</updated>
+  <updated>2014-04-29T12:08:18-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Qnorm() Tutorial]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial/"/>
+    <updated>2014-04-28T22:00:00-04:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></a></li>
+  <li><a href="#a-few-more-examples">A Few More Examples</a>    <ul>
+      <li><a href="#making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</a></li>
+      <li><a href="#an-area-between">An Area Between</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></h2>
+
+<p>Thew function <code>prnorm()</code> in regular <code>R</code>, as well as the function <code>pnormGC() in the </code>tigerstats` package, compute probabilities from known bounding values.  For example, suppose that $X$ is a normally distributed random variable with mean 70 and standard deviation 3, and that you want to know:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+P(X < 72). %]]&gt;</script>
+
+<p>Then you <em>know</em> the boundary value 72, but you don’t know the probability:  the area under the normal density curve before 72.  Functions like <code>pnormGC()</code> aim to give you that area–that probability:</p>
+
+<pre><code>require(tigerstats)
+
+ 
+
+pnormGC(72, region="below", mean=70,
+        sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/qnormtut72.png" alt="plot of chunk qnormtut72" /> </p>
+
+<pre><code>## [1] 0.7475
+</code></pre>
+
+<p>The function <code>qnorm()</code>, which comes standard with R, aims to do the opposite:  given an area, find the boundary value that determines this area.</p>
+
+<p>For example, suppose you want to find that 85th percentile of a normal distribution whose mean is 70 and whose standard deviation is 3.  Then you ask for:</p>
+
+<pre><code>qnorm(0.85,mean=70,sd=3)
+
+## [1] 73.11
+</code></pre>
+
+<p>The value 73.1093 is indeed the 85th percentile, in the sense that 85% of the values in a population that is normally distributed with mean 70 and standard deviation 3 will lie below 73.1093.  In other words, if you were to pick a random member $X$ from such a population, then</p>
+
+<p><script type="math/tex">% &lt;![CDATA[
+P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
+
+<p>You can check that this is correct by plugging 73.1093 into <code>pnormGC()</code>:</p>
+
+<pre><code>pnormGC(73.1093,region="below",mean=70,
+        sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/qnormtut73.png" alt="plot of chunk qnormtut73" /> </p>
+
+<pre><code>## [1] 0.85
+</code></pre>
+
+<p>Sure enough, the area under the curve before 73.1093 is 0.85.</p>
+
+<h2 id="a-few-more-examples">A Few More Examples</h2>
+
+<h3 id="making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</h3>
+
+<blockquote>
+  <p>Suppose that SAT scores are normally distributed, and that the mean SAT score is 1000, and the standard deviation of all SAT scores is 100.  <em>How high must you score so that only 10% of the population scores higher than you?</em></p>
+</blockquote>
+
+<p>Here’s the solution.  If 10% score higher than you, then 90% score lower.  So just call <code>qnorm()</code> with 0.90 as the boundary value:</p>
+
+<pre><code>qnorm(0.90,mean=1000,sd=100)
+
+## [1] 1128
+</code></pre>
+
+<p>In other words, the 90th percentile of SAT scores is around 1128.</p>
+
+<h3 id="an-area-between">An Area Between</h3>
+
+<blockquote>
+  <p>Find a positive number $z$ so that the area under the standard normal curve between $-z$ and $z$ is 0.95.</p>
+</blockquote>
+
+<p>Here’s the solution.  If 95% of the area lies between $-z$ and $z$, then 5% of the area must lie outside of this range.  since normal curve as symmetric, half of this amount–2.5%–must lie before $-z$.  Then the area under the curve before $z$ must be:</p>
+
+<script type="math/tex; mode=display">0.025+0.95=0.975.</script>
+
+<p>Hence the number $z$ is actually the 97.5th percentile of the standard normal distribution, and we can find it as follows:</p>
+
+<pre><code>qnorm(0.975,mean=0,sd=1)
+
+## [1] 1.96
+</code></pre>
+
+<p>So $z$ is about 1.96.  We can check this result graphically as follows:</p>
+
+<pre><code>pnormGC(c(-1.96,1.96),region="between",mean=0,
+        sd=1,graph=TRUE)
+</code></pre>
+
+<p><img src="http://homerhanumat.github.io/images/figure/qnormtutbetween.png" alt="plot of chunk qnormtutbetween" /> </p>
+
+<pre><code>## [1] 0.95
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Roctopress: Configure Your Octopress Blog for R]]></title>
@@ -545,7 +656,7 @@ system("cp figure/* ../source/images/figure")
 </span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
 </span><span class="line">  &lt;link href="http://homerhanumat.github.io/atom.xml" rel="self"/&gt;
 </span><span class="line">  &lt;link href="http://homerhanumat.github.io/"/&gt;
-</span><span class="line">  &lt;updated&gt;2014-04-13T00:14:17-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;updated&gt;2014-04-29T12:08:18-04:00&lt;/updated&gt;
 </span><span class="line">  &lt;id&gt;http://homerhanumat.github.io/&lt;/id&gt;
 </span><span class="line">  &lt;author&gt;
 </span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;

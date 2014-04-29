@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries One Numerical Variable Controlling Breaks Numerical and Factor Variable Preliminaries The function histogram() is used to study the &hellip;">
+  <meta name="description" content="Preliminaries One Factor Variable Two Factor Variables Preliminaries xtabs() is the numerical version of barchartGC(). You use it when you want to &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,131 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/28/xtabstutorial/">Xtabs() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T18:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/28/xtabstutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/xtabstutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-factor-variable">One Factor Variable</a></li>
+  <li><a href="#two-factor-variables">Two Factor Variables</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>xtabs()</code> is the numerical version of <code>barchartGC()</code>.  You use it when you want to study</p>
+
+<ul>
+  <li>the distribution of one factor variable;</li>
+  <li>the relationship between two factor variables.</li>
+</ul>
+
+<p>The function <code>xtabs()</code> comes with the <code>stats</code> package, which is always loaded in R.  However, some of the data and other functions that we will use come from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-factor-variable">One Factor Variable</h2>
+
+<p>To see a table of the tallies for the factor variable <strong>seat</strong> (from the <code>mat111survey</code> data frame in the <code>tigerstats</code> package):</p>
+
+<pre><code>xtabs(~seat,data=m111survey)
+
+## seat
+##  1_front 2_middle   3_back 
+##       27       32       12
+</code></pre>
+
+<p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts, so apply the function <code>rowPerc()</code> from <code>tigerstats</code>:</p>
+
+<pre><code>rowPerc(xtabs(~seat,data=m111survey))
+
+##  1_front 2_middle 3_back  Total
+##    38.03    45.07  16.90 100.00
+</code></pre>
+
+<p>If you have a table of the counts for a variable, then you can enter it directly.  For example, suppose you have already made:</p>
+
+<pre><code>Seat &lt;- xtabs(~seat,data=m111survey)
+Seat
+
+## seat
+##  1_front 2_middle   3_back 
+##       27       32       12
+</code></pre>
+
+<p>Then you can just enter the table into <code>rowPerc()</code>:</p>
+
+<pre><code>rowPerc(Seat)
+
+##  1_front 2_middle 3_back  Total
+##    38.03    45.07  16.90 100.00
+</code></pre>
+
+<h2 id="two-factor-variables">Two Factor Variables</h2>
+
+<p>You can also use <code>xtabs()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data input as follows:</p>
+
+<pre><code>xtabs(~sex+seat,data=m111survey)
+
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+</code></pre>
+
+<p>Of course, row percents are the way to actually study the relationship:</p>
+
+<pre><code>rowPerc(xtabs(~sex+seat,data=m111survey))
+
+##        1_front 2_middle 3_back Total
+## female   47.50    40.00  12.50   100
+## male     25.81    51.61  22.58   100
+</code></pre>
+
+<p>Note the type of formula used to study the relationship between two factor variables:</p>
+
+<script type="math/tex; mode=display">\sim ExplanatoryFactor + ResponseFactor</script>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -556,139 +681,6 @@ install_github(repo="homerhanumat/tigerstats")
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/28/bwplottutorial/">Tutorial on Lattice&#8217;s Bwplot()</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-28T17:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/28/bwplottutorial/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
-  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
-  <li><a href="#warning">Warning</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>The function <code>bwplot()</code> makes box-and-whisker plots for numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>bwplot()</code>, then make sure you load lattice:</p>
-
-<pre><code>require(lattice)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="one-numerical-variable">One Numerical Variable</h2>
-
-<p>For a box-and-whisker plot of the fastest speeds ever driven by students in the <code>m111survey</code> data frame, use the command:</p>
-
-<pre><code>bwplot(~fastest,data=m111survey,
-       xlab="speed (mph)",
-       main="Fastest Speed Ever Driven")
-</code></pre>
-
-<p><img src="/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
-
-<p>Note the use of:</p>
-
-<ul>
-  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
-  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
-</ul>
-
-<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
-
-<p>Say you want to know:</p>
-
-<blockquote>
-  <p><em>Who tends to drive faster:  the guys or the gals?</em></p>
-</blockquote>
-
-<p>Then you are studying the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  <code>bwplot()</code> will break the fastest speeds up by sex and parallel box-and-whisker plots, if you run the following command:</p>
-
-<pre><code>bwplot(fastest~sex,data=m111survey,
-       ylab="speed (mph)",
-       main="Fastest Speed Ever Driven,\nby Sex of Subject")
-</code></pre>
-
-<p><img src="/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
-
-<p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
-
-<p>If you prefer your box-and-whisker plots to be horizontal, then you can reverse the order of the variables in the formula:</p>
-
-<pre><code>bwplot(sex~fastest,data=m111survey,
-       xlab="speed (mph)",
-       main="Fastest Speed Ever Driven,\nby Sex of Subject")
-</code></pre>
-
-<p><img src="/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
-
-<h2 id="warning">Warning</h2>
-
-<p>Box-and-Whisker plots are great for studying:</p>
-
-<ul>
-  <li>one numerical variable</li>
-  <li>the relationship between a numerical variable and a factor variable.</li>
-</ul>
-
-<p>However, if you try to study the relationship between two numerical variables with <code>bwplot()</code>, you will get bizarre results.</p>
-
-<p>For example, suppose you want to study the relationship between fastest speed ever driven (<strong>fastest</strong>) and the grade point average (<strong>GPA</strong>) of the subjects in <code>m111survey</code>:</p>
-
-<pre><code>bwplot(fastest~GPA,data=m111survey,
-       ylab="speed (mph)",
-       xbal="grade-point average",
-       main="Fastes Speed Ever Driven,\nby Grade-Point Average")
-</code></pre>
-
-<p><img src="/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
-
-<p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
-
-<p>Use <code>xyplot()</code> (scatterplots) to study the relationship between two numerical variables.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -706,6 +698,10 @@ install_github(repo="homerhanumat/tigerstats")
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
       </li>
     
@@ -719,10 +715,6 @@ install_github(repo="homerhanumat/tigerstats")
     
       <li class="post">
         <a href="/blog/2014/02/28/xtabstutorial/">Xtabs() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/28/histogramtutorial/">Tutorial on Lattice&#8217;s Histogram()</a>
       </li>
     
   </ul>
@@ -773,7 +765,7 @@ install_github(repo="homerhanumat/tigerstats")
   <h1>Categories</h1>
   <ul id="categories">
     <li class='category'><a href='/blog/categories/r/'>R (3)</a></li>
-<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (14)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (2)</a></li>
 
   </ul>

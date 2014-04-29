@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Five Reasons to Teach Elementary Statistics With R: #1 - A Statistics Blog</title>
+  <title>Qnorm() Tutorial - A Statistics Blog</title>
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Introduction Reason #1: Package mosaic Keeping Simple Things Simple Flow-Control for the Masses There is Much More References Introduction This is &hellip;">
+  <meta name="description" content="Comparison of qnorm() with pnorm() A Few More Examples Making the Top Ten Percent (An Area Above) An Area Between Comparison of qnorm() with pnorm &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro">
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
@@ -114,7 +114,7 @@
   
   <header>
     
-      <h1 class="entry-title">Five Reasons to Teach Elementary Statistics With R: #1</h1>
+      <h1 class="entry-title">Qnorm() Tutorial</h1>
     
     
       <p class="meta">
@@ -130,7 +130,7 @@
   
 
 
-<time datetime="2014-04-05T19:30:00-04:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+<time datetime="2014-04-28T22:00:00-04:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
         
            | <a href="#disqus_thread"
              data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
@@ -141,157 +141,108 @@
 
 
 <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
-      <li><a href="#keeping-simple-things-simple">Keeping Simple Things Simple</a></li>
-      <li><a href="#flow-control-for-the-masses">Flow-Control for the Masses</a></li>
-      <li><a href="#there-is-much-more">There is Much More</a></li>
-    </ul>
-  </li>
-  <li><a href="#references">References</a></li>
-</ul>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>This is is first in a projected five-part series of posts aimed at colleagues who teach elementary statistics.</p>
-
-<p>I can’t remember exactly how I first made acquaintance with R, but it’s been an important part of my teaching/consulting life since at least 2007, when I used it for the first time in an upper-level undergraduate statistics class.  As of last Fall all of our statistics classes—even the elementary ones—are based on R.  We may never return to a ground-up GUI platform.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
-
-<h2 id="reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></h2>
-
-<p>This package is a product of the NSF-funded <a href="http://mosaic-web.org/">Project Mosaic</a>, led by Nick Horton, Daniel Kaplan and Randall Pruim.  It’s on CRAN, but you might want to keep up with the very latest releases on Github:</p>
-
-<pre><code>require(devtools)
-install_github(repo="rpruim/mosaic")
-</code></pre>
-
-<p><code>mosaic</code> aims to flatten the learning curve for elementary students by gentling down the coding aspects of the R experience.  With <code>mosaic</code>:</p>
-
-<ul>
-  <li>students need to know relatively few R-functions in order to thrive in the introductory course;</li>
-  <li>many of the these functions are “wrappers” for standard R-functions, and provide a fairly uniform interface for user input;</li>
-  <li>the package provides tools that mostly obviate the need for students to deal with R as a programming language:
-    <ul>
-      <li>the students don’t have to write their own functions;</li>
-      <li>they don’t need to think much about the different types of R objects;</li>
-      <li>they don’t even need to learn about flow-control structures.</li>
+  <li><a href="#comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></a></li>
+  <li><a href="#a-few-more-examples">A Few More Examples</a>    <ul>
+      <li><a href="#making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</a></li>
+      <li><a href="#an-area-between">An Area Between</a></li>
     </ul>
   </li>
 </ul>
 
-<h3 id="keeping-simple-things-simple">Keeping Simple Things Simple</h3>
+<h2 id="comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></h2>
 
-<p>R can make the easy stuff surprisingly tricky for beginners:  suppose for example, that you want numerical summaries of a particular numerical variable, broken down by the values of some factor variable.  Standard procedure in R would be to write your own anonymous function as an argument for <code>aggregate()</code>, thus:</p>
+<p>Thew function <code>prnorm()</code> in regular <code>R</code>, as well as the function <code>pnormGC() in the </code>tigerstats` package, compute probabilities from known bounding values.  For example, suppose that $X$ is a normally distributed random variable with mean 70 and standard deviation 3, and that you want to know:</p>
 
-<pre><code>aggregate(mpg~cyl,data=mtcars,
-    FUN=function(x) c(mean=mean(x),sd=sd(x)))
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 72). %]]></script>
 
-##   cyl mpg.mean mpg.sd
-## 1   4   26.664  4.510
-## 2   6   19.743  1.454
-## 3   8   15.100  2.560
-</code></pre>
+<p>Then you <em>know</em> the boundary value 72, but you don’t know the probability:  the area under the normal density curve before 72.  Functions like <code>pnormGC()</code> aim to give you that area–that probability:</p>
 
-<p><code>mosaic</code> skirts the problem by providing wrapper functions for aggregation:</p>
-
-<pre><code>require(mosaic)
+<pre><code>require(tigerstats)
 
  
 
-mean(mpg~cyl,data=mtcars)
-
-##     4     6     8 
-## 26.66 19.74 15.10
-
-sd(mpg~cyl,data=mtcars)
-
-##     4     6     8 
-## 4.510 1.454 2.560
+pnormGC(72, region="below", mean=70,
+        sd=3,graph=TRUE)
 </code></pre>
 
-<p>One can attain even more simplicity, at only a small cost in flexibility, by sticking to <code>mosaic</code>’s <code>favstats()</code> as a one-stop shop:</p>
+<p><img src="/images/figure/qnormtut72.png" alt="plot of chunk qnormtut72" /> </p>
 
-<pre><code>favstats(mpg~cyl,data= mtcars)
-
-##   .group  min    Q1 median    Q3  max  mean    sd  n missing
-## 1      4 21.4 22.80   26.0 30.40 33.9 26.66 4.510 11       0
-## 2      6 17.8 18.65   19.7 21.00 21.4 19.74 1.454  7       0
-## 3      8 10.4 14.40   15.2 16.25 19.2 15.10 2.560 14       0
+<pre><code>## [1] 0.7475
 </code></pre>
 
-<h3 id="flow-control-for-the-masses">Flow-Control for the Masses</h3>
+<p>The function <code>qnorm()</code>, which comes standard with R, aims to do the opposite:  given an area, find the boundary value that determines this area.</p>
 
-<p><code>mosaic</code> includes powerful wrapper functions that permit extensive work with re-sampling and simulation, without the need to learn flow-control.  Here follows a <code>mosaic</code>-style implementation of a permutation test.</p>
+<p>For example, suppose you want to find that 85th percentile of a normal distribution whose mean is 70 and whose standard deviation is 3.  Then you ask for:</p>
 
-<p>Consider the data frame <code>Pseudoscorpions</code> from the <code>abd</code> package:</p>
+<pre><code>qnorm(0.85,mean=70,sd=3)
 
-<pre><code>require(abd)
-data(Pseudoscorpions)
+## [1] 73.11
 </code></pre>
 
-<p><code>Pseudoscorpions</code> contains the results of an experiment on 36 female Pseudoscorpions:  each one was either mated twice with a single male (<code>SM</code>) or was mated with two males, one time each (<code>DM</code>), receiving about the same total amount of sperm under either treatment.  The idea was to see whether an increase in genetic diversity of sperm sources increases the number of successful broods a female produces during her lifetime.</p>
+<p>The value 73.1093 is indeed the 85th percentile, in the sense that 85% of the values in a population that is normally distributed with mean 70 and standard deviation 3 will lie below 73.1093.  In other words, if you were to pick a random member $X$ from such a population, then</p>
 
-<p>Here are some descriptive results:</p>
+<p><script type="math/tex">% <![CDATA[
+P(X < 73.1093) = 0.85 %]]></script>.</p>
 
-<pre><code>favstats(successful.broods~treatment,
-    data=Pseudoscorpions)[c(".group","mean","sd")]
+<p>You can check that this is correct by plugging 73.1093 into <code>pnormGC()</code>:</p>
 
-##   .group  mean    sd
-## 1     DM 3.625 1.962
-## 2     SM 2.200 1.609
+<pre><code>pnormGC(73.1093,region="below",mean=70,
+        sd=3,graph=TRUE)
 </code></pre>
 
-<p>For the permutation test, we first compute and store the observed difference between the sample means:</p>
+<p><img src="/images/figure/qnormtut73.png" alt="plot of chunk qnormtut73" /> </p>
 
-<pre><code>obsDiff &lt;- compareMean(successful.broods~treatment,
-    data=Pseudoscorpions)
-obsDiff
-
-## [1] -1.425
+<pre><code>## [1] 0.85
 </code></pre>
 
-<p>Next, we create an empirical Null distribution with <code>shuffle()</code> (the random permutation function) and <code>do()</code> (a for-loop wrapper):</p>
+<p>Sure enough, the area under the curve before 73.1093 is 0.85.</p>
 
-<pre><code>set.seed(12345)
-nullDist &lt;- do(2500)*(
-  compareMean(successful.broods~shuffle(treatment),
-      data=Pseudoscorpions))
+<h2 id="a-few-more-examples">A Few More Examples</h2>
+
+<h3 id="making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</h3>
+
+<blockquote>
+  <p>Suppose that SAT scores are normally distributed, and that the mean SAT score is 1000, and the standard deviation of all SAT scores is 100.  <em>How high must you score so that only 10% of the population scores higher than you?</em></p>
+</blockquote>
+
+<p>Here’s the solution.  If 10% score higher than you, then 90% score lower.  So just call <code>qnorm()</code> with 0.90 as the boundary value:</p>
+
+<pre><code>qnorm(0.90,mean=1000,sd=100)
+
+## [1] 1128
 </code></pre>
 
-<p>Finally, we call <code>statTally()</code> for numerical and graphical analysis of the results:</p>
+<p>In other words, the 90th percentile of SAT scores is around 1128.</p>
 
-<pre><code>statTally(obsDiff,nullDist)
+<h3 id="an-area-between">An Area Between</h3>
 
-## Null distribution appears to be asymmetric. (p = 1.07e-05)
-## 
-## Test statistic applied to sample data =  -1.425
-## 
-## Quantiles of test statistic applied to random data:
+<blockquote>
+  <p>Find a positive number $z$ so that the area under the standard normal curve between $-z$ and $z$ is 0.95.</p>
+</blockquote>
 
-##    50%    90%    95%    99% 
-## 0.0375 0.8250 1.0500 1.3875
+<p>Here’s the solution.  If 95% of the area lies between $-z$ and $z$, then 5% of the area must lie outside of this range.  since normal curve as symmetric, half of this amount–2.5%–must lie before $-z$.  Then the area under the curve before $z$ must be:</p>
 
-## 
-## Of the random samples
-## 
-## 	13 ( 0.52 % ) had test stats = -1.425
-## 
-## 	23 ( 0.92 % ) had test stats &lt; -1.425
+<script type="math/tex; mode=display">0.025+0.95=0.975.</script>
+
+<p>Hence the number $z$ is actually the 97.5th percentile of the standard normal distribution, and we can find it as follows:</p>
+
+<pre><code>qnorm(0.975,mean=0,sd=1)
+
+## [1] 1.96
 </code></pre>
 
-<p><img src="/images/figure/reason1hist.png" alt="plot of chunk reason1hist" /> </p>
+<p>So $z$ is about 1.96.  We can check this result graphically as follows:</p>
 
-<p>We seem to have fairly strong evidence ($P \approx 1.7\%$) that mating with more males increases the number of successful broods.</p>
+<pre><code>pnormGC(c(-1.96,1.96),region="between",mean=0,
+        sd=1,graph=TRUE)
+</code></pre>
 
-<h3 id="there-is-much-more">There is Much More</h3>
+<p><img src="/images/figure/qnormtutbetween.png" alt="plot of chunk qnormtutbetween" /> </p>
 
-<p>I have only scratched the surface of the <code>mosaic</code> package, which is rich enough to support statistics instruction in both elementary and advanced courses.  The <code>mosaic</code> authors provide extensive instructor resources in the package vignettes, and frequently offer workshops and short-courses, especially through events sponsored by the <a href="https://www.causeweb.org/">Consortium for the Advancement of Undergraduate Statistics Education</a>.</p>
+<pre><code>## [1] 0.95
+</code></pre>
 
-<p>Next week I’ll introduce a supplementary package that is intended for students who might require even more simplicity, and that aligns their R experience with a particular set of teaching objectives.</p>
-
-<h2 id="references">References</h2>
-
-<p>The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s <em>The Analysis of Biological Data</em> (Roberts and Company Publishers; First Edition, 1st Edition July 2008).</p>
 </div>
 
 
@@ -314,12 +265,12 @@ nullDist &lt;- do(2500)*(
   
 
 
-<time datetime="2014-04-05T19:30:00-04:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+<time datetime="2014-04-28T22:00:00-04:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/r/'>R</a>
+    <a class='category' href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials</a>
   
 </span>
 
@@ -337,10 +288,8 @@ nullDist &lt;- do(2500)*(
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/02/28/xtabstutorial/" title="Previous Post: xtabs() Tutorial">&laquo; xtabs() Tutorial</a>
+        <a class="basic-alignment left" href="/blog/2014/04/13/roctopress/" title="Previous Post: Roctopress:  Configure Your Octopress Blog for R">&laquo; Roctopress:  Configure Your Octopress Blog for R</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/04/08/reasons-to-teach-with-R-2/" title="Next Post: Five Reasons to Teach Elementary Statistics With R:  #2">Five Reasons to Teach Elementary Statistics With R:  #2 &raquo;</a>
       
     </p>
   </footer>
@@ -465,8 +414,8 @@ nullDist &lt;- do(2500)*(
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/';
-        var disqus_url = 'http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/';
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial/';
         var disqus_script = 'embed.js';
       
     (function () {

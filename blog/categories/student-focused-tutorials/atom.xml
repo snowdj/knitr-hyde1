@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-13T00:14:17-04:00</updated>
+  <updated>2014-04-29T12:08:18-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,117 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Qnorm() Tutorial]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial/"/>
+    <updated>2014-04-28T22:00:00-04:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></a></li>
+  <li><a href="#a-few-more-examples">A Few More Examples</a>    <ul>
+      <li><a href="#making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</a></li>
+      <li><a href="#an-area-between">An Area Between</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></h2>
+
+<p>Thew function <code>prnorm()</code> in regular <code>R</code>, as well as the function <code>pnormGC() in the </code>tigerstats` package, compute probabilities from known bounding values.  For example, suppose that $X$ is a normally distributed random variable with mean 70 and standard deviation 3, and that you want to know:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+P(X < 72). %]]&gt;</script>
+
+<p>Then you <em>know</em> the boundary value 72, but you don’t know the probability:  the area under the normal density curve before 72.  Functions like <code>pnormGC()</code> aim to give you that area–that probability:</p>
+
+<pre><code>require(tigerstats)
+
+ 
+
+pnormGC(72, region="below", mean=70,
+        sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/qnormtut72.png" alt="plot of chunk qnormtut72" /> </p>
+
+<pre><code>## [1] 0.7475
+</code></pre>
+
+<p>The function <code>qnorm()</code>, which comes standard with R, aims to do the opposite:  given an area, find the boundary value that determines this area.</p>
+
+<p>For example, suppose you want to find that 85th percentile of a normal distribution whose mean is 70 and whose standard deviation is 3.  Then you ask for:</p>
+
+<pre><code>qnorm(0.85,mean=70,sd=3)
+
+## [1] 73.11
+</code></pre>
+
+<p>The value 73.1093 is indeed the 85th percentile, in the sense that 85% of the values in a population that is normally distributed with mean 70 and standard deviation 3 will lie below 73.1093.  In other words, if you were to pick a random member $X$ from such a population, then</p>
+
+<p><script type="math/tex">% &lt;![CDATA[
+P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
+
+<p>You can check that this is correct by plugging 73.1093 into <code>pnormGC()</code>:</p>
+
+<pre><code>pnormGC(73.1093,region="below",mean=70,
+        sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/qnormtut73.png" alt="plot of chunk qnormtut73" /> </p>
+
+<pre><code>## [1] 0.85
+</code></pre>
+
+<p>Sure enough, the area under the curve before 73.1093 is 0.85.</p>
+
+<h2 id="a-few-more-examples">A Few More Examples</h2>
+
+<h3 id="making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</h3>
+
+<blockquote>
+  <p>Suppose that SAT scores are normally distributed, and that the mean SAT score is 1000, and the standard deviation of all SAT scores is 100.  <em>How high must you score so that only 10% of the population scores higher than you?</em></p>
+</blockquote>
+
+<p>Here’s the solution.  If 10% score higher than you, then 90% score lower.  So just call <code>qnorm()</code> with 0.90 as the boundary value:</p>
+
+<pre><code>qnorm(0.90,mean=1000,sd=100)
+
+## [1] 1128
+</code></pre>
+
+<p>In other words, the 90th percentile of SAT scores is around 1128.</p>
+
+<h3 id="an-area-between">An Area Between</h3>
+
+<blockquote>
+  <p>Find a positive number $z$ so that the area under the standard normal curve between $-z$ and $z$ is 0.95.</p>
+</blockquote>
+
+<p>Here’s the solution.  If 95% of the area lies between $-z$ and $z$, then 5% of the area must lie outside of this range.  since normal curve as symmetric, half of this amount–2.5%–must lie before $-z$.  Then the area under the curve before $z$ must be:</p>
+
+<script type="math/tex; mode=display">0.025+0.95=0.975.</script>
+
+<p>Hence the number $z$ is actually the 97.5th percentile of the standard normal distribution, and we can find it as follows:</p>
+
+<pre><code>qnorm(0.975,mean=0,sd=1)
+
+## [1] 1.96
+</code></pre>
+
+<p>So $z$ is about 1.96.  We can check this result graphically as follows:</p>
+
+<pre><code>pnormGC(c(-1.96,1.96),region="between",mean=0,
+        sd=1,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/qnormtutbetween.png" alt="plot of chunk qnormtutbetween" /> </p>
+
+<pre><code>## [1] 0.95
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Xtabs() Tutorial]]></title>
@@ -459,109 +570,6 @@ install_github(repo="homerhanumat/tigerstats")
 <pre><code>colors()
 </code></pre>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tutorial on Lattice's Bwplot()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/"/>
-    <updated>2014-02-28T17:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
-  <li><a href="#numerical-and-factor-variable">Numerical and Factor Variable</a></li>
-  <li><a href="#warning">Warning</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>The function <code>bwplot()</code> makes box-and-whisker plots for numerical variables.  It comes from the <code>lattice</code> package for statistical graphics, which is pre-installed with every distribution of R.  Also, package <code>tigerstats</code> depends on lattice, so if you load <code>tigerstats</code>:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p>then <code>lattice</code> will be loaded as well.  If you don’t plan to use <code>tigerstats</code> but you want to use the function <code>bwplot()</code>, then make sure you load lattice:</p>
-
-<pre><code>require(lattice)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="one-numerical-variable">One Numerical Variable</h2>
-
-<p>For a box-and-whisker plot of the fastest speeds ever driven by students in the <code>m111survey</code> data frame, use the command:</p>
-
-<pre><code>bwplot(~fastest,data=m111survey,
-       xlab="speed (mph)",
-       main="Fastest Speed Ever Driven")
-</code></pre>
-
-<p><img src="/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
-
-<p>Note the use of:</p>
-
-<ul>
-  <li>the <code>xlab</code> argument to label the horizontal axis, complete with units (miles per hour);</li>
-  <li>the <code>main</code> argument to provide a brief but descriptive title for the graph.</li>
-</ul>
-
-<h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
-
-<p>Say you want to know:</p>
-
-<blockquote>
-  <p><em>Who tends to drive faster:  the guys or the gals?</em></p>
-</blockquote>
-
-<p>Then you are studying the relationship between the numerical variable <strong>fastest</strong> and the factor variable <strong>sex</strong>.  <code>bwplot()</code> will break the fastest speeds up by sex and parallel box-and-whisker plots, if you run the following command:</p>
-
-<pre><code>bwplot(fastest~sex,data=m111survey,
-       ylab="speed (mph)",
-       main="Fastest Speed Ever Driven,\nby Sex of Subject")
-</code></pre>
-
-<p><img src="/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
-
-<p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
-
-<p>If you prefer your box-and-whisker plots to be horizontal, then you can reverse the order of the variables in the formula:</p>
-
-<pre><code>bwplot(sex~fastest,data=m111survey,
-       xlab="speed (mph)",
-       main="Fastest Speed Ever Driven,\nby Sex of Subject")
-</code></pre>
-
-<p><img src="/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
-
-<h2 id="warning">Warning</h2>
-
-<p>Box-and-Whisker plots are great for studying:</p>
-
-<ul>
-  <li>one numerical variable</li>
-  <li>the relationship between a numerical variable and a factor variable.</li>
-</ul>
-
-<p>However, if you try to study the relationship between two numerical variables with <code>bwplot()</code>, you will get bizarre results.</p>
-
-<p>For example, suppose you want to study the relationship between fastest speed ever driven (<strong>fastest</strong>) and the grade point average (<strong>GPA</strong>) of the subjects in <code>m111survey</code>:</p>
-
-<pre><code>bwplot(fastest~GPA,data=m111survey,
-       ylab="speed (mph)",
-       xbal="grade-point average",
-       main="Fastes Speed Ever Driven,\nby Grade-Point Average")
-</code></pre>
-
-<p><img src="/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
-
-<p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
-
-<p>Use <code>xyplot()</code> (scatterplots) to study the relationship between two numerical variables.</p>
 ]]></content>
   </entry>
   
