@@ -220,7 +220,7 @@ P(X < 73.1093) = 0.85 %]]></script>.</p>
 <pre><code>qnorm(0.10,mean=1000,sd=100)
 </code></pre>
 
-<p>then we would have got only the 10th percentile of the SAT scores, not the desired 90th percentile.  If you would like to input 0.10 directly, then you can do so provided that you fiddle with the <code>upper.tail</code> argument:</p>
+<p>then we would have got only the 10th percentile of the SAT scores, not the desired 90th percentile.  If you would like to input 0.10 directly, then you can do so provided that you fiddle with the <code>lower.tail</code> argument:</p>
 
 <pre><code>qnorm(0.10,mean=1000,sd=100,
       lower.tail=FALSE)

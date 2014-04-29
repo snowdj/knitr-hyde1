@@ -4,7 +4,7 @@
   <title><![CDATA[A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-29T13:30:37-04:00</updated>
+  <updated>2014-04-29T13:34:14-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -98,7 +98,7 @@ P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
 <pre><code>qnorm(0.10,mean=1000,sd=100)
 </code></pre>
 
-<p>then we would have got only the 10th percentile of the SAT scores, not the desired 90th percentile.  If you would like to input 0.10 directly, then you can do so provided that you fiddle with the <code>upper.tail</code> argument:</p>
+<p>then we would have got only the 10th percentile of the SAT scores, not the desired 90th percentile.  If you would like to input 0.10 directly, then you can do so provided that you fiddle with the <code>lower.tail</code> argument:</p>
 
 <pre><code>qnorm(0.10,mean=1000,sd=100,
       lower.tail=FALSE)
@@ -673,7 +673,7 @@ system("cp figure/* ../source/images/figure")
 </span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
 </span><span class="line">  &lt;link href="http://homerhanumat.github.io/atom.xml" rel="self"/&gt;
 </span><span class="line">  &lt;link href="http://homerhanumat.github.io/"/&gt;
-</span><span class="line">  &lt;updated&gt;2014-04-29T13:30:37-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;updated&gt;2014-04-29T13:34:14-04:00&lt;/updated&gt;
 </span><span class="line">  &lt;id&gt;http://homerhanumat.github.io/&lt;/id&gt;
 </span><span class="line">  &lt;author&gt;
 </span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;
