@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Tech Note | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/tech-note/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-04-29T13:34:14-04:00</updated>
+  <updated>2014-05-03T21:01:05-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,6 +12,668 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Course Management With the RStudio Server]]></title>
+    <link href="http://homerhanumat.github.io/blog/2014/05/02/perl-scripts-r-studio/"/>
+    <updated>2014-05-02T21:00:00-04:00</updated>
+    <id>http://homerhanumat.github.io/blog/2014/05/02/perl-scripts-r-studio</id>
+    <content type="html"><![CDATA[<ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#establishing-a-common-source-folder">Establishing a “Common Source” Folder</a></li>
+  <li><a href="#automated-assignment-collectionreturn">Automated Assignment Collection/Return</a>    <ul>
+      <li><a href="#student-usernames">Student Usernames</a></li>
+      <li><a href="#encrypting-your-password">Encrypting Your Password</a></li>
+      <li><a href="#create-subdirectories">Create Subdirectories</a></li>
+    </ul>
+  </li>
+  <li><a href="#collect-commandline-arguments">collect commandline arguments</a>    <ul>
+      <li><a href="#collect-assignments">Collect Assignments</a></li>
+    </ul>
+  </li>
+  <li><a href="#section"><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</a></li>
+  <li><a href="#collect-commandline-arguments-1">collect commandline arguments</a>    <ul>
+      <li><a href="#return-assignments">Return Assignments</a></li>
+    </ul>
+  </li>
+  <li><a href="#section-1"><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</a></li>
+  <li><a href="#collect-commandline-arguments-2">collect commandline arguments</a>    <ul>
+      <li><a href="#bumps-on-the-road">Bumps on the Road</a></li>
+      <li><a href="#props-to-the-sysadmin">Props to the Sysadmin</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>At my institution we teach both elementary and upper-level undergraduate statistics using R, in the environment of the <a href="https://www.rstudio.com/ide/download/">RStudio Linux server</a> installed and configured on our campus network.  Although students are made aware of the existence of the desktop version of RStudio and eventually are encouraged to install it on their personal machines, the default course environment is that of the server.</p>
+
+<p>One reason for this choice is that the server allows us—instructors working in consultation with our sysadmin—to standardize the R environment (R version, installed packages, etc.) for all class members, so that if we add a feature or fix a problem we have some reasonable confidence that it will work for everyone.</p>
+
+<p>Another reason—which constitutes the theme of this post—is that the server environment facilitates course management, especially in technical respects specific to a statistics course, where standard online content management systems such as Moodle or Blackboard may fall short.  The aim of this post is to record, for colleagues at our institution and for folks at other institutions who are considering making the switch to R, the principal ways in which in we have tweaked the server for course-management purposes.  R and RStudio are wonderful free software, but like all free software, they come with a certain “cost of ownership”, and those costs can be considerable if (like me) you begin with little in the way of programming/hacking skills.  I hope that the following information will reduce the ownership costs for others who choose to teach with R in a similar vein.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>I assume that you have persuaded your sysadmin to install and configure some version of the <a href="https://www.rstudio.com/ide/download/">RStudio Linux server</a>.  My sysadmin chose to set up the Cent OS version, and configured it so that all members of the campus community can access it by means of their username and password.</p>
+
+<p>If your personal machine runs Linux—either the Ubuntu or Cent OS distribution—it’s a good idea to brush up on (or acquire) some very basic command-line skills and to install the server on your own machine as well, so you can replicate some of the strategies described below.  Just a little bit of knowledge of the innards—file permissions, etc.—pays off handsomely in being able to work with your sysadmin to diagnose and resolve quickly any problems that arise.  I myself run Ubuntu, but have not found significant differences between how the server works for me and how it works on campus.</p>
+
+<h2 id="establishing-a-common-source-folder">Establishing a “Common Source” Folder</h2>
+
+<p>Ask your sysadmin to grant superuser privileges t oyou and other course instructors.  Then one of you should create a folder in your Home directory on the server that will serve as a common source for course material.  The sysadmin can create a symbolic link to the folder and can set permissions so that all users may read files in the folder but only you and fellow instructors can write to it.  This folder serves as the repository for assignments, solutions, syllabi, etc.</p>
+
+<p>If you are not the owner of the folder, you can get to it using the ellipses button in the upper right-hand corner of the Files pane.  Simply enter the path-name as specified by your sysadmin.  For one of our courses it is simply: <code>/mat111</code>.</p>
+
+<p>From there you can navigate the directory structure in the Files pane, in the usual way.  To reset the Files pane view back to your Home directory, push the Ellipses button again and enter: <code>~</code>.</p>
+
+<p>All of the foregoing will make sense to you once your have studied Unix-like directory structures.</p>
+
+<h2 id="automated-assignment-collectionreturn">Automated Assignment Collection/Return</h2>
+
+<h3 id="student-usernames">Student Usernames</h3>
+
+<p>Once our elementary  students have acquired some proficiency with R, we introduce them to R Markdown and require them to turn in certain homework  and project assignments as R Markdown documents.  We write comments into a copy of the assignment and return it to the student.  One of the best arguments for teaching in the server environment is that this collection and return process can be automated.  Here’s how we do it these days.</p>
+
+<p>First of all, each instructor should create a text file consisting of the network usernames of student in his or her course (or section thereof), one username per line, and name it something like <code>students.txt</code>.</p>
+
+<p>Save the file in your Home directory on the server.</p>
+
+<h3 id="encrypting-your-password">Encrypting Your Password</h3>
+
+<p>You are going to create some sub-directories in Home directories of your students, so for this you will need to act as a superuser.  This action will in turn require you to provide your password to the computer.  For security reasons, you don’t want to send out the password every time you perform a superuser action, so you need to encrypt your password and provide a key in its place.  For this purpose our sysadmin has written the following Perl script:</p>
+
+<p>``` perl
+#!/usr/bin/perl -w</p>
+
+<p>use strict;
+use Crypt::RC4;</p>
+
+<p>my($clearText,$passwordFile,$key);</p>
+
+<p>foreach my $item(@ARGV) {</p>
+
+<pre><code>    if ($item =~ m/--password=/i) {
+            $clearText = substr($item,11,length($item)-11);
+    }
+ 
+ 
+    if ($item =~ m/--file=/i) {
+            $passwordFile = substr($item,7,length($item)-7);
+    }
+ 
+ 
+    if ($item =~ m/--key=/i) {
+            $key = substr($item,6,length($item)-6);
+    }
+</code></pre>
+
+<p>}</p>
+
+<p>if (!$passwordFile || !$clearText || !$key) {
+print “\n USAGE: perl createpasswordfile.pl –password=<domain password=""> --key=<password file="" key=""> --file=<secure password="" file="">\n\n";
+exit;
+}</secure></password></domain></p>
+
+<p>my($encryptedPassword) = RC4($key,$clearText);</p>
+
+<p>my($OUTPUTFILE);
+open ($OUTPUTFILE, “&gt;$passwordFile”) or die “Could not open $passwordFile\n”;
+print $OUTPUTFILE “$encryptedPassword”;
+close ($OUTPUTFILE);</p>
+
+<p>system(“chmod 400 $passwordFile”);</p>
+
+<p>print “\n\nPassword file $passwordFile written.\n”;
+```</p>
+
+<p>The above script, and others to follow, are house in <code>/scripts</code>.  You will use it to create an encrypted version of your password that is stored in a new file in your Home directory.  To run the script, issue the following (suitably modified) command in R:</p>
+
+<pre><code>system("perl /scripts/createpasswordfile.pl --password=&lt;YourPassword&gt; --key=&lt;YourChosenKey&gt; --file=&lt;/path/to/YourFavFileName.txt&gt;")
+</code></pre>
+
+<p>After you run the script, clear your R History:  you don’t want to leave your password hanging out in the open.</p>
+
+<h3 id="create-subdirectories">Create Subdirectories</h3>
+
+<p>Here is the Perl script that we currently use to create <code>submit</code> and <code>returned</code> directories in the Home directory of each student in the class.  Obviously your sysadmin will modify it to suit the file structure of your server.</p>
+
+<p>``` perl
+#!/usr/bin/perl -w</p>
+
+<p>use strict;
+use constant TRUE =&gt; -1;
+use constant FALSE =&gt; 0;
+#<strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong> PARAMETERS <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</p>
+
+<p>my($sourceRoot) = “/home/FAST”;
+my($group) = “admins”;
+my($userDirective) = “FAST\\”;
+my($permissions) = “770”;
+#<strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</p>
+
+<h1 id="collect-commandline-arguments">collect commandline arguments</h1>
+
+<p>sub showUsage {</p>
+
+<p>print “\nUSAGE: perl createdirectories.pl –studentfile=<filename> [--source=<source path="" /> (Alternate source path) --email=<email address=""> (Email for submission report) --group=<group name=""> (Security Group) --permissions=<nnn> (Default Directory Permissions)]\n\n";
+exit;</nnn></group></email></filename></p>
+
+<p>}</p>
+
+<p>my($studentfile,$sendEmail,$summaryLine,$recipientAddress);
+$sendEmail = FALSE;</p>
+
+<p>foreach my $item(@ARGV) {</p>
+
+<pre><code>    if ($item =~ m/--studentfile=/i) {
+            $studentfile = substr($item,14,length($item)-14);
+    }
+ 
+    if ($item =~ m/--source=/i) {
+             $sourceRoot = substr($item,9,length($item)-9);
+    }
+ 
+    if ($item =~ m/--email=/i) {
+            $sendEmail = TRUE;
+            $recipientAddress = substr($item,8,length($item)-8);
+    }
+</code></pre>
+
+<p>if ($item =~ m/–group=/i) {
+                $group = substr($item,8,length($item)-8);
+        }</p>
+
+ 	if ($item =~ m/–permissions=/i) {
+<pre><code>            $permissions = substr($item,14,length($item)-14);
+    }
+</code></pre>
+
+<p>}</p>
+
+<p>if (!$studentfile) {
+&amp;showUsage;
+}</p>
+
+<p>$summaryLine = “\nDirectory Permission Updates:\n————————–\n\n”;</p>
+
+<p>my($INPUTFILE);
+open ($INPUTFILE, “&lt;$studentfile”) or die “Could not open $studentfile\n”;</p>
+
+<p>while (&lt;$INPUTFILE&gt;) {</p>
+
+<pre><code>$_ =~ s/\cM\cJ|\cM|\cJ/\n/g;  # Re-format Windows files
+my($inputLine) = $_;
+    chomp ($inputLine);
+ 
+unless ($inputLine =~ /^\s*$/) {
+ 
+ 
+	my($submitPath) = $sourceRoot . "/" . $inputLine . "/submit";
+	my($returnPath) = $sourceRoot . "/" . $inputLine . "/returned";
+	my($mynotesPath) = $sourceRoot . "/" . $inputLine ."/mynotes";
+
+	unless (-e $submitPath) { 
+		system ("mkdir $submitPath"); #or die "\nCould not create directory $submitPath.\n"; 
+		$summaryLine = $summaryLine . "\nCreated submit path $submitPath for user $inputLine.\n";
+	} else {
+		$summaryLine = $summaryLine . "\nSubmit path $submitPath for user $inputLine already exists.\n";
+	}
+
+	unless (-e $returnPath) { 
+		system ("mkdir $returnPath");  #or die "\nCould not create directory $returnPath.\n"; 
+		$summaryLine = $summaryLine . "\nCreated return path $returnPath for user $inputLine.\n";
+	} else {
+		$summaryLine = $summaryLine . "\nReturn path $returnPath for user $inputLine already exists.\n";
+	}
+</code></pre>
+
+ 		unless (-e $mynotesPath) {
+<pre><code>            	system ("mkdir $mynotesPath");  #or die "\nCould not create directory $returnPath.\n";
+            	$summaryLine = $summaryLine . "\nCreated mynotes path $mynotesPath for user $inputLine.\n";
+    	} else {
+            	$summaryLine = $summaryLine . "\nmynotes path $mynotesPath for user $inputLine already exists.\n";
+    	}
+ 
+ 
+	my($securityToken) = $userDirective . $inputLine . ":" . $group;
+
+	system("chown $securityToken $submitPath");
+	$summaryLine = $summaryLine . "\nChanged ownership of submit path $submitPath to $securityToken.\n";
+    
+	system("chown $securityToken $returnPath");
+	$summaryLine = $summaryLine . "\nChanged ownership of return path $returnPath to $securityToken.\n";
+ 	
+	system("chown $securityToken $mynotesPath");
+    	$summaryLine = $summaryLine . "\nChanged ownership of mynotes path $mynotesPath to $securityToken.\n";
+ 
+    
+	system("chmod $permissions $submitPath");
+	$summaryLine = $summaryLine . "\nChanged permissions of submit path $submitPath to $permissions.\n";
+    
+	system("chmod $permissions $returnPath");
+ 		$summaryLine = $summaryLine . "\nChanged permissions of return path $returnPath to $permissions.\n";
+ 
+	system("chmod $permissions $mynotesPath");
+    	$summaryLine = $summaryLine . "\nChanged permissions of mynotes path $mynotesPath to $permissions.\n";
+ 
+ 
+}
+</code></pre>
+
+<p>}</p>
+
+<p>close ($INPUTFILE);</p>
+
+<p>$summaryLine = $summaryLine . “\n”;</p>
+
+<p>print $summaryLine;</p>
+
+<p>if ($sendEmail == TRUE) {
+        print “\nSending summary email to $recipientAddress.\n”;
+        my ($emailSubject) = “Subject: RStudio directories updated”;
+        my ($sendmailObject) = “/usr/sbin/sendmail -F RStudio_Grades\@georgetowncollege.edu -t”;
+        my ($replyAddress) = “Reply-to: RStudio_Grades\@georgetowncollege.edu”;
+        my ($recipient) = “To: $recipientAddress”;
+        open (SENDMAIL, “|$sendmailObject”) or die “Cannot open $sendmailObject: $!”;
+        print SENDMAIL $emailSubject;
+        print SENDMAIL “\n”;
+        print SENDMAIL $recipient;
+        print SENDMAIL “\n”;
+        print SENDMAIL $replyAddress;
+        print SENDMAIL “\n”;
+        print SENDMAIL “Content-type: text/plain\n\n”;
+        print SENDMAIL “\n”;
+        print SENDMAIL $summaryLine;
+        print SENDMAIL “\n”;
+        print SENDMAIL “.”;
+        close (SENDMAIL);
+}
+```
+To run the script, issue the following R command, suitably modified:</p>
+
+<pre><code>system("perl createdirectories.pl --studentfile=&lt;StudentFileName&gt;")
+</code></pre>
+
+<p>There are options to receive an email report confirming the creation of the directories, and to set permissions for them as well.  Currently we use the default settings.</p>
+
+<h3 id="collect-assignments">Collect Assignments</h3>
+
+<p>Students save an assignment into their <code>submit</code> directory, named according to some convention that you establish.  Specifics vary, but the name must end with an underscore followed by the student username.  For example:  <code>HW05_jdoe.Rmd</code> is the fifth homework assignment, submitted by the student with username <code>jdoe</code>.</p>
+
+<p>The Perl script for collection of assignments is as follows:</p>
+
+<p>``` perl
+#!/usr/bin/perl -w</p>
+
+<p>use strict;
+use File::Find;
+use constant TRUE =&gt; -1;
+use constant FALSE =&gt; 0;
+#<strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong> PARAMETERS <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</p>
+
+<p>my($sourceRoot) = “/home/FAST”;</p>
+
+<h1 id="section"><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</h1>
+
+<h1 id="collect-commandline-arguments-1">collect commandline arguments</h1>
+
+<p>sub showUsage {</p>
+
+<p>print “\nUSAGE: perl collecthomework.pl –instructor=<name> --assignment=<name> --studentfile=<filename> \n Optional Parameters:\n\n[--source=<source path="" /> (Alternate source path)\n--destination=<destination path=""> (Alternate destination path)\n --remove (Remove homework files after copying them)\n --email=<email address=""> (Email for submission report)]\n\n";
+exit;</email></destination></filename></name></name></p>
+
+<p>}</p>
+
+<p>my($instructor,$assignment,$studentfile,$destinationRoot,$sendEmail,$recipientAddress);</p>
+
+<p>$sendEmail = FALSE;</p>
+
+<p>foreach my $item(@ARGV) {</p>
+
+<p>if ($item =~ m/–instructor=/i) {
+		$instructor = substr($item,13,length($item)-13);
+	}</p>
+
+ 	if ($item =~ m/–assignment=/i) {
+<pre><code>            $assignment = substr($item,13,length($item)-13);
+    }
+ 
+ 
+if ($item =~ m/--studentfile=/i) {
+            $studentfile = substr($item,14,length($item)-14);
+    }
+</code></pre>
+
+ 	if ($item =~ m/–source=/i) {
+<pre><code>	 $sourceRoot = substr($item,9,length($item)-9);                
+    }
+ 
+if ($item =~ m/--destination=/i) {
+             $destinationRoot = substr($item,14,length($item)-14);
+    }
+ 
+if ($item =~ m/--email=/i) {
+            $sendEmail = TRUE;
+	$recipientAddress = substr($item,8,length($item)-8);
+    }
+</code></pre>
+
+<p>}</p>
+
+<p>if (!$instructor || !$assignment || !$studentfile) {
+&amp;showUsage;
+}</p>
+
+<p>if (!$destinationRoot) {
+	$destinationRoot = “/home/FAST/” . $instructor . “/homework”;
+}</p>
+
+<p>my($noSubmissionYet) = “\nThe following students have not submitted homework yet:\n————————————————————”;
+my($summaryLine) = “\nHomework assignments retrieved for assignment $assignment:\n————————————-“;</p>
+
+<p>my($INPUTFILE);
+open ($INPUTFILE, “&lt;$studentfile”) or die “Could not open $studentfile\n”;</p>
+
+<p>while (&lt;$INPUTFILE&gt;) {</p>
+
+ 	$_ =~ s/\cM\cJ|\cM|\cJ/\n/g;  # Re-format Windows files
+<pre><code>    my($inputLine) = $_;
+    chomp ($inputLine);
+ 
+    unless ($inputLine =~ /^\s*$/) {
+ 
+ 
+ 
+ 
+ 
+    my(@searchFolders) = ($sourceRoot . "/" . $inputLine . "/submit");
+my(@foundProjects);
+ 
+    find( sub { push @foundProjects, $File::Find::name if /$assignment/i }, @searchFolders);
+ 
+
+    my($projectFile);
+ 
+    foreach $projectFile(@foundProjects) {
+ 
+	print "\nFound $projectFile.";
+ 
+            my ($destinationFolder) = $destinationRoot . "/" . $assignment . "/" . $inputLine;
+            unless (-e $destinationFolder) {
+                    system ("mkdir -p $destinationFolder");
+            }
+ 
+            $destinationFolder = $destinationFolder . "/";
+            system ("cp -f $projectFile $destinationFolder");
+	$summaryLine = $summaryLine . "\n $inputLine submitted file: $projectFile";		
+ 
+}
+ 
+if (!@foundProjects) {
+	$noSubmissionYet = $noSubmissionYet . "\n$inputLine";
+}
+ 
+ 
+}
+</code></pre>
+
+<p>}</p>
+
+<p>close ($INPUTFILE);</p>
+
+<p>$summaryLine = $summaryLine . “\n\n” . $noSubmissionYet . “\n\n”;</p>
+
+<p>print $summaryLine;</p>
+
+<p>if ($sendEmail == TRUE) {
+	print “\nSending summary email to $recipientAddress.\n”;
+	my ($emailSubject) = “Subject: RStudio projects submitted for assignment $assignment”;
+	my ($sendmailObject) = “/usr/sbin/sendmail -F RStudio_Grades\@georgetowncollege.edu -t”;
+	my ($replyAddress) = “Reply-to: RStudio_Grades\@georgetowncollege.edu”;
+	my ($recipient) = “To: $recipientAddress”;
+	open (SENDMAIL, “|$sendmailObject”) or die “Cannot open $sendmailObject: $!”;
+	print SENDMAIL $emailSubject;
+	print SENDMAIL “\n”;
+	print SENDMAIL $recipient;
+	print SENDMAIL “\n”;
+	print SENDMAIL $replyAddress;
+	print SENDMAIL “\n”;
+	print SENDMAIL “Content-type: text/plain\n\n”;
+	print SENDMAIL “\n”;
+	print SENDMAIL $summaryLine;
+	print SENDMAIL “\n”;
+	print SENDMAIL “.”;
+	close (SENDMAIL);</p>
+
+<p>}
+```
+To run the script issue a command like the following:</p>
+
+<pre><code>system("perl /scripts/collecthomework.pl --instructor=&lt;yourUsername&gt; --assignment=&lt;assignCode&gt; --studentfile=students.txt")
+</code></pre>
+
+<p>If you would like to receive an email with a list of all students from whom you got an assignment, run this instead:</p>
+
+<pre><code>system("perl /scripts/collecthomework.pl --instructor=&lt;yourUsername&gt; --assignment=&lt;assignCode&gt; --studentfile=students.txt --email=&lt;yourEmailAddress&gt;")
+</code></pre>
+
+<p>You can run the collection script as often as you like:  it will pick up newly-submitted assignments but will not overwrite assignments collected from other students in a previous run.</p>
+
+<h3 id="return-assignments">Return Assignments</h3>
+
+<p>All of the assignments you collect appear in a <code>homework</code> folder in your Home directory, in sub-directories by assignment name and sub-sub-directories by student username.  Navigate to the assignments one by one.  For each assignment, open the R Markdown file and save it with an additional tag in the file name that will mark it out as the graded/commented copy to be returned to the student.  We use <code>_com</code> as our tag, creating files like this:  <code>HW05_jdoe_com.Rmd</code>.</p>
+
+<p>For returning assignments, we have the following Perl script:</p>
+
+<p>``` perl
+#!/usr/bin/perl -w</p>
+
+<p>use strict;
+use File::Find;
+use Crypt::RC4;
+use constant TRUE =&gt; -1;
+use constant FALSE =&gt; 0;
+#<strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong> PARAMETERS <strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</p>
+
+<p>my($sourceRoot) = “/home/FAST/”;
+my($group) = “admins”;
+my($userDirective) = “FAST\\”;
+my($permissions) = “770”;</p>
+
+<h1 id="section-1"><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong><strong>**</strong>***</h1>
+
+<h1 id="collect-commandline-arguments-2">collect commandline arguments</h1>
+
+<p>sub showUsage {</p>
+
+<p>print “\nUSAGE: perl returnhomework.pl –path=<name> --flag=<name> --studentfile=<filename> \n Optional Parameters:\n\n[--email=<email address=""> (Email for submission report) --key=<password file="" key=""> --passwordfile=<password file="">]\n\n";
+exit;</password></password></email></filename></name></name></p>
+
+<p>}</p>
+
+<p>my($path,$flag,$studentfile,$destinationRoot,$sendEmail,$recipientAddress,$key,$passwordFile,$decryptedPassword);</p>
+
+<p>$sendEmail = FALSE;</p>
+
+<p>foreach my $item(@ARGV) {</p>
+
+<p>if ($item =~ m/–flag=/i) {
+                $flag = substr($item,7,length($item)-7);
+        }</p>
+
+<pre><code>if ($item =~ m/--studentfile=/i) {
+            $studentfile = substr($item,14,length($item)-14);
+    }
+</code></pre>
+
+ 	if ($item =~ m/–path=/i) {
+<pre><code>	 $path = substr($item,7,length($item)-7);                
+    }
+ 
+if ($item =~ m/--destination=/i) {
+             $destinationRoot = substr($item,14,length($item)-14);
+    }
+ 
+if ($item =~ m/--email=/i) {
+            $sendEmail = TRUE;
+	$recipientAddress = substr($item,8,length($item)-8);
+    }
+ 
+ 
+if ($item =~ m/--key=/i) {
+            $key = substr($item,6,length($item)-6);
+    }
+ 
+if ($item =~ m/--passwordfile=/i) {
+            $passwordFile = substr($item,15,length($item)-15);
+    }
+</code></pre>
+
+<p>}</p>
+
+<p>if ($passwordFile) {</p>
+
+<pre><code>my($INPUTFILE);
+open ($INPUTFILE, "&lt;$passwordFile") or die "Could not open $passwordFile\n";
+ 
+while (&lt;$INPUTFILE&gt;) {
+    	my($inputLine) = $_;
+    	chomp ($inputLine);
+ 
+	$decryptedPassword = RC4($key,$inputLine);
+}
+</code></pre>
+
+<p>}</p>
+
+<p>if (!$path || !$flag || !$studentfile) {
+&amp;showUsage;
+}</p>
+
+<p>unless ( $path =~ s|/\s*$|/| ) 
+{
+    $path = $path . “/”;
+}</p>
+
+<p>if (!$destinationRoot) {
+	$destinationRoot = “/home/FAST/”;
+}</p>
+
+<p>my($summaryLine) = “\nHomework graded in folder $path:\n————————————-“;</p>
+
+<p>my($INPUTFILE);
+open ($INPUTFILE, “&lt;$studentfile”) or die “Could not open $studentfile\n”;</p>
+
+<p>while (&lt;$INPUTFILE&gt;) {</p>
+
+ 	$_ =~ s/\cM\cJ|\cM|\cJ/\n/g;  # Re-format Windows files
+<pre><code>    my($inputLine) = $_;
+    chomp ($inputLine);
+ 
+    unless ($inputLine =~ /^\s*$/) {
+ 
+ 
+ 
+    my(@searchFolders) = ($path .  $inputLine);
+my(@foundProjects);
+ 
+    find( sub { push @foundProjects, $File::Find::name if /$flag/i }, @searchFolders);
+ 
+
+    my($projectFile);
+ 
+    foreach $projectFile(@foundProjects) {
+ 
+	print "\nFound $projectFile.";
+ 
+            my ($destinationFolder) = $destinationRoot . $inputLine . "/returned";
+            unless (-e $destinationFolder) {
+                    system ("mkdir -p $destinationFolder");
+            }
+ 
+            $destinationFolder = $destinationFolder . "/";
+</code></pre>
+
+ 		my($securityToken) = $userDirective . $inputLine . “:” . $group;
+
+<pre><code>            system ("cp -f $projectFile $destinationFolder");
+	
+	my($folderWildcard) = $destinationFolder . "*";
+
+ 
+	if ($passwordFile) {
+            	system("echo $decryptedPassword | sudo chown $securityToken $folderWildcard");
+            	system ("echo $decryptedPassword | sudo chmod 770 $folderWildcard");
+	} else {
+		system("chown $securityToken $folderWildcard");
+            	system("chmod 770 $folderWildcard");
+	}
+ 
+	
+	$summaryLine = $summaryLine . "\n $inputLine returned $projectFile to $destinationFolder\n";		
+ 
+ 
+}
+ 
+ 
+}
+</code></pre>
+
+<p>}</p>
+
+<p>close ($INPUTFILE);</p>
+
+<p>$summaryLine = $summaryLine . “\n”;</p>
+
+<p>print $summaryLine;</p>
+
+<p>if ($sendEmail == TRUE) {
+	print “\nSending summary email to $recipientAddress.\n”;
+	my ($emailSubject) = “Subject: RStudio projects graded and returned.”;
+	my ($sendmailObject) = “/usr/sbin/sendmail -F RStudio_Grades\@georgetowncollege.edu -t”;
+	my ($replyAddress) = “Reply-to: RStudio_Grades\@georgetowncollege.edu”;
+	my ($recipient) = “To: $recipientAddress”;
+	open (SENDMAIL, “|$sendmailObject”) or die “Cannot open $sendmailObject: $!”;
+	print SENDMAIL $emailSubject;
+	print SENDMAIL “\n”;
+	print SENDMAIL $recipient;
+	print SENDMAIL “\n”;
+	print SENDMAIL $replyAddress;
+	print SENDMAIL “\n”;
+	print SENDMAIL “Content-type: text/plain\n\n”;
+	print SENDMAIL “\n”;
+	print SENDMAIL $summaryLine;
+	print SENDMAIL “\n”;
+	print SENDMAIL “.”;
+	close (SENDMAIL);</p>
+
+<p>}
+```</p>
+
+<p>To run the script, you need the key for your encrypted password.  Run a command like the following:</p>
+
+<pre><code>system("perl /scripts/returnhomework.pl --path=/path/to/yourUsername/homework/HW05/ --flag=_com --studentfile=/usr/local/sbin/YourUsername-YourCourse.txt --key=YourChosenKey --passwordfile=password_file_YourUsername.txt")
+</code></pre>
+
+<p>Note that the sysadmin has established, for each instructor, a file in <code>/usr/local/sbin</code> of student usernames for the instructor’s course.  As students drop your course and you edit your local student file accordingly, the two files may fall out of sync, but the return script will still work correctly for students still enrolled in the course.</p>
+
+<h2 id="bumps-on-the-road">Bumps on the Road</h2>
+
+<p>All in all, the server environment has proven to be quite useful for our courses.  Nevertheless, there are a few complications and potential problems to keep in mind.</p>
+
+<ul>
+  <li>Students can read from the Common Source, directory, but cannot write to it.  If a student wishes to perform an “knitting” type of action to a file in the Common Source directory—e.g., knitting an R Markdown to HTML or previewing an R Presentation document—then she must save a copy into her Home directory and perform the knitting operations upon it.  The same often goes for other instructors (default file permissions are still a bit unclear to us).</li>
+  <li><a href="https://www.rstudio.com/shiny/">Shiny apps</a> are wonderful.  We put them into the <a href="https://github.com/homerhanumat/tigerstats">ancillary package</a> that we use for our own elementary course, so that R users can run them locally once the package is installed, or run them locally after downloading them from the package’s Git Hub repository.  However, at many institutions the firewalls don’t permit execution of the Shiny scripts.  If this is the case at your own institution and you want your students to work with Shiny apps, then you must either install and configure the Shiny server or deploy the apps yourself on a site hosted by RStudio, e.g., <a href="http://shinyapps.io/">http://shinyapps.io/</a>.  We have experimented with both venues and are pleased with the results.</li>
+  <li>A small percentage of users eventually experience mysterious problems—e.g., loss of ability to knit an R markdown document more than once in a single server session—that we have not been able to diagnose and resolve completely.  If the problem becomes sufficiently severe, a student could always use the desktop version, but this in itself creates a course management problem.  Larger institutions than ours may wish to consider paying for the Enterprise version of the RStudio server, and the support that accompanies it.</li>
+</ul>
+
+<h2 id="props-to-the-sysadmin">Props to the Sysadmin</h2>
+
+<p>We are grateful for the work of Scott Switzer, who serves as Server System Manager in the Office of Information Technology Services at Georgetown College.  Scott manages the RStudio server and the College’s Shiny server, created the Perl scripts in this post, helped establish other website support for our elementary statistics course, and at an early stage played the role of informal command-line guru to the the author of this post.  If you have the good fortune to work with a such a sysadmin your own institution, make sure that she gets lots of love and special ice cream!</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Roctopress: Configure Your Octopress Blog for R]]></title>
@@ -381,7 +1043,7 @@ git push origin source
 
 <link href="http://homerhanumat.github.io/" />
 
-<updated>2014-04-29T13:34:14-04:00</updated>
+<updated>2014-05-03T21:01:05-04:00</updated>
 <id>http://homerhanumat.github.io/</id>
 <author>
     <name>Homer White</name>
