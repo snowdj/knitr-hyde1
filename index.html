@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Introduction Installation Establishing a “Common Source” Folder Automated Assignment Collection/Return Student Usernames Encrypting Your Password &hellip;">
+  <meta name="description" content="Introduction Reason #3: RStudio’s shiny Examples “Slow” Simulation Understanding Model Assumptions Types of Error Illustrating Fine Points Playing &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,226 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/04/reasons-to-teach-with-R-3/">Five Reasons to Teach Elementary Statistics With R: #3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T21:00:00-04:00" pubdate data-updated="true">May 4<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/05/04/reasons-to-teach-with-R-3/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></a></li>
+  <li><a href="#examples">Examples</a>    <ul>
+      <li><a href="#slow-simulation">“Slow” Simulation</a></li>
+      <li><a href="#understanding-model-assumptions">Understanding Model Assumptions</a></li>
+      <li><a href="#types-of-error">Types of Error</a></li>
+      <li><a href="#illustrating-fine-points">Illustrating Fine Points</a></li>
+      <li><a href="#playing-games">Playing Games</a></li>
+    </ul>
+  </li>
+  <li><a href="#shiny-vs-manipulate">Shiny vs. <code>manipulate</code></a></li>
+  <li><a href="#instructional-apps-gallery">Instructional Apps Gallery?</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is the third in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/">previous post</a> in this series described R Studio’s package <code>manipulate</code> and its applications in the easy authoring of instructional applets.  Today we’ll look at <code>shiny</code>, a related RStudio project.</p>
+
+<p>In order to try the ensuing examples, download an ancillary package that we use for our elementary course:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></h2>
+
+<p><a href="https://www.rstudio.com/shiny/">Shiny</a> appears to be intended primarily for data analysts working in industry or in academic or institutional research, but on the very day of its public release Victor Moreno pointed out its implications for statistics education (see his comment on <a href="http://blog.rstudio.org/2012/11/08/introducing-shiny/">this RStudio blog post</a>).  For statistics instructors Shiny offers essentially the same benefits as <code>manipulate</code>, but in addition comes pimped out with:</p>
+
+<ul>
+  <li>options for dynamic user input;</li>
+  <li>output formats that go well beyond <code>manipulate</code>’s home in the Plots pane;</li>
+  <li>default Bootstrap styling.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="slow-simulation">“Slow” Simulation</h3>
+
+<p>At my College we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose for example you are wondering whether a certain die is loaded.  You don’t want to crack it open, so you roll it sixty times, getting the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Spots</strong></th>
+      <th style="text-align: center">One</th>
+      <th style="text-align: center">Two</th>
+      <th style="text-align: center">Three</th>
+      <th style="text-align: center">Four</th>
+      <th style="text-align: center">Five</th>
+      <th style="text-align: center">Six</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Freq</strong></td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">18</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This looks like an awful lot of two-spots, but we were not expecting this in advance.  By this point in the course students have been made aware of the perils of “data snooping” and hence should be disinclined to employ an inferential procedure that is based specifically on a pattern that one happens to notice in one’s data.  Therefore, rather than perform inferential procedures keyed to “Two-spot” side of the die, we might turn instead to the chi-square statistic as a neutral measure of the difference between the observed results and what one would expect if the die were fair.</p>
+
+<p>The situation is addressed in this Shiny app:</p>
+
+<p><a href="http://rstudio.georgetowncollege.edu:3838/SlowGoodness">http://rstudio.georgetowncollege.edu:3838/SlowGoodness</a></p>
+
+<p>After re-sampling for a few minutes, students are convinced that it’s not so unlikely, after all to get results like the ones we observed, if the die is fair all along.</p>
+
+<p>Students are then prepared to understand a full-scale re-sampling simulation like the following one:</p>
+
+<pre><code>require(tigerstats)
+
+ 
+ 
+
+observed &lt;- c(8,18,11,7,9,7)
+fair &lt;- rep(1/6,6)
+set.seed(2020)
+chisqtestGC(observed,p=fair,
+      simulate.p.value=TRUE,
+      B=3000,graph=TRUE)
+
+## Pearson's chi-squared test with simulated p-value 
+## 	 (based on 3000 resamples)
+## 
+##   observed counts Expected by Null contribution to chisq statistic
+## A               8               10                             0.4
+## B              18               10                             6.4
+## C              11               10                             0.1
+## D               7               10                             0.9
+## E               9               10                             0.1
+## F               7               10                             0.9
+## 
+## 
+## Chi-Square Statistic = 8.8 
+## Degrees of Freedom of the table = 5 
+## P-Value = 0.125
+</code></pre>
+
+<p><img src="/images/figure/reasonsteachr3chisq.png" alt="plot of chunk reasonsteachr3chisq" /> </p>
+
+<p>Sure enough, if the die is fair then there is a reasonably good chance—about 12.5%—of getting results at least as extreme as the ones we got in our 60 rolls.</p>
+
+<p><strong>Note:</strong>  Shiny users know that the apps are liable to run more quickly if you run them locally.  To run the foregoing app locally from an R session, pull it out of the <code>tigerstats</code> package:</p>
+
+<pre><code>require(siny)
+runApp(system.file("SlowGoodness",package="tigerstats"))
+</code></pre>
+
+<h3 id="understanding-model-assumptions">Understanding Model Assumptions</h3>
+
+<p>Students tend to be somewhat rigid in their handling of “safety checks”—the diagnostics they are instructed to perform in order to judge whether the statistical model underlying a given inferential procedure is appropriate to the data at hand.  This rigidity stems partly from a lack of understanding of what the inferential procedure is intended to deliver (for example, that a method for making 95%-confidence intervals for a parameter should produce intervals that cover the parameter about 95% of the time in repeated sampling), and partly from a lack of experience with situations in which the mathematical assumptions of the model are not perfectly satisfied.</p>
+
+<p>The following Shiny app:</p>
+
+<pre><code>runApp(system.file("CIMean",package="tigerstats"))
+</code></pre>
+
+<p>addresses two learning outcomes:</p>
+
+<ul>
+  <li>coverage properties of confidence intervals (e.g, what “95% confidence” means, from a frequentist point of view);</li>
+  <li>the effect on coverage properties, at various sample sizes, of departures from normality assumptions in procedures based upon the t-statistic.</li>
+</ul>
+
+<p>Both “slow” (one-at-a-time) simulation and large-scale simulation (5000 samples) are available to the student.</p>
+
+<h3 id="types-of-error">Types of Error</h3>
+
+<p>Simulation is also helpful in coming to understand such notions as the level of significance of a hypothesis test (i.e., the probability a true Null Hypothesis in repeated sampling), and the notion of power as well.  See the following app:</p>
+
+<pre><code>runApp(system.file("Type12Errors",package="tigerstats"))
+</code></pre>
+
+<h3 id="illustrating-fine-points">Illustrating Fine Points</h3>
+
+<p>Sometimes you want to have an app on hand, not because it addresses a major course objective, but simply in case students ask a particular question.  For example, sometimes when the class is looking at a scatter plot—with regression line—of data that comes from a bivariate normal distribution, a student will remark that the regression line looks “too shallow”.  This root of this question is a confusion, in the student’s mind, between two purposes that a line might serve:</p>
+
+<ul>
+  <li>to provide a “linear summary”” of the scatter plot;</li>
+  <li>to provide linear predictions, based on the scatter plot, of y-values from x-values.</li>
+</ul>
+
+<p>The so-called “SD line”—the line that runs through the point of averages and whose slope is the ratio of the standard deviation of the y-value to the standard deviation of the x-value—is well-suited to the former task, whereas the regression line is, of course, the right choice for the latter one.  When many students first look at a scatter plot, they see an SD line in their mind’s eye; when they get around to producing the regression line, it can look like a misfire.</p>
+
+<p>The following app helps clear things up for students.  It is based on a discussion on the “shallow regression line” issue in <a href="http://books.wwnorton.com/books/Statistics/"><em>Statistics</em></a>, the classic text by Freeman, Pisani and Purves.</p>
+
+<pre><code>runApp(system.file("ShallowReg",package="tigerstats"))
+</code></pre>
+
+<h3 id="playing-games">Playing Games</h3>
+
+<p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
+
+<pre><code>runApp(system.file("FindRegLine",package="tigerstats"))
+</code></pre>
+
+<p>You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:</p>
+
+<script type="math/tex; mode=display">100 \times \frac{\textbf{Your Line's Error-SS}-\textbf{Residual-SS}}{\textbf{Total-SS}-\textbf{Residual-SS}}.</script>
+
+<h2 id="shiny-vs-manipulate">Shiny vs. <code>manipulate</code></h2>
+
+<p>You don’t need to know much at all about web development in order to program in Shiny, but for R users there is the extra requirement of becoming comfortable with the reactive programming paradigm.  The hurdle is not all that high:  as an intermediate-level R-programmer, I was able to pick up Shiny over a weekend.  The <a href="http://shiny.rstudio.com/tutorial/">online Shiny tutorials</a> and a few consultations with <a href="http://stackoverflow.com/">Stack Overflow</a> provide almost everything I needed to know.</p>
+
+<p>The pay-back for the extra learning is considerable.  Shiny apps permit a much more flexible user-interface, as compared to <code>manipulate</code>.  For example, it is easy to make input “dynamic”, in the sense that the requests that a user can make of the app can be easily made to depend upon previous choices that the user has made.  It’s also easy to provide plenty of written explanation for the activity, as it proceeds:  with <code>manipulate</code> apps this can be somewhat difficult.</p>
+
+<p>On the other hand, since <code>manipulate</code> apps run directly within RStudio, they can easily be programmed to work with any data frame that the user specifies.  Shiny apps will allow you to upload a CSV file, but for elementary students this process is usually too much of a burden.</p>
+
+<h2 id="instructional-apps-gallery">Instructional Apps Gallery?</h2>
+
+<p>Considering all of the buzz surrounding Shiny, I am baffled at how difficult it is has been for me to find up-to-date sites featuring Shiny apps for statistics instruction:  perhaps readers of this post could direct me to any that they know of.  Eventually it would be nice to develop something like a ShinyTeachingTube, which could serve as a central hub for Shiny instructional applets.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2079,7 +2299,7 @@ system("cp figure/* ../source/images/figure")
 </span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
 </span><span class="line">  &lt;link href="http://homerhanumat.github.io/atom.xml" rel="self"/&gt;
 </span><span class="line">  &lt;link href="http://homerhanumat.github.io/"/&gt;
-</span><span class="line">  &lt;updated&gt;2014-05-03T21:01:05-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;updated&gt;2014-05-05T18:06:02-04:00&lt;/updated&gt;
 </span><span class="line">  &lt;id&gt;http://homerhanumat.github.io/&lt;/id&gt;
 </span><span class="line">  &lt;author&gt;
 </span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;
@@ -2108,166 +2328,6 @@ system("cp figure/* ../source/images/figure")
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/08/reasons-to-teach-with-R-2/">Five Reasons to Teach Elementary Statistics With R: #2</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-08T19:59:59-04:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/04/08/reasons-to-teach-with-R-2/#disqus_thread"
-             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></a>    <ul>
-      <li><a href="#do-it-yourself">Do It Yourself</a></li>
-      <li><a href="#next-time">Next Time</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
-
-<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/">first post</a> in this series introduced package <code>mosaic</code>, and promised to review a supplementary package that I and a colleague put together for our own students, but I’ve decided put that off a bit and focus instead on another powerful new tool for statistics instruction:  the well-known <a href="https://www.rstudio.com/">RStudio</a> Integrated Development Environment for R, and its <code>manipulate</code> package in particular.</p>
-
-<h2 id="reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></h2>
-
-<p>You might think that an IDE is strictly for programmers.  The authors of <code>mosaic</code>, though, looked at RStudio and saw an environment ripe for customization to fit the elementary classroom.  RStudio offers many benefits in this regard, but for this post I’ll concentrate on just one:  its pre-installed package <code>manipulate</code>.</p>
-
-<p>The RStudio developers may have written <code>manipulate</code> simply as a prototype for <a href="http://shiny.rstudio.com/">Shiny</a>, but it happens to be a fabulous tool for authoring instructional applets.  To be sure, there are many great instructional apps out on the web—visual stunners put together by authentic web developers—but the everyday statistics instructor may find that <code>manipulate</code> empowers her to quickly work up small instructional apps that address needs specific to her own students.</p>
-
-<p>At my College, for example, we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
-
-<p>Suppose you want students to understand coverage properties of confidence intervals—i.e., what we really mean when we say that we are “95%-confident” that the interval covers the population parameter–in a ground-up way.  Then you might do as my colleague Rebekah Robinson did, and write a manipulate app like <code>CIMean()</code>.</p>
-
-<p>To get the app, install package <code>tigerstats</code> from CRAN, or for the very latest version try:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<p>Next, get into RStudio (if you are not there already), and run:</p>
-
-<pre><code>require(tigerstats)
-require(manipulate)
-CIMean(~height,data=imagpop)
-</code></pre>
-
-<p>The app loads in the (roughly normally distributed) heights of an imaginary population of 10,000 people.  Sliders allow the user to select a sample size and a desired confidence level.  Click on one of the sliders and you’ll get just one sample from the population, with a histogram of the sample overlaying the density curve for the population, and a confidence interval displayed clearly along the horizontal axis.  The user can easily see whether the interval contains the population mean (marked by the red vertical line).  Output to the console also keeps the user apprised of what has just happened.  When the user has clicked enough to get the idea, he/she can ask for a lot of samples at once, verifying that when assumptions are met 95%-confidence intervals do indeed cover their target parameter about 95% of the time.</p>
-
-<p>One advantage of <code>manipulate</code> apps over the visually spectacular ones you find on the web is that you can easily write them to accept arbitrary input.  <code>CIMean()</code>, for example, will deal with any numerical variable from any data frame on R’s search path,including the quite right-skewed variable <strong>income</strong> from<code>imagpop</code>:</p>
-
-<pre><code>CIMean(~income,data=imagpop)
-</code></pre>
-
-<p>The user realizes quickly that the standard t-intervals applied to small samples from skewed populations do not possess the advertised coverage properties.</p>
-
-<p>Once you get into the spirit of <code>manipulate</code> you may find yourself writing apps that work in a similar vein without requiring the elements of the package itself.  For example <code>ChisqSimSlow()</code>, which does not require <code>manipulate</code> (and in fact runs outside of RStudio) takes arbitrary data and applies a one-at-a-time re-sampling routine to slowly build up the Null Distribution of the chi-square statistic, in a situation where one is testing whether two factor variables are associated.</p>
-
-<p>For example, suppose we are looking at survey in which a random sample of students were asked for their sex and for their seating preference in a classroom:</p>
-
-<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
-SexSeat
-
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-</code></pre>
-
-<p>Let’s check this out with some row percentages:</p>
-
-<pre><code>rowPerc(SexSeat)
-
-##        1_front 2_middle 3_back Total
-## female   47.50    40.00  12.50   100
-## male     25.81    51.61  22.58   100
-</code></pre>
-
-<p>Hmm, the women in the sample seem much more likely than the guys to prefer the Front!  Does this data provide convincing evidence for a relationship between <strong>sex</strong> and <strong>seat</strong> in the College population at large?  To investigate this, a student might try:</p>
-
-<pre><code>ChisqSimSlow(~sex+seat,data=m111survey)
-</code></pre>
-
-<p>Keep asking for a re-sample, and after a while you get the sense that the observed value of the chi-square statistic is not an unusually large value, if <strong>sex</strong> and <strong>seat</strong> are, all along, unrelated in the population.</p>
-
-<p>Once students understand the import of simulation they can employ it to advantage on a large scale.  In the <code>tigerstats</code> version of the <code>chisq.test()</code>, the student might ask for:</p>
-
-<pre><code>set.seed(2014)
-chisqtestGC(~sex+seat,data=m111survey,
-      simulate.p.value="random",
-      B=3000,
-      graph=TRUE)
-
-## Pearson's chi-squared test with simulated p-value, random effects
-## 	 (based on 3000 resamples)
-## 
-## Observed Counts:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-## 
-## Counts Expected by Null:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female   15.21    18.03   6.76
-##   male     11.79    13.97   5.24
-## 
-## Contributions to the chi-square statistic:
-##         seat
-## sex      1_front 2_middle 3_back
-##   female    0.94     0.23   0.46
-##   male      1.22     0.29   0.59
-## 
-## 
-## Chi-Square Statistic = 3.734 
-## Degrees of Freedom of the table = 2 
-## P-Value = 0.1727
-</code></pre>
-
-<p><img src="/images/figure/reasonsteachr2.png" alt="plot of chunk reasonsteachr2" /> </p>
-
-<h3 id="do-it-yourself">Do It Yourself</h3>
-
-<p>I do not discuss the above apps with the expectation that colleagues at other institution will adopt them.  On the contrary, my point is merely that the folks at RStudio have provided R-users with a tool that enables ordinary instructors like us to write our own apps.  If you like a particular app, them check out the source code (<code>tigerstats</code>, for example is <a href="http:github.com/homerhanumat/tigerstats">on GitHub</a>), clean it up a bit maybe, and use it as a basis for an app tailored to your particular tastes and the needs of your particular students.</p>
-
-<p>Better yet, persuade an upper-level student to write the app for you as a programming project:  <code>manipulate</code>’s greatest use may prove to be as a gateway-drug to coding!</p>
-
-<h3 id="next-time">Next Time</h3>
-
-<p>In the next post, maybe we’ll have a look at what R Studio’s <code>shiny</code> can do for an elementary class.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -2283,6 +2343,10 @@ chisqtestGC(~sex+seat,data=m111survey,
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/05/04/reasons-to-teach-with-R-3/">Five Reasons to Teach Elementary Statistics With R: #3</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/02/perl-scripts-r-studio/">Course Management With the RStudio Server</a>
       </li>
     
@@ -2296,10 +2360,6 @@ chisqtestGC(~sex+seat,data=m111survey,
     
       <li class="post">
         <a href="/blog/2014/04/08/reasons-to-teach-with-R-2/">Five Reasons to Teach Elementary Statistics With R: #2</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/05/tigerstatsintro/">Five Reasons to Teach Elementary Statistics With R: #1</a>
       </li>
     
   </ul>
@@ -2349,7 +2409,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/r/'>R (3)</a></li>
+    <li class='category'><a href='/blog/categories/r/'>R (4)</a></li>
 <li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (3)</a></li>
 
