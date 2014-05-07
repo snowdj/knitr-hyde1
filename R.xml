@@ -4,7 +4,7 @@
   <title>A Statistics Blog - R</title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-05-05T18:14:22-04:00</updated>
+  <updated>2014-05-06T22:41:14-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name>Homer White</name>
@@ -98,19 +98,23 @@ install_github(repo=&quot;homerhanumat/tigerstats&quot;)
 
 &lt;p&gt;Students are then prepared to understand a full-scale re-sampling simulation like the following one:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;require(tigerstats)
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;3&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;4&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;5&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;6&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;7&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tigerstats&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;observed &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;fair &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2020&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;observed&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;p&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;fair&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;      simulate.p.value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;      B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;graph&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
- 
- 
-
-observed &amp;lt;- c(8,18,11,7,9,7)
-fair &amp;lt;- rep(1/6,6)
-set.seed(2020)
-chisqtestGC(observed,p=fair,
-      simulate.p.value=TRUE,
-      B=3000,graph=TRUE)
-
-## Pearson&#8217;s chi-squared test with simulated p-value 
+&lt;pre&gt;&lt;code&gt;## Pearson&#8217;s chi-squared test with simulated p-value 
 ## 	 (based on 3000 resamples)
 ## 
 ##   observed counts Expected by Null contribution to chisq statistic
@@ -133,9 +137,11 @@ chisqtestGC(observed,p=fair,
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;  Shiny users know that the apps are liable to run more quickly if you run them locally.  To run the foregoing app locally from an R session, pull it out of the &lt;code&gt;tigerstats&lt;/code&gt; package:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;require(siny)
-runApp(system.file(&quot;SlowGoodness&quot;,package=&quot;tigerstats&quot;))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;shiny&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SlowGoodness&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;understanding-model-assumptions&quot;&gt;Understanding Model Assumptions&lt;/h3&gt;
 
@@ -143,8 +149,9 @@ runApp(system.file(&quot;SlowGoodness&quot;,package=&quot;tigerstats&quot;))
 
 &lt;p&gt;The following Shiny app:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;runApp(system.file(&quot;CIMean&quot;,package=&quot;tigerstats&quot;))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;CIMean&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;p&gt;addresses two learning outcomes:&lt;/p&gt;
 
@@ -159,8 +166,9 @@ runApp(system.file(&quot;SlowGoodness&quot;,package=&quot;tigerstats&quot;))
 
 &lt;p&gt;Simulation is also helpful in coming to understand such notions as the level of significance of a hypothesis test (i.e., the probability a true Null Hypothesis in repeated sampling), and the notion of power as well.  See the following app:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;runApp(system.file(&quot;Type12Errors&quot;,package=&quot;tigerstats&quot;))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Type12Errors&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;illustrating-fine-points&quot;&gt;Illustrating Fine Points&lt;/h3&gt;
 
@@ -175,15 +183,17 @@ runApp(system.file(&quot;SlowGoodness&quot;,package=&quot;tigerstats&quot;))
 
 &lt;p&gt;The following app helps clear things up for students.  It is based on a discussion on the “shallow regression line” issue in &lt;a href=&quot;http://books.wwnorton.com/books/Statistics/&quot;&gt;&lt;em&gt;Statistics&lt;/em&gt;&lt;/a&gt;, the classic text by Freeman, Pisani and Purves.&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;runApp(system.file(&quot;ShallowReg&quot;,package=&quot;tigerstats&quot;))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;ShallowReg&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;playing-games&quot;&gt;Playing Games&lt;/h3&gt;
 
 &lt;p&gt;Here’s is yet another of those “find the regression line” apps that you see all over the web:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;runApp(system.file(&quot;FindRegLine&quot;,package=&quot;tigerstats&quot;))
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;FindRegLine&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;p&gt;You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:&lt;/p&gt;
 

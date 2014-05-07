@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-05-05T18:14:22-04:00</updated>
+  <updated>2014-05-06T22:41:14-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -98,19 +98,17 @@ install_github(repo="homerhanumat/tigerstats")
 
 <p>Students are then prepared to understand a full-scale re-sampling simulation like the following one:</p>
 
-<pre><code>require(tigerstats)
+<p><code>r
+    require(tigerstats)
+    observed &lt;- c(8,18,11,7,9,7)
+    fair &lt;- rep(1/6,6)
+    set.seed(2020)
+    chisqtestGC(observed,p=fair,
+          simulate.p.value=TRUE,
+          B=3000,graph=TRUE)
+</code></p>
 
- 
- 
-
-observed &lt;- c(8,18,11,7,9,7)
-fair &lt;- rep(1/6,6)
-set.seed(2020)
-chisqtestGC(observed,p=fair,
-      simulate.p.value=TRUE,
-      B=3000,graph=TRUE)
-
-## Pearson's chi-squared test with simulated p-value 
+<pre><code>## Pearson's chi-squared test with simulated p-value 
 ## 	 (based on 3000 resamples)
 ## 
 ##   observed counts Expected by Null contribution to chisq statistic
@@ -133,9 +131,10 @@ chisqtestGC(observed,p=fair,
 
 <p><strong>Note:</strong>  Shiny users know that the apps are liable to run more quickly if you run them locally.  To run the foregoing app locally from an R session, pull it out of the <code>tigerstats</code> package:</p>
 
-<pre><code>require(siny)
-runApp(system.file("SlowGoodness",package="tigerstats"))
-</code></pre>
+<p><code>r
+    require(shiny)
+    runApp(system.file("SlowGoodness",package="tigerstats"))
+</code></p>
 
 <h3 id="understanding-model-assumptions">Understanding Model Assumptions</h3>
 
@@ -143,8 +142,9 @@ runApp(system.file("SlowGoodness",package="tigerstats"))
 
 <p>The following Shiny app:</p>
 
-<pre><code>runApp(system.file("CIMean",package="tigerstats"))
-</code></pre>
+<p><code>r
+    runApp(system.file("CIMean",package="tigerstats"))
+</code></p>
 
 <p>addresses two learning outcomes:</p>
 
@@ -159,8 +159,9 @@ runApp(system.file("SlowGoodness",package="tigerstats"))
 
 <p>Simulation is also helpful in coming to understand such notions as the level of significance of a hypothesis test (i.e., the probability a true Null Hypothesis in repeated sampling), and the notion of power as well.  See the following app:</p>
 
-<pre><code>runApp(system.file("Type12Errors",package="tigerstats"))
-</code></pre>
+<p><code>r
+    runApp(system.file("Type12Errors",package="tigerstats"))
+</code></p>
 
 <h3 id="illustrating-fine-points">Illustrating Fine Points</h3>
 
@@ -175,15 +176,17 @@ runApp(system.file("SlowGoodness",package="tigerstats"))
 
 <p>The following app helps clear things up for students.  It is based on a discussion on the “shallow regression line” issue in <a href="http://books.wwnorton.com/books/Statistics/"><em>Statistics</em></a>, the classic text by Freeman, Pisani and Purves.</p>
 
-<pre><code>runApp(system.file("ShallowReg",package="tigerstats"))
-</code></pre>
+<p><code>r
+    runApp(system.file("ShallowReg",package="tigerstats"))
+</code></p>
 
 <h3 id="playing-games">Playing Games</h3>
 
 <p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
 
-<pre><code>runApp(system.file("FindRegLine",package="tigerstats"))
-</code></pre>
+<p><code>r
+    runApp(system.file("FindRegLine",package="tigerstats"))
+</code></p>
 
 <p>You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:</p>
 
