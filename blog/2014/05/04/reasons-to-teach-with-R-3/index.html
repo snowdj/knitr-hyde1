@@ -163,9 +163,11 @@
 
 <p>In order to try the ensuing examples, download an ancillary package that we use for our elementary course:</p>
 
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="s"><span class="line">require<span class="p">(</span>devtools<span class="p">)</span>
+</span><span class="line">install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;homerhanumat/tigerstats&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <h2 id="reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></h2>
 
@@ -227,7 +229,7 @@ install_github(repo="homerhanumat/tigerstats")
 <span class="line-number">5</span>
 <span class="line-number">6</span>
 <span class="line-number">7</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">require<span class="p">(</span>tigerstats<span class="p">)</span>
+</pre></td><td class="code"><pre><code class="s"><span class="line">require<span class="p">(</span>tigerstats<span class="p">)</span>
 </span><span class="line">observed <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">11</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
 </span><span class="line">fair <span class="o">&lt;-</span> rep<span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)</span>
 </span><span class="line">set.seed<span class="p">(</span><span class="m">2020</span><span class="p">)</span>
@@ -314,7 +316,7 @@ install_github(repo="homerhanumat/tigerstats")
 <p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-</pre></td><td class="code"><pre><code class="r"><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;FindRegLine&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
+</pre></td><td class="code"><pre><code class="s"><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;FindRegLine&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
 </span></code></pre></td></tr></table></div></figure></notextile></div>
 
 <p>You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:</p>

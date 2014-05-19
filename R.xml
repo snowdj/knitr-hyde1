@@ -4,7 +4,7 @@
   <title>A Statistics Blog - R</title>
   <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-05-06T22:41:14-04:00</updated>
+  <updated>2014-05-19T17:43:30-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name>Homer White</name>
@@ -41,9 +41,11 @@
 
 &lt;p&gt;In order to try the ensuing examples, download an ancillary package that we use for our elementary course:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;require(devtools)
-install_github(repo=&quot;homerhanumat/tigerstats&quot;)
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;line-number&quot;&gt;2&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;s&quot;&gt;&lt;span class=&quot;line&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;devtools&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;span class=&quot;line&quot;&gt;install_github&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;repo&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;homerhanumat/tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;reason-3&#8211;rstudios-shiny&quot;&gt;Reason #3:  RStudio’s &lt;code&gt;shiny&lt;/code&gt;&lt;/h2&gt;
 
@@ -105,7 +107,7 @@ install_github(repo=&quot;homerhanumat/tigerstats&quot;)
 &lt;span class=&quot;line-number&quot;&gt;5&lt;/span&gt;
 &lt;span class=&quot;line-number&quot;&gt;6&lt;/span&gt;
 &lt;span class=&quot;line-number&quot;&gt;7&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tigerstats&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;s&quot;&gt;&lt;span class=&quot;line&quot;&gt;require&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tigerstats&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&quot;line&quot;&gt;observed &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; c&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;18&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;11&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&quot;line&quot;&gt;fair &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; rep&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;span class=&quot;line&quot;&gt;set.seed&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2020&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -192,7 +194,7 @@ install_github(repo=&quot;homerhanumat/tigerstats&quot;)
 &lt;p&gt;Here’s is yet another of those “find the regression line” apps that you see all over the web:&lt;/p&gt;
 
 &lt;div class=&quot;bogus-wrapper&quot;&gt;&lt;notextile&gt;&lt;figure class=&quot;code&quot;&gt;&lt;figcaption&gt;&lt;span&gt;&lt;/span&gt;&lt;/figcaption&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre class=&quot;line-numbers&quot;&gt;&lt;span class=&quot;line-number&quot;&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;r&quot;&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;FindRegLine&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;code class=&quot;s&quot;&gt;&lt;span class=&quot;line&quot;&gt;runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;system.file&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;FindRegLine&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;package&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;&lt;/figure&gt;&lt;/notextile&gt;&lt;/div&gt;
 
 &lt;p&gt;You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:&lt;/p&gt;
@@ -510,7 +512,9 @@ nullDist &amp;lt;- do(2500)*(
     <link href="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
     <updated>2014-02-01T11:42:14-05:00</updated>
     <id>http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
-    <content type="html">&lt;p&gt;Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.&lt;/p&gt;
+    <content type="html">&lt;p&gt;(&lt;strong&gt;Added May 19, 2014&lt;/strong&gt;:  On May 17 R Stduio announced a &lt;a href=&quot;http://www.rstudio.com/ide/download/preview&quot;&gt;preview release&lt;/a&gt; of version 0.98b which will render moot the techniques described in this post, as the new version provides built-in options to convert from R Markdown to PDF and to Word formats.)&lt;/p&gt;
+
+&lt;p&gt;Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.&lt;/p&gt;
 
 &lt;p&gt;But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?&lt;/p&gt;
 

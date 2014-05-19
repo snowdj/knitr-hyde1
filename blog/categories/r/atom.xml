@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | A Statistics Blog]]></title>
   <link href="http://homerhanumat.github.io/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-05-06T22:41:14-04:00</updated>
+  <updated>2014-05-19T17:43:30-04:00</updated>
   <id>http://homerhanumat.github.io/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -41,9 +41,10 @@
 
 <p>In order to try the ensuing examples, download an ancillary package that we use for our elementary course:</p>
 
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
+<p><code>s
+    require(devtools)
+    install_github(repo="homerhanumat/tigerstats")
+</code></p>
 
 <h2 id="reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></h2>
 
@@ -98,7 +99,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <p>Students are then prepared to understand a full-scale re-sampling simulation like the following one:</p>
 
-<p><code>r
+<p><code>s
     require(tigerstats)
     observed &lt;- c(8,18,11,7,9,7)
     fair &lt;- rep(1/6,6)
@@ -184,7 +185,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
 
-<p><code>r
+<p><code>s
     runApp(system.file("FindRegLine",package="tigerstats"))
 </code></p>
 
@@ -503,7 +504,9 @@ nullDist &lt;- do(2500)*(
     <link href="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
     <updated>2014-02-01T11:42:14-05:00</updated>
     <id>http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
-    <content type="html"><![CDATA[<p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
+    <content type="html"><![CDATA[<p>(<strong>Added May 19, 2014</strong>:  On May 17 R Stduio announced a <a href="http://www.rstudio.com/ide/download/preview">preview release</a> of version 0.98b which will render moot the techniques described in this post, as the new version provides built-in options to convert from R Markdown to PDF and to Word formats.)</p>
+
+<p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
 
 <p>But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
 
