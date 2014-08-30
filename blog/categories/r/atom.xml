@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: R | A Statistics Blog]]></title>
-  <link href="http://homerhanumat.github.io/blog/categories/r/atom.xml" rel="self"/>
-  <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-08-29T21:53:05-04:00</updated>
-  <id>http://homerhanumat.github.io/</id>
+  <link href="http://statistics.rainandrhino.org/blog/categories/r/atom.xml" rel="self"/>
+  <link href="http://statistics.rainandrhino.org/"/>
+  <updated>2014-08-29T22:14:46-04:00</updated>
+  <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
     <updated>2014-08-29T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#new-pandoc">New Pandoc</a></li>
@@ -100,9 +100,9 @@ sudo texhash
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #3]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/05/04/reasons-to-teach-with-R-3/"/>
     <updated>2014-05-04T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/05/04/reasons-to-teach-with-R-3</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></a></li>
@@ -296,9 +296,9 @@ sudo texhash
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #2]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/"/>
     <updated>2014-04-08T19:59:59-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></a>    <ul>
@@ -426,9 +426,9 @@ chisqtestGC(~sex+seat,data=m111survey,
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #1]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/"/>
     <updated>2014-04-05T19:30:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
@@ -586,9 +586,9 @@ nullDist &lt;- do(2500)*(
   
   <entry>
     <title type="html"><![CDATA[Pander/Pandoc for Pretty Conversion on the R Studio Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
     <updated>2014-02-01T11:42:14-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
     <content type="html"><![CDATA[<p>(<strong>Added May 19, 2014</strong>:  On May 17 R Stduio announced a <a href="http://www.rstudio.com/ide/download/preview">preview release</a> of version 0.98b which will render moot the techniques described in this post, as the new version provides built-in options to convert from R Markdown to PDF and to Word formats.)</p>
 
 <p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>

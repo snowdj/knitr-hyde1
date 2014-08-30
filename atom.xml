@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[A Statistics Blog]]></title>
-  <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
-  <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-08-29T21:53:05-04:00</updated>
-  <id>http://homerhanumat.github.io/</id>
+  <link href="http://statistics.rainandrhino.org/atom.xml" rel="self"/>
+  <link href="http://statistics.rainandrhino.org/"/>
+  <updated>2014-08-29T22:14:46-04:00</updated>
+  <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
     <updated>2014-08-29T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#new-pandoc">New Pandoc</a></li>
@@ -103,9 +103,9 @@
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #3]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/05/04/reasons-to-teach-with-R-3/"/>
     <updated>2014-05-04T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/05/04/reasons-to-teach-with-R-3</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></a></li>
@@ -221,7 +221,7 @@
 ## P-Value = 0.125
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/reasonsteachr3chisq.png" alt="plot of chunk reasonsteachr3chisq" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/reasonsteachr3chisq.png" alt="plot of chunk reasonsteachr3chisq" /> </p>
 
 <p>Sure enough, if the die is fair then there is a reasonably good chance—about 12.5%—of getting results at least as extreme as the ones we got in our 60 rolls.</p>
 
@@ -307,9 +307,9 @@
   
   <entry>
     <title type="html"><![CDATA[Course Management With the RStudio Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/05/02/perl-scripts-r-studio/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/05/02/perl-scripts-r-studio/"/>
     <updated>2014-05-02T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/05/02/perl-scripts-r-studio</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/05/02/perl-scripts-r-studio</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#installation">Installation</a></li>
@@ -1528,9 +1528,9 @@
   
   <entry>
     <title type="html"><![CDATA[Qnorm() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/28/qnormtutorial/"/>
     <updated>2014-04-28T22:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/28/qnormtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></a></li>
   <li><a href="#a-few-more-examples">A Few More Examples</a>    <ul>
@@ -1557,7 +1557,7 @@ pnormGC(72, region="below", mean=70,
         sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/qnormtut72.png" alt="plot of chunk qnormtut72" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/qnormtut72.png" alt="plot of chunk qnormtut72" /> </p>
 
 <pre><code>## [1] 0.7475
 </code></pre>
@@ -1582,7 +1582,7 @@ P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
         sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/qnormtut73.png" alt="plot of chunk qnormtut73" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/qnormtut73.png" alt="plot of chunk qnormtut73" /> </p>
 
 <pre><code>## [1] 0.85
 </code></pre>
@@ -1646,7 +1646,7 @@ P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
         sd=1,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/qnormtutbetween.png" alt="plot of chunk qnormtutbetween" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/qnormtutbetween.png" alt="plot of chunk qnormtutbetween" /> </p>
 
 <pre><code>## [1] 0.95
 </code></pre>
@@ -1656,9 +1656,9 @@ P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
   
   <entry>
     <title type="html"><![CDATA[Roctopress: Configure Your Octopress Blog for R]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/13/roctopress/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/13/roctopress/"/>
     <updated>2014-04-13T16:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/13/roctopress</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/13/roctopress</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#directory-house-keeping">Directory House-Keeping</a></li>
@@ -2184,10 +2184,10 @@ system("cp figure/* ../source/images/figure")
 </span><span class="line">&lt;feed xmlns="http://www.w3.org/2005/Atom"&gt;
 </span><span class="line"> 
 </span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
-</span><span class="line">  &lt;link href="http://homerhanumat.github.io/atom.xml" rel="self"/&gt;
-</span><span class="line">  &lt;link href="http://homerhanumat.github.io/"/&gt;
-</span><span class="line">  &lt;updated&gt;2014-08-29T21:53:05-04:00&lt;/updated&gt;
-</span><span class="line">  &lt;id&gt;http://homerhanumat.github.io/&lt;/id&gt;
+</span><span class="line">  &lt;link href="http://statistics.rainandrhino.org/atom.xml" rel="self"/&gt;
+</span><span class="line">  &lt;link href="http://statistics.rainandrhino.org/"/&gt;
+</span><span class="line">  &lt;updated&gt;2014-08-29T22:14:46-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;id&gt;http://statistics.rainandrhino.org/&lt;/id&gt;
 </span><span class="line">  &lt;author&gt;
 </span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;
 </span><span class="line">    
@@ -2213,9 +2213,9 @@ system("cp figure/* ../source/images/figure")
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #2]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/"/>
     <updated>2014-04-08T19:59:59-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></a>    <ul>
@@ -2327,7 +2327,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## P-Value = 0.1727
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/reasonsteachr2.png" alt="plot of chunk reasonsteachr2" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/reasonsteachr2.png" alt="plot of chunk reasonsteachr2" /> </p>
 
 <h3 id="do-it-yourself">Do It Yourself</h3>
 
@@ -2343,9 +2343,9 @@ chisqtestGC(~sex+seat,data=m111survey,
   
   <entry>
     <title type="html"><![CDATA[Five Reasons to Teach Elementary Statistics With R: #1]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/"/>
     <updated>2014-04-05T19:30:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
@@ -2485,7 +2485,7 @@ nullDist &lt;- do(2500)*(
 ## 	23 ( 0.92 % ) had test stats &lt; -1.425
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/reason1hist.png" alt="plot of chunk reason1hist" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/reason1hist.png" alt="plot of chunk reason1hist" /> </p>
 
 <p>We seem to have fairly strong evidence ($P \approx 1.7\%$) that mating with more males increases the number of successful broods.</p>
 
@@ -2503,9 +2503,9 @@ nullDist &lt;- do(2500)*(
   
   <entry>
     <title type="html"><![CDATA[Xtabs() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/xtabstutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/xtabstutorial/"/>
     <updated>2014-02-28T18:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/xtabstutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/xtabstutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-factor-variable">One Factor Variable</a></li>
@@ -2598,9 +2598,9 @@ Seat
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Histogram()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/histogramtutorial/"/>
     <updated>2014-02-28T17:50:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/histogramtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
@@ -2641,7 +2641,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/histtutfastest.png" alt="plot of chunk histtutfastest" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/histtutfastest.png" alt="plot of chunk histtutfastest" /> </p>
 
 <p>Note the use of:</p>
 
@@ -2679,7 +2679,7 @@ install_github(repo="homerhanumat/tigerstats")
                 140,150,160,170,180,190))
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/histtutfastestbreaks10.png" alt="plot of chunk histtutfastestbreaks10" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/histtutfastestbreaks10.png" alt="plot of chunk histtutfastestbreaks10" /> </p>
 
 <p>You can accomplish the same thing with less typing, if you make use of the <code>seq()</code> function:</p>
 
@@ -2690,7 +2690,7 @@ install_github(repo="homerhanumat/tigerstats")
        breaks=seq(from=60,to=190,by=10))
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/histtutfastestbreaks10seq.png" alt="plot of chunk histtutfastestbreaks10seq" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/histtutfastestbreaks10seq.png" alt="plot of chunk histtutfastestbreaks10seq" /> </p>
 
 <h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
 
@@ -2711,7 +2711,7 @@ install_github(repo="homerhanumat/tigerstats")
        breaks=seq(from=60,to=190,by=10))
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/histtutfastestsexcond.png" alt="plot of chunk histtutfastestsexcond" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/histtutfastestsexcond.png" alt="plot of chunk histtutfastestsexcond" /> </p>
 
 <p>Note that to produce side-by-side histograms, you “condition” on the factor variable with the formula:</p>
 
@@ -2724,9 +2724,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Densityplot()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/densityplottutorial/"/>
     <updated>2014-02-28T17:45:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/densityplottutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
@@ -2765,7 +2765,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/dentutfastest.png" alt="plot of chunk dentutfastest" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/dentutfastest.png" alt="plot of chunk dentutfastest" /> </p>
 
 <p>Note the use of:</p>
 
@@ -2782,7 +2782,7 @@ install_github(repo="homerhanumat/tigerstats")
        plot.points=FALSE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/dentutfastestnorug.png" alt="plot of chunk dentutfastestnorug" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/dentutfastestnorug.png" alt="plot of chunk dentutfastestnorug" /> </p>
 
 <h2 id="numerical-and-factor-variable">Numerical and Factor Variable</h2>
 
@@ -2801,7 +2801,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven,\nby Sex")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/dentutfastestsexcond.png" alt="plot of chunk dentutfastestsexcond" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/dentutfastestsexcond.png" alt="plot of chunk dentutfastestsexcond" /> </p>
 
 <p>Note that to produce side-by-side plots, you “condition” on the factor variable with the formula:</p>
 
@@ -2821,7 +2821,7 @@ install_github(repo="homerhanumat/tigerstats")
        auto.key=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/dentutfastestsexgroups.png" alt="plot of chunk dentutfastestsexgroups" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/dentutfastestsexgroups.png" alt="plot of chunk dentutfastestsexgroups" /> </p>
 
 <p>Note the use of the <code>auto,key</code> argument to produce the legend at the top, so that the reader can tell which plot goes with which sex.</p>
 
@@ -2837,7 +2837,7 @@ install_github(repo="homerhanumat/tigerstats")
             plot.points=FALSE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/dentutkkard.png" alt="plot of chunk dentutkkard" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/dentutkkard.png" alt="plot of chunk dentutkkard" /> </p>
 
 <p>The function <code>densityplot()</code> has no way of knowing that <strong>kkardashtemp</strong> must lie between 0 and 100, so from the available data it infers that there is some possibility for a rating to be below 0 or above 100.  If you want to inform <code>denistyplot()</code> of the known limits, then use the <code>from</code> and <code>to</code> arguments, as follows:</p>
 
@@ -2846,16 +2846,16 @@ install_github(repo="homerhanumat/tigerstats")
             from=0,to=100)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/dentutkkardfromto.png" alt="plot of chunk dentutkkardfromto" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/dentutkkardfromto.png" alt="plot of chunk dentutkkardfromto" /> </p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Xyplot()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/xyplottutorial/"/>
     <updated>2014-02-28T17:30:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/xyplottutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#basic-scatterplot">Basic Scatterplot</a></li>
@@ -2897,7 +2897,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven,\nby Grade Point Average")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/xytutfastestgpa.png" alt="plot of chunk xytutfastestgpa" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/xytutfastestgpa.png" alt="plot of chunk xytutfastestgpa" /> </p>
 
 <p>Note the use of:</p>
 
@@ -2923,7 +2923,7 @@ install_github(repo="homerhanumat/tigerstats")
        type=c("p","r"))
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/xytutfastestgpareg.png" alt="plot of chunk xytutfastestgpareg" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/xytutfastestgpareg.png" alt="plot of chunk xytutfastestgpareg" /> </p>
 
 <p>The list given by <code>c("p","r")</code> tells <code>xyplot()</code> that we want both the points (“p”) and a regression line (“r”).</p>
 
@@ -2938,7 +2938,7 @@ install_github(repo="homerhanumat/tigerstats")
        pch=19,col="blue")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/xytutfastestgpapoints.png" alt="plot of chunk xytutfastestgpapoints" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/xytutfastestgpapoints.png" alt="plot of chunk xytutfastestgpapoints" /> </p>
 
 <p>There are 25 different values for <code>pch</code>:  the integers 1 through 25.</p>
 
@@ -2952,9 +2952,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Bwplot()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/bwplottutorial/"/>
     <updated>2014-02-28T17:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/bwplottutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/bwplottutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
@@ -2989,7 +2989,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/bwtutfastest.png" alt="plot of chunk bwtutfastest" /> </p>
 
 <p>Note the use of:</p>
 
@@ -3013,7 +3013,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven,\nby Sex of Subject")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/bwtutfastestsex.png" alt="plot of chunk bwtutfastestsex" /> </p>
 
 <p>Note the use of the “\n” to create a two-line title.  This trick can come in handy if your title is long!</p>
 
@@ -3024,7 +3024,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastest Speed Ever Driven,\nby Sex of Subject")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/bwtutfastestsexhoriz.png" alt="plot of chunk bwtutfastestsexhoriz" /> </p>
 
 <h2 id="warning">Warning</h2>
 
@@ -3045,7 +3045,7 @@ install_github(repo="homerhanumat/tigerstats")
        main="Fastes Speed Ever Driven,\nby Grade-Point Average")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/bwtutbad.png" alt="plot of chunk bwtutbad" /> </p>
 
 <p><code>bwplot()</code> expects at least one of the two variable in the formula to be numerical.  When it is presented with two numerical variables it politely makes do—apparently converting <strong>fastest</strong> into a new factor variable—but the resulting graph doesn’t make any sense at all.</p>
 
@@ -3055,9 +3055,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[proptestGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/proptestGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/proptestGCtutorial/"/>
     <updated>2014-02-28T16:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/proptestGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/proptestGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-proportion-from-data-frame-read-this">One Proportion, From Data Frame (Read This!!)</a>    <ul>
@@ -3384,7 +3384,7 @@ install_github(repo="homerhanumat/tigerstats")
 ## 	P-value:		P = 0.3385
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/proptesttutoneprop2sided.png" alt="plot of chunk proptesttutoneprop2sided" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/proptesttutoneprop2sided.png" alt="plot of chunk proptesttutoneprop2sided" /> </p>
 
 <h3 id="limiting-output">Limiting Output</h3>
 
@@ -3759,16 +3759,16 @@ install_github(repo="homerhanumat/tigerstats")
 ## 	P-value:		P = 0.07797
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/proptesttut2propssummary.png" alt="plot of chunk proptesttut2propssummary" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/proptesttut2propssummary.png" alt="plot of chunk proptesttut2propssummary" /> </p>
 
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[binomtestGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/binomtestGCtutorial/"/>
     <updated>2014-02-28T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/binomtestGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/binomtestGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#working-from-a-data-frame">Working from a Data Frame</a></li>
@@ -4034,7 +4034,7 @@ install_github(repo="homerhanumat/tigerstats")
 ## 	P-value:		P = 0.1712
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtesttutsexless.png" alt="plot of chunk binomtesttutsexless" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtesttutsexless.png" alt="plot of chunk binomtesttutsexless" /> </p>
 
 <p>For a two-sided test, the function gets the $P$-value by doubling an appropriate one-sided $P$-value, so no graph represents the $P$-value very well.  Hence the function will refuse to provide a graph in that case.</p>
 
@@ -4112,9 +4112,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[ttestGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/27/ttestGCtutorial/"/>
     <updated>2014-02-27T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/27/ttestGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/27/ttestGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-mean-from-data-frame-read-this">One Mean, From Data Frame (Read This!!)</a>    <ul>
@@ -4439,7 +4439,7 @@ install_github(repo="homerhanumat/tigerstats")
 ## 	P-value:		P = 0.01995
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/ttesttutonemean2sided.png" alt="plot of chunk ttesttutonemean2sided" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/ttesttutonemean2sided.png" alt="plot of chunk ttesttutonemean2sided" /> </p>
 
 <h3 id="limiting-output">Limiting Output</h3>
 
@@ -4823,7 +4823,7 @@ install_github(repo="homerhanumat/tigerstats")
 ## 	P-value:		P = 0.03333
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/ttesttut2meanssummary.png" alt="plot of chunk ttesttut2meanssummary" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/ttesttut2meanssummary.png" alt="plot of chunk ttesttut2meanssummary" /> </p>
 
 <h2 id="mean-of-differences">Mean of Differences</h2>
 
@@ -5005,9 +5005,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[pnormGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/26/pnormGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/26/pnormGCtutorial/"/>
     <updated>2014-02-26T16:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/26/pnormGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/26/pnormGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#finding-px--x">Finding P(X &lt; x)</a></li>
@@ -5059,7 +5059,7 @@ P(X < 66). %]]&gt;</script>
         mean=70,sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/normtutless66.png" alt="plot of chunk normtutless66" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/normtutless66.png" alt="plot of chunk normtutless66" /> </p>
 
 <pre><code>## [1] 0.09121
 </code></pre>
@@ -5078,7 +5078,7 @@ P(X < 66). %]]&gt;</script>
         mean=70,sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/normtutgreater69.png" alt="plot of chunk normtutgreater69" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/normtutgreater69.png" alt="plot of chunk normtutgreater69" /> </p>
 
 <pre><code>## [1] 0.6306
 </code></pre>
@@ -5096,7 +5096,7 @@ P(68 < X < 72). %]]&gt;</script>
         mean=70,sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/normtutbetween.png" alt="plot of chunk normtutbetween" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/normtutbetween.png" alt="plot of chunk normtutbetween" /> </p>
 
 <pre><code>## [1] 0.495
 </code></pre>
@@ -5116,7 +5116,7 @@ P(X < 66 \textbf{ or } X > 73). %]]&gt;</script>
          mean=70,sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/mormtutout.png" alt="plot of chunk mormtutout" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/mormtutout.png" alt="plot of chunk mormtutout" /> </p>
 
 <pre><code>## [1] 0.2499
 </code></pre>
@@ -5141,7 +5141,7 @@ P(X < 66 \textbf{ or } X > 73). %]]&gt;</script>
         mean=70,sd=3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/normtutequal.png" alt="plot of chunk normtutequal" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/normtutequal.png" alt="plot of chunk normtutequal" /> </p>
 
 <pre><code>## [1] 0
 </code></pre>
@@ -5164,9 +5164,9 @@ P(X < 66), %]]&gt;</script>
   
   <entry>
     <title type="html"><![CDATA[pbinomGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/26/pbinomGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/26/pbinomGCtutorial/"/>
     <updated>2014-02-26T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/26/pbinomGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/26/pbinomGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#finding-px--x">Finding P(X &lt;= x)</a></li>
@@ -5219,7 +5219,7 @@ install_github(repo="homerhanumat/tigerstats")
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutleq8.png" alt="plot of chunk binomtutleq8" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutleq8.png" alt="plot of chunk binomtutleq8" /> </p>
 
 <pre><code>## [1] 0.8867
 </code></pre>
@@ -5244,7 +5244,7 @@ install_github(repo="homerhanumat/tigerstats")
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutgeq10.png" alt="plot of chunk binomtutgeq10" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutgeq10.png" alt="plot of chunk binomtutgeq10" /> </p>
 
 <pre><code>## [1] 0.04796
 </code></pre>
@@ -5268,7 +5268,7 @@ P(X < 6). %]]&gt;</script>
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutless6.png" alt="plot of chunk binomtutless6" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutless6.png" alt="plot of chunk binomtutless6" /> </p>
 
 <pre><code>## [1] 0.4164
 </code></pre>
@@ -5285,7 +5285,7 @@ P(X < 6). %]]&gt;</script>
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutgreater7.png" alt="plot of chunk binomtutgreater7" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutgreater7.png" alt="plot of chunk binomtutgreater7" /> </p>
 
 <pre><code>## [1] 0.2277
 </code></pre>
@@ -5302,7 +5302,7 @@ P(X < 6). %]]&gt;</script>
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutbetwee.png" alt="plot of chunk binomtutbetwee" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutbetwee.png" alt="plot of chunk binomtutbetwee" /> </p>
 
 <pre><code>## [1] 0.5665
 </code></pre>
@@ -5323,7 +5323,7 @@ P(X < 6). %]]&gt;</script>
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutequal.png" alt="plot of chunk binomtutequal" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutequal.png" alt="plot of chunk binomtutequal" /> </p>
 
 <pre><code>## [1] 0.1916
 </code></pre>
@@ -5343,7 +5343,7 @@ P(X < 7 \textbf{ or } X > 9). %]]&gt;</script>
          size=20,prob=0.3,graph=TRUE)
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/binomtutout.png" alt="plot of chunk binomtutout" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/binomtutout.png" alt="plot of chunk binomtutout" /> </p>
 
 <pre><code>## [1] 0.656
 </code></pre>
@@ -5354,9 +5354,9 @@ P(X < 7 \textbf{ or } X > 9). %]]&gt;</script>
   
   <entry>
     <title type="html"><![CDATA[barchartGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/21/barchartGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/21/barchartGCtutorial/"/>
     <updated>2014-02-21T16:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/21/barchartGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/21/barchartGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-factor-variable">One Factor Variable</a></li>
@@ -5411,7 +5411,7 @@ help(m111survey)
            main="Barchart of Seating Preference")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/barchartseatfreq.png" alt="plot of chunk barchartseatfreq" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/barchartseatfreq.png" alt="plot of chunk barchartseatfreq" /> </p>
 
 <p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts:</p>
 
@@ -5419,7 +5419,7 @@ help(m111survey)
            main="Barchart of Seating Preference")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/barchartseatperc.png" alt="plot of chunk barchartseatperc" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/barchartseatperc.png" alt="plot of chunk barchartseatperc" /> </p>
 
 <p>If you have a table of the counts for a variable, then you can enter it directly.  For example, suppose you have already made:</p>
 
@@ -5437,7 +5437,7 @@ Seat
            main="Barchart of Seating Preference")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/barchartseattab.png" alt="plot of chunk barchartseattab" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/barchartseattab.png" alt="plot of chunk barchartseattab" /> </p>
 
 <h2 id="two-factor-variables">Two Factor Variables</h2>
 
@@ -5448,7 +5448,7 @@ Seat
            main="Sex and Seating Preference\nat Georgetown")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/barchartsexseat.png" alt="plot of chunk barchartsexseat" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/barchartsexseat.png" alt="plot of chunk barchartsexseat" /> </p>
 
 <p>Again, if you happen to have already made a two-way table, then you can just enter it:</p>
 
@@ -5467,7 +5467,7 @@ SexSeat
            main="Sex and Seating Preference\nat Georgetown")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/barchartsexseattab.png" alt="plot of chunk barchartsexseattab" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/barchartsexseattab.png" alt="plot of chunk barchartsexseattab" /> </p>
 
 <h2 id="warning">Warning</h2>
 
@@ -5477,7 +5477,7 @@ SexSeat
            main="Fastest Speed Ever Driven")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/barchartfastest.png" alt="plot of chunk barchartfastest" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/barchartfastest.png" alt="plot of chunk barchartfastest" /> </p>
 
 <p>R tries to accommodate your request, but it ends up making something that resembles a very amateurish histogram.  R draws a separate bar for each speed that appears in the data, making for a very “busy” graph.  Worse yet, consecutive speeds are equally spaced from each other, even though the differences between consecutive speeds vary.  For example, the spacing between the 90 ans 91 mph bars is the same as the spacing between the 160 and 190 mph bars.  This is very misleading!</p>
 ]]></content>
@@ -5485,9 +5485,9 @@ SexSeat
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Mosaic's Favstats()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/21/favstatstutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/21/favstatstutorial/"/>
     <updated>2014-02-21T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/21/favstatstutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/21/favstatstutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#studying-one-numerical-variable">Studying One Numerical Variable</a></li>
@@ -5627,9 +5627,9 @@ help(m111survey)
   
   <entry>
     <title type="html"><![CDATA[lmGC() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/15/lmGCtutorial/"/>
     <updated>2014-02-15T15:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/15/lmGCtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#formula-data-input">Formula-Data Input</a></li>
@@ -5736,7 +5736,7 @@ help(fuel)
 ## R^2 (unadjusted):		R^2 = 0.7528
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
 
 <p>The scatterplot includes the regression line. Indeed, the cloud of point seems to follow a line fairly well.  The relationship may be thought of as linear, so using <code>lmGC()</code> for tasks like prediction does make sense, for this data.</p>
 
@@ -5757,7 +5757,7 @@ help(fuel)
 ## R^2 (unadjusted):		R^2 = 0.7528
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
 
 <p>You get two graphs:</p>
 
@@ -5783,7 +5783,7 @@ help(fuel)
 ## R^2 (unadjusted):		R^2 = 0.0295
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
 
 <p>The residuals have a roughly-bell-shaped distribution, but the residual plot is clearly patterned.  Something is amiss!  Let’s look at a scatterplot of the data:</p>
 
@@ -5794,7 +5794,7 @@ help(fuel)
        main="Speed and Fuel Efficiency\nfor a British Ford Escort")
 </code></pre>
 
-<p><img src="http://homerhanumat.github.io/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
+<p><img src="http://statistics.rainandrhino.org/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
 
 <p>The relationship is strongly curvilinear:  it makes no sense to use the regression line (shown in the plot above) to study the relationship between these two variables!</p>
 ]]></content>

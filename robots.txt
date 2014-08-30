@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://homerhanumat.github.io/sitemap.xml 
+Sitemap: http://statistics.rainandrhino.org/sitemap.xml 

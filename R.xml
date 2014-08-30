@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title>A Statistics Blog - R</title>
-  <link href="http://homerhanumat.github.io/atom.xml" rel="self"/>
-  <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-08-29T21:53:05-04:00</updated>
-  <id>http://homerhanumat.github.io/</id>
+  <link href="http://statistics.rainandrhino.org/atom.xml" rel="self"/>
+  <link href="http://statistics.rainandrhino.org/"/>
+  <updated>2014-08-29T22:14:46-04:00</updated>
+  <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name>Homer White</name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title>New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server</title>
-    <link href="http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
     <updated>2014-08-29T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
     <content type="html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#new-pandoc&quot;&gt;New Pandoc&lt;/a&gt;&lt;/li&gt;
@@ -103,9 +103,9 @@
   
   <entry>
     <title>Five Reasons to Teach Elementary Statistics With R:  #3</title>
-    <link href="http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/05/04/reasons-to-teach-with-R-3/"/>
     <updated>2014-05-04T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/05/04/reasons-to-teach-with-R-3</id>
     <content type="html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#reason-3&#8211;rstudios-shiny&quot;&gt;Reason #3:  RStudio’s &lt;code&gt;shiny&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
@@ -221,7 +221,7 @@
 ## P-Value = 0.125
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://homerhanumat.github.io/images/figure/reasonsteachr3chisq.png&quot; alt=&quot;plot of chunk reasonsteachr3chisq&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://statistics.rainandrhino.org/images/figure/reasonsteachr3chisq.png&quot; alt=&quot;plot of chunk reasonsteachr3chisq&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;Sure enough, if the die is fair then there is a reasonably good chance—about 12.5%—of getting results at least as extreme as the ones we got in our 60 rolls.&lt;/p&gt;
 
@@ -307,9 +307,9 @@
   
   <entry>
     <title>Five Reasons to Teach Elementary Statistics With R:  #2</title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/"/>
     <updated>2014-04-08T19:59:59-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2</id>
     <content type="html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#reason-2&#8211;rstudios-manipulate&quot;&gt;Reason #2:  RStudio’s &lt;code&gt;manipulate&lt;/code&gt;&lt;/a&gt;    &lt;ul&gt;
@@ -421,7 +421,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## P-Value = 0.1727
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://homerhanumat.github.io/images/figure/reasonsteachr2.png&quot; alt=&quot;plot of chunk reasonsteachr2&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://statistics.rainandrhino.org/images/figure/reasonsteachr2.png&quot; alt=&quot;plot of chunk reasonsteachr2&quot; /&gt; &lt;/p&gt;
 
 &lt;h3 id=&quot;do-it-yourself&quot;&gt;Do It Yourself&lt;/h3&gt;
 
@@ -437,9 +437,9 @@ chisqtestGC(~sex+seat,data=m111survey,
   
   <entry>
     <title>Five Reasons to Teach Elementary Statistics With R:  #1</title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/"/>
     <updated>2014-04-05T19:30:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro</id>
     <content type="html">&lt;ul id=&quot;markdown-toc&quot;&gt;
   &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;#reason-1&#8211;package-mosaic&quot;&gt;Reason #1:  Package &lt;code&gt;mosaic&lt;/code&gt;&lt;/a&gt;    &lt;ul&gt;
@@ -579,7 +579,7 @@ nullDist &amp;lt;- do(2500)*(
 ## 	23 ( 0.92 % ) had test stats &amp;lt; -1.425
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://homerhanumat.github.io/images/figure/reason1hist.png&quot; alt=&quot;plot of chunk reason1hist&quot; /&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://statistics.rainandrhino.org/images/figure/reason1hist.png&quot; alt=&quot;plot of chunk reason1hist&quot; /&gt; &lt;/p&gt;
 
 &lt;p&gt;We seem to have fairly strong evidence ($P \approx 1.7\%$) that mating with more males increases the number of successful broods.&lt;/p&gt;
 
@@ -597,9 +597,9 @@ nullDist &amp;lt;- do(2500)*(
   
   <entry>
     <title>Pander/Pandoc for Pretty Conversion on the R Studio Server</title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
     <updated>2014-02-01T11:42:14-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
     <content type="html">&lt;p&gt;(&lt;strong&gt;Added May 19, 2014&lt;/strong&gt;:  On May 17 R Stduio announced a &lt;a href=&quot;http://www.rstudio.com/ide/download/preview&quot;&gt;preview release&lt;/a&gt; of version 0.98b which will render moot the techniques described in this post, as the new version provides built-in options to convert from R Markdown to PDF and to Word formats.)&lt;/p&gt;
 
 &lt;p&gt;Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.&lt;/p&gt;

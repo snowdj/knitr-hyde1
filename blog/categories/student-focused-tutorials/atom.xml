@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Student-Focused Tutorials | A Statistics Blog]]></title>
-  <link href="http://homerhanumat.github.io/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
-  <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-08-29T21:53:05-04:00</updated>
-  <id>http://homerhanumat.github.io/</id>
+  <link href="http://statistics.rainandrhino.org/blog/categories/student-focused-tutorials/atom.xml" rel="self"/>
+  <link href="http://statistics.rainandrhino.org/"/>
+  <updated>2014-08-29T22:14:46-04:00</updated>
+  <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Qnorm() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/28/qnormtutorial/"/>
     <updated>2014-04-28T22:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/28/qnormtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/28/qnormtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></a></li>
   <li><a href="#a-few-more-examples">A Few More Examples</a>    <ul>
@@ -143,9 +143,9 @@ P(X < 73.1093) = 0.85 %]]&gt;</script>.</p>
   
   <entry>
     <title type="html"><![CDATA[Xtabs() Tutorial]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/xtabstutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/xtabstutorial/"/>
     <updated>2014-02-28T18:00:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/xtabstutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/xtabstutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-factor-variable">One Factor Variable</a></li>
@@ -238,9 +238,9 @@ Seat
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Histogram()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/histogramtutorial/"/>
     <updated>2014-02-28T17:50:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/histogramtutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/histogramtutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
@@ -364,9 +364,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Densityplot()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/densityplottutorial/"/>
     <updated>2014-02-28T17:45:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/densityplottutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/densityplottutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#one-numerical-variable">One Numerical Variable</a></li>
@@ -493,9 +493,9 @@ install_github(repo="homerhanumat/tigerstats")
   
   <entry>
     <title type="html"><![CDATA[Tutorial on Lattice's Xyplot()]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/28/xyplottutorial/"/>
     <updated>2014-02-28T17:30:00-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/28/xyplottutorial</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/28/xyplottutorial</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#preliminaries">Preliminaries</a></li>
   <li><a href="#basic-scatterplot">Basic Scatterplot</a></li>

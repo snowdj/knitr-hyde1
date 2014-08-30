@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Tech Note | A Statistics Blog]]></title>
-  <link href="http://homerhanumat.github.io/blog/categories/tech-note/atom.xml" rel="self"/>
-  <link href="http://homerhanumat.github.io/"/>
-  <updated>2014-08-29T21:53:05-04:00</updated>
-  <id>http://homerhanumat.github.io/</id>
+  <link href="http://statistics.rainandrhino.org/blog/categories/tech-note/atom.xml" rel="self"/>
+  <link href="http://statistics.rainandrhino.org/"/>
+  <updated>2014-08-29T22:14:46-04:00</updated>
+  <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
     <updated>2014-08-29T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#new-pandoc">New Pandoc</a></li>
@@ -100,9 +100,9 @@ sudo texhash
   
   <entry>
     <title type="html"><![CDATA[Course Management With the RStudio Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/05/02/perl-scripts-r-studio/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/05/02/perl-scripts-r-studio/"/>
     <updated>2014-05-02T21:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/05/02/perl-scripts-r-studio</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/05/02/perl-scripts-r-studio</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#installation">Installation</a></li>
@@ -762,9 +762,9 @@ my(@foundProjects);
   
   <entry>
     <title type="html"><![CDATA[Roctopress: Configure Your Octopress Blog for R]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/04/13/roctopress/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/04/13/roctopress/"/>
     <updated>2014-04-13T16:00:00-04:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/04/13/roctopress</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/04/13/roctopress</id>
     <content type="html"><![CDATA[<ul id="markdown-toc">
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#directory-house-keeping">Directory House-Keeping</a></li>
@@ -1124,12 +1124,12 @@ git push origin source
 <feed xmlns="http://www.w3.org/2005/Atom" /></p>
 
 <title>A Statistics Blog - YourCategoryName</title>
-<link href="http://homerhanumat.github.io/atom.xml" rel="self" />
+<link href="http://statistics.rainandrhino.org/atom.xml" rel="self" />
 
-<link href="http://homerhanumat.github.io/" />
+<link href="http://statistics.rainandrhino.org/" />
 
-<updated>2014-08-29T21:53:05-04:00</updated>
-<id>http://homerhanumat.github.io/</id>
+<updated>2014-08-29T22:14:46-04:00</updated>
+<id>http://statistics.rainandrhino.org/</id>
 <author>
     <name>Homer White</name>
     
@@ -1156,9 +1156,9 @@ git push origin source
   
   <entry>
     <title type="html"><![CDATA[Pander/Pandoc for Pretty Conversion on the R Studio Server]]></title>
-    <link href="http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
     <updated>2014-02-01T11:42:14-05:00</updated>
-    <id>http://homerhanumat.github.io/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
     <content type="html"><![CDATA[<p>(<strong>Added May 19, 2014</strong>:  On May 17 R Stduio announced a <a href="http://www.rstudio.com/ide/download/preview">preview release</a> of version 0.98b which will render moot the techniques described in this post, as the new version provides built-in options to convert from R Markdown to PDF and to Word formats.)</p>
 
 <p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
