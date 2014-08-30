@@ -1,0 +1,1022 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Preliminaries Finding P(X &lt;= x) Find P(X &gt;= x) Strict Inequalities: Finding P(X &lt; x) Strict Inequalities: Finding P(X &gt; x) Finding P(a & &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/page/5">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/26/pbinomGCtutorial/">pbinomGC() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T15:00:00-05:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/26/pbinomGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/26/pbinomGCtutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#finding-px--x">Finding P(X &lt;= x)</a></li>
+  <li><a href="#find-px--x">Find P(X &gt;= x)</a></li>
+  <li><a href="#strict-inequalities--finding-px--x">Strict Inequalities:  Finding P(X &lt; x)</a></li>
+  <li><a href="#strict-inequalities--finding-px--x-1">Strict Inequalities:  Finding P(X &gt; x)</a></li>
+  <li><a href="#finding-pa--x--b">Finding P(a &lt;= X &lt;= b)</a></li>
+  <li><a href="#finding-px--x-1">Finding P(X = x)</a></li>
+  <li><a href="#outside-probabilities">“Outside” Probabilities</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>pbinomGC()</code> provides a direct way to compute probabilities for binomial random variables, along with graphs for the probabilities, if you want them.  The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="finding-px--x">Finding P(X &lt;= x)</h2>
+
+<p>Suppose that you have a binomial random variable with $n=20$ trials, and chance of success $p=0.3$ on each trial, and you would like to find the chance of getting 8 or fewer successes in your 20 trials.  In other words (letting $X$ stand for the binomial random variable), you are looking for:</p>
+
+<script type="math/tex; mode=display">P(X \leq 8).</script>
+
+<p>Then run this command:</p>
+
+<pre><code>pbinomGC(bound=8,region="below",size=20,prob=0.3)
+
+## [1] 0.8867
+</code></pre>
+
+<p>Note carefully what the arguments mean, here:</p>
+
+<ul>
+  <li><code>bound=8</code> tells where to stop</li>
+  <li><code>region="below"</code> takes care of the “less than” part of the requested probability</li>
+  <li><code>size=20</code> tells <code>pbinomGC()</code> the number of trials for $X$</li>
+  <li><code>prob=0.3</code> tells <code>pbinomGC()</code> the chance of success on each trial</li>
+</ul>
+
+<p>If you would like to see a graph of the probability distribution of $X$ along with a shaded area that represents the requested probability, then you can set the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>pbinomGC(bound=8,region="below",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutleq8.png" alt="plot of chunk binomtutleq8" /> </p>
+
+<pre><code>## [1] 0.8867
+</code></pre>
+
+<h2 id="find-px--x">Find P(X &gt;= x)</h2>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability of at least 10 successes, i.e.:</p>
+
+<script type="math/tex; mode=display">P(X \geq 10).</script>
+
+<p>When we want to go “above” a given number, <code>pbinomGC()</code> will <em>not</em> include that number in its computation of probabilities, so asking for</p>
+
+<pre><code>pbinomGC(bound=10,region="above",
+         size=20,prob=0.3)
+</code></pre>
+
+<p>would give us the chance of $X$ being at least 11, which is not what we want.</p>
+
+<p>However, since $X$ can only take on whole number values, $X \geq 10$ means exactly the same thing as $X &gt; 9$, what we really should ask for is:</p>
+
+<pre><code>pbinomGC(bound=9,region="above",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutgeq10.png" alt="plot of chunk binomtutgeq10" /> </p>
+
+<pre><code>## [1] 0.04796
+</code></pre>
+
+<p>The shaded area starts at 10, as desired.</p>
+
+<p>It’s a good idea to keep asking for a graph along with your output, so you can check that R is giving you exactly the probability that you need.</p>
+
+<h2 id="strict-inequalities--finding-px--x">Strict Inequalities:  Finding P(X &lt; x)</h2>
+
+<p>For this case we also have to be careful.</p>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability of less than 6 successes, i.e.:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 6). %]]></script>
+
+<p>Since $X$ is a discrete random variable with whole number values, $X &lt; 6$ means exactly the same thing thing as $X \leq 5$.  <code>pbinomGC()</code> includes the bound in the probability that it computes, so we have stop at 5, rather than at 6.  We use the command:</p>
+
+<pre><code>pbinomGC(bound=5,region="below",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutless6.png" alt="plot of chunk binomtutless6" /> </p>
+
+<pre><code>## [1] 0.4164
+</code></pre>
+
+<h2 id="strict-inequalities--finding-px--x-1">Strict Inequalities:  Finding P(X &gt; x)</h2>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability that the number of successes will be more than 7.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">P(X > 7).</script>
+
+<p>This is easy again.  Since <code>pbinomGC()</code> does not include the bound when <code>region</code> is “above”, we only need to ask for:</p>
+
+<pre><code>pbinomGC(bound=7,region="above",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutgreater7.png" alt="plot of chunk binomtutgreater7" /> </p>
+
+<pre><code>## [1] 0.2277
+</code></pre>
+
+<h2 id="finding-pa--x--b">Finding P(a &lt;= X &lt;= b)</h2>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability that the number of successes will be at least 6 but no more than 10.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">P(6 \leq X \leq 10).</script>
+
+<p>We can find this with the command:</p>
+
+<pre><code>pbinomGC(bound=c(6,10),region="between",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutbetwee.png" alt="plot of chunk binomtutbetwee" /> </p>
+
+<pre><code>## [1] 0.5665
+</code></pre>
+
+<p>Notice that there are no two numbers—6 and 10—that make the boundaries, so we must supply both of them to the <code>bound</code> argument as a list:  <code>c(6,10)</code>.  Also note that when <code>region="between"</code>, <code>pbinomGC()</code> includes <em>both</em> of the bounds in its computation of probabilities.</p>
+
+<h2 id="finding-px--x-1">Finding P(X = x)</h2>
+
+<p>To find the chance of $X$ being <em>exactly</em> a particular value, you can employ a little trick.</p>
+
+<p>For example, for the same random variable $X \sim binom(20,0.3)$, suppose we want the chance of exactly 6 successes.  This is very same thing as</p>
+
+<script type="math/tex; mode=display">P(6 \leq X \leq 6),</script>
+
+<p>so you can ask for:</p>
+
+<pre><code>pbinomGC(bound=c(6,6),region="between",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutequal.png" alt="plot of chunk binomtutequal" /> </p>
+
+<pre><code>## [1] 0.1916
+</code></pre>
+
+<h2 id="outside-probabilities">“Outside” Probabilities</h2>
+
+<p>This case does not occur very often.</p>
+
+<p>For the same random variable $X \sim binom(20,0.3)$, suppose we want the probability that you either get less than 7 successes OR you get more than 9 successes.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 7 \textbf{ or } X > 9). %]]></script>
+
+<p>You can find this with the command:</p>
+
+<pre><code>pbinomGC(bound=c(7,9),region="outside",
+         size=20,prob=0.3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/binomtutout.png" alt="plot of chunk binomtutout" /> </p>
+
+<pre><code>## [1] 0.656
+</code></pre>
+
+<p>Notice that there are two numbers—7 and 9—that make the boundaries, so we must supply both of them to the <code>bound</code> argument as a list:  <code>c(6,10)</code>.  Notice also that when <code>region</code> is set to “outside”, <code>pbinomGC()</code> excludes both bounds.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/21/barchartGCtutorial/">barchartGC() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-21T16:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/21/barchartGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/21/barchartGCtutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-factor-variable">One Factor Variable</a></li>
+  <li><a href="#two-factor-variables">Two Factor Variables</a></li>
+  <li><a href="#warning">Warning</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>barchartGC()</code> provides quick-and-easy bar charts for the graphical exploration of factor variables.  The function comes from the <code>tigerstats</code> package and we will use some data from the <code>tigerstats</code> as well, so make sure that <code>tigerstats</code> is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<p>In this tutorial we will work with the <code>m111survey</code> data frame from <code>tigerstats</code> package.  If you are not yet familiar with this data, then run:</p>
+
+<pre><code>data(m111survey)
+View(m111survey)
+help(m111survey)
+</code></pre>
+
+<p>Remember that you can also learn about the types of each variable in the data frame with the <code>str()</code> function:</p>
+
+<pre><code>str(m111survey)
+
+## 'data.frame':	71 obs. of  12 variables:
+##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
+##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
+##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
+##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
+##  $ weight_feel    : Factor w/ 3 levels "1_underweight",..: 1 2 2 1 1 3 2 2 2 3 ...
+##  $ love_first     : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ extra_life     : Factor w/ 2 levels "no","yes": 2 2 1 1 2 1 2 2 2 1 ...
+##  $ seat           : Factor w/ 3 levels "1_front","2_middle",..: 1 2 2 1 3 1 1 3 3 2 ...
+##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
+##  $ enough_Sleep   : Factor w/ 2 levels "no","yes": 1 1 1 1 1 2 1 2 1 2 ...
+##  $ sex            : Factor w/ 2 levels "female","male": 2 2 1 1 2 2 2 2 1 1 ...
+##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...
+</code></pre>
+
+<h2 id="one-factor-variable">One Factor Variable</h2>
+
+<p>To look see a bar chart for the tallies of the factor variable <strong>seat</strong>:</p>
+
+<pre><code>barchartGC(~seat,data=m111survey,type="frequency",
+           main="Barchart of Seating Preference")
+</code></pre>
+
+<p><img src="/images/figure/barchartseatfreq.png" alt="plot of chunk barchartseatfreq" /> </p>
+
+<p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts:</p>
+
+<pre><code>barchartGC(~seat,data=m111survey,type="percent",
+           main="Barchart of Seating Preference")
+</code></pre>
+
+<p><img src="/images/figure/barchartseatperc.png" alt="plot of chunk barchartseatperc" /> </p>
+
+<p>If you have a table of the counts for a variable, then you can enter it directly.  For example, suppose you have already made:</p>
+
+<pre><code>Seat &lt;- xtabs(~seat,data=m111survey)
+Seat
+
+## seat
+##  1_front 2_middle   3_back 
+##       27       32       12
+</code></pre>
+
+<p>Then you can just enter the table:</p>
+
+<pre><code>barchartGC(Seat,type="percent",
+           main="Barchart of Seating Preference")
+</code></pre>
+
+<p><img src="/images/figure/barchartseattab.png" alt="plot of chunk barchartseattab" /> </p>
+
+<h2 id="two-factor-variables">Two Factor Variables</h2>
+
+<p>You can also use <code>barchartGC()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data input as follows:</p>
+
+<pre><code>barchartGC(~sex+seat,data=m111survey,
+           type="percent",
+           main="Sex and Seating Preference\nat Georgetown")
+</code></pre>
+
+<p><img src="/images/figure/barchartsexseat.png" alt="plot of chunk barchartsexseat" /> </p>
+
+<p>Again, if you happen to have already made a two-way table, then you can just enter it:</p>
+
+<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
+SexSeat
+
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+</code></pre>
+
+<p>Here is the bar chart from the two-way table:</p>
+
+<pre><code>barchartGC(SexSeat,type="percent",
+           main="Sex and Seating Preference\nat Georgetown")
+</code></pre>
+
+<p><img src="/images/figure/barchartsexseattab.png" alt="plot of chunk barchartsexseattab" /> </p>
+
+<h2 id="warning">Warning</h2>
+
+<p>Bar charts are for factor variables, not for numerical variables.  Look what happens when you ask for a bar chart of <strong>fastest</strong>:</p>
+
+<pre><code>barchartGC(~fastest,data=m111survey,
+           main="Fastest Speed Ever Driven")
+</code></pre>
+
+<p><img src="/images/figure/barchartfastest.png" alt="plot of chunk barchartfastest" /> </p>
+
+<p>R tries to accommodate your request, but it ends up making something that resembles a very amateurish histogram.  R draws a separate bar for each speed that appears in the data, making for a very “busy” graph.  Worse yet, consecutive speeds are equally spaced from each other, even though the differences between consecutive speeds vary.  For example, the spacing between the 90 ans 91 mph bars is the same as the spacing between the 160 and 190 mph bars.  This is very misleading!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/21/favstatstutorial/">Tutorial on Mosaic&#8217;s Favstats()</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-21T15:00:00-05:00" pubdate data-updated="true">Feb 21<span>st</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/21/favstatstutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/21/favstatstutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#studying-one-numerical-variable">Studying One Numerical Variable</a></li>
+  <li><a href="#studying-the-relationship-between-a-numerical-variable-and-a-factor-variable">Studying the Relationship Between a Numerical Variable and a Factor Variable</a></li>
+  <li><a href="#limiting-the-output">Limiting the Output</a></li>
+  <li><a href="#warning">Warning</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>favstats()</code> comes from the <code>mosaic</code> package and we will use some data from the <code>tigerstats</code> package, so make sure that both are loaded:</p>
+
+<pre><code>require(mosaic)
+require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo = "homerhanumat/tigerstats")
+</code></pre>
+
+<p>In this tutorial we will work with the <code>m111survey</code> data frame from <code>tigerstats</code> package.  If you are not yet familiar with this data, then run:</p>
+
+<pre><code>data(m111survey)
+View(m111survey)
+help(m111survey)
+</code></pre>
+
+<p>Remember that you can also learn about the types of each variable in the data frame with the <code>str()</code> function:</p>
+
+<pre><code>str(m111survey)
+
+## 'data.frame':	71 obs. of  12 variables:
+##  $ height         : num  76 74 64 62 72 70.8 70 79 59 67 ...
+##  $ ideal_ht       : num  78 76 NA 65 72 NA 72 76 61 67 ...
+##  $ sleep          : num  9.5 7 9 7 8 10 4 6 7 7 ...
+##  $ fastest        : int  119 110 85 100 95 100 85 160 90 90 ...
+##  $ weight_feel    : Factor w/ 3 levels "1_underweight",..: 1 2 2 1 1 3 2 2 2 3 ...
+##  $ love_first     : Factor w/ 2 levels "no","yes": 1 1 1 1 1 1 1 1 1 1 ...
+##  $ extra_life     : Factor w/ 2 levels "no","yes": 2 2 1 1 2 1 2 2 2 1 ...
+##  $ seat           : Factor w/ 3 levels "1_front","2_middle",..: 1 2 2 1 3 1 1 3 3 2 ...
+##  $ GPA            : num  3.56 2.5 3.8 3.5 3.2 3.1 3.68 2.7 2.8 NA ...
+##  $ enough_Sleep   : Factor w/ 2 levels "no","yes": 1 1 1 1 1 2 1 2 1 2 ...
+##  $ sex            : Factor w/ 2 levels "female","male": 2 2 1 1 2 2 2 2 1 1 ...
+##  $ diff.ideal.act.: num  2 2 NA 3 0 NA 2 -3 2 0 ...
+</code></pre>
+
+<h2 id="studying-one-numerical-variable">Studying One Numerical Variable</h2>
+
+<p>“favstats” is short for “favorite statistics”:  it will give you the some of the most popular summary statistics for numerical variables.</p>
+
+<p>Suppose, for example, that you want to know how fast people in the <code>m111survey</code> sample tend to drive, when they drive their fastest. The you want to study the numerical variable <strong>fastest</strong>:  the fastest speed each person claims to have ever driven, measured in miles per hour.  Just try <code>favstats()</code> with the usual formula-data input:</p>
+
+<pre><code>favstats(~fastest, data = m111survey)
+
+##  min   Q1 median    Q3 max  mean    sd  n missing
+##   60 90.5    102 119.5 190 105.9 20.88 71       0
+</code></pre>
+
+<p>Remember what each of the statistics tells you:</p>
+
+<ul>
+  <li>The minimum fastest speed drive by anyone in the survery was 60 mph.</li>
+  <li>The maximum fastest speed was 190 mph.</li>
+  <li>About 25% of the survey participants drove less than 90.5 mph (the First Quartile)</li>
+  <li>About 75% percent of the survey participants drove less than 119.5 mph (the Third Quartile)</li>
+  <li>About 50% of the participants drove less than 102 mph (the median)</li>
+  <li>The mean speed for this sample of students was about 105.9 mph …</li>
+  <li>… give or take about 20.9 mph or so (the standard deviation).</li>
+</ul>
+
+<p>We also see that</p>
+
+<ul>
+  <li>71 people answered the question about fastest speed;</li>
+  <li>Nobody did not answer (missing = 0).</li>
+</ul>
+
+<h2 id="studying-the-relationship-between-a-numerical-variable-and-a-factor-variable">Studying the Relationship Between a Numerical Variable and a Factor Variable</h2>
+
+<p>Studying the relationship between a numerical variable and factor variable involves what is popularly known as “breaking the data into groups” based on the values of the factor variable.  More formally, we obtain the conditional distributions of the numerical variable given the various possible values of the factor variable, and look for difference between these distributions.  If we see large differences. then we know that the factor variable “makes a difference” in the likely values of the numerical variable, i.e., the two variable are related.</p>
+
+<p>For example we might want to know if the fastest speed one drives might be related to one’s sex.  The relevant variables in <code>m111survey</code> are then the numerical <strong>fastest</strong> and the factor variable <strong>sex</strong>.</p>
+
+<p>In formula-data input for <code>favstats()</code> the formula always follows the format:</p>
+
+<script type="math/tex; mode=display">numerical \sim factor.</script>
+
+<p>So we run the following command:</p>
+
+<pre><code>favstats(fastest ~ sex, data = m111survey)
+
+##   .group min Q1 median    Q3 max  mean    sd  n missing
+## 1 female  60 90     95 110.0 145 100.0 17.61 40       0
+## 2   male  85 99    110 122.5 190 113.5 22.57 31       0
+</code></pre>
+
+<p>The first row of the output gives a summary of the conditional distribution of <strong>fastest</strong>, given that <strong>sex</strong> is female.</p>
+
+<p>The second row summarizes the conditional distribution of <strong>fastest</strong>, given that <strong>sex</strong> is male.</p>
+
+<p>The two conditional distribution are not the same.  For example, we see that on average females drove about 100 mph, whereas the guys drove about 113.4 mph.  The guys appear to drive faster than the gals:  for this sample of students, fastest speed drive does indeed appear to be related to sex.</p>
+
+<h2 id="limiting-the-output">Limiting the Output</h2>
+
+<p>Sometimes you want just a few of the numbers from <code>favstats()</code>.  If you would like to display only those numbers you can do so using brackets “[” and “]”, along with a list of the names of the columns you want to see.  For example, to display only the means and the standard deviations for <strong>fastest</strong>, ask for:</p>
+
+<pre><code>favstats(fastest, data = m111survey)[c("mean", "sd")]
+
+##   mean    sd
+##  105.9 20.88
+</code></pre>
+
+<p>The brackets are R’s way of locating particular parts of an object.  If you want to display more than one column, make sure to combine their names (in quotes) in a list with the <code>c()</code> function, as shown above.</p>
+
+<p>When you are breaking a numerical variable into groups, you will probably also want to see the group names:  this requires the addition of the column named <code>.group</code>.  Therefore, to see just the mean and the standard deviation for <strong>fastest</strong> broken down by <strong>sex</strong>, ask for:</p>
+
+<pre><code>favstats(fastest ~ sex, data = m111survey)[c(".group", "mean", "sd")]
+
+##   .group  mean    sd
+## 1 female 100.0 17.61
+## 2   male 113.5 22.57
+</code></pre>
+
+<h2 id="warning">Warning</h2>
+
+<p><code>favstats()</code> specializes in numerical variables:  it won’t help you to study a factor variable by itself.  Look what happens when you try to use it to study the factor variable <strong>sex</strong>:</p>
+
+<pre><code>favstats(~sex, data = m111survey)
+
+## Error: non-numeric argument to binary operator
+</code></pre>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/15/lmGCtutorial/">lmGC() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-15T15:00:00-05:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/15/lmGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/15/lmGCtutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#formula-data-input">Formula-Data Input</a></li>
+  <li><a href="#prediction">Prediction</a></li>
+  <li><a href="#plotting">Plotting</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>The <code>lmGC()</code> is a starter-tool for simple linear regression, when you are studying the relationship between two numerical variables, one of which you consider to be an explanatory or predictor variable and the other of which you think of as the response.  It’s only a starter-tool:  by the end of the course, or in later statistics courses, you will move on to R’s function <code>lm()</code>, which allows you to work with more than one explanatory variable and which provides additional useful information in its output.  Also, in <code>lm()</code> the explanatory variable(s) can even be factors!</p>
+
+<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo = "homerhanumat/tigerstats")
+</code></pre>
+
+<p>In this tutorial we will work with a couple of data sets:  <code>mtcars</code> from the <code>data</code> package that comes with the basic R installation, and <code>fuel</code> from the <code>tigerstats</code> package, so make sure you become familiar with them.  The following commands may be helpful in this regard:</p>
+
+<pre><code>data(mtcars)
+View(mtcars)
+help(mtcars)
+</code></pre>
+
+<p>For <code>fuel</code>:</p>
+
+<pre><code>data(fuel)
+View(fuel)
+help(fuel)
+</code></pre>
+
+<h2 id="formula-data-input">Formula-Data Input</h2>
+
+<p>Like many R functions, <code>lmGC()</code> accepts formula-data input.  The general command looks like:</p>
+
+<pre><code>lmGC(response ~ explanatory, data = DataFrame)
+</code></pre>
+
+<p>If you are interested in studying the relationship between the fuel efficiency of a car (<strong>mpg</strong> in the <code>mtcars</code> data frame, measured in miles per gallon) and its weight (<strong>wt</strong> in <code>mtcars</code>, measure din thousands of pounds), then you  can run:</p>
+
+<pre><code>lmGC(mpg ~ wt, data = mtcars)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.8677 
+## 
+## Equation of Regression Line:
+## 
+## 	 mpg = 37.29 + -5.345 * wt 
+## 
+## Residual Standard Error:	s   = 3.046 
+## R^2 (unadjusted):		R^2 = 0.7528
+</code></pre>
+
+<p>The output to the console is rather minimal.  You get:</p>
+
+<ul>
+  <li>the correlation coefficient $r$.  We need to look at a scatter plot to be really sure about it (for plots, see below), but at this point the value $r = -0.87$ indicates a fairly strong negative linear relationship between fuel efficiency and weight.</li>
+  <li>the equation of the regression line.  From the slope of -5.34, we see that for every thousand pound increase in the weight of a car, we predict a 5.34 mpg decrease in the fuel efficiency.</li>
+  <li>the residual standard error $s$.  As a rough rule of thumb, we figure that when we use the regression equation to predict the fuel efficiency of a car from its weight, that prediction is liable to be off by about $s$ miles per gallon, or so.</li>
+  <li>the unadjusted $R^2$.  We see here that about 75% of the variation in the fuel efficiency of the cars in the data set is accounted for by the variation in their weights.  since $R^2$ is fairly high, it seems that weight is a fairly decent predictor of fuel efficiency.</li>
+</ul>
+
+<h2 id="prediction">Prediction</h2>
+
+<p>When the value of the explanatory variable for an individual is known and you wish to predict the value of the response variable for that individual, you can use the <code>predict()</code> function.  Its arguments are the linear model that is created by <code>lmGC()</code>, and the value <code>x</code> of the explanatory variable.</p>
+
+<p>If you think that you might want to use <code>predict()</code>, you may first want to store the model in a variable, for example:</p>
+
+<pre><code>WeightEff &lt;- lmGC(mpg ~ wt, data = mtcars)
+</code></pre>
+
+<p>Then if you want to predict the fuel efficiency of a car that weights 3000 pounds, run this command:</p>
+
+<pre><code>predict(WeightEff, x = 3)
+
+## [1] 21.25
+</code></pre>
+
+<p>We predict that a 3000 pound car (from the time of the Motor Trend study that produced this data) would have a fuel efficiency of 21.25 mpg, give or take about 3.046 mpg or so.  (Note how we used $s$ as a rough give-or-take figure.)</p>
+
+<h2 id="plotting">Plotting</h2>
+
+<p>But we are getting ahead of ourselves!  In order to use linear models at all, we need to make sure that our data really do show a linear relationship.  The single best way to check this is to look at a scatterplot, so <code>lmGC()</code> comes equipped with a option to produce one:  just set the argument <code>graph</code> to <code>TRUE</code>, as follows:</p>
+
+<pre><code>lmGC(mpg ~ wt, data = mtcars, graph = TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.8677 
+## 
+## Equation of Regression Line:
+## 
+## 	 mpg = 37.29 + -5.345 * wt 
+## 
+## Residual Standard Error:	s   = 3.046 
+## R^2 (unadjusted):		R^2 = 0.7528
+</code></pre>
+
+<p><img src="/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
+
+<p>The scatterplot includes the regression line. Indeed, the cloud of point seems to follow a line fairly well.  The relationship may be thought of as linear, so using <code>lmGC()</code> for tasks like prediction does make sense, for this data.</p>
+
+<p>You can also perform some simple diagnostics, by setting the argument <code>diag</code> to <code>TRUE</code>:</p>
+
+<pre><code>lmGC(mpg ~ wt, data = mtcars, diag = TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.8677 
+## 
+## Equation of Regression Line:
+## 
+## 	 mpg = 37.29 + -5.345 * wt 
+## 
+## Residual Standard Error:	s   = 3.046 
+## R^2 (unadjusted):		R^2 = 0.7528
+</code></pre>
+
+<p><img src="/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
+
+<p>You get two graphs:</p>
+
+<ul>
+  <li>a density plot of the residuals.  If the distribution of the residuals is roughly bell-shaped, then you can actually employ a &#8220;regression’’ version of the 68-95 Rule:  when you make a prediction using the regression line, there is a about a 68% chance that your predcition will be wtthin one $s$ of the actual $y$-value, and about a 95% chance that ti will be within $2s$ of the actual $y$-value.  <em>Neat!</em></li>
+  <li>A plot of the residuals vs, the <code>fitted</code> $y$-values (the $y$-coordinates of the points on the original scatterplot).  If the points exhibit a linear relationship with about the same amount of scatter all the way along the regression line, then this plot should look like a random cloud of points.  In this case, it confirms that our linear model is appropriate to the data.</li>
+</ul>
+
+<p>On the other hand, consider <code>fuel</code> data frame, which shows the results of a study where a British Ford Escort was driven at various speed along a standard course, and the fuel efficiency (in kilometers traveled per liter of fuel consumed) was recorded at each speed.  Let’s try a linear model with <strong>speed</strong> as explanatory and <strong>efficiency</strong> as the response, with some diagnostic plots attached:</p>
+
+<pre><code>lmGC(efficiency ~ speed, data = fuel, diag = TRUE)
+
+## 
+## 			Simple Linear Regression
+## 
+## Correlation coefficient r =  -0.1716 
+## 
+## Equation of Regression Line:
+## 
+## 	 efficiency = 11.06 + -0.0147 * speed 
+## 
+## Residual Standard Error:	s   = 3.905 
+## R^2 (unadjusted):		R^2 = 0.0295
+</code></pre>
+
+<p><img src="/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
+
+<p>The residuals have a roughly-bell-shaped distribution, but the residual plot is clearly patterned.  Something is amiss!  Let’s look at a scatterplot of the data:</p>
+
+<pre><code>xyplot(efficiency~speed,data=fuel,
+       xlab="speed (kilometers/hour",
+       ylab="fuel effiency (liters/100km",
+       pch=19,col="blue",type=c("p","r"),
+       main="Speed and Fuel Efficiency\nfor a British Ford Escort")
+</code></pre>
+
+<p><img src="/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
+
+<p>The relationship is strongly curvilinear:  it makes no sense to use the regression line (shown in the plot above) to study the relationship between these two variables!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/6/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog/page/4/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/29/r-studio-server-centos-pandoc-latex/">New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/04/reasons-to-teach-with-R-3/">Five Reasons to Teach Elementary Statistics With R: #3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/02/perl-scripts-r-studio/">Course Management With the RStudio Server</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'homerhanumat',
+            count: 5,
+            skip_forks: true,
+            skip_repos: [ "homerhanumat.github.io" ],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101037539642604924807?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/r/'>R (5)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
+<li class='category'><a href='/blog/categories/tech-note/'>Tech Note (4)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Useful Links</h1>
+  <ul id="links">
+      <li class="post"><a href="http://www.r-bloggers.com" target="_blank">R-Bloggers</a></li>
+      <li class="post"><a href="http://mosaic-web.org/" target="_blank">Project Mosaic</a></li>
+      <li class="post"><a href="http://statistics.georgetowncollege.edu", target="_blank">My Elementary Course</a></li> 
+  </ul>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p float>
+  2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+<p>      
+  <span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></span><span style="color:black">This work is licensed under a </span><a style="color:black" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

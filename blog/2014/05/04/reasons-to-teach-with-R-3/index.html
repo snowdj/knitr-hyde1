@@ -1,0 +1,544 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Five Reasons to Teach Elementary Statistics With R: #3 - A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Introduction Reason #3: RStudio’s shiny Examples “Slow” Simulation Understanding Model Assumptions Types of Error Illustrating Fine Points Playing &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Five Reasons to Teach Elementary Statistics With R: #3</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T21:00:00-04:00" pubdate data-updated="true">May 4<span>th</span>, 2014</time>
+        
+           | <a href="#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></a></li>
+  <li><a href="#examples">Examples</a>    <ul>
+      <li><a href="#slow-simulation">“Slow” Simulation</a></li>
+      <li><a href="#understanding-model-assumptions">Understanding Model Assumptions</a></li>
+      <li><a href="#types-of-error">Types of Error</a></li>
+      <li><a href="#illustrating-fine-points">Illustrating Fine Points</a></li>
+      <li><a href="#playing-games">Playing Games</a></li>
+    </ul>
+  </li>
+  <li><a href="#shiny-vs-manipulate">Shiny vs. <code>manipulate</code></a></li>
+  <li><a href="#instructional-apps-gallery">Instructional Apps Gallery?</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is the third in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/">previous post</a> in this series described R Studio’s package <code>manipulate</code> and its applications in the easy authoring of instructional applets.  Today we’ll look at <code>shiny</code>, a related RStudio project.</p>
+
+<p>In order to try the ensuing examples, download an ancillary package that we use for our elementary course:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="s"><span class="line">require<span class="p">(</span>devtools<span class="p">)</span>
+</span><span class="line">install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;homerhanumat/tigerstats&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></h2>
+
+<p><a href="https://www.rstudio.com/shiny/">Shiny</a> appears to be intended primarily for data analysts working in industry or in academic or institutional research, but on the very day of its public release Victor Moreno pointed out its implications for statistics education (see his comment on <a href="http://blog.rstudio.org/2012/11/08/introducing-shiny/">this RStudio blog post</a>).  For statistics instructors Shiny offers essentially the same benefits as <code>manipulate</code>, but in addition comes pimped out with:</p>
+
+<ul>
+  <li>options for dynamic user input;</li>
+  <li>output formats that go well beyond <code>manipulate</code>’s home in the Plots pane;</li>
+  <li>default Bootstrap styling.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="slow-simulation">“Slow” Simulation</h3>
+
+<p>At my College we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose for example you are wondering whether a certain die is loaded.  You don’t want to crack it open, so you roll it sixty times, getting the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Spots</strong></th>
+      <th style="text-align: center">One</th>
+      <th style="text-align: center">Two</th>
+      <th style="text-align: center">Three</th>
+      <th style="text-align: center">Four</th>
+      <th style="text-align: center">Five</th>
+      <th style="text-align: center">Six</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Freq</strong></td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">18</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This looks like an awful lot of two-spots, but we were not expecting this in advance.  By this point in the course students have been made aware of the perils of “data snooping” and hence should be disinclined to employ an inferential procedure that is based specifically on a pattern that one happens to notice in one’s data.  Therefore, rather than perform inferential procedures keyed to “Two-spot” side of the die, we might turn instead to the chi-square statistic as a neutral measure of the difference between the observed results and what one would expect if the die were fair.</p>
+
+<p>The situation is addressed in this Shiny app:</p>
+
+<p><a href="http://rstudio.georgetowncollege.edu:3838/SlowGoodness">http://rstudio.georgetowncollege.edu:3838/SlowGoodness</a></p>
+
+<p>After re-sampling for a few minutes, students are convinced that it’s not so unlikely, after all to get results like the ones we observed, if the die is fair all along.</p>
+
+<p>Students are then prepared to understand a full-scale re-sampling simulation like the following one:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="s"><span class="line">require<span class="p">(</span>tigerstats<span class="p">)</span>
+</span><span class="line">observed <span class="o">&lt;-</span> c<span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">11</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
+</span><span class="line">fair <span class="o">&lt;-</span> rep<span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)</span>
+</span><span class="line">set.seed<span class="p">(</span><span class="m">2020</span><span class="p">)</span>
+</span><span class="line">chisqtestGC<span class="p">(</span>observed<span class="p">,</span>p<span class="o">=</span>fair<span class="p">,</span>
+</span><span class="line">      simulate.p.value<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>
+</span><span class="line">      B<span class="o">=</span><span class="m">3000</span><span class="p">,</span>graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<pre><code>## Pearson's chi-squared test with simulated p-value 
+## 	 (based on 3000 resamples)
+## 
+##   observed counts Expected by Null contribution to chisq statistic
+## A               8               10                             0.4
+## B              18               10                             6.4
+## C              11               10                             0.1
+## D               7               10                             0.9
+## E               9               10                             0.1
+## F               7               10                             0.9
+## 
+## 
+## Chi-Square Statistic = 8.8 
+## Degrees of Freedom of the table = 5 
+## P-Value = 0.125
+</code></pre>
+
+<p><img src="/images/figure/reasonsteachr3chisq.png" alt="plot of chunk reasonsteachr3chisq" /> </p>
+
+<p>Sure enough, if the die is fair then there is a reasonably good chance—about 12.5%—of getting results at least as extreme as the ones we got in our 60 rolls.</p>
+
+<p><strong>Note:</strong>  Shiny users know that the apps are liable to run more quickly if you run them locally.  To run the foregoing app locally from an R session, pull it out of the <code>tigerstats</code> package:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">require<span class="p">(</span>shiny<span class="p">)</span>
+</span><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;SlowGoodness&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="understanding-model-assumptions">Understanding Model Assumptions</h3>
+
+<p>Students tend to be somewhat rigid in their handling of “safety checks”—the diagnostics they are instructed to perform in order to judge whether the statistical model underlying a given inferential procedure is appropriate to the data at hand.  This rigidity stems partly from a lack of understanding of what the inferential procedure is intended to deliver (for example, that a method for making 95%-confidence intervals for a parameter should produce intervals that cover the parameter about 95% of the time in repeated sampling), and partly from a lack of experience with situations in which the mathematical assumptions of the model are not perfectly satisfied.</p>
+
+<p>The following Shiny app:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;CIMean&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>addresses two learning outcomes:</p>
+
+<ul>
+  <li>coverage properties of confidence intervals (e.g, what “95% confidence” means, from a frequentist point of view);</li>
+  <li>the effect on coverage properties, at various sample sizes, of departures from normality assumptions in procedures based upon the t-statistic.</li>
+</ul>
+
+<p>Both “slow” (one-at-a-time) simulation and large-scale simulation (5000 samples) are available to the student.</p>
+
+<h3 id="types-of-error">Types of Error</h3>
+
+<p>Simulation is also helpful in coming to understand such notions as the level of significance of a hypothesis test (i.e., the probability a true Null Hypothesis in repeated sampling), and the notion of power as well.  See the following app:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;Type12Errors&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="illustrating-fine-points">Illustrating Fine Points</h3>
+
+<p>Sometimes you want to have an app on hand, not because it addresses a major course objective, but simply in case students ask a particular question.  For example, sometimes when the class is looking at a scatter plot—with regression line—of data that comes from a bivariate normal distribution, a student will remark that the regression line looks “too shallow”.  This root of this question is a confusion, in the student’s mind, between two purposes that a line might serve:</p>
+
+<ul>
+  <li>to provide a “linear summary”” of the scatter plot;</li>
+  <li>to provide linear predictions, based on the scatter plot, of y-values from x-values.</li>
+</ul>
+
+<p>The so-called “SD line”—the line that runs through the point of averages and whose slope is the ratio of the standard deviation of the y-value to the standard deviation of the x-value—is well-suited to the former task, whereas the regression line is, of course, the right choice for the latter one.  When many students first look at a scatter plot, they see an SD line in their mind’s eye; when they get around to producing the regression line, it can look like a misfire.</p>
+
+<p>The following app helps clear things up for students.  It is based on a discussion on the “shallow regression line” issue in <a href="http://books.wwnorton.com/books/Statistics/"><em>Statistics</em></a>, the classic text by Freeman, Pisani and Purves.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="r"><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;ShallowReg&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h3 id="playing-games">Playing Games</h3>
+
+<p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class="s"><span class="line">runApp<span class="p">(</span>system.file<span class="p">(</span><span class="s">&quot;FindRegLine&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:</p>
+
+<script type="math/tex; mode=display">100 \times \frac{\textbf{Your Line's Error-SS}-\textbf{Residual-SS}}{\textbf{Total-SS}-\textbf{Residual-SS}}.</script>
+
+<h2 id="shiny-vs-manipulate">Shiny vs. <code>manipulate</code></h2>
+
+<p>You don’t need to know much at all about web development in order to program in Shiny, but for R users there is the extra requirement of becoming comfortable with the reactive programming paradigm.  The hurdle is not all that high:  as an intermediate-level R-programmer, I was able to pick up Shiny over a weekend.  The <a href="http://shiny.rstudio.com/tutorial/">online Shiny tutorials</a> and a few consultations with <a href="http://stackoverflow.com/">Stack Overflow</a> provide almost everything I needed to know.</p>
+
+<p>The pay-back for the extra learning is considerable.  Shiny apps permit a much more flexible user-interface, as compared to <code>manipulate</code>.  For example, it is easy to make input “dynamic”, in the sense that the requests that a user can make of the app can be easily made to depend upon previous choices that the user has made.  It’s also easy to provide plenty of written explanation for the activity, as it proceeds:  with <code>manipulate</code> apps this can be somewhat difficult.</p>
+
+<p>On the other hand, since <code>manipulate</code> apps run directly within RStudio, they can easily be programmed to work with any data frame that the user specifies.  Shiny apps will allow you to upload a CSV file, but for elementary students this process is usually too much of a burden.</p>
+
+<h2 id="instructional-apps-gallery">Instructional Apps Gallery?</h2>
+
+<p><a href="http://www.showmeshiny.com/">Show Me Shiny</a> has some wonderful instructional apps.</p>
+
+<p>Considering all of the buzz surrounding Shiny, I am baffled at how difficult it is has been for me to find other up-to-date sites featuring Shiny apps for statistics instruction.  Perhaps readers of this post could direct me to any that they know of.  Eventually it would be nice to develop something like a ShinyTeachingTube, which could serve as a central hub for Shiny instructional applets.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Homer White</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-04T21:00:00-04:00" pubdate data-updated="true">May 4<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/r/'>R</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/02/perl-scripts-r-studio/" title="Previous Post: Course Management with the RStudio Server">&laquo; Course Management with the RStudio Server</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/08/29/r-studio-server-centos-pandoc-latex/" title="Next Post: New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server">New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/29/r-studio-server-centos-pandoc-latex/">New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/04/reasons-to-teach-with-R-3/">Five Reasons to Teach Elementary Statistics With R: #3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/02/perl-scripts-r-studio/">Course Management With the RStudio Server</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'homerhanumat',
+            count: 5,
+            skip_forks: true,
+            skip_repos: [ "homerhanumat.github.io" ],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101037539642604924807?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/r/'>R (5)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
+<li class='category'><a href='/blog/categories/tech-note/'>Tech Note (4)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Useful Links</h1>
+  <ul id="links">
+      <li class="post"><a href="http://www.r-bloggers.com" target="_blank">R-Bloggers</a></li>
+      <li class="post"><a href="http://mosaic-web.org/" target="_blank">Project Mosaic</a></li>
+      <li class="post"><a href="http://statistics.georgetowncollege.edu", target="_blank">My Elementary Course</a></li> 
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p float>
+  2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+<p>      
+  <span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></span><span style="color:black">This work is licensed under a </span><a style="color:black" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3/';
+        var disqus_url = 'http://homerhanumat.github.io/blog/2014/05/04/reasons-to-teach-with-R-3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

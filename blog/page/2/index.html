@@ -1,0 +1,1326 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>A Statistics Blog</title>
+  <meta name="author" content="Homer White">
+
+  
+  <meta name="description" content="Introduction Directory House-Keeping From R Markdown to Markdown From R Markdown to HTML Considerations of Style Producing a Post Creating a Topics &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://homerhanumat.github.io/blog/page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="A Statistics Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<!-- MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript"
+   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-47254229-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">A Statistics Blog</a></h1>
+  <img src="/favicon.png" style="float:  right; align:  right; width: 20%;">
+  
+    <h2>R for Statistics Education, and information for the courses I teach.</h2>
+  
+ 
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:homerhanumat.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about/index.html">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-13T16:00:00-04:00" pubdate data-updated="true">Apr 13<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/13/roctopress/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/04/13/roctopress/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#directory-house-keeping">Directory House-Keeping</a></li>
+  <li><a href="#from-r-markdown-to-markdown">From R Markdown to Markdown</a></li>
+  <li><a href="#from-r-markdown-to-html">From R Markdown to HTML</a></li>
+  <li><a href="#considerations-of-style">Considerations of Style</a></li>
+  <li><a href="#producing-a-post">Producing a Post</a></li>
+  <li><a href="#creating-a-topics-feed">Creating a Topics Feed</a></li>
+  <li><a href="#archive-old-r-markdowns">Archive Old R Markdowns</a></li>
+  <li><a href="#lingering-problems">Lingering Problems</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This post records how I configured <a href="http://octopress.org/">Octopress</a> for blogging about <a href="http://www.r-project.org/">R</a>, my favorite statistical programming environment.  It is intended for colleagues and students who would like to begin blogging in a similar vein.  I will assume that you have got Octopress up and running, and that you have chosen to have it hosted by <a href="https://pages.github.com/">GitHub Pages</a>.</p>
+
+<p>I claim little in the way of originality:  most of this post consists of tips I picked up from knowledgeable people on the web.</p>
+
+<h2 id="directory-house-keeping">Directory House-Keeping</h2>
+
+<p>Create the following directories in the Octopress directory:</p>
+
+<ul>
+  <li><code>Rmd_sources</code> (your posts will start here)</li>
+  <li><code>Rmd_sources_old</code> (to archive old posts source files)</li>
+  <li><code>source/images/figure</code> (your R graphs will be placed here)</li>
+  <li><code>source/images/cache</code> (if you cache the results of an expensive computation, the results go here)</li>
+</ul>
+
+<h2 id="from-r-markdown-to-markdown">From R Markdown to Markdown</h2>
+
+<p>We will adopt the approach of <a href="http://jason.bryer.org/posts/2012-12-10/Markdown_Jekyll_R_for_Blogging.html">Jason Breyer</a>.</p>
+
+<p>In your Octopress directory, place the Jason’s R Script (perhaps call it <code>rmarkdown.r</code>):</p>
+
+<pre><code>#' This R script will process all R mardown files (those with in_ext file extention,
+#' .rmd by default) in the current working directory. Files with a status of
+#' 'processed' will be converted to markdown (with out_ext file extention, '.markdown'
+#' by default). It will change the published parameter to 'true' and change the
+#' status parameter to 'publish'.
+#'
+#' @param dir the directory to process R Markdown files.
+#' @param images.dir the base directory where images will be generated.
+#' @param images.url
+#' @param out_ext the file extention to use for processed files.
+#' @param in_ext the file extention of input files to process.
+#' @param recursive should rmd files in subdirectories be processed.
+#' @return nothing.
+#' @author Jason Bryer &lt;jason@bryer.org&gt;
+convertRMarkdown &lt;- function(dir=getwd(), images.dir=dir, 
+                             images.url='/images/',
+                             out_ext='.markdown', in_ext='.rmd', recursive=FALSE) {
+        require(knitr, quietly=TRUE, warn.conflicts=FALSE)
+        files &lt;- list.files(path=dir, pattern=in_ext, ignore.case=TRUE, recursive=recursive)
+        for(f in files) {
+                message(paste("Processing ", f, sep=''))
+                content &lt;- readLines(f)
+                frontMatter &lt;- which(substr(content, 1, 3) == '---')
+                if(length(frontMatter) &gt;= 2 &amp; 1 %in% frontMatter) {
+                        statusLine &lt;- which(substr(content, 1, 7) == 'status:')
+                        publishedLine &lt;- which(substr(content, 1, 10) == 'published:')
+                        if(statusLine &gt; frontMatter[1] &amp; statusLine &lt; frontMatter[2]) {
+                                status &lt;- unlist(strsplit(content[statusLine], ':'))[2]
+                                status &lt;- sub('[[:space:]]+$', '', status)
+                                status &lt;- sub('^[[:space:]]+', '', status)
+                                if(tolower(status) == 'process') {
+                                        #This is a bit of a hack but if a line has zero length (i.e. a
+                                        #black line), it will be removed in the resulting markdown file.
+                                        #This will ensure that all line returns are retained.
+                                        content[nchar(content) == 0] &lt;- ' '
+                                        message(paste('Processing ', f, sep=''))
+                                        content[statusLine] &lt;- 'status: publish'
+                                        content[publishedLine] &lt;- 'published: true'
+                                        outFile &lt;- paste(substr(f, 1, (nchar(f)-(nchar(in_ext)))), out_ext, sep='')
+                                        render_markdown(strict=TRUE)
+                                        opts_knit$set(out.format='markdown')
+                                        opts_knit$set(fig.path="images/")
+                                        opts_knit$set(base.dir=images.dir)
+                                        opts_knit$set(base.url=images.url)
+                                        opts_knit$set(fig.width=3.5,fig.height=3,tidy=FALSE)
+                                        try(knit(text=content, output=outFile), silent=FALSE)
+                                } else {
+                                        warning(paste("Not processing ", f, ", status is '", status,
+                                                                 "'. Set status to 'process' to convert.", sep=''))
+                                }
+                        } else {
+                                warning("Status not found in front matter.")
+                        }
+                } else {
+                        warning("No front matter found. Will not process this file.")
+                }
+        }
+        invisible()
+}
+</code></pre>
+
+<h2 id="from-r-markdown-to-html">From R Markdown to HTML</h2>
+
+<p>Octopress ships with  <code>rdiscount</code> as the converter from markdown to HTML, but to handle math you want another converter.  I played around with <code>pandoc</code> for a while, but eventually decided on <code>kramdown</code>.</p>
+
+<p>Octopress may be “locked” to a specific older version of <code>kramdown</code>, so install that version:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">gem install kramdown -v 0.13.8</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Now modify your Gemfile to include <code>kramdown</code>.  For example, my Gemfile now looks like:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">source "https://rubygems.org"
+</span><span class="line"> 
+</span><span class="line">group :development do
+</span><span class="line">  gem 'rake', '~&gt; 0.9'
+</span><span class="line">  gem 'jekyll', '~&gt; 0.12'
+</span><span class="line">  gem 'kramdown', '~&gt; 0.13.8'
+</span><span class="line">  gem 'rdiscount', '~&gt; 2.0.7'
+</span><span class="line">  gem 'pygments.rb', '~&gt; 0.3.4'
+</span><span class="line">  gem 'RedCloth', '~&gt; 4.2.9'
+</span><span class="line">  gem 'haml', '~&gt; 3.1.7'
+</span><span class="line">  gem 'compass', '~&gt; 0.12.2'
+</span><span class="line">  gem 'sass', '~&gt; 3.2'
+</span><span class="line">  gem 'sass-globbing', '~&gt; 1.0.0'
+</span><span class="line">  gem 'rubypants', '~&gt; 0.2.0'
+</span><span class="line">  gem 'rb-fsevent', '~&gt; 0.9'
+</span><span class="line">  gem 'stringex', '~&gt; 1.4.0'
+</span><span class="line">  gem 'liquid', '~&gt; 2.3.0'
+</span><span class="line">  gem 'directory_watcher', '1.4.1'
+</span><span class="line">end
+</span><span class="line"> 
+</span><span class="line">gem 'sinatra', '~&gt; 1.4.2'</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Also, edit your <code>_config.yml</code> file:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">gems: [ 'kramdown' ]
+</span><span class="line">markdown: kramdown</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>To get MathJax to work, my source is <a href="http://blog.zhengdong.me/2012/12/19/latex-math-in-octopress">Zheng Dong</a>,</p>
+
+<p>Open <code>source/_includes/custom/head.html</code> and add the following:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">&lt;!-- MathJax --&gt;
+</span><span class="line">&lt;script type="text/x-mathjax-config"&gt;
+</span><span class="line">  MathJax.Hub.Config({
+</span><span class="line">    tex2jax: {
+</span><span class="line">      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+</span><span class="line">      processEscapes: true
+</span><span class="line">    }
+</span><span class="line">  });
+</span><span class="line">&lt;/script&gt;
+</span><span class="line"> 
+</span><span class="line">&lt;script type="text/x-mathjax-config"&gt;
+</span><span class="line">    MathJax.Hub.Config({
+</span><span class="line">      tex2jax: {
+</span><span class="line">        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+</span><span class="line">      }
+</span><span class="line">    });
+</span><span class="line">&lt;/script&gt;
+</span><span class="line"> 
+</span><span class="line">&lt;script type="text/x-mathjax-config"&gt;
+</span><span class="line">    MathJax.Hub.Queue(function() {
+</span><span class="line">        var all = MathJax.Hub.getAllJax(), i;
+</span><span class="line">        for(i=0; i &lt; all.length; i += 1) {
+</span><span class="line">            all[i].SourceElement().parentNode.className += ' has-jax';
+</span><span class="line">        }
+</span><span class="line">    });
+</span><span class="line">&lt;/script&gt;
+</span><span class="line"> 
+</span><span class="line">&lt;script type="text/javascript"
+</span><span class="line">   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+</span><span class="line">&lt;/script&gt;
+</span><span class="line"> </span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="considerations-of-style">Considerations of Style</h2>
+
+<p>Open <code>octopress/sass/custom/_styles.css</code> and add:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+<span class="line-number">80</span>
+<span class="line-number">81</span>
+<span class="line-number">82</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">#markdown-toc:before {
+</span><span class="line">  content: "In this Post";
+</span><span class="line">  font-weight: bold;
+</span><span class="line">}
+</span><span class="line">ul#markdown-toc {
+</span><span class="line">  list-style: none;
+</span><span class="line">  float: right;
+</span><span class="line">  @include shadow-box;
+</span><span class="line">  background-color: white;
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line"> 
+</span><span class="line"> 
+</span><span class="line">caption {
+</span><span class="line">  font-weight:  bolder;
+</span><span class="line">  text-align:  center;
+</span><span class="line">  margin-bottom:  20px; 
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">figcaption {
+</span><span class="line">  font-weight:  bolder;
+</span><span class="line">  text-align:  center;
+</span><span class="line">  margin-bottom:  30px; 
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">p img {
+</span><span class="line">  display: block;
+</span><span class="line">  margin-left: auto;
+</span><span class="line">  margin-right: auto;
+</span><span class="line">  margin-bottom: 10px;
+</span><span class="line">  border-style:  ridge;
+</span><span class="line">  border-color:  teal;
+</span><span class="line">  border-width:  thick;
+</span><span class="line">  padding:  5px 5px 5px 5px;
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">table, th, td
+</span><span class="line">{
+</span><span class="line">border: 1px solid black;
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">td
+</span><span class="line">{
+</span><span class="line">padding:15px;
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">table, td, th
+</span><span class="line">{
+</span><span class="line">border:1px solid green;
+</span><span class="line">}
+</span><span class="line">th
+</span><span class="line">{
+</span><span class="line">background-color: rgb(147,161,161);
+</span><span class="line">color:white;
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">table {
+</span><span class="line">    margin-left:auto; 
+</span><span class="line">    margin-right:auto;
+</span><span class="line">    margin-bottom:  30px;
+</span><span class="line">  }
+</span><span class="line">  
+</span><span class="line"> 
+</span><span class="line">dt {
+</span><span class="line">  display:  block;
+</span><span class="line">  font-weight:  bolder;
+</span><span class="line">  margin-bottom:  15px;
+</span><span class="line">  
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">dd {
+</span><span class="line">  display:  block;
+</span><span class="line">  border-style:  double;
+</span><span class="line">  border-color:  blue;
+</span><span class="line">  border-width:  medium;
+</span><span class="line">  padding:  5px 5px 5px 5px;
+</span><span class="line">  margin-bottom:  15px;
+</span><span class="line">}
+</span><span class="line"> 
+</span><span class="line">dl {
+</span><span class="line">  margin-bottom:  30px;
+</span><span class="line">}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Drawback:  your blog will look exactly like my blog.</p>
+
+<p>Notes:</p>
+
+<ul>
+  <li>the table of contents styling was from <a href="http://blog.riemann.cc/2013/04/10/table-of-contents-in-octopress/">Robert Riemann</a>.</li>
+  <li>CSS for <code>caption</code> and <code>figcaption</code> are left over from earlier experiments with <code>pandoc</code>, but I’m retaining them in case they come in handy later.</li>
+</ul>
+
+<h2 id="producing-a-post">Producing a Post</h2>
+
+<p>Create a new .Rmd document, and put it in <code>Rmd_sources</code>.  At the top, make sure you have stuff like this:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">---
+</span><span class="line">layout: post
+</span><span class="line">title: "Your Title Here in Quotes"
+</span><span class="line">date: 2014-04-17 01:00:00
+</span><span class="line">comments: true
+</span><span class="line">categories: [YourCategoryName]
+</span><span class="line">published: true
+</span><span class="line">status: publish
+</span><span class="line">---</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>If you want the table of contents that <code>kramdown</code> provides, then add the following a couple of lines on down:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">* will be replaced by TOC
+</span><span class="line">{:toc}</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>It’s a good idea to set some chunk options (use <code>include-FALSE</code>):</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">opts_chunk$set(tidy=FALSE,fig.width=4.5,fig.height=3.5)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>All images from all posts end up in the same directory, so when a code chunk results in a graphic give that chunk a unique name (different from all other graph chunks that you will ever produce with this blog).</p>
+
+<p>When you are ready to process run:</p>
+
+<pre><code>source("~/octopress/rmarkdown.r")
+</code></pre>
+
+<p>(This assumes your working directory is your home directory, and that <code>octopress</code> is directly under your home.  Modify the path name if this is not the case.)</p>
+
+<p>Then change working directory to <code>Rmd_sources</code> and run:</p>
+
+<pre><code>convertRMarkdown()
+system("cp figure/* ../source/images/figure")
+</code></pre>
+
+<p>If you created any cache make sure you named the chunks uniquely.  Also you need to run:</p>
+
+<pre><code>system("cp cache/* ../source/images/cache")
+</code></pre>
+
+<p>Finally, get the markdown file into the <code>source/_posts</code> directory:</p>
+
+<pre><code>system("cp 2014-04-01-HowToSurviveZombieArmageddonUsingR.markdown ../source/_posts")
+</code></pre>
+
+<p>Then the usual:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">rake generate
+</span><span class="line">rake preview</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>until it looks good, then</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">rake deploy</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Then commit your changes and push to Git Hub repository:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">git add --all
+</span><span class="line">git commit -m "add Zombie Armageddon Survival Guide"
+</span><span class="line">git push origin source</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="creating-a-topics-feed">Creating a Topics Feed</h2>
+
+<p>Say you produce something you think merits wider distribution, and want to pass it on to a great site like <a href="http://www.r-bloggers.com/">R-bloggers</a>:  then you need to create a category feed.  Here’s some help I got from <a href="http://hairysun.com/blog/2011/11/09/creating-category-feeds-in-octopress/">Matt Harrison</a>.</p>
+
+<p>Create the file the <code>source/YourCategoryName.xml</code> (make sure to modify occurrences of “YourCategoryName” in what follows to whatever you please):</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">---
+</span><span class="line">layout: nil
+</span><span class="line">---
+</span><span class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+</span><span class="line">&lt;feed xmlns="http://www.w3.org/2005/Atom"&gt;
+</span><span class="line"> 
+</span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
+</span><span class="line">  &lt;link href="http://homerhanumat.github.io/atom.xml" rel="self"/&gt;
+</span><span class="line">  &lt;link href="http://homerhanumat.github.io/"/&gt;
+</span><span class="line">  &lt;updated&gt;2014-08-29T21:53:05-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;id&gt;http://homerhanumat.github.io/&lt;/id&gt;
+</span><span class="line">  &lt;author&gt;
+</span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;
+</span><span class="line">    
+</span><span class="line">  &lt;/author&gt;
+</span><span class="line">  &lt;generator uri="http://octopress.org/"&gt;Octopress&lt;/generator&gt;
+</span><span class="line"> 
+</span><span class="line">  
+</span><span class="line">&lt;/feed&gt;</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<h2 id="archive-old-r-markdowns">Archive Old R Markdowns</h2>
+
+<p>Once you are done publishing a post, move the R Markdown source into the <code>Rmd_sources_old</code> directory, so the <code>ConvertRMarkdown()</code> function won’t keep processing them needlessly.</p>
+
+<h2 id="lingering-problems">Lingering Problems</h2>
+
+<ul>
+  <li><code>kramdown</code> differs from <code>knitr</code> in how it recognizes math.  If you see odd results, consult the <code>kramdown</code> documentation on the web to learn how to really really do it right.  If you want to keep on the R Markdown way, then from time to time you may have to escape certain special characters.</li>
+  <li>R-bloggers takes your stuff from a blog feed.  It does not recognize MathJax, so your math won’t render.</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/08/reasons-to-teach-with-R-2/">Five Reasons to Teach Elementary Statistics With R: #2</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-08T19:59:59-04:00" pubdate data-updated="true">Apr 8<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/08/reasons-to-teach-with-R-2/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/04/08/reasons-to-teach-with-R-2/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></a>    <ul>
+      <li><a href="#do-it-yourself">Do It Yourself</a></li>
+      <li><a href="#next-time">Next Time</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/">first post</a> in this series introduced package <code>mosaic</code>, and promised to review a supplementary package that I and a colleague put together for our own students, but I’ve decided put that off a bit and focus instead on another powerful new tool for statistics instruction:  the well-known <a href="https://www.rstudio.com/">RStudio</a> Integrated Development Environment for R, and its <code>manipulate</code> package in particular.</p>
+
+<h2 id="reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></h2>
+
+<p>You might think that an IDE is strictly for programmers.  The authors of <code>mosaic</code>, though, looked at RStudio and saw an environment ripe for customization to fit the elementary classroom.  RStudio offers many benefits in this regard, but for this post I’ll concentrate on just one:  its pre-installed package <code>manipulate</code>.</p>
+
+<p>The RStudio developers may have written <code>manipulate</code> simply as a prototype for <a href="http://shiny.rstudio.com/">Shiny</a>, but it happens to be a fabulous tool for authoring instructional applets.  To be sure, there are many great instructional apps out on the web—visual stunners put together by authentic web developers—but the everyday statistics instructor may find that <code>manipulate</code> empowers her to quickly work up small instructional apps that address needs specific to her own students.</p>
+
+<p>At my College, for example, we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose you want students to understand coverage properties of confidence intervals—i.e., what we really mean when we say that we are “95%-confident” that the interval covers the population parameter–in a ground-up way.  Then you might do as my colleague Rebekah Robinson did, and write a manipulate app like <code>CIMean()</code>.</p>
+
+<p>To get the app, install package <code>tigerstats</code> from CRAN, or for the very latest version try:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<p>Next, get into RStudio (if you are not there already), and run:</p>
+
+<pre><code>require(tigerstats)
+require(manipulate)
+CIMean(~height,data=imagpop)
+</code></pre>
+
+<p>The app loads in the (roughly normally distributed) heights of an imaginary population of 10,000 people.  Sliders allow the user to select a sample size and a desired confidence level.  Click on one of the sliders and you’ll get just one sample from the population, with a histogram of the sample overlaying the density curve for the population, and a confidence interval displayed clearly along the horizontal axis.  The user can easily see whether the interval contains the population mean (marked by the red vertical line).  Output to the console also keeps the user apprised of what has just happened.  When the user has clicked enough to get the idea, he/she can ask for a lot of samples at once, verifying that when assumptions are met 95%-confidence intervals do indeed cover their target parameter about 95% of the time.</p>
+
+<p>One advantage of <code>manipulate</code> apps over the visually spectacular ones you find on the web is that you can easily write them to accept arbitrary input.  <code>CIMean()</code>, for example, will deal with any numerical variable from any data frame on R’s search path,including the quite right-skewed variable <strong>income</strong> from<code>imagpop</code>:</p>
+
+<pre><code>CIMean(~income,data=imagpop)
+</code></pre>
+
+<p>The user realizes quickly that the standard t-intervals applied to small samples from skewed populations do not possess the advertised coverage properties.</p>
+
+<p>Once you get into the spirit of <code>manipulate</code> you may find yourself writing apps that work in a similar vein without requiring the elements of the package itself.  For example <code>ChisqSimSlow()</code>, which does not require <code>manipulate</code> (and in fact runs outside of RStudio) takes arbitrary data and applies a one-at-a-time re-sampling routine to slowly build up the Null Distribution of the chi-square statistic, in a situation where one is testing whether two factor variables are associated.</p>
+
+<p>For example, suppose we are looking at survey in which a random sample of students were asked for their sex and for their seating preference in a classroom:</p>
+
+<pre><code>SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
+SexSeat
+
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+</code></pre>
+
+<p>Let’s check this out with some row percentages:</p>
+
+<pre><code>rowPerc(SexSeat)
+
+##        1_front 2_middle 3_back Total
+## female   47.50    40.00  12.50   100
+## male     25.81    51.61  22.58   100
+</code></pre>
+
+<p>Hmm, the women in the sample seem much more likely than the guys to prefer the Front!  Does this data provide convincing evidence for a relationship between <strong>sex</strong> and <strong>seat</strong> in the College population at large?  To investigate this, a student might try:</p>
+
+<pre><code>ChisqSimSlow(~sex+seat,data=m111survey)
+</code></pre>
+
+<p>Keep asking for a re-sample, and after a while you get the sense that the observed value of the chi-square statistic is not an unusually large value, if <strong>sex</strong> and <strong>seat</strong> are, all along, unrelated in the population.</p>
+
+<p>Once students understand the import of simulation they can employ it to advantage on a large scale.  In the <code>tigerstats</code> version of the <code>chisq.test()</code>, the student might ask for:</p>
+
+<pre><code>set.seed(2014)
+chisqtestGC(~sex+seat,data=m111survey,
+      simulate.p.value="random",
+      B=3000,
+      graph=TRUE)
+
+## Pearson's chi-squared test with simulated p-value, random effects
+## 	 (based on 3000 resamples)
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1727
+</code></pre>
+
+<p><img src="/images/figure/reasonsteachr2.png" alt="plot of chunk reasonsteachr2" /> </p>
+
+<h3 id="do-it-yourself">Do It Yourself</h3>
+
+<p>I do not discuss the above apps with the expectation that colleagues at other institution will adopt them.  On the contrary, my point is merely that the folks at RStudio have provided R-users with a tool that enables ordinary instructors like us to write our own apps.  If you like a particular app, them check out the source code (<code>tigerstats</code>, for example is <a href="http:github.com/homerhanumat/tigerstats">on GitHub</a>), clean it up a bit maybe, and use it as a basis for an app tailored to your particular tastes and the needs of your particular students.</p>
+
+<p>Better yet, persuade an upper-level student to write the app for you as a programming project:  <code>manipulate</code>’s greatest use may prove to be as a gateway-drug to coding!</p>
+
+<h3 id="next-time">Next Time</h3>
+
+<p>In the next post, maybe we’ll have a look at what R Studio’s <code>shiny</code> can do for an elementary class.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/05/tigerstatsintro/">Five Reasons to Teach Elementary Statistics With R: #1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-05T19:30:00-04:00" pubdate data-updated="true">Apr 5<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/05/tigerstatsintro/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/04/05/tigerstatsintro/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
+      <li><a href="#keeping-simple-things-simple">Keeping Simple Things Simple</a></li>
+      <li><a href="#flow-control-for-the-masses">Flow-Control for the Masses</a></li>
+      <li><a href="#there-is-much-more">There is Much More</a></li>
+    </ul>
+  </li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is first in a projected five-part series of posts aimed at colleagues who teach elementary statistics.</p>
+
+<p>I can’t remember exactly how I first made acquaintance with R, but it’s been an important part of my teaching/consulting life since at least 2007, when I used it for the first time in an upper-level undergraduate statistics class.  As of last Fall all of our statistics classes—even the elementary ones—are based on R.  We may never return to a ground-up GUI platform.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<h2 id="reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></h2>
+
+<p>This package is a product of the NSF-funded <a href="http://mosaic-web.org/">Project Mosaic</a>, led by Nick Horton, Daniel Kaplan and Randall Pruim.  It’s on CRAN, but you might want to keep up with the very latest releases on Github:</p>
+
+<pre><code>require(devtools)
+install_github(repo="rpruim/mosaic")
+</code></pre>
+
+<p><code>mosaic</code> aims to flatten the learning curve for elementary students by gentling down the coding aspects of the R experience.  With <code>mosaic</code>:</p>
+
+<ul>
+  <li>students need to know relatively few R-functions in order to thrive in the introductory course;</li>
+  <li>many of the these functions are “wrappers” for standard R-functions, and provide a fairly uniform interface for user input;</li>
+  <li>the package provides tools that mostly obviate the need for students to deal with R as a programming language:
+    <ul>
+      <li>the students don’t have to write their own functions;</li>
+      <li>they don’t need to think much about the different types of R objects;</li>
+      <li>they don’t even need to learn about flow-control structures.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="keeping-simple-things-simple">Keeping Simple Things Simple</h3>
+
+<p>R can make the easy stuff surprisingly tricky for beginners:  suppose for example, that you want numerical summaries of a particular numerical variable, broken down by the values of some factor variable.  Standard procedure in R would be to write your own anonymous function as an argument for <code>aggregate()</code>, thus:</p>
+
+<pre><code>aggregate(mpg~cyl,data=mtcars,
+    FUN=function(x) c(mean=mean(x),sd=sd(x)))
+
+##   cyl mpg.mean mpg.sd
+## 1   4   26.664  4.510
+## 2   6   19.743  1.454
+## 3   8   15.100  2.560
+</code></pre>
+
+<p><code>mosaic</code> skirts the problem by providing wrapper functions for aggregation:</p>
+
+<pre><code>require(mosaic)
+
+ 
+
+mean(mpg~cyl,data=mtcars)
+
+##     4     6     8 
+## 26.66 19.74 15.10
+
+sd(mpg~cyl,data=mtcars)
+
+##     4     6     8 
+## 4.510 1.454 2.560
+</code></pre>
+
+<p>One can attain even more simplicity, at only a small cost in flexibility, by sticking to <code>mosaic</code>’s <code>favstats()</code> as a one-stop shop:</p>
+
+<pre><code>favstats(mpg~cyl,data= mtcars)
+
+##   .group  min    Q1 median    Q3  max  mean    sd  n missing
+## 1      4 21.4 22.80   26.0 30.40 33.9 26.66 4.510 11       0
+## 2      6 17.8 18.65   19.7 21.00 21.4 19.74 1.454  7       0
+## 3      8 10.4 14.40   15.2 16.25 19.2 15.10 2.560 14       0
+</code></pre>
+
+<h3 id="flow-control-for-the-masses">Flow-Control for the Masses</h3>
+
+<p><code>mosaic</code> includes powerful wrapper functions that permit extensive work with re-sampling and simulation, without the need to learn flow-control.  Here follows a <code>mosaic</code>-style implementation of a permutation test.</p>
+
+<p>Consider the data frame <code>Pseudoscorpions</code> from the <code>abd</code> package:</p>
+
+<pre><code>require(abd)
+data(Pseudoscorpions)
+</code></pre>
+
+<p><code>Pseudoscorpions</code> contains the results of an experiment on 36 female Pseudoscorpions:  each one was either mated twice with a single male (<code>SM</code>) or was mated with two males, one time each (<code>DM</code>), receiving about the same total amount of sperm under either treatment.  The idea was to see whether an increase in genetic diversity of sperm sources increases the number of successful broods a female produces during her lifetime.</p>
+
+<p>Here are some descriptive results:</p>
+
+<pre><code>favstats(successful.broods~treatment,
+    data=Pseudoscorpions)[c(".group","mean","sd")]
+
+##   .group  mean    sd
+## 1     DM 3.625 1.962
+## 2     SM 2.200 1.609
+</code></pre>
+
+<p>For the permutation test, we first compute and store the observed difference between the sample means:</p>
+
+<pre><code>obsDiff &lt;- compareMean(successful.broods~treatment,
+    data=Pseudoscorpions)
+obsDiff
+
+## [1] -1.425
+</code></pre>
+
+<p>Next, we create an empirical Null distribution with <code>shuffle()</code> (the random permutation function) and <code>do()</code> (a for-loop wrapper):</p>
+
+<pre><code>set.seed(12345)
+nullDist &lt;- do(2500)*(
+  compareMean(successful.broods~shuffle(treatment),
+      data=Pseudoscorpions))
+</code></pre>
+
+<p>Finally, we call <code>statTally()</code> for numerical and graphical analysis of the results:</p>
+
+<pre><code>statTally(obsDiff,nullDist)
+
+## Null distribution appears to be asymmetric. (p = 1.07e-05)
+## 
+## Test statistic applied to sample data =  -1.425
+## 
+## Quantiles of test statistic applied to random data:
+
+##    50%    90%    95%    99% 
+## 0.0375 0.8250 1.0500 1.3875
+
+## 
+## Of the random samples
+## 
+## 	13 ( 0.52 % ) had test stats = -1.425
+## 
+## 	23 ( 0.92 % ) had test stats &lt; -1.425
+</code></pre>
+
+<p><img src="/images/figure/reason1hist.png" alt="plot of chunk reason1hist" /> </p>
+
+<p>We seem to have fairly strong evidence ($P \approx 1.7\%$) that mating with more males increases the number of successful broods.</p>
+
+<h3 id="there-is-much-more">There is Much More</h3>
+
+<p>I have only scratched the surface of the <code>mosaic</code> package, which is rich enough to support statistics instruction in both elementary and advanced courses.  The <code>mosaic</code> authors provide extensive instructor resources in the package vignettes, and frequently offer workshops and short-courses, especially through events sponsored by the <a href="https://www.causeweb.org/">Consortium for the Advancement of Undergraduate Statistics Education</a>.</p>
+
+<p>Next week I’ll introduce a supplementary package that is intended for students who might require even more simplicity, and that aligns their R experience with a particular set of teaching objectives.</p>
+
+<h2 id="references">References</h2>
+
+<p>The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s <em>The Analysis of Biological Data</em> (Roberts and Company Publishers; First Edition, 1st Edition July 2008).</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/28/xtabstutorial/">Xtabs() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-28T18:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/28/xtabstutorial/#disqus_thread"
+             data-disqus-identifier="http://homerhanumat.github.io/blog/2014/02/28/xtabstutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#one-factor-variable">One Factor Variable</a></li>
+  <li><a href="#two-factor-variables">Two Factor Variables</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>xtabs()</code> is the numerical version of <code>barchartGC()</code>.  You use it when you want to study</p>
+
+<ul>
+  <li>the distribution of one factor variable;</li>
+  <li>the relationship between two factor variables.</li>
+</ul>
+
+<p>The function <code>xtabs()</code> comes with the <code>stats</code> package, which is always loaded in R.  However, some of the data and other functions that we will use come from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="one-factor-variable">One Factor Variable</h2>
+
+<p>To see a table of the tallies for the factor variable <strong>seat</strong> (from the <code>mat111survey</code> data frame in the <code>tigerstats</code> package):</p>
+
+<pre><code>xtabs(~seat,data=m111survey)
+
+## seat
+##  1_front 2_middle   3_back 
+##       27       32       12
+</code></pre>
+
+<p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts, so apply the function <code>rowPerc()</code> from <code>tigerstats</code>:</p>
+
+<pre><code>rowPerc(xtabs(~seat,data=m111survey))
+
+##  1_front 2_middle 3_back  Total
+##    38.03    45.07  16.90 100.00
+</code></pre>
+
+<p>If you have a table of the counts for a variable, then you can enter it directly.  For example, suppose you have already made:</p>
+
+<pre><code>Seat &lt;- xtabs(~seat,data=m111survey)
+Seat
+
+## seat
+##  1_front 2_middle   3_back 
+##       27       32       12
+</code></pre>
+
+<p>Then you can just enter the table into <code>rowPerc()</code>:</p>
+
+<pre><code>rowPerc(Seat)
+
+##  1_front 2_middle 3_back  Total
+##    38.03    45.07  16.90 100.00
+</code></pre>
+
+<h2 id="two-factor-variables">Two Factor Variables</h2>
+
+<p>You can also use <code>xtabs()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data input as follows:</p>
+
+<pre><code>xtabs(~sex+seat,data=m111survey)
+
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+</code></pre>
+
+<p>Of course, row percents are the way to actually study the relationship:</p>
+
+<pre><code>rowPerc(xtabs(~sex+seat,data=m111survey))
+
+##        1_front 2_middle 3_back Total
+## female   47.50    40.00  12.50   100
+## male     25.81    51.61  22.58   100
+</code></pre>
+
+<p>Note the type of formula used to study the relationship between two factor variables:</p>
+
+<script type="math/tex; mode=display">\sim ExplanatoryFactor + ResponseFactor</script>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog/page/3/">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/08/29/r-studio-server-centos-pandoc-latex/">New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/04/reasons-to-teach-with-R-3/">Five Reasons to Teach Elementary Statistics With R: #3</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/02/perl-scripts-r-studio/">Course Management With the RStudio Server</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/homerhanumat">@homerhanumat</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'homerhanumat',
+            count: 5,
+            skip_forks: true,
+            skip_repos: [ "homerhanumat.github.io" ],
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+<section class="googleplus">
+  <h1>
+    <a href="https://plus.google.com/101037539642604924807?rel=author">
+      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
+      Google+
+    </a>
+  </h1>
+</section>
+
+
+<section>
+  <h1>Categories</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/r/'>R (5)</a></li>
+<li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
+<li class='category'><a href='/blog/categories/tech-note/'>Tech Note (4)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>Useful Links</h1>
+  <ul id="links">
+      <li class="post"><a href="http://www.r-bloggers.com" target="_blank">R-Bloggers</a></li>
+      <li class="post"><a href="http://mosaic-web.org/" target="_blank">Project Mosaic</a></li>
+      <li class="post"><a href="http://statistics.georgetowncollege.edu", target="_blank">My Elementary Course</a></li> 
+  </ul>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p float>
+  2014 - Homer White -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>
+</p>
+<p>      
+  <span> <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /></span><span style="color:black">This work is licensed under a </span><a style="color:black" rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/deed.en_US">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+  </span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'homerhanumatgithubio';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>
