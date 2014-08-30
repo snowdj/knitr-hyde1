@@ -4,7 +4,7 @@
   <title><![CDATA[Category: R | A Statistics Blog]]></title>
   <link href="http://statistics.rainandrhino.org/blog/categories/r/atom.xml" rel="self"/>
   <link href="http://statistics.rainandrhino.org/"/>
-  <updated>2014-08-29T23:29:57-04:00</updated>
+  <updated>2014-08-29T23:34:32-04:00</updated>
   <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -12,91 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server]]></title>
-    <link href="http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex/"/>
-    <updated>2014-08-29T21:00:00-04:00</updated>
-    <id>http://statistics.rainandrhino.org/blog/2014/08/29/r-studio-server-centos-pandoc-latex</id>
-    <content type="html"><![CDATA[<ul id="markdown-toc">
-  <li><a href="#introduction">Introduction</a></li>
-  <li><a href="#new-pandoc">New Pandoc</a></li>
-  <li><a href="#installing-latex-packages">Installing LaTeX Packages</a></li>
-</ul>
-
-<h2 id="introduction">Introduction</h2>
-
-<p>R Markdown Version 2 is a boon to students:  with a single click one can convert an R Markdown file to either HTML, PDF or Word format.  However, getting this feature to work fully in the R Studio server environment may require a bit of work, especially if you running the Server on a Cent OS distribution.  Although I am sure that Cent OS has many virtues, an up-to-date repository is not among them.</p>
-
-<p>This post is the record of an arm wrasslin’ match with Cent OS and the R Studio Server version 0.98.932, from which I emerged more or less victorious.  If your IT department hosts RStudio on CentOS, then perhaps the following remarks will make your life a bit easier.  On the other hand,  if you know your way around Linux better than I do, please feel free to offer quicker or better solutions in the Comments.</p>
-
-<p>Log on to the server, perhaps through <code>ssh</code> (secure shell).  Come armed with administrative privileges.</p>
-
-<h2 id="new-pandoc">New Pandoc</h2>
-
-<p>R Markdown v2 uses a newer version of the <code>pandoc</code>converter than the one available in the Cent OS repository.  Fortunately, R Studio comes bundled with the binaries of a sufficiently recent version of <code>pandoc</code>.  You obtain access to these files by establishing symbolic links in the <code>/usr/local/bin</code> directory to the <code>pandoc</code> and <code>pandoc-cite</code> binaries:</p>
-
-<p><code>sh
-sudo ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc-citeproc /usr/local/bin
-sudo ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc /usr/local/bin
-</code></p>
-
-<h2 id="installing-latex-packages">Installing LaTeX Packages</h2>
-
-<p>You can get Tex Live from the Cent OS repositories, but the release appears to date back to the year 2007.  Therefore it lacks a couple of packages needed by <code>pandoc</code>:</p>
-
-<ul>
-  <li>Heiko Oberdiek’s <a href="http://www.ctan.org/pkg/ifluatex">ifluatex</a>, and </li>
-  <li>Donald Arsenau’s <a href="http://www.ctan.org/pkg/framed">framed</a>.</li>
-</ul>
-
-<p>Since you will download these packages from the Comprehensive Tex Archive Network, you’ll want a web-fetch utility such as <code>wget</code>.  If it’s not already installed on Cent OS, you can get it with:</p>
-
-<p><code>sh
-sudo yum install wget
-</code></p>
-
-<p>Now you can grab the relevant files with <code>wget</code>:</p>
-
-<p><code>sh
-wget http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/ifluatex.dtx
-wget http://mirrors.ctan.org/macros/latex/contrib/framed.zip
-</code></p>
-
-<p>Turning first to <code>ifluatex</code>, we begin by by unpacking the <code>.dtx</code> bundle.  This is accomplished with a <code>tex</code> command:</p>
-
-<p><code>sh
-tex ifluatex.dtx
-</code></p>
-
-<p>Several files spill out into your Home directory.  You care only about <code>ifluatex.sty</code>.  Copy it as follows:</p>
-
-<p><code>sh
-sudo cp ifluatex.sty /usr/share/texmf/tex/generic/oberdiek
-</code></p>
-
-<p>As for the <code>framed</code> package, you must first unzip the downloaded file into a directory:</p>
-
-<p><code>sh
-mkdir framed
-unzip framed.zip -d framed
-</code></p>
-
-<p>Now copy the <code>framed</code> directory as follows:</p>
-
-<p><code>sh
-sudo cp -rf framed /usr/share/texmf/tex/latex
-</code></p>
-
-<p>Finally, you need to make tex aware of the existence of these new packages with <code>texhash</code>:</p>
-
-<p><code>sh
-sudo texhash
-</code></p>
-
-<p>Now you may Knit to your heart’s content!</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server]]></title>
@@ -666,6 +581,41 @@ nullDist &lt;- do(2500)*(
 <h2 id="references">References</h2>
 
 <p>The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s <em>The Analysis of Biological Data</em> (Roberts and Company Publishers; First Edition, 1st Edition July 2008).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pander/Pandoc for Pretty Conversion on the R Studio Server]]></title>
+    <link href="http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server/"/>
+    <updated>2014-02-01T11:42:14-05:00</updated>
+    <id>http://statistics.rainandrhino.org/blog/2014/02/01/pander-for-pretty-conversion-on-the-r-studio-server</id>
+    <content type="html"><![CDATA[<p>(<strong>Added May 19, 2014</strong>:  On May 17 R Stduio announced a <a href="http://www.rstudio.com/ide/download/preview">preview release</a> of version 0.98b which will render moot the techniques described in this post, as the new version provides built-in options to convert from R Markdown to PDF and to Word formats.)</p>
+
+<p>Eventually we get around to teaching our students to turn in Homework assignments as R Markdown documents, and towards the end of the semester many of them will do a data analysis project, complete with a report generated as an HTML file.</p>
+
+<p>But frankly the HTML output is a bit ugly.  What if students want something that looks a bit better?  What if they use R for data analysis in another class, and the instructor wants the report in some other format—a .docx, for instance?</p>
+
+<p>Our solution, for now, involves <a href="http://johnmacfarlane.net/pandoc/">Pandoc</a>, an excellent universal document converter written by John MacFarlane.  The R package <code>pander</code> facilitates the use of Pandoc for conversion of documents that began as R Markdown, so you just need to ask your sysadmin to install Pandoc and <code>pander</code> on the server.  <code>pander</code> calls Pandoc, which will in turn convert a Markdown document into a variety of formats:  pdf, docx, odt, etc., as per your request.</p>
+
+<p>For pdf output, Pandoc first turns the converts the Markdown into $\LaTeX$, so you will need to make sure that $\LaTeX$ is installed on the server as well (some minimal version probably comes with the distribution).  The engine default engine for conversion is <code>pdflatex</code>, followed by <code>lualatex</code> and <code>xelatex</code>, so you need to make sure that one of these is installed.  [<code>xelatex</code> came along with our CentOS R Studio server, but had to be configured.]</p>
+
+<p>Students would use Pandoc through the <code>Pandoc.convert()</code> function from the <code>pander</code> package.  First, one knits the r Markdown document, simply in order to produce the Markdown document along the way.  Then set the working to directory to the directory containing the file you wish to convert, and run something like:</p>
+
+<p><code>
+require(pander)
+Pandoc.convert(f="MyReport.md", format="pdf", options="-S")
+</code></p>
+
+<p>R complains bitterly in the console—apparently it attempts to open a preview window but cannot—but produces the desired file in the same directory as the Markdown file.</p>
+
+<p>We find that pdf and docx format both look rather nice.  The pdf centers plots, too (this is popular with students).  Sadly, the code chunks do lose their background color under Pandoc’s default highlighting style of “pygments”.  If you try for some other style, e.g.,</p>
+
+<p><code>
+Pandoc.convert(f="MyReport.md", format="pdf", 
+  options="-S --highlight-style="tango")
+</code>
+then in some installations of $\LaTeX$, including the one on our server, there will be an error.  We have not yet decided whether to bug the sysadmin to install a fuller version of $\LaTeX$ in order to get overcome this difficulty.</p>
+
 ]]></content>
   </entry>
   
