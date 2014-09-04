@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Introduction Directory House-Keeping From R Markdown to Markdown From R Markdown to HTML Considerations of Style Producing a Post Creating a Topics &hellip;">
+  <meta name="description" content="Comparison of qnorm() with pnorm() A Few More Examples Making the Top Ten Percent (An Area Above) An Area Between Comparison of qnorm() with pnorm &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,164 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-28T22:00:00-04:00" pubdate data-updated="true">Apr 28<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/04/28/qnormtutorial/#disqus_thread"
+             data-disqus-identifier="http://statistics.rainandrhino.org/blog/2014/04/28/qnormtutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></a></li>
+  <li><a href="#a-few-more-examples">A Few More Examples</a>    <ul>
+      <li><a href="#making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</a></li>
+      <li><a href="#an-area-between">An Area Between</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="comparison-of-qnorm-with-pnorm">Comparison of <code>qnorm()</code> with <code>pnorm()</code></h2>
+
+<p>Thew function <code>prnorm()</code> in regular <code>R</code>, as well as the function <code>pnormGC() in the </code>tigerstats` package, compute probabilities from known bounding values.  For example, suppose that $X$ is a normally distributed random variable with mean 70 and standard deviation 3, and that you want to know:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 72). %]]></script>
+
+<p>Then you <em>know</em> the boundary value 72, but you don’t know the probability:  the area under the normal density curve before 72.  Functions like <code>pnormGC()</code> aim to give you that area–that probability:</p>
+
+<pre><code>require(tigerstats)
+
+ 
+
+pnormGC(72, region="below", mean=70,
+        sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/qnormtut72.png" alt="plot of chunk qnormtut72" /> </p>
+
+<pre><code>## [1] 0.7475
+</code></pre>
+
+<p>The function <code>qnorm()</code>, which comes standard with R, aims to do the opposite:  given an area, find the boundary value that determines this area.</p>
+
+<p>For example, suppose you want to find that 85th percentile of a normal distribution whose mean is 70 and whose standard deviation is 3.  Then you ask for:</p>
+
+<pre><code>qnorm(0.85,mean=70,sd=3)
+
+## [1] 73.11
+</code></pre>
+
+<p>The value 73.1093 is indeed the 85th percentile, in the sense that 85% of the values in a population that is normally distributed with mean 70 and standard deviation 3 will lie below 73.1093.  In other words, if you were to pick a random member $X$ from such a population, then</p>
+
+<p><script type="math/tex">% <![CDATA[
+P(X < 73.1093) = 0.85 %]]></script>.</p>
+
+<p>You can check that this is correct by plugging 73.1093 into <code>pnormGC()</code>:</p>
+
+<pre><code>pnormGC(73.1093,region="below",mean=70,
+        sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/qnormtut73.png" alt="plot of chunk qnormtut73" /> </p>
+
+<pre><code>## [1] 0.85
+</code></pre>
+
+<p>Sure enough, the area under the curve before 73.1093 is 0.85.</p>
+
+<h2 id="a-few-more-examples">A Few More Examples</h2>
+
+<h3 id="making-the-top-ten-percent-an-area-above">Making the Top Ten Percent (An Area Above)</h3>
+
+<blockquote>
+  <p>Suppose that SAT scores are normally distributed, and that the mean SAT score is 1000, and the standard deviation of all SAT scores is 100.  <em>How high must you score so that only 10% of the population scores higher than you?</em></p>
+</blockquote>
+
+<p>Here’s the solution.  If 10% score higher than you, then 90% score lower.  So just call <code>qnorm()</code> with 0.90 as the boundary value:</p>
+
+<pre><code>qnorm(0.90,mean=1000,sd=100)
+
+## [1] 1128
+</code></pre>
+
+<p>In other words, the 90th percentile of SAT scores is around 1128.</p>
+
+<p><strong>Note</strong>:  <code>qnorm()</code> deals by default with areas <em>below</em> the given boundary value.  If we had asked for:</p>
+
+<pre><code>qnorm(0.10,mean=1000,sd=100)
+</code></pre>
+
+<p>then we would have got only the 10th percentile of the SAT scores, not the desired 90th percentile.  If you would like to input 0.10 directly, then you can do so provided that you fiddle with the <code>lower.tail</code> argument:</p>
+
+<pre><code>qnorm(0.10,mean=1000,sd=100,
+      lower.tail=FALSE)
+
+## [1] 1128
+</code></pre>
+
+<p>But really it seems easier just to do the math:</p>
+
+<p>$1 - 0.10 = 0.90.$</p>
+
+<h3 id="an-area-between">An Area Between</h3>
+
+<blockquote>
+  <p>Find a positive number $z$ so that the area under the standard normal curve between $-z$ and $z$ is 0.95.</p>
+</blockquote>
+
+<p>Here’s the solution.  If 95% of the area lies between $-z$ and $z$, then 5% of the area must lie outside of this range.  since normal curves are symmetric, half of this amount–2.5%–must lie before $-z$.  Then the area under the curve before $z$ must be:</p>
+
+<script type="math/tex; mode=display">0.025+0.95=0.975.</script>
+
+<p>Hence the number $z$ is actually the 97.5th percentile of the standard normal distribution, and we can find it as follows:</p>
+
+<pre><code>qnorm(0.975,mean=0,sd=1)
+
+## [1] 1.96
+</code></pre>
+
+<p>So $z$ is about 1.96.  We can check this result graphically as follows:</p>
+
+<pre><code>pnormGC(c(-1.96,1.96),region="between",mean=0,
+        sd=1,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/qnormtutbetween.png" alt="plot of chunk qnormtutbetween" /> </p>
+
+<pre><code>## [1] 0.95
+</code></pre>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -670,7 +828,7 @@ system("cp figure/* ../source/images/figure")
 </span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
 </span><span class="line">  &lt;link href="http://statistics.rainandrhino.org/atom.xml" rel="self"/&gt;
 </span><span class="line">  &lt;link href="http://statistics.rainandrhino.org/"/&gt;
-</span><span class="line">  &lt;updated&gt;2014-08-30T12:20:22-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;updated&gt;2014-09-03T22:51:25-04:00&lt;/updated&gt;
 </span><span class="line">  &lt;id&gt;http://statistics.rainandrhino.org/&lt;/id&gt;
 </span><span class="line">  &lt;author&gt;
 </span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;
@@ -1049,131 +1207,6 @@ nullDist &lt;- do(2500)*(
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/28/xtabstutorial/">Xtabs() Tutorial</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-28T18:00:00-05:00" pubdate data-updated="true">Feb 28<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/28/xtabstutorial/#disqus_thread"
-             data-disqus-identifier="http://statistics.rainandrhino.org/blog/2014/02/28/xtabstutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#one-factor-variable">One Factor Variable</a></li>
-  <li><a href="#two-factor-variables">Two Factor Variables</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p><code>xtabs()</code> is the numerical version of <code>barchartGC()</code>.  You use it when you want to study</p>
-
-<ul>
-  <li>the distribution of one factor variable;</li>
-  <li>the relationship between two factor variables.</li>
-</ul>
-
-<p>The function <code>xtabs()</code> comes with the <code>stats</code> package, which is always loaded in R.  However, some of the data and other functions that we will use come from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></pre>
-
-<h2 id="one-factor-variable">One Factor Variable</h2>
-
-<p>To see a table of the tallies for the factor variable <strong>seat</strong> (from the <code>mat111survey</code> data frame in the <code>tigerstats</code> package):</p>
-
-<pre><code>xtabs(~seat,data=m111survey)
-
-## seat
-##  1_front 2_middle   3_back 
-##       27       32       12
-</code></pre>
-
-<p>In order to get the actual distribution of <strong>seat</strong>, you want percents rather than counts, so apply the function <code>rowPerc()</code> from <code>tigerstats</code>:</p>
-
-<pre><code>rowPerc(xtabs(~seat,data=m111survey))
-
-##  1_front 2_middle 3_back  Total
-##    38.03    45.07  16.90 100.00
-</code></pre>
-
-<p>If you have a table of the counts for a variable, then you can enter it directly.  For example, suppose you have already made:</p>
-
-<pre><code>Seat &lt;- xtabs(~seat,data=m111survey)
-Seat
-
-## seat
-##  1_front 2_middle   3_back 
-##       27       32       12
-</code></pre>
-
-<p>Then you can just enter the table into <code>rowPerc()</code>:</p>
-
-<pre><code>rowPerc(Seat)
-
-##  1_front 2_middle 3_back  Total
-##    38.03    45.07  16.90 100.00
-</code></pre>
-
-<h2 id="two-factor-variables">Two Factor Variables</h2>
-
-<p>You can also use <code>xtabs()</code> to study the relationship between two factor variables.  For example, if you want to see whether males and females differ in their seating preferences, then you might try formula-data input as follows:</p>
-
-<pre><code>xtabs(~sex+seat,data=m111survey)
-
-##         seat
-## sex      1_front 2_middle 3_back
-##   female      19       16      5
-##   male         8       16      7
-</code></pre>
-
-<p>Of course, row percents are the way to actually study the relationship:</p>
-
-<pre><code>rowPerc(xtabs(~sex+seat,data=m111survey))
-
-##        1_front 2_middle 3_back Total
-## female   47.50    40.00  12.50   100
-## male     25.81    51.61  22.58   100
-</code></pre>
-
-<p>Note the type of formula used to study the relationship between two factor variables:</p>
-
-<script type="math/tex; mode=display">\sim ExplanatoryFactor + ResponseFactor</script>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; Older</a>
@@ -1191,6 +1224,10 @@ Seat
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/03/google-charts/">Google Charts in R Markdown</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/27/r-studio-server-centos-pandoc-latex/">New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server</a>
       </li>
     
@@ -1204,10 +1241,6 @@ Seat
     
       <li class="post">
         <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
       </li>
     
   </ul>
@@ -1258,7 +1291,7 @@ Seat
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/r/'>R (5)</a></li>
+    <li class='category'><a href='/blog/categories/r/'>R (6)</a></li>
 <li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (4)</a></li>
 

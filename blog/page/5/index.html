@@ -9,7 +9,7 @@
   <meta name="author" content="Homer White">
 
   
-  <meta name="description" content="Preliminaries Finding P(X &lt;= x) Find P(X &gt;= x) Strict Inequalities: Finding P(X &lt; x) Strict Inequalities: Finding P(X &gt; x) Finding P(a & &hellip;">
+  <meta name="description" content="Preliminaries Finding P(X &lt; x) Find P(X &gt; x) Finding P(a &lt; X &lt; b) “Outside” Probabilities Non-Strict Inequalities Preliminaries pnormGC &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -111,6 +111,195 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/26/pnormGCtutorial/">pnormGC() Tutorial</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-26T16:00:00-05:00" pubdate data-updated="true">Feb 26<span>th</span>, 2014</time>
+        
+           | <a href="/blog/2014/02/26/pnormGCtutorial/#disqus_thread"
+             data-disqus-identifier="http://statistics.rainandrhino.org/blog/2014/02/26/pnormGCtutorial/">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><ul id="markdown-toc">
+  <li><a href="#preliminaries">Preliminaries</a></li>
+  <li><a href="#finding-px--x">Finding P(X &lt; x)</a></li>
+  <li><a href="#find-px--x">Find P(X &gt; x)</a></li>
+  <li><a href="#finding-pa--x--b">Finding P(a &lt; X &lt; b)</a></li>
+  <li><a href="#outside-probabilities">“Outside” Probabilities</a></li>
+  <li><a href="#non-strict-inequalities">Non-Strict Inequalities</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p><code>pnormGC()</code> provides a direct way to compute probabilities for normal random variables, along with graphs for the probabilities, if you want them.  The function comes from the <code>tigerstats</code> package, so make sure that <code>tigerstats</code> is loaded:</p>
+
+<pre><code>require(tigerstats)
+</code></pre>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need to install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<pre><code>require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></pre>
+
+<h2 id="finding-px--x">Finding P(X &lt; x)</h2>
+
+<p>Suppose that you have a normal random variable $X$ with mean $\mu=70$ and standard deviation $\sigma=3$, and you would like to find the chance that $X$ will turn out to be less than 66.  In other words, you are looking for:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 66). %]]></script>
+
+<p>Then run this command:</p>
+
+<pre><code>pnormGC(bound=66,region="below",mean=70,sd=3)
+
+## [1] 0.09121
+</code></pre>
+
+<p>Note carefully what the arguments mean, here:</p>
+
+<ul>
+  <li><code>bound=66</code> tells <code>pnormGC()</code> where to stop</li>
+  <li><code>region="below"</code> takes care of the “less than” part of the requested probability</li>
+  <li><code>mean=70</code> specifies the mean $\mu$ of $X$</li>
+  <li><code>sd=3</code> specifies the standard deviation $\sigma$ of $X$</li>
+</ul>
+
+<p>If you would like to see a graph of the probability distribution of $X$ along with a shaded area that represents the requested probability, then you can set the argument <code>graph</code> to <code>TRUE</code>:</p>
+
+<pre><code>pnormGC(bound=66,region="below",
+        mean=70,sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/normtutless66.png" alt="plot of chunk normtutless66" /> </p>
+
+<pre><code>## [1] 0.09121
+</code></pre>
+
+<p>You should ask for a graph until you are confident of being able to use <code>pnormGC()</code> to get exactly the probability that you want.</p>
+
+<h2 id="find-px--x">Find P(X &gt; x)</h2>
+
+<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that $X$ is greater than 69, i.e.:</p>
+
+<script type="math/tex; mode=display">P(X > 69).</script>
+
+<p>Ask for:</p>
+
+<pre><code>pnormGC(bound=69,region="above",
+        mean=70,sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/normtutgreater69.png" alt="plot of chunk normtutgreater69" /> </p>
+
+<pre><code>## [1] 0.6306
+</code></pre>
+
+<h2 id="finding-pa--x--b">Finding P(a &lt; X &lt; b)</h2>
+
+<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that $X$ is between 68 and 72, i.e.:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(68 < X < 72). %]]></script>
+
+<p>Ask for:</p>
+
+<pre><code>pnormGC(bound=c(68,72),region="between",
+        mean=70,sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/normtutbetween.png" alt="plot of chunk normtutbetween" /> </p>
+
+<pre><code>## [1] 0.495
+</code></pre>
+
+<p>Observe that since there are two numbers—68 and 72—that are boundaries, we have to specify both of them for <code>pnormGC()</code> in the form of a list <code>c(68,72)</code>.</p>
+
+<h2 id="outside-probabilities">“Outside” Probabilities</h2>
+
+<p>For the same random variable $X \sim norm(70,3)$, suppose we want the probability that either $X$ is less than 66 OR that $X$ is more than 73.  Then we are looking for:</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 66 \textbf{ or } X > 73). %]]></script>
+
+<p>We can find this with the command:</p>
+
+<pre><code>pnormGC(bound=c(66,73),region="outside",
+         mean=70,sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/mormtutout.png" alt="plot of chunk mormtutout" /> </p>
+
+<pre><code>## [1] 0.2499
+</code></pre>
+
+<p>Again observe that there are two numbers—66 and 73—that make the boundaries, so supply both of them to the <code>bound</code> argument as a list:  <code>c(66,72)</code>.</p>
+
+<h2 id="non-strict-inequalities">Non-Strict Inequalities</h2>
+
+<p>Suppose that for the same random variable $X \sim norm(70,3)$, you want the probability that $X$ will turn out to be <em>no more than</em> 66, i.e., you want:</p>
+
+<script type="math/tex; mode=display">P(X \leq 66).</script>
+
+<p>You get this with exactly the same function call that gives you $P(X &lt; 66)$, namely:</p>
+
+<pre><code>pnormGC(bound=66,region="below",
+        mean=70,sd=3)
+</code></pre>
+
+<p>Remember why?  Normal random variables are <em>continuous</em> random variables, and for any continuous random variable the chance that it is <em>exactly</em> equal to any particular value is zero.  For example, the probability that $X$ is exactly equal to 66 is given by:</p>
+
+<pre><code>pnormGC(bound=c(66,66),region="between",
+        mean=70,sd=3,graph=TRUE)
+</code></pre>
+
+<p><img src="/images/figure/normtutequal.png" alt="plot of chunk normtutequal" /> </p>
+
+<pre><code>## [1] 0
+</code></pre>
+
+<p>The probability of getting exactly 66 is given by the area of the line segment under the curve over 66.  But the area of a line segment—if you think of it as a “rectangle”” with zero width—is zero!</p>
+
+<p>When you ask for</p>
+
+<script type="math/tex; mode=display">P(X \leq 66)</script>
+
+<p>as opposed to</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+P(X < 66), %]]></script>
+
+<p>you are adding on just the chance of $X$ being exactly 66.  Since this extra chance is zero, you get the same probability as you did with the strict inequality.</p>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -665,211 +854,6 @@ help(m111survey)
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/15/lmGCtutorial/">lmGC() Tutorial</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-02-15T15:00:00-05:00" pubdate data-updated="true">Feb 15<span>th</span>, 2014</time>
-        
-           | <a href="/blog/2014/02/15/lmGCtutorial/#disqus_thread"
-             data-disqus-identifier="http://statistics.rainandrhino.org/blog/2014/02/15/lmGCtutorial/">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><ul id="markdown-toc">
-  <li><a href="#preliminaries">Preliminaries</a></li>
-  <li><a href="#formula-data-input">Formula-Data Input</a></li>
-  <li><a href="#prediction">Prediction</a></li>
-  <li><a href="#plotting">Plotting</a></li>
-</ul>
-
-<h2 id="preliminaries">Preliminaries</h2>
-
-<p>The <code>lmGC()</code> is a starter-tool for simple linear regression, when you are studying the relationship between two numerical variables, one of which you consider to be an explanatory or predictor variable and the other of which you think of as the response.  It’s only a starter-tool:  by the end of the course, or in later statistics courses, you will move on to R’s function <code>lm()</code>, which allows you to work with more than one explanatory variable and which provides additional useful information in its output.  Also, in <code>lm()</code> the explanatory variable(s) can even be factors!</p>
-
-<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
-
-<pre><code>require(tigerstats)
-</code></pre>
-
-<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
-
-<pre><code>require(devtools)
-install_github(repo = "homerhanumat/tigerstats")
-</code></pre>
-
-<p>In this tutorial we will work with a couple of data sets:  <code>mtcars</code> from the <code>data</code> package that comes with the basic R installation, and <code>fuel</code> from the <code>tigerstats</code> package, so make sure you become familiar with them.  The following commands may be helpful in this regard:</p>
-
-<pre><code>data(mtcars)
-View(mtcars)
-help(mtcars)
-</code></pre>
-
-<p>For <code>fuel</code>:</p>
-
-<pre><code>data(fuel)
-View(fuel)
-help(fuel)
-</code></pre>
-
-<h2 id="formula-data-input">Formula-Data Input</h2>
-
-<p>Like many R functions, <code>lmGC()</code> accepts formula-data input.  The general command looks like:</p>
-
-<pre><code>lmGC(response ~ explanatory, data = DataFrame)
-</code></pre>
-
-<p>If you are interested in studying the relationship between the fuel efficiency of a car (<strong>mpg</strong> in the <code>mtcars</code> data frame, measured in miles per gallon) and its weight (<strong>wt</strong> in <code>mtcars</code>, measure din thousands of pounds), then you  can run:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p>The output to the console is rather minimal.  You get:</p>
-
-<ul>
-  <li>the correlation coefficient $r$.  We need to look at a scatter plot to be really sure about it (for plots, see below), but at this point the value $r = -0.87$ indicates a fairly strong negative linear relationship between fuel efficiency and weight.</li>
-  <li>the equation of the regression line.  From the slope of -5.34, we see that for every thousand pound increase in the weight of a car, we predict a 5.34 mpg decrease in the fuel efficiency.</li>
-  <li>the residual standard error $s$.  As a rough rule of thumb, we figure that when we use the regression equation to predict the fuel efficiency of a car from its weight, that prediction is liable to be off by about $s$ miles per gallon, or so.</li>
-  <li>the unadjusted $R^2$.  We see here that about 75% of the variation in the fuel efficiency of the cars in the data set is accounted for by the variation in their weights.  since $R^2$ is fairly high, it seems that weight is a fairly decent predictor of fuel efficiency.</li>
-</ul>
-
-<h2 id="prediction">Prediction</h2>
-
-<p>When the value of the explanatory variable for an individual is known and you wish to predict the value of the response variable for that individual, you can use the <code>predict()</code> function.  Its arguments are the linear model that is created by <code>lmGC()</code>, and the value <code>x</code> of the explanatory variable.</p>
-
-<p>If you think that you might want to use <code>predict()</code>, you may first want to store the model in a variable, for example:</p>
-
-<pre><code>WeightEff &lt;- lmGC(mpg ~ wt, data = mtcars)
-</code></pre>
-
-<p>Then if you want to predict the fuel efficiency of a car that weights 3000 pounds, run this command:</p>
-
-<pre><code>predict(WeightEff, x = 3)
-
-## [1] 21.25
-</code></pre>
-
-<p>We predict that a 3000 pound car (from the time of the Motor Trend study that produced this data) would have a fuel efficiency of 21.25 mpg, give or take about 3.046 mpg or so.  (Note how we used $s$ as a rough give-or-take figure.)</p>
-
-<h2 id="plotting">Plotting</h2>
-
-<p>But we are getting ahead of ourselves!  In order to use linear models at all, we need to make sure that our data really do show a linear relationship.  The single best way to check this is to look at a scatterplot, so <code>lmGC()</code> comes equipped with a option to produce one:  just set the argument <code>graph</code> to <code>TRUE</code>, as follows:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars, graph = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p><img src="/images/figure/mtcarsscatter.png" alt="Speed and fuel efficiency in the Motor Trends study" /> </p>
-
-<p>The scatterplot includes the regression line. Indeed, the cloud of point seems to follow a line fairly well.  The relationship may be thought of as linear, so using <code>lmGC()</code> for tasks like prediction does make sense, for this data.</p>
-
-<p>You can also perform some simple diagnostics, by setting the argument <code>diag</code> to <code>TRUE</code>:</p>
-
-<pre><code>lmGC(mpg ~ wt, data = mtcars, diag = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.8677 
-## 
-## Equation of Regression Line:
-## 
-## 	 mpg = 37.29 + -5.345 * wt 
-## 
-## Residual Standard Error:	s   = 3.046 
-## R^2 (unadjusted):		R^2 = 0.7528
-</code></pre>
-
-<p><img src="/images/figure/mtcarsdiag.png" alt="Diagnostic plots for the Motor Trends study" /> </p>
-
-<p>You get two graphs:</p>
-
-<ul>
-  <li>a density plot of the residuals.  If the distribution of the residuals is roughly bell-shaped, then you can actually employ a &#8220;regression’’ version of the 68-95 Rule:  when you make a prediction using the regression line, there is a about a 68% chance that your predcition will be wtthin one $s$ of the actual $y$-value, and about a 95% chance that ti will be within $2s$ of the actual $y$-value.  <em>Neat!</em></li>
-  <li>A plot of the residuals vs, the <code>fitted</code> $y$-values (the $y$-coordinates of the points on the original scatterplot).  If the points exhibit a linear relationship with about the same amount of scatter all the way along the regression line, then this plot should look like a random cloud of points.  In this case, it confirms that our linear model is appropriate to the data.</li>
-</ul>
-
-<p>On the other hand, consider <code>fuel</code> data frame, which shows the results of a study where a British Ford Escort was driven at various speed along a standard course, and the fuel efficiency (in kilometers traveled per liter of fuel consumed) was recorded at each speed.  Let’s try a linear model with <strong>speed</strong> as explanatory and <strong>efficiency</strong> as the response, with some diagnostic plots attached:</p>
-
-<pre><code>lmGC(efficiency ~ speed, data = fuel, diag = TRUE)
-
-## 
-## 			Simple Linear Regression
-## 
-## Correlation coefficient r =  -0.1716 
-## 
-## Equation of Regression Line:
-## 
-## 	 efficiency = 11.06 + -0.0147 * speed 
-## 
-## Residual Standard Error:	s   = 3.905 
-## R^2 (unadjusted):		R^2 = 0.0295
-</code></pre>
-
-<p><img src="/images/figure/fordescortsdiag.png" alt="Diagnostic Plots for British Ford Escort Study" /> </p>
-
-<p>The residuals have a roughly-bell-shaped distribution, but the residual plot is clearly patterned.  Something is amiss!  Let’s look at a scatterplot of the data:</p>
-
-<pre><code>xyplot(efficiency~speed,data=fuel,
-       xlab="speed (kilometers/hour",
-       ylab="fuel effiency (liters/100km",
-       pch=19,col="blue",type=c("p","r"),
-       main="Speed and Fuel Efficiency\nfor a British Ford Escort")
-</code></pre>
-
-<p><img src="/images/figure/fordescortscatter.png" alt="Speed and Fuel Efficiency for a British Ford Escort" /> </p>
-
-<p>The relationship is strongly curvilinear:  it makes no sense to use the regression line (shown in the plot above) to study the relationship between these two variables!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/6/">&larr; Older</a>
@@ -887,6 +871,10 @@ help(fuel)
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/09/03/google-charts/">Google Charts in R Markdown</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/08/27/r-studio-server-centos-pandoc-latex/">New Wine in an Old Bottle: R Markdown V2 and R Studio on the Cent OS Server</a>
       </li>
     
@@ -900,10 +888,6 @@ help(fuel)
     
       <li class="post">
         <a href="/blog/2014/04/28/qnormtutorial/">Qnorm() Tutorial</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/04/13/roctopress/">Roctopress: Configure Your Octopress Blog for R</a>
       </li>
     
   </ul>
@@ -954,7 +938,7 @@ help(fuel)
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    <li class='category'><a href='/blog/categories/r/'>R (5)</a></li>
+    <li class='category'><a href='/blog/categories/r/'>R (6)</a></li>
 <li class='category'><a href='/blog/categories/student-focused-tutorials/'>Student-Focused Tutorials (15)</a></li>
 <li class='category'><a href='/blog/categories/tech-note/'>Tech Note (4)</a></li>
 
