@@ -1250,7 +1250,7 @@ install_github(repo="homerhanumat/tigerstats")
 
 <h2 id="a-graph-of-the-p-value">A Graph of the $P$-Value</h2>
 
-<p>Fro a one-sided test, we can get a graph of the $P$-value simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
+<p>We can get a graph of the $P$-value simply by setting the argument <code>graph</code> to <code>TRUE</code>:</p>
 
 <pre><code>binomtestGC(~sex,data=m111survey,
             success="male",p=0.50,
@@ -1283,8 +1283,6 @@ install_github(repo="homerhanumat/tigerstats")
 </code></pre>
 
 <p><img src="/images/figure/binomtesttutsexless.png" alt="plot of chunk binomtesttutsexless" /> </p>
-
-<p>For a two-sided test, the function gets the $P$-value by doubling an appropriate one-sided $P$-value, so no graph represents the $P$-value very well.  Hence the function will refuse to provide a graph in that case.</p>
 
 <h2 id="working-with-summary-data">Working with Summary Data</h2>
 
