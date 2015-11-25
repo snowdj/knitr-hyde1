@@ -4,7 +4,7 @@
   <title><![CDATA[A Statistics Blog]]></title>
   <link href="http://statistics.rainandrhino.org/atom.xml" rel="self"/>
   <link href="http://statistics.rainandrhino.org/"/>
-  <updated>2015-07-02T18:05:37-04:00</updated>
+  <updated>2015-11-25T17:15:56-05:00</updated>
   <id>http://statistics.rainandrhino.org/</id>
   <author>
     <name><![CDATA[Homer White]]></name>
@@ -18,9 +18,11 @@
     <link href="http://statistics.rainandrhino.org/blog/2015/07/03/shiny-simulation-tutorial/"/>
     <updated>2015-07-03T15:00:00-04:00</updated>
     <id>http://statistics.rainandrhino.org/blog/2015/07/03/shiny-simulation-tutorial</id>
-    <content type="html"><![CDATA[<p>I stand in awe of the R wizards who post their latest and greatest <a href="http://shiny.rstudio.com" target="_blank">Shiny</a> feats on R-Bloggers.  It’s taken me a while to find my way around Shiny, but at last I feel ready to fill in a few gaps for others who may be just starting out and who aspire to write reasonably involved, user-friendly simulation apps.  To make it a bit more fun I’ve written it up as an R Markdown document hosted on <code>shinyapps.io</code>:  <a href="http://homer.shinyapps.io/sim_tutorial_Rmd" target="_blank">here you go<a>.</a></a></p>
+    <content type="html"><![CDATA[<p>(<strong>Edited November 25, 2015.</strong>)  I stand in awe of the R wizards who post their latest and greatest <a href="http://shiny.rstudio.com" target="_blank">Shiny</a> feats on R-Bloggers.  It’s taken me a while to find my way around Shiny, but at last I feel ready to fill in a few gaps for others who may be just starting out and who aspire to write reasonably involved, user-friendly simulation apps.  To make it a bit more fun I’ve written it up as an R Markdown document.</p>
 
-<p>Prerequisites are indicated in the tutorial; so are links to the source code.  If you have feedback or suggestions for improvements, comment here or post an Issue on the GitHub site.</p>
+<p>I used to host the document on <code>shinyapps.io</code>, but it pushed my monthly hours over their limit.  You can get the source code, however, from the <a href="https://github.com/homerhanumat/shinyTutorials" target="_blank">GitHub repository<a>.  Check the repo’s Readme for prerequisites and instructions on access.</a></a></p>
+
+<p>If you have feedback or suggestions for improvements, comment here or post an Issue on the GitHub site.  Happy learning!</p>
 ]]></content>
   </entry>
   
@@ -3151,7 +3153,7 @@ system("cp figure/* ../source/images/figure")
 </span><span class="line">  &lt;title&gt;A Statistics Blog - YourCategoryName&lt;/title&gt;
 </span><span class="line">  &lt;link href="http://statistics.rainandrhino.org/atom.xml" rel="self"/&gt;
 </span><span class="line">  &lt;link href="http://statistics.rainandrhino.org/"/&gt;
-</span><span class="line">  &lt;updated&gt;2015-07-02T18:05:37-04:00&lt;/updated&gt;
+</span><span class="line">  &lt;updated&gt;2015-11-25T17:15:56-05:00&lt;/updated&gt;
 </span><span class="line">  &lt;id&gt;http://statistics.rainandrhino.org/&lt;/id&gt;
 </span><span class="line">  &lt;author&gt;
 </span><span class="line">    &lt;name&gt;Homer White&lt;/name&gt;
