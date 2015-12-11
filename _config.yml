@@ -1,0 +1,23 @@
+# Site settings
+title: A Statistics Blog
+email: homerhanumatATgmailDOTcom
+description: > # this means to ignore newlines until "baseurl:"
+  A blog devoted mostly to the the teaching of undergraduate-level statstics
+  and data anlysis with R, along with occasional technical notes on R-related
+  tools.
+url: "https://homerhanumat.github.io" # the base hostname & protocol for your site
+github_username:  homerhanumat
+permalink: //:year/:month/:title.html
+author:  Homer White
+
+# Build settings
+
+# rendering engine
+markdown: kramdown
+
+#sets number of posts to appear on Home page; handled in index.html
+post_limit:  4
+
+# feeds
+subscribe_rss: /feed.xml
+category_feeds: R
