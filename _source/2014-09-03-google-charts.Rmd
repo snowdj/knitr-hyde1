@@ -3,7 +3,7 @@ layout: post
 title: "Google Charts in R Markdown"
 date: 2014-09-03 20:30:00
 published: true
-categories: [R]
+categories: ['R']
 output:
   html_document:
     mathjax:  default
