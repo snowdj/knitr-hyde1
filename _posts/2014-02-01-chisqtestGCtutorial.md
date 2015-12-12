@@ -1,5 +1,6 @@
 ---
 layout: post
+comments:  true
 title:  "chisqtestGC() Tutorial"
 date: 2014-02-01 20:00:00
 published: true

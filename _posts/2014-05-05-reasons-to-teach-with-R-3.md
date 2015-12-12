@@ -1,5 +1,6 @@
 ---
 layout: post
+comments:  true
 title: "Five Reasons to Teach Elementary Statistics With R:  #3"
 date: 2014-05-05 01:00:00
 categories: [R]
