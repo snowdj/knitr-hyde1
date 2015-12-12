@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>A Statistics Blog</title>
+    <meta name="description" content="A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://homerhanumat.github.io/">
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">A Statistics Blog</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/archives/">Archives</a>
+          
+        
+          
+          <a class="page-link" href="/categories/">Categories</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="home">
+
+  
+  <div class="post">
+  <div class="post-header">
+    <a href="/2015/07/shiny-simulation-tutorial.html">
+      <h1 class="post-title">A Tutorial on Writing Simulation Apps in Shiny</h1>
+    </a>
+    <p class="post-meta">Jul 3, 2015</p>
+  </div>
+
+  <article class="post-content">
+    <p>(<strong>Edited November 25, 2015.</strong>)  I stand in awe of the R wizards who post their latest and greatest <a href="http://shiny.rstudio.com" target="_blank">Shiny</a> feats on R-Bloggers.  It’s taken me a while to find my way around Shiny, but at last I feel ready to fill in a few gaps for others who may be just starting out and who aspire to write reasonably involved, user-friendly simulation apps.  To make it a bit more fun I’ve written it up as an R Markdown document.</p>
+
+<p>I used to host the document on <code class="highlighter-rouge">shinyapps.io</code>, but it pushed my monthly hours over their limit.  You can get the source code, however, from the <a href="https://github.com/homerhanumat/shinyTutorials" target="_blank">GitHub repository</a>.  Check the repo’s Readme for prerequisites and instructions on access.</p>
+
+<p>If you have feedback or suggestions for improvements, comment here or post an Issue on the GitHub site.  Happy learning!</p>
+
+  </article>
+
+</div>
+
+<hr>
+<br><br>
+
+
+
+  
+  <div class="post">
+  <div class="post-header">
+    <a href="/2014/09/google-charts.html">
+      <h1 class="post-title">Google Charts in R Markdown</h1>
+    </a>
+    <p class="post-meta">Sep 3, 2014</p>
+  </div>
+
+  <article class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#extrapolation" id="markdown-toc-extrapolation">Extrapolation</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>An excellent little post (<a href="http://lamages.blogspot.com/2014/09/zoom-zoom-googlevis.html">Zoom, zoom googleVis</a>) showed up recently on <a href="http://www.r-bloggers.com/">R-Bloggers</a>.  The author Markus Gesmann is the maintainer of the <code class="highlighter-rouge">googleVis</code> package that links R to the <a href="https://developers.google.com/chart/interactive/docs/gallery">Google Charts API</a>.  My first thought was:  could I embed charts like those in R Markdown documents that could knit to ioslides or other formats suitable for use in my elementary statistics classes?</p>
+
+<p>A quick look at the documentation showed that it’s very easy indeed to do this sort of thing.</p>
+
+<h2 id="extrapolation">Extrapolation</h2>
+
+<p>Suppose, for example, that you want to illustrate to students the risks associated with extrapolation.  You begin by reminding them of the experience they had back in high school with their graphing calculators, when they zoomed in on a curve:  zoom in close enough, and it looks like a straight line.</p>
+
+<p>Then you point out that for the most part we live our lives from a “zoomed-in” perspective, at least where data is concerned.  In situations where we are interested in a pair of numerical measurements on individuals, we usually possess <script type="math/tex">y</script>-values for only a fairly narrow range of <script type="math/tex">x</script>-values.  Hence it is likely that a scatter plot we make from our “zoomed-in” data will show a roughly linear relationship, even though on a global scale the “real” relationship probably is some kind of a curve.</p>
+
+<p>The app below (a slight modification of the example in Gesmann’s post) makes the point in a flash.  Click and drag to establish a zoom region, right-click to reset:</p>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in eval(expr, envir, enclos): could not find function "gvisScatterChart"</code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Error in print(gvScat, "chart"): object 'gvScat' not found</code></pre></figure>
+
+<p>All we needed was the following code (be sure to add the chunk option <code class="highlighter-rouge">results='asis'</code>):</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">set.seed</span><span class="p">(</span><span class="m">2020</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">&lt;-</span> <span class="n">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">100</span><span class="p">,</span><span class="n">by</span><span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">&lt;-</span> <span class="p">(</span><span class="m">50</span><span class="o">-</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="o">+</span><span class="n">rnorm</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">sd</span><span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+<span class="n">curvy</span> <span class="o">&lt;-</span> <span class="n">data.frame</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+
+<span class="n">gvScat</span> <span class="o">&lt;-</span> <span class="n">gvisScatterChart</span><span class="p">(</span><span class="n">curvy</span><span class="p">,</span>
+                   <span class="n">options</span><span class="o">=</span><span class="n">list</span><span class="p">(</span>
+                     <span class="n">explorer</span><span class="o">=</span><span class="s2">"{actions: ['dragToZoom',
+                     'rightClickToReset'],
+                     maxZoomIn:0.05}"</span><span class="p">,</span>
+                     <span class="n">chartArea</span><span class="o">=</span><span class="s2">"{width:'85%',height:'80%'}"</span><span class="p">,</span>
+                     <span class="n">hAxis</span><span class="o">=</span><span class="s2">"{title: 'Explanatory x',
+                     titleTextStyle: {color: '#000000'}}"</span><span class="p">,</span>
+                     <span class="n">vAxis</span><span class="o">=</span><span class="s2">"{title: 'Response y',
+                     titleTextStyle: {color: '#000000'}}"</span><span class="p">,</span>
+                     <span class="n">title</span><span class="o">=</span><span class="s2">"Curvilinear Relationship"</span><span class="p">,</span>
+                     <span class="n">width</span><span class="o">=</span><span class="m">550</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="m">500</span><span class="p">,</span>
+                     <span class="n">legend</span><span class="o">=</span><span class="s2">"none"</span><span class="p">),</span>
+                   <span class="n">chartid</span><span class="o">=</span><span class="s2">"ZoomZoom"</span><span class="p">)</span>
+
+<span class="n">print</span><span class="p">(</span><span class="n">gvScat</span><span class="p">,</span><span class="s1">'chart'</span><span class="p">)</span></code></pre></figure>
+
+<p>The same approach works in any R Markdown document (including the source document for this Jekyll-powered post).  I will certainly take a closer look at <code class="highlighter-rouge">googleVis</code>:  thanks, Markus!</p>
+
+
+  </article>
+
+</div>
+
+<hr>
+<br><br>
+
+
+
+  
+  <div class="post">
+  <div class="post-header">
+    <a href="/2014/08/r-studio-server-centos-pandoc-latex.html">
+      <h1 class="post-title">New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server</h1>
+    </a>
+    <p class="post-meta">Aug 27, 2014</p>
+  </div>
+
+  <article class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#new-pandoc" id="markdown-toc-new-pandoc">New Pandoc</a></li>
+  <li><a href="#installing-latex-packages" id="markdown-toc-installing-latex-packages">Installing LaTeX Packages</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>R Markdown Version 2 is a boon to students:  with a single click one can convert an R Markdown file to either HTML, PDF or Word format.  However, getting this feature to work fully in the R Studio server environment may require a bit of work, especially if you running the Server on a Cent OS distribution.  Although I am sure that Cent OS has many virtues, an up-to-date repository is not among them.</p>
+
+<p>This post is the record of an arm wrasslin’ match with Cent OS and the R Studio Server version 0.98.932, from which I emerged more or less victorious.  If your IT department hosts RStudio on CentOS, then perhaps the following remarks will make your life a bit easier.  On the other hand,  if you know your way around Linux better than I do, please feel free to offer quicker or better solutions in the Comments.</p>
+
+<p>Log on to the server, perhaps through <code class="highlighter-rouge">ssh</code> (secure shell).  Come armed with administrative privileges.</p>
+
+<h2 id="new-pandoc">New Pandoc</h2>
+
+<p>R Markdown v2 uses a newer version of the <code class="highlighter-rouge">pandoc</code>converter than the one available in the Cent OS repository.  Fortunately, R Studio comes bundled with the binaries of a sufficiently recent version of <code class="highlighter-rouge">pandoc</code>.  You obtain access to these files by establishing symbolic links in the <code class="highlighter-rouge">/usr/local/bin</code> directory to the <code class="highlighter-rouge">pandoc</code> and <code class="highlighter-rouge">pandoc-cite</code> binaries:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc-citeproc /usr/local/bin
+sudo ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc /usr/local/bin
+</code></pre>
+</div>
+
+<h2 id="installing-latex-packages">Installing LaTeX Packages</h2>
+
+<p>You can get Tex Live from the Cent OS repositories, but the release appears to date back to the year 2007.  Therefore it lacks a couple of packages needed by <code class="highlighter-rouge">pandoc</code>:</p>
+
+<ul>
+  <li>Heiko Oberdiek’s <a href="http://www.ctan.org/pkg/ifluatex">ifluatex</a>, and</li>
+  <li>Donald Arsenau’s <a href="http://www.ctan.org/pkg/framed">framed</a>.</li>
+</ul>
+
+<p>Since you will download these packages from the Comprehensive Tex Archive Network, you’ll want a web-fetch utility such as <code class="highlighter-rouge">wget</code>.  If it’s not already installed on Cent OS, you can get it with:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo yum install wget
+</code></pre>
+</div>
+
+<p>Now you can grab the relevant files with <code class="highlighter-rouge">wget</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/ifluatex.dtx
+wget http://mirrors.ctan.org/macros/latex/contrib/framed.zip
+</code></pre>
+</div>
+
+<p>Turning first to <code class="highlighter-rouge">ifluatex</code>, we begin by by unpacking the <code class="highlighter-rouge">.dtx</code> bundle.  This is accomplished with a <code class="highlighter-rouge">tex</code> command:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tex ifluatex.dtx
+</code></pre>
+</div>
+
+<p>Several files spill out into your Home directory.  You care only about <code class="highlighter-rouge">ifluatex.sty</code>.  Copy it as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo cp ifluatex.sty /usr/share/texmf/tex/generic/oberdiek
+</code></pre>
+</div>
+
+<p>As for the <code class="highlighter-rouge">framed</code> package, you must first unzip the downloaded file into a directory:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mkdir framed
+unzip framed.zip -d framed
+</code></pre>
+</div>
+
+<p>Now copy the <code class="highlighter-rouge">framed</code> directory as follows:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo cp -rf framed /usr/share/texmf/tex/latex
+</code></pre>
+</div>
+
+<p>Finally, you need to make tex aware of the existence of these new packages with <code class="highlighter-rouge">texhash</code>:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo texhash
+</code></pre>
+</div>
+
+<p>Now you may Knit to your heart’s content!</p>
+
+  </article>
+
+</div>
+
+<hr>
+<br><br>
+
+
+
+  
+  <div class="post">
+  <div class="post-header">
+    <a href="/2014/05/reasons-to-teach-with-R-3.html">
+      <h1 class="post-title">Five Reasons to Teach Elementary Statistics With R:  #3</h1>
+    </a>
+    <p class="post-meta">May 4, 2014</p>
+  </div>
+
+  <article class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-3--rstudios-shiny" id="markdown-toc-reason-3--rstudios-shiny">Reason #3:  RStudio’s <code class="highlighter-rouge">shiny</code></a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
+      <li><a href="#slow-simulation" id="markdown-toc-slow-simulation">“Slow” Simulation</a></li>
+      <li><a href="#understanding-model-assumptions" id="markdown-toc-understanding-model-assumptions">Understanding Model Assumptions</a></li>
+      <li><a href="#types-of-error" id="markdown-toc-types-of-error">Types of Error</a></li>
+      <li><a href="#illustrating-fine-points" id="markdown-toc-illustrating-fine-points">Illustrating Fine Points</a></li>
+      <li><a href="#playing-games" id="markdown-toc-playing-games">Playing Games</a></li>
+    </ul>
+  </li>
+  <li><a href="#shiny-vs-manipulate" id="markdown-toc-shiny-vs-manipulate">Shiny vs. <code class="highlighter-rouge">manipulate</code></a></li>
+  <li><a href="#instructional-apps-gallery" id="markdown-toc-instructional-apps-gallery">Instructional Apps Gallery?</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is the third in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/">previous post</a> in this series described R Studio’s package <code class="highlighter-rouge">manipulate</code> and its applications in the easy authoring of instructional applets.  Today we’ll look at <code class="highlighter-rouge">shiny</code>, a related RStudio project.</p>
+
+<p>In order to try the ensuing examples, download an ancillary package that we use for our elementary course:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">require</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+<span class="n">install_github</span><span class="p">(</span><span class="n">repo</span><span class="o">=</span><span class="s2">"homerhanumat/tigerstats"</span><span class="p">)</span></code></pre></figure>
+
+<h2 id="reason-3--rstudios-shiny">Reason #3:  RStudio’s <code class="highlighter-rouge">shiny</code></h2>
+
+<p><a href="https://www.rstudio.com/shiny/">Shiny</a> appears to be intended primarily for data analysts working in industry or in academic or institutional research, but on the very day of its public release Victor Moreno pointed out its implications for statistics education (see his comment on <a href="http://blog.rstudio.org/2012/11/08/introducing-shiny/">this RStudio blog post</a>).  For statistics instructors Shiny offers essentially the same benefits as <code class="highlighter-rouge">manipulate</code>, but in addition comes pimped out with:</p>
+
+<ul>
+  <li>options for dynamic user input;</li>
+  <li>output formats that go well beyond <code class="highlighter-rouge">manipulate</code>’s home in the Plots pane;</li>
+  <li>default Bootstrap styling.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="slow-simulation">“Slow” Simulation</h3>
+
+<p>At my College we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose for example you are wondering whether a certain die is loaded.  You don’t want to crack it open, so you roll it sixty times, getting the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Spots</strong></th>
+      <th style="text-align: center">One</th>
+      <th style="text-align: center">Two</th>
+      <th style="text-align: center">Three</th>
+      <th style="text-align: center">Four</th>
+      <th style="text-align: center">Five</th>
+      <th style="text-align: center">Six</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Freq</strong></td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">18</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This looks like an awful lot of two-spots, but we were not expecting this in advance.  By this point in the course students have been made aware of the perils of “data snooping” and hence should be disinclined to employ an inferential procedure that is based specifically on a pattern that one happens to notice in one’s data.  Therefore, rather than perform inferential procedures keyed to “Two-spot” side of the die, we might turn instead to the chi-square statistic as a neutral measure of the difference between the observed results and what one would expect if the die were fair.</p>
+
+<p>The situation is addressed in this Shiny app:</p>
+
+<p><a href="http://rstudio.georgetowncollege.edu:3838/SlowGoodness">http://rstudio.georgetowncollege.edu:3838/SlowGoodness</a></p>
+
+<p>After re-sampling for a few minutes, students are convinced that it’s not so unlikely, after all to get results like the ones we observed, if the die is fair all along.</p>
+
+<p>Students are then prepared to understand a full-scale re-sampling simulation like the following one:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">require</span><span class="p">(</span><span class="n">tigerstats</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">observed</span> <span class="o">&lt;-</span> <span class="n">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">11</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
+<span class="n">fair</span> <span class="o">&lt;-</span> <span class="n">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)</span>
+<span class="n">set.seed</span><span class="p">(</span><span class="m">2020</span><span class="p">)</span>
+<span class="n">chisqtestGC</span><span class="p">(</span><span class="n">observed</span><span class="p">,</span><span class="n">p</span><span class="o">=</span><span class="n">fair</span><span class="p">,</span>
+      <span class="n">simulate.p.value</span><span class="o">=</span><span class="n">TRUE</span><span class="p">,</span>
+      <span class="n">B</span><span class="o">=</span><span class="m">3000</span><span class="p">,</span><span class="n">graph</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Pearson's chi-squared test with simulated p-value 
+## 	 (based on 3000 resamples) 
+## 
+##   Observed counts Expected by Null Contr to chisq stat
+## A               8               10                 0.4
+## B              18               10                 6.4
+## C              11               10                 0.1
+## D               7               10                 0.9
+## E               9               10                 0.1
+## F               7               10                 0.9
+## 
+## 
+## Chi-Square Statistic = 8.8 
+## Degrees of Freedom of the table = 5 
+## P-Value = 0.1253</code></pre></figure>
+
+<p><img src="/figure/source/2014-05-05-reasons-to-teach-with-R-3/reasonsteachr3chisq-1.png" alt="plot of chunk reasonsteachr3chisq" /></p>
+
+<p>Sure enough, if the die is fair then there is a reasonably good chance—about 12.5%—of getting results at least as extreme as the ones we got in our 60 rolls.</p>
+
+<p><strong>Note:</strong>  Shiny users know that the apps are liable to run more quickly if you run them locally.  To run the foregoing app locally from an R session, pull it out of the <code class="highlighter-rouge">tigerstats</code> package:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">require</span><span class="p">(</span><span class="n">siny</span><span class="p">)</span>
+<span class="n">runApp</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"SlowGoodness"</span><span class="p">,</span><span class="n">package</span><span class="o">=</span><span class="s2">"tigerstats"</span><span class="p">))</span></code></pre></figure>
+
+<h3 id="understanding-model-assumptions">Understanding Model Assumptions</h3>
+
+<p>Students tend to be somewhat rigid in their handling of “safety checks”—the diagnostics they are instructed to perform in order to judge whether the statistical model underlying a given inferential procedure is appropriate to the data at hand.  This rigidity stems partly from a lack of understanding of what the inferential procedure is intended to deliver (for example, that a method for making 95%-confidence intervals for a parameter should produce intervals that cover the parameter about 95% of the time in repeated sampling), and partly from a lack of experience with situations in which the mathematical assumptions of the model are not perfectly satisfied.</p>
+
+<p>The following Shiny app:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">runApp</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"CIMean"</span><span class="p">,</span><span class="n">package</span><span class="o">=</span><span class="s2">"tigerstats"</span><span class="p">))</span></code></pre></figure>
+
+<p>addresses two learning outcomes:</p>
+
+<ul>
+  <li>coverage properties of confidence intervals (e.g, what “95% confidence” means, from a frequentist point of view);</li>
+  <li>the effect on coverage properties, at various sample sizes, of departures from normality assumptions in procedures based upon the t-statistic.</li>
+</ul>
+
+<p>Both “slow” (one-at-a-time) simulation and large-scale simulation (5000 samples) are available to the student.</p>
+
+<h3 id="types-of-error">Types of Error</h3>
+
+<p>Simulation is also helpful in coming to understand such notions as the level of significance of a hypothesis test (i.e., the probability a true Null Hypothesis in repeated sampling), and the notion of power as well.  See the following app:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">runApp</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"Type12Errors"</span><span class="p">,</span><span class="n">package</span><span class="o">=</span><span class="s2">"tigerstats"</span><span class="p">))</span></code></pre></figure>
+
+<h3 id="illustrating-fine-points">Illustrating Fine Points</h3>
+
+<p>Sometimes you want to have an app on hand, not because it addresses a major course objective, but simply in case students ask a particular question.  For example, sometimes when the class is looking at a scatter plot—with regression line—of data that comes from a bivariate normal distribution, a student will remark that the regression line looks “too shallow”.  This root of this question is a confusion, in the student’s mind, between two purposes that a line might serve:</p>
+
+<ul>
+  <li>to provide a “linear summary”” of the scatter plot;</li>
+  <li>to provide linear predictions, based on the scatter plot, of y-values from x-values.</li>
+</ul>
+
+<p>The so-called “SD line”—the line that runs through the point of averages and whose slope is the ratio of the standard deviation of the <script type="math/tex">y</script>-value to the standard deviation of the <script type="math/tex">x</script>-value—is well-suited to the former task, whereas the regression line is, of course, the right choice for the latter one.  When many students first look at a scatter plot, they see an SD line in their mind’s eye; when they get around to producing the regression line, it can look like a misfire.</p>
+
+<p>The following app helps clear things up for students.  It is based on a discussion on the “shallow regression line” issue in <a href="http://books.wwnorton.com/books/Statistics/"><em>Statistics</em></a>, the classic text by Freeman, Pisani and Purves.</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">runApp</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"ShallowReg"</span><span class="p">,</span><span class="n">package</span><span class="o">=</span><span class="s2">"tigerstats"</span><span class="p">))</span></code></pre></figure>
+
+<h3 id="playing-games">Playing Games</h3>
+
+<p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">runApp</span><span class="p">(</span><span class="n">system.file</span><span class="p">(</span><span class="s2">"FindRegLine"</span><span class="p">,</span><span class="n">package</span><span class="o">=</span><span class="s2">"tigerstats"</span><span class="p">))</span></code></pre></figure>
+
+<p>You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:</p>
+
+<script type="math/tex; mode=display">100 \times \frac{\textbf{Your Line's Error-SS}-\textbf{Residual-SS}}{\textbf{Total-SS}-\textbf{Residual-SS}}.</script>
+
+<h2 id="shiny-vs-manipulate">Shiny vs. <code class="highlighter-rouge">manipulate</code></h2>
+
+<p>You don’t need to know much at all about web development in order to program in Shiny, but for R users there is the extra requirement of becoming comfortable with the reactive programming paradigm.  The hurdle is not all that high:  as an intermediate-level R-programmer, I was able to pick up Shiny over a weekend.  The <a href="http://shiny.rstudio.com/tutorial/">online Shiny tutorials</a> and a few consultations with <a href="http://stackoverflow.com/">Stack Overflow</a> provide almost everything I needed to know.</p>
+
+<p>The pay-back for the extra learning is considerable.  Shiny apps permit a much more flexible user-interface, as compared to <code class="highlighter-rouge">manipulate</code>.  For example, it is easy to make input “dynamic”, in the sense that the requests that a user can make of the app can be easily made to depend upon previous choices that the user has made.  It’s also easy to provide plenty of written explanation for the activity, as it proceeds:  with <code class="highlighter-rouge">manipulate</code> apps this can be somewhat difficult.</p>
+
+<p>On the other hand, since <code class="highlighter-rouge">manipulate</code> apps run directly within RStudio, they can easily be programmed to work with any data frame that the user specifies.  Shiny apps will allow you to upload a CSV file, but for elementary students this process is usually too much of a burden.</p>
+
+<h2 id="instructional-apps-gallery">Instructional Apps Gallery?</h2>
+
+<p><a href="http://www.showmeshiny.com/">Show Me Shiny</a> has some wonderful instructional apps.</p>
+
+<p>Considering all of the buzz surrounding Shiny, I am baffled at how difficult it is has been for me to find other up-to-date sites featuring Shiny apps for statistics instruction.  Perhaps readers of this post could direct me to any that they know of.  Eventually it would be nice to develop something like a ShinyTeachingTube, which could serve as a central hub for Shiny instructional applets.</p>
+
+  </article>
+
+</div>
+
+<hr>
+<br><br>
+
+
+
+  
+    
+
+  <p class="rss-subscribe">subscribe <a href="/feed.xml">via RSS</a></p>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">A Statistics Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Homer White</li>
+          <li><a href="mailto:homerhanumatATgmailDOTcom">homerhanumatATgmailDOTcom</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/homerhanumat">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">homerhanumat</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>

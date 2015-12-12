@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Five Reasons to Teach Elementary Statistics With R:  #2</title>
+    <meta name="description" content="A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="canonical" href="https://homerhanumat.github.io/2014/04/reasons-to-teach-with-R-2.html">
+    <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">A Statistics Blog</a>
+
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg viewBox="0 0 18 15">
+          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/about/">About</a>
+          
+        
+          
+          <a class="page-link" href="/archives/">Archives</a>
+          
+        
+          
+          <a class="page-link" href="/categories/">Categories</a>
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Five Reasons to Teach Elementary Statistics With R:  #2</h1>
+    <p class="post-meta">Apr 8, 2014</p>
+  </header>
+
+  <article class="post-content">
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-2--rstudios-manipulate" id="markdown-toc-reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code class="highlighter-rouge">manipulate</code></a>    <ul>
+      <li><a href="#do-it-yourself" id="markdown-toc-do-it-yourself">Do It Yourself</a></li>
+      <li><a href="#next-time" id="markdown-toc-next-time">Next Time</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/">first post</a> in this series introduced package <code class="highlighter-rouge">mosaic</code>, and promised to review a supplementary package that I and a colleague put together for our own students, but I’ve decided put that off a bit and focus instead on another powerful new tool for statistics instruction:  the well-known <a href="https://www.rstudio.com/">RStudio</a> Integrated Development Environment for R, and its <code class="highlighter-rouge">manipulate</code> package in particular.</p>
+
+<h2 id="reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code class="highlighter-rouge">manipulate</code></h2>
+
+<p>You might think that an IDE is strictly for programmers.  The authors of <code class="highlighter-rouge">mosaic</code>, though, looked at RStudio and saw an environment ripe for customization to fit the elementary classroom.  RStudio offers many benefits in this regard, but for this post I’ll concentrate on just one:  its pre-installed package <code class="highlighter-rouge">manipulate</code>.</p>
+
+<p>The RStudio developers may have written <code class="highlighter-rouge">manipulate</code> simply as a prototype for <a href="http://shiny.rstudio.com/">Shiny</a>, but it happens to be a fabulous tool for authoring instructional applets.  To be sure, there are many great instructional apps out on the web—visual stunners put together by authentic web developers—but the everyday statistics instructor may find that <code class="highlighter-rouge">manipulate</code> empowers her to quickly work up small instructional apps that address needs specific to her own students.</p>
+
+<p>At my College, for example, we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose you want students to understand coverage properties of confidence intervals—i.e., what we really mean when we say that we are “95%-confident” that the interval covers the population parameter–in a ground-up way.  Then you might do as my colleague Rebekah Robinson did, and write a manipulate app like <code class="highlighter-rouge">CIMean()</code>.</p>
+
+<p>To get the app, install package <code class="highlighter-rouge">tigerstats</code> from CRAN, or for the very latest version try:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">require</span><span class="p">(</span><span class="n">devtools</span><span class="p">)</span>
+<span class="n">install_github</span><span class="p">(</span><span class="n">repo</span><span class="o">=</span><span class="s2">"homerhanumat/tigerstats"</span><span class="p">)</span></code></pre></figure>
+
+<p>Next, get into RStudio (if you are not there already), and run:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">require</span><span class="p">(</span><span class="n">tigerstats</span><span class="p">)</span>
+<span class="n">require</span><span class="p">(</span><span class="n">manipulate</span><span class="p">)</span>
+<span class="n">CIMean</span><span class="p">(</span><span class="o">~</span><span class="n">height</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">imagpop</span><span class="p">)</span></code></pre></figure>
+
+<p>The app loads in the (roughly normally distributed) heights of an imaginary population of 10,000 people.  Sliders allow the user to select a sample size and a desired confidence level.  Click on one of the sliders and you’ll get just one sample from the population, with a histogram of the sample overlaying the density curve for the population, and a confidence interval displayed clearly along the horizontal axis.  The user can easily see whether the interval contains the population mean (marked by the red vertical line).  Output to the console also keeps the user apprised of what has just happened.  When the user has clicked enough to get the idea, he/she can ask for a lot of samples at once, verifying that when assumptions are met 95%-confidence intervals do indeed cover their target parameter about 95% of the time.</p>
+
+<p>One advantage of <code class="highlighter-rouge">manipulate</code> apps over the visually spectacular ones you find on the web is that you can easily write them to accept arbitrary input.  <code class="highlighter-rouge">CIMean()</code>, for example, will deal with any numerical variable from any data frame on R’s search path,including the quite right-skewed variable <strong>income</strong> from<code class="highlighter-rouge">imagpop</code>:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">CIMean</span><span class="p">(</span><span class="o">~</span><span class="n">income</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">imagpop</span><span class="p">)</span></code></pre></figure>
+
+<p>The user realizes quickly that the standard t-intervals applied to small samples from skewed populations do not possess the advertised coverage properties.</p>
+
+<p>Once you get into the spirit of <code class="highlighter-rouge">manipulate</code> you may find yourself writing apps that work in a similar vein without requiring the elements of the package itself.  For example <code class="highlighter-rouge">ChisqSimSlow()</code>, which does not require <code class="highlighter-rouge">manipulate</code> (and in fact runs outside of RStudio) takes arbitrary data and applies a one-at-a-time re-sampling routine to slowly build up the Null Distribution of the chi-square statistic, in a situation where one is testing whether two factor variables are associated.</p>
+
+<p>For example, suppose we are looking at survey in which a random sample of students were asked for their sex and for their seating preference in a classroom:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">SexSeat</span> <span class="o">&lt;-</span> <span class="n">xtabs</span><span class="p">(</span><span class="o">~</span><span class="n">sex</span><span class="o">+</span><span class="n">seat</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">m111survey</span><span class="p">)</span>
+<span class="n">SexSeat</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7</code></pre></figure>
+
+<p>Let’s check this out with some row percentages:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">rowPerc</span><span class="p">(</span><span class="n">SexSeat</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">##         seat
+## sex      1_front 2_middle 3_back  Total
+##   female   47.50    40.00  12.50 100.00
+##   male     25.81    51.61  22.58 100.00</code></pre></figure>
+
+<p>Hmm, the women in the sample seem much more likely than the guys to prefer the Front!  Does this data provide convincing evidence for a relationship between <strong>sex</strong> and <strong>seat</strong> in the College population at large?  To investigate this, a student might try:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">ChisqSimSlow</span><span class="p">(</span><span class="o">~</span><span class="n">sex</span><span class="o">+</span><span class="n">seat</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">m111survey</span><span class="p">)</span></code></pre></figure>
+
+<p>Keep asking for a re-sample, and after a while you get the sense that the observed value of the chi-square statistic is not an unusually large value, if <strong>sex</strong> and <strong>seat</strong> are, all along, unrelated in the population.</p>
+
+<p>Once students understand the import of simulation they can employ it to advantage on a large scale.  In the <code class="highlighter-rouge">tigerstats</code> version of the <code class="highlighter-rouge">chisq.test()</code>, the student might ask for:</p>
+
+<figure class="highlight"><pre><code class="language-r" data-lang="r"><span class="n">set.seed</span><span class="p">(</span><span class="m">2014</span><span class="p">)</span>
+<span class="n">chisqtestGC</span><span class="p">(</span><span class="o">~</span><span class="n">sex</span><span class="o">+</span><span class="n">seat</span><span class="p">,</span><span class="n">data</span><span class="o">=</span><span class="n">m111survey</span><span class="p">,</span>
+      <span class="n">simulate.p.value</span><span class="o">=</span><span class="s2">"random"</span><span class="p">,</span>
+      <span class="n">B</span><span class="o">=</span><span class="m">3000</span><span class="p">,</span>
+      <span class="n">graph</span><span class="o">=</span><span class="n">TRUE</span><span class="p">)</span></code></pre></figure>
+
+<figure class="highlight"><pre><code class="language-text" data-lang="text">## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
+## 	 (based on 3000 resamples) 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1729</code></pre></figure>
+
+<p><img src="/figure/source/2014-04-08-reasons-to-teach-with-R-2/reasonsteachr2-1.png" alt="plot of chunk reasonsteachr2" /></p>
+
+<h3 id="do-it-yourself">Do It Yourself</h3>
+
+<p>I do not discuss the above apps with the expectation that colleagues at other institution will adopt them.  On the contrary, my point is merely that the folks at RStudio have provided R-users with a tool that enables ordinary instructors like us to write our own apps.  If you like a particular app, them check out the source code (<code class="highlighter-rouge">tigerstats</code>, for example is <a href="http:github.com/homerhanumat/tigerstats">on GitHub</a>), clean it up a bit maybe, and use it as a basis for an app tailored to your particular tastes and the needs of your particular students.</p>
+
+<p>Better yet, persuade an upper-level student to write the app for you as a programming project:  <code class="highlighter-rouge">manipulate</code>’s greatest use may prove to be as a gateway-drug to coding!</p>
+
+<h3 id="next-time">Next Time</h3>
+
+<p>In the next post, maybe we’ll have a look at what R Studio’s <code class="highlighter-rouge">shiny</code> can do for an elementary class.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">A Statistics Blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col  footer-col-1">
+        <ul class="contact-list">
+          <li>Homer White</li>
+          <li><a href="mailto:homerhanumatATgmailDOTcom">homerhanumatATgmailDOTcom</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-2">
+        <ul class="social-media-list">
+          
+          <li>
+            <a href="https://github.com/homerhanumat">
+              <span class="icon  icon--github">
+                <svg viewBox="0 0 16 16">
+                  <path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+                </svg>
+              </span>
+
+              <span class="username">homerhanumat</span>
+            </a>
+          </li>
+          
+
+          
+        </ul>
+      </div>
+
+      <div class="footer-col  footer-col-3">
+        <p class="text">A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+
+
+  </body>
+
+</html>
