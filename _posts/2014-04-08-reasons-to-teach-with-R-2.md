@@ -15,6 +15,7 @@ published:  true
 
 
 
+
 ## Introduction
 
 This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students---many of whom whom will have had no prior experience with the command line, much less with coding---then I hope these posts will give you some encouragement.
@@ -145,7 +146,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## P-Value = 0.1729
 {% endhighlight %}
 
-![plot of chunk reasonsteachr2](/knitr-jekyll/figure/source/2014-04-08-reasons-to-teach-with-R-2/reasonsteachr2-1.png) 
+![plot of chunk reasonsteachr2](/figure/source/2014-04-08-reasons-to-teach-with-R-2/reasonsteachr2-1.png) 
 
 
 

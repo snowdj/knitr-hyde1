@@ -17,7 +17,3 @@ markdown: kramdown
 
 #sets number of posts to appear on Home page; handled in index.html
 post_limit:  4
-
-# feeds
-subscribe_rss: /feed.xml, /R.xml
-category_feeds: R

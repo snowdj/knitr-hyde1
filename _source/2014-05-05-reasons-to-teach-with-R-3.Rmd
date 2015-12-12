@@ -15,6 +15,7 @@ published:  true
 knitr::opts_chunk$set(tidy=FALSE,fig.width=4.5,fig.height=3.5)
 ```
 
+
 ```{r include=FALSE}
 require(tigerstats)
 require(shiny)

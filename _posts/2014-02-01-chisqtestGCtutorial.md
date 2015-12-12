@@ -14,7 +14,9 @@ output:
 
 
 
+
 ## Preliminaries
+
 
 You use the $$ \chi^2 $$-test when you are addressing the inferential aspect of research questions about:
 

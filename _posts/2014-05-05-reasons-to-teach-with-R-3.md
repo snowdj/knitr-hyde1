@@ -15,6 +15,7 @@ published:  true
 
 
 
+
 ## Introduction
 
 This is the third in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students---many of whom whom will have had no prior experience with the command line, much less with coding---then I hope these posts will give you some encouragement.
@@ -96,7 +97,7 @@ chisqtestGC(observed,p=fair,
 ## P-Value = 0.1253
 {% endhighlight %}
 
-![plot of chunk reasonsteachr3chisq](/knitr-jekyll/figure/source/2014-05-05-reasons-to-teach-with-R-3/reasonsteachr3chisq-1.png) 
+![plot of chunk reasonsteachr3chisq](/figure/source/2014-05-05-reasons-to-teach-with-R-3/reasonsteachr3chisq-1.png) 
 
 Sure enough, if the die is fair then there is a reasonably good chance---about 12.5%---of getting results at least as extreme as the ones we got in our 60 rolls.
 

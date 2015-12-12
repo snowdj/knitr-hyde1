@@ -17,7 +17,9 @@ library(knitr)
 opts_chunk$set(tidy=FALSE,fig.width=4.5,fig.height=3.5)
 ```
 
+
 ## Preliminaries
+
 
 You use the $$ \chi^2 $$-test when you are addressing the inferential aspect of research questions about:
 

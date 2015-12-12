@@ -19,6 +19,7 @@ knitr::opts_chunk$set(tidy=FALSE,fig.width=4.5,fig.height=3.5)
 require(tigerstats)
 ```
 
+
 ## Introduction
 
 This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students---many of whom whom will have had no prior experience with the command line, much less with coding---then I hope these posts will give you some encouragement.
