@@ -3,7 +3,7 @@ layout: post
 title:  "chisqtestGC() Tutorial"
 date: 2014-02-01 20:00:00
 published: true
-categories: [Student-Focused Tutorials]
+categories: ['Student-Focused Tutorials']
 output:
   html_document:
     mathjax:  default

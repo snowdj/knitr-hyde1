@@ -19,5 +19,5 @@ markdown: kramdown
 post_limit:  4
 
 # feeds
-subscribe_rss: /feed.xml
+subscribe_rss: /feed.xml, /R.xml
 category_feeds: R

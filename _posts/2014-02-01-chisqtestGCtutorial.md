@@ -3,7 +3,7 @@ layout: post
 title:  "chisqtestGC() Tutorial"
 date: 2014-02-01 20:00:00
 published: true
-categories: [Student-Focused Tutorials]
+categories: ['Student-Focused Tutorials']
 output:
   html_document:
     mathjax:  default
@@ -327,7 +327,7 @@ chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
 ## P-Value = 0.1546
 {% endhighlight %}
 
-![Graph of P-value, no simulation](/knitr-jekyll/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutnosim-1.png) 
+![Graph of P-value, no simulation](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutnosim-1.png) 
 
 
 Here is a case with simulation:
@@ -369,7 +369,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## P-Value = 0.1575
 {% endhighlight %}
 
-![Graph of P-value, with simulation](/knitr-jekyll/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutsim-1.png) 
+![Graph of P-value, with simulation](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutsim-1.png) 
 
 ## One Factor Variable (Goodness of Fit)
 
@@ -414,7 +414,7 @@ chisqtestGC(~seat,data=m111survey,
 ## P-Value = 0.0103
 {% endhighlight %}
 
-![plot of chunk chisqtutseatgraph](/knitr-jekyll/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatgraph-1.png) 
+![plot of chunk chisqtutseatgraph](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatgraph-1.png) 
 
 
 ### Summary Data
@@ -495,7 +495,7 @@ chisqtestGC(~seat,data=m111survey,
 ## P-Value = 0.0116
 {% endhighlight %}
 
-![plot of chunk chisqtutseatsim](/knitr-jekyll/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatsim-1.png) 
+![plot of chunk chisqtutseatsim](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatsim-1.png) 
 
 ## Want Less Output?
 
