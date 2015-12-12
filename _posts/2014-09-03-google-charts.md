@@ -5,6 +5,7 @@ title: "Google Charts in R Markdown"
 date: 2014-09-03 20:30:00
 published: true
 categories: ['R']
+excerpt_seperator: <!--more-->
 output:
   html_document:
     mathjax:  default
@@ -23,6 +24,8 @@ output:
 
 An excellent little post ([Zoom, zoom googleVis](http://lamages.blogspot.com/2014/09/zoom-zoom-googlevis.html)) showed up recently on [R-Bloggers](http://www.r-bloggers.com/).  The author Markus Gesmann is the maintainer of the `googleVis` package that links R to the [Google Charts API](https://developers.google.com/chart/interactive/docs/gallery).  My first thought was:  could I embed charts like those in R Markdown documents that could knit to ioslides or other formats suitable for use in my elementary statistics classes?
 
+<!--more-->
+
 A quick look at the documentation showed that it's very easy indeed to do this sort of thing.
 
 
@@ -36,7 +39,7 @@ The app below (a slight modification of the example in Gesmann's post) makes the
 
 
 <!-- ScatterChart generated in R 3.2.2 by googleVis 0.5.10 package -->
-<!-- Sat Dec 12 01:29:22 2015 -->
+<!-- Sat Dec 12 09:31:41 2015 -->
 
 
 <!-- jsHeader -->
