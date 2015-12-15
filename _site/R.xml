@@ -15,8 +15,8 @@
 &lt;p&gt;If you have feedback or suggestions for improvements, comment here or post an Issue on the GitHub site.  Happy learning!&lt;/p&gt;
 </description>
 				<pubDate>Fri, 03 Jul 2015 15:00:00 -0400</pubDate>
-				<link>https://homerhanumat.github.io/2015/07/shiny-simulation-tutorial.html</link>
-				<guid isPermaLink="true">https://homerhanumat.github.io/2015/07/shiny-simulation-tutorial.html</guid>
+				<link>https://homerhanumat.github.io/2015/07/03/shiny-simulation-tutorial.html</link>
+				<guid isPermaLink="true">https://homerhanumat.github.io/2015/07/03/shiny-simulation-tutorial.html</guid>
 			</item>
 		
 			<item>
@@ -970,8 +970,8 @@ gvScat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; gvisScatterChart&l
 
 </description>
 				<pubDate>Wed, 03 Sep 2014 16:30:00 -0400</pubDate>
-				<link>https://homerhanumat.github.io/2014/09/google-charts.html</link>
-				<guid isPermaLink="true">https://homerhanumat.github.io/2014/09/google-charts.html</guid>
+				<link>https://homerhanumat.github.io/2014/09/03/google-charts.html</link>
+				<guid isPermaLink="true">https://homerhanumat.github.io/2014/09/03/google-charts.html</guid>
 			</item>
 		
 			<item>
@@ -1047,8 +1047,8 @@ unzip framed.zip -d framed
 &lt;p&gt;Now you may Knit to your heart’s content!&lt;/p&gt;
 </description>
 				<pubDate>Wed, 27 Aug 2014 21:00:00 -0400</pubDate>
-				<link>https://homerhanumat.github.io/2014/08/r-studio-server-centos-pandoc-latex.html</link>
-				<guid isPermaLink="true">https://homerhanumat.github.io/2014/08/r-studio-server-centos-pandoc-latex.html</guid>
+				<link>https://homerhanumat.github.io/2014/08/27/r-studio-server-centos-pandoc-latex.html</link>
+				<guid isPermaLink="true">https://homerhanumat.github.io/2014/08/27/r-studio-server-centos-pandoc-latex.html</guid>
 			</item>
 		
 			<item>
@@ -1229,8 +1229,8 @@ runApp&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot
 &lt;p&gt;Considering all of the buzz surrounding Shiny, I am baffled at how difficult it is has been for me to find other up-to-date sites featuring Shiny apps for statistics instruction.  Perhaps readers of this post could direct me to any that they know of.  Eventually it would be nice to develop something like a ShinyTeachingTube, which could serve as a central hub for Shiny instructional applets.&lt;/p&gt;
 </description>
 				<pubDate>Sun, 04 May 2014 21:00:00 -0400</pubDate>
-				<link>https://homerhanumat.github.io/2014/05/reasons-to-teach-with-R-3.html</link>
-				<guid isPermaLink="true">https://homerhanumat.github.io/2014/05/reasons-to-teach-with-R-3.html</guid>
+				<link>https://homerhanumat.github.io/2014/05/04/reasons-to-teach-with-R-3.html</link>
+				<guid isPermaLink="true">https://homerhanumat.github.io/2014/05/04/reasons-to-teach-with-R-3.html</guid>
 			</item>
 		
 			<item>
@@ -1353,8 +1353,8 @@ chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&
 &lt;p&gt;In the next post, maybe we’ll have a look at what R Studio’s &lt;code&gt;shiny&lt;/code&gt; can do for an elementary class.&lt;/p&gt;
 </description>
 				<pubDate>Tue, 08 Apr 2014 19:59:59 -0400</pubDate>
-				<link>https://homerhanumat.github.io/2014/04/reasons-to-teach-with-R-2.html</link>
-				<guid isPermaLink="true">https://homerhanumat.github.io/2014/04/reasons-to-teach-with-R-2.html</guid>
+				<link>https://homerhanumat.github.io/2014/04/08/reasons-to-teach-with-R-2.html</link>
+				<guid isPermaLink="true">https://homerhanumat.github.io/2014/04/08/reasons-to-teach-with-R-2.html</guid>
 			</item>
 		
 			<item>
@@ -1503,8 +1503,8 @@ nullDist &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; do&lt;span class
 &lt;p&gt;The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s &lt;em&gt;The Analysis of Biological Data&lt;/em&gt; (Roberts and Company Publishers; First Edition, 1st Edition July 2008).&lt;/p&gt;
 </description>
 				<pubDate>Mon, 31 Mar 2014 21:00:00 -0400</pubDate>
-				<link>https://homerhanumat.github.io/2014/03/tigerstatsintro.html</link>
-				<guid isPermaLink="true">https://homerhanumat.github.io/2014/03/tigerstatsintro.html</guid>
+				<link>https://homerhanumat.github.io/2014/03/31/tigerstatsintro.html</link>
+				<guid isPermaLink="true">https://homerhanumat.github.io/2014/03/31/tigerstatsintro.html</guid>
 			</item>
 		
 	</channel>
