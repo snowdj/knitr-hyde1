@@ -13,6 +13,9 @@ author:  Homer White
 baseurl: "/" # the sub-path of your proejct site, e.g. /myProject/
              # or "/" for user site
 
+# limit posts on Home page to this number:
+homepostlimit:  2
+
 # Disqus comments:
 disqus:           true
 shortname:        homerhanumatgithubio
