@@ -7,7 +7,7 @@ description: > # this means to ignore newlines until "baseurl:"
   tools.
 url: "https://homerhanumat.github.io" # the base hostname & protocol for your site
 github_username:  homerhanumat
-permalink: /:year/:month/:title.html
+permalink: /:year/:month/:day/:title.html
 author:  Homer White
 
 baseurl: "/" # the sub-path of your site, e.g. /myProject/
