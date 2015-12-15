@@ -10,9 +10,8 @@ github_username:  homerhanumat
 permalink: /:year/:month/:day/:title.html
 author:  Homer White
 
-baseurl: "/" # the sub-path of your site, e.g. /myProject/
-                        # not standard for gh-pages, used for knitr
-baseurlstrip:  "" # to generate standard links
+baseurl: "/" # the sub-path of your proejct site, e.g. /myProject/
+             # or "/" for user site
 
 # Disqus comments:
 disqus:           true
