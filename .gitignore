@@ -3,6 +3,7 @@ _site
 .ruby-version
 homerhanumat.github.io.Rproj
 .Rhistory
+.sass-cache
 
 # Numerous always-ignore extensions
 *.diff
