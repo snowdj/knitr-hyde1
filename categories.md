@@ -1,7 +1,6 @@
 ---
 layout: page
 title: Categories
-permalink: /categories/
 ---
 
 <!-- thanks to Houssain Mohd Faysel, https://stackoverflow.com/questions/20945944/jekyll-liquid-output-category-list-with-post-count/21080786#21080786 .  Adapted slightly.-->
@@ -35,7 +34,7 @@ permalink: /categories/
     {% for post in pages_list %}
       {% if post.title != null %}
       {% if group == null or group == post.group %}
-      <li><a href="{{ post.url }}">
+      <li><a href="{{ site.baseurlstrip }}{{ post.url }}" class = "post-title">
             {{ post.title }}<span class="entry-date"><time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">:  {{ post.date | date: "%B %d, %Y" }}</time></span></a></li>
       {% endif %}
       {% endif %}

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Five Reasons to Teach Elementary Statistics With R:  #2 &middot; A Statistics Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-146052-15', 'getpoole.com');
+    ga('send', 'pageview');
+  </script>
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//homerhanumatgithubio.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="">
+          A Statistics Blog
+        </a>
+      </h1>
+      <p class="lead">A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about.html">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive.html">Archives</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/categories.html">Categories</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/homerhanumat/homerhanumat.github.io">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Five Reasons to Teach Elementary Statistics With R:  #2</h1>
+  <span class="post-date">08 Apr 2014</span>
+  <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-2--rstudios-manipulate" id="markdown-toc-reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></a>    <ul>
+      <li><a href="#do-it-yourself" id="markdown-toc-do-it-yourself">Do It Yourself</a></li>
+      <li><a href="#next-time" id="markdown-toc-next-time">Next Time</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/">first post</a> in this series introduced package <code>mosaic</code>, and promised to review a supplementary package that I and a colleague put together for our own students, but I’ve decided put that off a bit and focus instead on another powerful new tool for statistics instruction:  the well-known <a href="https://www.rstudio.com/">RStudio</a> Integrated Development Environment for R, and its <code>manipulate</code> package in particular.</p>
+
+<h2 id="reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></h2>
+
+<p>You might think that an IDE is strictly for programmers.  The authors of <code>mosaic</code>, though, looked at RStudio and saw an environment ripe for customization to fit the elementary classroom.  RStudio offers many benefits in this regard, but for this post I’ll concentrate on just one:  its pre-installed package <code>manipulate</code>.</p>
+
+<p>The RStudio developers may have written <code>manipulate</code> simply as a prototype for <a href="http://shiny.rstudio.com/">Shiny</a>, but it happens to be a fabulous tool for authoring instructional applets.  To be sure, there are many great instructional apps out on the web—visual stunners put together by authentic web developers—but the everyday statistics instructor may find that <code>manipulate</code> empowers her to quickly work up small instructional apps that address needs specific to her own students.</p>
+
+<p>At my College, for example, we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose you want students to understand coverage properties of confidence intervals—i.e., what we really mean when we say that we are “95%-confident” that the interval covers the population parameter–in a ground-up way.  Then you might do as my colleague Rebekah Robinson did, and write a manipulate app like <code>CIMean()</code>.</p>
+
+<p>To get the app, install package <code>tigerstats</code> from CRAN, or for the very latest version try:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;homerhanumat/tigerstats&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>Next, get into RStudio (if you are not there already), and run:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>tigerstats<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>manipulate<span class="p">)</span>
+CIMean<span class="p">(</span><span class="o">~</span>height<span class="p">,</span>data<span class="o">=</span>imagpop<span class="p">)</span></code></pre></div>
+
+<p>The app loads in the (roughly normally distributed) heights of an imaginary population of 10,000 people.  Sliders allow the user to select a sample size and a desired confidence level.  Click on one of the sliders and you’ll get just one sample from the population, with a histogram of the sample overlaying the density curve for the population, and a confidence interval displayed clearly along the horizontal axis.  The user can easily see whether the interval contains the population mean (marked by the red vertical line).  Output to the console also keeps the user apprised of what has just happened.  When the user has clicked enough to get the idea, he/she can ask for a lot of samples at once, verifying that when assumptions are met 95%-confidence intervals do indeed cover their target parameter about 95% of the time.</p>
+
+<p>One advantage of <code>manipulate</code> apps over the visually spectacular ones you find on the web is that you can easily write them to accept arbitrary input.  <code>CIMean()</code>, for example, will deal with any numerical variable from any data frame on R’s search path,including the quite right-skewed variable <strong>income</strong> from<code>imagpop</code>:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">CIMean<span class="p">(</span><span class="o">~</span>income<span class="p">,</span>data<span class="o">=</span>imagpop<span class="p">)</span></code></pre></div>
+
+<p>The user realizes quickly that the standard t-intervals applied to small samples from skewed populations do not possess the advertised coverage properties.</p>
+
+<p>Once you get into the spirit of <code>manipulate</code> you may find yourself writing apps that work in a similar vein without requiring the elements of the package itself.  For example <code>ChisqSimSlow()</code>, which does not require <code>manipulate</code> (and in fact runs outside of RStudio) takes arbitrary data and applies a one-at-a-time re-sampling routine to slowly build up the Null Distribution of the chi-square statistic, in a situation where one is testing whether two factor variables are associated.</p>
+
+<p>For example, suppose we are looking at survey in which a random sample of students were asked for their sex and for their seating preference in a classroom:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">SexSeat <span class="o">&lt;-</span> xtabs<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">)</span>
+SexSeat</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7</code></pre></div>
+
+<p>Let’s check this out with some row percentages:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">rowPerc<span class="p">(</span>SexSeat<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##         seat
+## sex      1_front 2_middle 3_back  Total
+##   female   47.50    40.00  12.50 100.00
+##   male     25.81    51.61  22.58 100.00</code></pre></div>
+
+<p>Hmm, the women in the sample seem much more likely than the guys to prefer the Front!  Does this data provide convincing evidence for a relationship between <strong>sex</strong> and <strong>seat</strong> in the College population at large?  To investigate this, a student might try:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ChisqSimSlow<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">)</span></code></pre></div>
+
+<p>Keep asking for a re-sample, and after a while you get the sense that the observed value of the chi-square statistic is not an unusually large value, if <strong>sex</strong> and <strong>seat</strong> are, all along, unrelated in the population.</p>
+
+<p>Once students understand the import of simulation they can employ it to advantage on a large scale.  In the <code>tigerstats</code> version of the <code>chisq.test()</code>, the student might ask for:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">set.seed</span><span class="p">(</span><span class="m">2014</span><span class="p">)</span>
+chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+      simulate.p.value<span class="o">=</span><span class="s">&quot;random&quot;</span><span class="p">,</span>
+      B<span class="o">=</span><span class="m">3000</span><span class="p">,</span>
+      graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value, marginal sums not fixed
+## 	 (based on 3000 resamples) 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1729</code></pre></div>
+
+<p><img src="/figure/source/2014-04-08-reasons-to-teach-with-R-2/reasonsteachr2-1.png" alt="plot of chunk reasonsteachr2" /></p>
+
+<h3 id="do-it-yourself">Do It Yourself</h3>
+
+<p>I do not discuss the above apps with the expectation that colleagues at other institution will adopt them.  On the contrary, my point is merely that the folks at RStudio have provided R-users with a tool that enables ordinary instructors like us to write our own apps.  If you like a particular app, them check out the source code (<code>tigerstats</code>, for example is <a href="http:github.com/homerhanumat/tigerstats">on GitHub</a>), clean it up a bit maybe, and use it as a basis for an app tailored to your particular tastes and the needs of your particular students.</p>
+
+<p>Better yet, persuade an upper-level student to write the app for you as a programming project:  <code>manipulate</code>’s greatest use may prove to be as a gateway-drug to coding!</p>
+
+<h3 id="next-time">Next Time</h3>
+
+<p>In the next post, maybe we’ll have a look at what R Studio’s <code>shiny</code> can do for an elementary class.</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/07/shiny-simulation-tutorial.html">
+            A Tutorial on Writing Simulation Apps in Shiny
+            <small>03 Jul 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/09/google-charts.html">
+            Google Charts in R Markdown
+            <small>03 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/08/r-studio-server-centos-pandoc-latex.html">
+            New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server
+            <small>27 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://homerhanumat.github.io" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//homerhanumatgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+    </div>
+
+  </body>
+</html>

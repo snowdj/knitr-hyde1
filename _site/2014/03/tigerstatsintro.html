@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Five Reasons to Teach Elementary Statistics With R:  #1 &middot; A Statistics Blog
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-146052-15', 'getpoole.com');
+    ga('send', 'pageview');
+  </script>
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//homerhanumatgithubio.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="">
+          A Statistics Blog
+        </a>
+      </h1>
+      <p class="lead">A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about.html">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive.html">Archives</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/categories.html">Categories</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/homerhanumat/homerhanumat.github.io">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Five Reasons to Teach Elementary Statistics With R:  #1</h1>
+  <span class="post-date">31 Mar 2014</span>
+  <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-1--package-mosaic" id="markdown-toc-reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
+      <li><a href="#keeping-simple-things-simple" id="markdown-toc-keeping-simple-things-simple">Keeping Simple Things Simple</a></li>
+      <li><a href="#flow-control-for-the-masses" id="markdown-toc-flow-control-for-the-masses">Flow-Control for the Masses</a></li>
+      <li><a href="#there-is-much-more" id="markdown-toc-there-is-much-more">There is Much More</a></li>
+    </ul>
+  </li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is first in a projected five-part series of posts aimed at colleagues who teach elementary statistics.</p>
+
+<p>I can’t remember exactly how I first made acquaintance with R, but it’s been an important part of my teaching/consulting life since at least 2007, when I used it for the first time in an upper-level undergraduate statistics class.  As of last Fall all of our statistics classes—even the elementary ones—are based on R.  We may never return to a ground-up GUI platform.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<h2 id="reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></h2>
+
+<p>This package is a product of the NSF-funded <a href="http://mosaic-web.org/">Project Mosaic</a>, led by Nick Horton, Daniel Kaplan and Randall Pruim.  It’s on CRAN, but you might want to keep up with the very latest releases on Github:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;rpruim/mosaic&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><code>mosaic</code> aims to flatten the learning curve for elementary students by gentling down the coding aspects of the R experience.  With <code>mosaic</code>:</p>
+
+<ul>
+  <li>students need to know relatively few R-functions in order to thrive in the introductory course;</li>
+  <li>many of the these functions are “wrappers” for standard R-functions, and provide a fairly uniform interface for user input;</li>
+  <li>the package provides tools that mostly obviate the need for students to deal with R as a programming language:
+    <ul>
+      <li>the students don’t have to write their own functions;</li>
+      <li>they don’t need to think much about the different types of R objects;</li>
+      <li>they don’t even need to learn about flow-control structures.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="keeping-simple-things-simple">Keeping Simple Things Simple</h3>
+
+<p>R can make the easy stuff surprisingly tricky for beginners:  suppose for example, that you want numerical summaries of a particular numerical variable, broken down by the values of some factor variable.  Standard procedure in R would be to write your own anonymous function as an argument for <code>aggregate()</code>, thus:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">aggregate<span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span>mtcars<span class="p">,</span>
+    FUN<span class="o">=</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kt">c</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>x<span class="p">),</span>sd<span class="o">=</span>sd<span class="p">(</span>x<span class="p">)))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##   cyl  mpg.mean    mpg.sd
+## 1   4 26.663636  4.509828
+## 2   6 19.742857  1.453567
+## 3   8 15.100000  2.560048</code></pre></div>
+
+<p><code>mosaic</code> skirts the problem by providing wrapper functions for aggregation:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>mosaic<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">mean</span><span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span>mtcars<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##        4        6        8 
+## 26.66364 19.74286 15.10000</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">sd<span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span>mtcars<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##        4        6        8 
+## 4.509828 1.453567 2.560048</code></pre></div>
+
+<p>One can attain even more simplicity, at only a small cost in flexibility, by sticking to <code>mosaic</code>’s <code>favstats()</code> as a one-stop shop:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">favstats<span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span> mtcars<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##   cyl  min    Q1 median    Q3  max     mean       sd  n missing
+## 1   4 21.4 22.80   26.0 30.40 33.9 26.66364 4.509828 11       0
+## 2   6 17.8 18.65   19.7 21.00 21.4 19.74286 1.453567  7       0
+## 3   8 10.4 14.40   15.2 16.25 19.2 15.10000 2.560048 14       0</code></pre></div>
+
+<h3 id="flow-control-for-the-masses">Flow-Control for the Masses</h3>
+
+<p><code>mosaic</code> includes powerful wrapper functions that permit extensive work with re-sampling and simulation, without the need to learn flow-control.  Here follows a <code>mosaic</code>-style implementation of a permutation test.</p>
+
+<p>Consider the data frame <code>Pseudoscorpions</code> from the <code>abd</code> package:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>abd<span class="p">)</span>
+data<span class="p">(</span>Pseudoscorpions<span class="p">)</span></code></pre></div>
+
+<p><code>Pseudoscorpions</code> contains the results of an experiment on 36 female Pseudoscorpions:  each one was either mated twice with a single male (<code>SM</code>) or was mated with two males, one time each (<code>DM</code>), receiving about the same total amount of sperm under either treatment.  The idea was to see whether an increase in genetic diversity of sperm sources increases the number of successful broods a female produces during her lifetime.</p>
+
+<p>Here are some descriptive results:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">favstats<span class="p">(</span>successful.broods<span class="o">~</span>treatment<span class="p">,</span>
+    data<span class="o">=</span>Pseudoscorpions<span class="p">)[</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;treatment&quot;</span><span class="p">,</span><span class="s">&quot;mean&quot;</span><span class="p">,</span><span class="s">&quot;sd&quot;</span><span class="p">)]</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##   treatment  mean       sd
+## 1        DM 3.625 1.962142
+## 2        SM 2.200 1.609184</code></pre></div>
+
+<p>For the permutation test, we first compute and store the observed difference between the sample means:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">obsDiff <span class="o">&lt;-</span> diffmean<span class="p">(</span>successful.broods<span class="o">~</span>treatment<span class="p">,</span>
+    data<span class="o">=</span>Pseudoscorpions<span class="p">)</span>
+obsDiff</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## diffmean 
+##   -1.425</code></pre></div>
+
+<p>Next, we create an empirical Null distribution with <code>shuffle()</code> (the random permutation function) and <code>do()</code> (a for-loop wrapper):</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">set.seed</span><span class="p">(</span><span class="m">12345</span><span class="p">)</span>
+nullDist <span class="o">&lt;-</span> do<span class="p">(</span><span class="m">2500</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>
+  diffmean<span class="p">(</span>successful.broods<span class="o">~</span>shuffle<span class="p">(</span>treatment<span class="p">),</span>
+      data<span class="o">=</span>Pseudoscorpions<span class="p">))</span></code></pre></div>
+
+<p>Finally, we call <code>statTally()</code> for numerical and graphical analysis of the results:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">statTally<span class="p">(</span>obsDiff<span class="p">,</span>nullDist<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Null distribution appears to be asymmetric. (p = 0.000258)
+## 
+## Test statistic applied to sample data =  -1.425
+## 
+## Quantiles of test statistic applied to random data:</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##    50%    90%    95%    99% 
+## 0.0375 0.8250 0.9375 1.3875</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## 
+## Of the 2501 samples (1 original + 2500 random),
+## 
+## 	12 ( 0.48 % ) had test stats = -1.425
+## 
+## 	40 ( 1.6 % ) had test stats &lt;= -1.425</code></pre></div>
+
+<p><img src="/figure/source/2014-04-01-tigerstatsintro/reason1hist-1.png" alt="plot of chunk reason1hist" /></p>
+
+<p>We seem to have fairly strong evidence (<script type="math/tex">P \approx 1.7\%</script>) that mating with more males increases the number of successful broods.</p>
+
+<h3 id="there-is-much-more">There is Much More</h3>
+
+<p>I have only scratched the surface of the <code>mosaic</code> package, which is rich enough to support statistics instruction in both elementary and advanced courses.  The <code>mosaic</code> authors provide extensive instructor resources in the package vignettes, and frequently offer workshops and short-courses, especially through events sponsored by the <a href="https://www.causeweb.org/">Consortium for the Advancement of Undergraduate Statistics Education</a>.</p>
+
+<p>Next week I’ll introduce a supplementary package that is intended for students who might require even more simplicity, and that aligns their R experience with a particular set of teaching objectives.</p>
+
+<h2 id="references">References</h2>
+
+<p>The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s <em>The Analysis of Biological Data</em> (Roberts and Company Publishers; First Edition, 1st Edition July 2008).</p>
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2015/07/shiny-simulation-tutorial.html">
+            A Tutorial on Writing Simulation Apps in Shiny
+            <small>03 Jul 2015</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/09/google-charts.html">
+            Google Charts in R Markdown
+            <small>03 Sep 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/08/r-studio-server-centos-pandoc-latex.html">
+            New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server
+            <small>27 Aug 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+
+<a href="https://twitter.com/share" class="twitter-share-button"{count}>Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-share-button" data-href="https://homerhanumat.github.io" data-layout="button_count"></div>
+
+
+
+
+<div id="disqus_thread"></div>
+
+<script>(function() {
+        var d = document, s = d.createElement('script');
+        s.src = '//homerhanumatgithubio.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+    </div>
+
+  </body>
+</html>

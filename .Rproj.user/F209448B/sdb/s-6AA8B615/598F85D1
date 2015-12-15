@@ -1,0 +1,17 @@
+{
+    "contents" : "# best to build with the version of Jekyll currently used by GitHub (see https://pages.github.com/versions/).\n\nservr::jekyll(command = \"/Library/Ruby/Gems/2.0.0/gems/jekyll-2.4.0/bin/jekyll build\")",
+    "created" : 1450142213988.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "998369334",
+    "id" : "598F85D1",
+    "lastKnownWriteTime" : 1450142175,
+    "path" : "~/git/homerhanumat.github.io/notes.txt",
+    "project_path" : "notes.txt",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "type" : "text"
+}

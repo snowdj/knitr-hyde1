@@ -1,7 +1,12 @@
 ---
 layout: page
 title: About
-permalink: /about/
 ---
 
-I am a mathematics professor at [Georgetown College](http://www.georgetowncollege.edu/mpc/).  I'm interested in statistics and the teaching of it, especially with R.  You can get some sense of how I go about this by visiting the web page for our [elementary course](http://statistics.georgetowncollege.edu).
+<p class="message">
+  Write in R Markdown, preview with Jekyll, push to GitHub.
+</p>
+
+This is a skeleton/tutorial for a Jekyll-powered blog based on the [Hyde](http://hyde.getpoole.com) theme by [@mdo](https://twitter.com/mdo), customized for R-bloggers with the help of Yihui Xie's <a href = "https://github.com/yihui/knitr-jekyll">knitr-jekyll</a>.
+
+The repo for this blog-template is [GitHub](https://github.com/homerhanumat/knitr-hyde).

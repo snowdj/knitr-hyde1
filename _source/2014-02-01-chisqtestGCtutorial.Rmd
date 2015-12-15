@@ -231,7 +231,7 @@ chisqtestGC(~seat,data=m111survey,
 
 ## Want Less Output?
 
-If you do not wnat to see quite so much output to the console and are only interested in the essentials for reporting a $$ \chi^2 $$-test, then set the argument `verbose` to `FALSE`:
+If you do not want to see quite so much output to the console and are only interested in the essentials for reporting a $$ \chi^2 $$-test, then set the argument `verbose` to `FALSE`:
 
 ```{r}
 chisqtestGC(~sex+seat,data=m111survey,

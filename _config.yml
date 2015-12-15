@@ -7,13 +7,29 @@ description: > # this means to ignore newlines until "baseurl:"
   tools.
 url: "https://homerhanumat.github.io" # the base hostname & protocol for your site
 github_username:  homerhanumat
-permalink: //:year/:month/:title.html
+permalink: /:year/:month/:title.html
 author:  Homer White
+
+baseurl: "/" # the sub-path of your site, e.g. /myProject/
+                        # not standard for gh-pages, used for knitr
+baseurlstrip:  "" # to generate standard links
+
+# Disqus comments:
+disqus:           true
+shortname:        homerhanumatgithubio
+
+# Social Media
+twitter:          true # add a twitter button to each post
+facebook:         true # add a facebook share button to each post
 
 # Build settings
 
 # rendering engine
 markdown: kramdown
 
-#sets number of posts to appear on Home page; handled in index.html
-post_limit:  4
+author:
+  name:           'Homer White'
+  url:            https://statistics.rainandrhino.org
+
+github:
+  repo:           https://github.com/homerhanumat/homerhanumat.github.io

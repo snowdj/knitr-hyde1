@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      A Statistics Blog &middot; 
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="/public/css/custom.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <!-- Google Analytics -->
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-146052-15', 'getpoole.com');
+    ga('send', 'pageview');
+  </script>
+  
+  <!-- Mathjax -->
+  <script type="text/javascript"
+            src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+    <!--Disqus comment counts-->
+    <script id="dsq-count-scr" src="//homerhanumatgithubio.disqus.com/count.js" async></script>
+    
+</head>
+
+
+  <body class="theme-base-0b">
+
+    <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1>
+        <a href="">
+          A Statistics Blog
+        </a>
+      </h1>
+      <p class="lead">A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
+</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="">Home</a>
+
+      
+
+      
+      
+        
+          
+        
+      
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about.html">About</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/archive.html">Archives</a>
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/categories.html">Categories</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+      <a class="sidebar-nav-item" href="https://github.com/homerhanumat/homerhanumat.github.io">GitHub project</a>
+    </nav>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2015/07/shiny-simulation-tutorial.html">
+        A Tutorial on Writing Simulation Apps in Shiny
+      </a>
+    </h1>
+    
+<a href="/2015/07/shiny-simulation-tutorial.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">03 Jul 2015</span>
+
+    <p>(<strong>Edited November 25, 2015.</strong>)  I stand in awe of the R wizards who post their latest and greatest <a href="http://shiny.rstudio.com" target="_blank">Shiny</a> feats on R-Bloggers.  It’s taken me a while to find my way around Shiny, but at last I feel ready to fill in a few gaps for others who may be just starting out and who aspire to write reasonably involved, user-friendly simulation apps.  To make it a bit more fun I’ve written it up as an R Markdown document.</p>
+
+<p>I used to host the document on <code>shinyapps.io</code>, but it pushed my monthly hours over their limit.  You can get the source code, however, from the <a href="https://github.com/homerhanumat/shinyTutorials" target="_blank">GitHub repository</a>.  Check the repo’s Readme for prerequisites and instructions on access.</p>
+
+<p>If you have feedback or suggestions for improvements, comment here or post an Issue on the GitHub site.  Happy learning!</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/09/google-charts.html">
+        Google Charts in R Markdown
+      </a>
+    </h1>
+    
+<a href="/2014/09/google-charts.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">03 Sep 2014</span>
+
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#extrapolation" id="markdown-toc-extrapolation">Extrapolation</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>An excellent little post (<a href="http://lamages.blogspot.com/2014/09/zoom-zoom-googlevis.html">Zoom, zoom googleVis</a>) showed up recently on <a href="http://www.r-bloggers.com/">R-Bloggers</a>.  The author Markus Gesmann is the maintainer of the <code>googleVis</code> package that links R to the <a href="https://developers.google.com/chart/interactive/docs/gallery">Google Charts API</a>.  My first thought was:  could I embed charts like those in R Markdown documents that could knit to ioslides or other formats suitable for use in my elementary statistics classes?</p>
+
+<!--more-->
+
+<p>A quick look at the documentation showed that it’s very easy indeed to do this sort of thing.</p>
+
+<h2 id="extrapolation">Extrapolation</h2>
+
+<p>Suppose, for example, that you want to illustrate to students the risks associated with extrapolation.  You begin by reminding them of the experience they had back in high school with their graphing calculators, when they zoomed in on a curve:  zoom in close enough, and it looks like a straight line.</p>
+
+<p>Then you point out that for the most part we live our lives from a “zoomed-in” perspective, at least where data is concerned.  In situations where we are interested in a pair of numerical measurements on individuals, we usually possess <script type="math/tex">y</script>-values for only a fairly narrow range of <script type="math/tex">x</script>-values.  Hence it is likely that a scatter plot we make from our “zoomed-in” data will show a roughly linear relationship, even though on a global scale the “real” relationship probably is some kind of a curve.</p>
+
+<p>The app below (a slight modification of the example in Gesmann’s post) makes the point in a flash.  Click and drag to establish a zoom region, right-click to reset:</p>
+
+<!-- ScatterChart generated in R 3.2.2 by googleVis 0.5.10 package -->
+<!-- Sat Dec 12 09:31:41 2015 -->
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataZoomZoom () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ 0,
+2537.697212 
+],
+[
+ 0.5,
+2480.404837 
+],
+[
+ 1,
+2291.197683 
+],
+[
+ 1.5,
+2239.20941 
+],
+[
+ 2,
+2024.346568 
+],
+[
+ 2.5,
+2328.30735 
+],
+[
+ 3,
+2302.912102 
+],
+[
+ 3.5,
+2139.312225 
+],
+[
+ 4,
+2291.913135 
+],
+[
+ 4.5,
+2081.986679 
+],
+[
+ 5,
+1939.687718 
+],
+[
+ 5.5,
+2071.175918 
+],
+[
+ 6,
+2055.637296 
+],
+[
+ 6.5,
+1855.09161 
+],
+[
+ 7,
+1836.673977 
+],
+[
+ 7.5,
+1986.254312 
+],
+[
+ 8,
+1934.399588 
+],
+[
+ 8.5,
+1418.373539 
+],
+[
+ 9,
+1452.102505 
+],
+[
+ 9.5,
+1646.080349 
+],
+[
+ 10,
+1817.436525 
+],
+[
+ 10.5,
+1670.068265 
+],
+[
+ 11,
+1552.822032 
+],
+[
+ 11.5,
+1474.935244 
+],
+[
+ 12,
+1527.426874 
+],
+[
+ 12.5,
+1426.125064 
+],
+[
+ 13,
+1498.784138 
+],
+[
+ 13.5,
+1425.921831 
+],
+[
+ 14,
+1281.256681 
+],
+[
+ 14.5,
+1271.293199 
+],
+[
+ 15,
+1143.749534 
+],
+[
+ 15.5,
+1115.879783 
+],
+[
+ 16,
+1265.534507 
+],
+[
+ 16.5,
+1365.787371 
+],
+[
+ 17,
+1127.811847 
+],
+[
+ 17.5,
+1085.312767 
+],
+[
+ 18,
+995.4401713 
+],
+[
+ 18.5,
+999.8514718 
+],
+[
+ 19,
+904.9701396 
+],
+[
+ 19.5,
+974.9688372 
+],
+[
+ 20,
+990.8501134 
+],
+[
+ 20.5,
+819.7440402 
+],
+[
+ 21,
+810.8995988 
+],
+[
+ 21.5,
+739.6464023 
+],
+[
+ 22,
+665.9922973 
+],
+[
+ 22.5,
+781.5574713 
+],
+[
+ 23,
+691.9288703 
+],
+[
+ 23.5,
+704.4679564 
+],
+[
+ 24,
+742.0044122 
+],
+[
+ 24.5,
+699.1293635 
+],
+[
+ 25,
+606.1210083 
+],
+[
+ 25.5,
+660.3859521 
+],
+[
+ 26,
+508.6239947 
+],
+[
+ 26.5,
+599.8550241 
+],
+[
+ 27,
+540.8753228 
+],
+[
+ 27.5,
+518.3726283 
+],
+[
+ 28,
+465.3953206 
+],
+[
+ 28.5,
+329.4228811 
+],
+[
+ 29,
+384.3077049 
+],
+[
+ 29.5,
+478.1333933 
+],
+[
+ 30,
+590.9037231 
+],
+[
+ 30.5,
+405.3257043 
+],
+[
+ 31,
+201.1684941 
+],
+[
+ 31.5,
+662.4131747 
+],
+[
+ 32,
+419.5235375 
+],
+[
+ 32.5,
+343.1144616 
+],
+[
+ 33,
+381.2919068 
+],
+[
+ 33.5,
+251.6978654 
+],
+[
+ 34,
+265.2966701 
+],
+[
+ 34.5,
+257.076218 
+],
+[
+ 35,
+304.5839125 
+],
+[
+ 35.5,
+374.8505607 
+],
+[
+ 36,
+24.30756836 
+],
+[
+ 36.5,
+150.4156894 
+],
+[
+ 37,
+78.5860028 
+],
+[
+ 37.5,
+85.85072033 
+],
+[
+ 38,
+-33.80994618 
+],
+[
+ 38.5,
+60.02448374 
+],
+[
+ 39,
+125.615421 
+],
+[
+ 39.5,
+134.6158021 
+],
+[
+ 40,
+162.8331306 
+],
+[
+ 40.5,
+87.78614177 
+],
+[
+ 41,
+312.4153309 
+],
+[
+ 41.5,
+89.97102573 
+],
+[
+ 42,
+-38.44147667 
+],
+[
+ 42.5,
+283.7181301 
+],
+[
+ 43,
+-139.9056665 
+],
+[
+ 43.5,
+151.6451601 
+],
+[
+ 44,
+220.6167027 
+],
+[
+ 44.5,
+82.35326735 
+],
+[
+ 45,
+-128.2962108 
+],
+[
+ 45.5,
+-173.6864969 
+],
+[
+ 46,
+64.69165381 
+],
+[
+ 46.5,
+136.7736691 
+],
+[
+ 47,
+-12.72734263 
+],
+[
+ 47.5,
+-71.70931145 
+],
+[
+ 48,
+38.88744997 
+],
+[
+ 48.5,
+70.422425 
+],
+[
+ 49,
+-52.14613874 
+],
+[
+ 49.5,
+-67.48934215 
+],
+[
+ 50,
+-172.8783941 
+],
+[
+ 50.5,
+-98.87609916 
+],
+[
+ 51,
+-57.55055617 
+],
+[
+ 51.5,
+40.6021748 
+],
+[
+ 52,
+78.66649197 
+],
+[
+ 52.5,
+-86.59209118 
+],
+[
+ 53,
+-24.81762967 
+],
+[
+ 53.5,
+166.7614015 
+],
+[
+ 54,
+42.65088778 
+],
+[
+ 54.5,
+50.20339324 
+],
+[
+ 55,
+-7.280201955 
+],
+[
+ 55.5,
+173.7847433 
+],
+[
+ 56,
+136.6527204 
+],
+[
+ 56.5,
+-129.6913636 
+],
+[
+ 57,
+78.89204617 
+],
+[
+ 57.5,
+-26.2225636 
+],
+[
+ 58,
+-55.95898328 
+],
+[
+ 58.5,
+-55.38871173 
+],
+[
+ 59,
+68.68219333 
+],
+[
+ 59.5,
+306.8442199 
+],
+[
+ 60,
+68.77170251 
+],
+[
+ 60.5,
+146.9939225 
+],
+[
+ 61,
+247.9439261 
+],
+[
+ 61.5,
+-94.23538391 
+],
+[
+ 62,
+15.01500904 
+],
+[
+ 62.5,
+175.0385938 
+],
+[
+ 63,
+244.1642855 
+],
+[
+ 63.5,
+360.7181336 
+],
+[
+ 64,
+346.8271736 
+],
+[
+ 64.5,
+114.9338291 
+],
+[
+ 65,
+235.342274 
+],
+[
+ 65.5,
+179.6939502 
+],
+[
+ 66,
+246.2399374 
+],
+[
+ 66.5,
+259.9051893 
+],
+[
+ 67,
+184.5320483 
+],
+[
+ 67.5,
+298.762966 
+],
+[
+ 68,
+500.0135333 
+],
+[
+ 68.5,
+199.0380413 
+],
+[
+ 69,
+627.2201028 
+],
+[
+ 69.5,
+251.1308468 
+],
+[
+ 70,
+401.5101774 
+],
+[
+ 70.5,
+416.2819428 
+],
+[
+ 71,
+660.1440323 
+],
+[
+ 71.5,
+264.606245 
+],
+[
+ 72,
+530.3665665 
+],
+[
+ 72.5,
+480.0287843 
+],
+[
+ 73,
+415.4285494 
+],
+[
+ 73.5,
+573.3799481 
+],
+[
+ 74,
+585.9427928 
+],
+[
+ 74.5,
+294.5816348 
+],
+[
+ 75,
+590.2863346 
+],
+[
+ 75.5,
+455.5873842 
+],
+[
+ 76,
+654.3923354 
+],
+[
+ 76.5,
+557.3303521 
+],
+[
+ 77,
+763.5434061 
+],
+[
+ 77.5,
+775.0702394 
+],
+[
+ 78,
+671.2147217 
+],
+[
+ 78.5,
+817.2950343 
+],
+[
+ 79,
+772.7300908 
+],
+[
+ 79.5,
+935.0553817 
+],
+[
+ 80,
+961.0364487 
+],
+[
+ 80.5,
+878.9843067 
+],
+[
+ 81,
+1036.440589 
+],
+[
+ 81.5,
+1011.060497 
+],
+[
+ 82,
+831.1714369 
+],
+[
+ 82.5,
+1179.832136 
+],
+[
+ 83,
+1121.827731 
+],
+[
+ 83.5,
+1036.758551 
+],
+[
+ 84,
+966.4311784 
+],
+[
+ 84.5,
+1274.919241 
+],
+[
+ 85,
+1349.402511 
+],
+[
+ 85.5,
+1283.875996 
+],
+[
+ 86,
+1219.930646 
+],
+[
+ 86.5,
+1409.472096 
+],
+[
+ 87,
+1435.155675 
+],
+[
+ 87.5,
+1246.876663 
+],
+[
+ 88,
+1224.965309 
+],
+[
+ 88.5,
+1364.574604 
+],
+[
+ 89,
+1626.000513 
+],
+[
+ 89.5,
+1559.679692 
+],
+[
+ 90,
+1572.398767 
+],
+[
+ 90.5,
+1725.102129 
+],
+[
+ 91,
+1576.106534 
+],
+[
+ 91.5,
+1548.891366 
+],
+[
+ 92,
+2005.413909 
+],
+[
+ 92.5,
+1786.685823 
+],
+[
+ 93,
+1941.678696 
+],
+[
+ 93.5,
+1820.903637 
+],
+[
+ 94,
+1806.025829 
+],
+[
+ 94.5,
+2068.67964 
+],
+[
+ 95,
+2145.064152 
+],
+[
+ 95.5,
+1953.216022 
+],
+[
+ 96,
+2192.147189 
+],
+[
+ 96.5,
+2249.259024 
+],
+[
+ 97,
+2136.275729 
+],
+[
+ 97.5,
+2318.912073 
+],
+[
+ 98,
+2194.855727 
+],
+[
+ 98.5,
+2300.640547 
+],
+[
+ 99,
+2402.693396 
+],
+[
+ 99.5,
+2516.349069 
+],
+[
+ 100,
+2427.046688 
+] 
+];
+data.addColumn('number','x');
+data.addColumn('number','y');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartZoomZoom() {
+var data = gvisDataZoomZoom();
+var options = {};
+options["allowHtml"] = true;
+options["explorer"] = {actions: ['dragToZoom',
+                     'rightClickToReset'],
+                     maxZoomIn:0.05};
+options["chartArea"] = {width:'85%',height:'80%'};
+options["hAxis"] = {title: 'Explanatory x',
+                     titleTextStyle: {color: '#000000'}};
+options["vAxis"] = {title: 'Response y',
+                     titleTextStyle: {color: '#000000'}};
+options["title"] = "Curvilinear Relationship";
+options["width"] =    550;
+options["height"] =    500;
+options["legend"] = "none";
+
+    var chart = new google.visualization.ScatterChart(
+    document.getElementById('ZoomZoom')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartZoomZoom);
+})();
+function displayChartZoomZoom() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+
+<!-- jsChart -->
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartZoomZoom"></script>
+
+<!-- divChart -->
+
+<div id="ZoomZoom" style="width: 550; height: 500;">
+</div>
+
+<p>All we needed was the following code (be sure to add the chunk option <code>results='asis'</code>):</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">set.seed</span><span class="p">(</span><span class="m">2020</span><span class="p">)</span>
+x <span class="o">&lt;-</span> <span class="kp">seq</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">100</span><span class="p">,</span>by<span class="o">=</span><span class="m">0.5</span><span class="p">)</span>
+y <span class="o">&lt;-</span> <span class="p">(</span><span class="m">50</span><span class="o">-</span>x<span class="p">)</span><span class="o">^</span><span class="m">2</span><span class="o">+</span>rnorm<span class="p">(</span><span class="kp">length</span><span class="p">(</span>x<span class="p">),</span>sd<span class="o">=</span><span class="m">100</span><span class="p">)</span>
+
+curvy <span class="o">&lt;-</span> <span class="kt">data.frame</span><span class="p">(</span>x<span class="p">,</span>y<span class="p">)</span>
+
+
+gvScat <span class="o">&lt;-</span> gvisScatterChart<span class="p">(</span>curvy<span class="p">,</span>
+                   options<span class="o">=</span><span class="kt">list</span><span class="p">(</span>
+                     explorer<span class="o">=</span><span class="s">&quot;{actions: [&#39;dragToZoom&#39;,</span>
+<span class="s">                     &#39;rightClickToReset&#39;],</span>
+<span class="s">                     maxZoomIn:0.05}&quot;</span><span class="p">,</span>
+                     chartArea<span class="o">=</span><span class="s">&quot;{width:&#39;85%&#39;,height:&#39;80%&#39;}&quot;</span><span class="p">,</span>
+                     hAxis<span class="o">=</span><span class="s">&quot;{title: &#39;Explanatory x&#39;,</span>
+<span class="s">                     titleTextStyle: {color: &#39;#000000&#39;}}&quot;</span><span class="p">,</span>
+                     vAxis<span class="o">=</span><span class="s">&quot;{title: &#39;Response y&#39;,</span>
+<span class="s">                     titleTextStyle: {color: &#39;#000000&#39;}}&quot;</span><span class="p">,</span>
+                     title<span class="o">=</span><span class="s">&quot;Curvilinear Relationship&quot;</span><span class="p">,</span>
+                     width<span class="o">=</span><span class="m">550</span><span class="p">,</span> height<span class="o">=</span><span class="m">500</span><span class="p">,</span>
+                     legend<span class="o">=</span><span class="s">&quot;none&quot;</span><span class="p">),</span>
+                   chartid<span class="o">=</span><span class="s">&quot;ZoomZoom&quot;</span><span class="p">)</span>
+
+<span class="kp">print</span><span class="p">(</span>gvScat<span class="p">,</span><span class="s">&#39;chart&#39;</span><span class="p">)</span></code></pre></div>
+
+<p>The same approach works in any R Markdown document (including the source document for this Jekyll-powered post).  I will certainly take a closer look at <code>googleVis</code>:  thanks, Markus!</p>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/08/r-studio-server-centos-pandoc-latex.html">
+        New Wine in an Old Bottle:  R Markdown v2 and R Studio on the Cent OS Server
+      </a>
+    </h1>
+    
+<a href="/2014/08/r-studio-server-centos-pandoc-latex.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">27 Aug 2014</span>
+
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#new-pandoc" id="markdown-toc-new-pandoc">New Pandoc</a></li>
+  <li><a href="#installing-latex-packages" id="markdown-toc-installing-latex-packages">Installing LaTeX Packages</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>R Markdown Version 2 is a boon to students:  with a single click one can convert an R Markdown file to either HTML, PDF or Word format.  However, getting this feature to work fully in the R Studio server environment may require a bit of work, especially if you running the Server on a Cent OS distribution.  Although I am sure that Cent OS has many virtues, an up-to-date repository is not among them.</p>
+
+<p>This post is the record of an arm wrasslin’ match with Cent OS and the R Studio Server version 0.98.932, from which I emerged more or less victorious.  If your IT department hosts RStudio on CentOS, then perhaps the following remarks will make your life a bit easier.  On the other hand,  if you know your way around Linux better than I do, please feel free to offer quicker or better solutions in the Comments.</p>
+
+<p>Log on to the server, perhaps through <code>ssh</code> (secure shell).  Come armed with administrative privileges.</p>
+
+<h2 id="new-pandoc">New Pandoc</h2>
+
+<p>R Markdown v2 uses a newer version of the <code>pandoc</code>converter than the one available in the Cent OS repository.  Fortunately, R Studio comes bundled with the binaries of a sufficiently recent version of <code>pandoc</code>.  You obtain access to these files by establishing symbolic links in the <code>/usr/local/bin</code> directory to the <code>pandoc</code> and <code>pandoc-cite</code> binaries:</p>
+
+<pre><code class="language-sh">sudo ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc-citeproc /usr/local/bin
+sudo ln -s /usr/lib/rstudio-server/bin/pandoc/pandoc /usr/local/bin
+</code></pre>
+
+<h2 id="installing-latex-packages">Installing LaTeX Packages</h2>
+
+<p>You can get Tex Live from the Cent OS repositories, but the release appears to date back to the year 2007.  Therefore it lacks a couple of packages needed by <code>pandoc</code>:</p>
+
+<ul>
+  <li>Heiko Oberdiek’s <a href="http://www.ctan.org/pkg/ifluatex">ifluatex</a>, and</li>
+  <li>Donald Arsenau’s <a href="http://www.ctan.org/pkg/framed">framed</a>.</li>
+</ul>
+
+<p>Since you will download these packages from the Comprehensive Tex Archive Network, you’ll want a web-fetch utility such as <code>wget</code>.  If it’s not already installed on Cent OS, you can get it with:</p>
+
+<pre><code class="language-sh">sudo yum install wget
+</code></pre>
+
+<p>Now you can grab the relevant files with <code>wget</code>:</p>
+
+<pre><code class="language-sh">wget http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/ifluatex.dtx
+wget http://mirrors.ctan.org/macros/latex/contrib/framed.zip
+</code></pre>
+
+<p>Turning first to <code>ifluatex</code>, we begin by by unpacking the <code>.dtx</code> bundle.  This is accomplished with a <code>tex</code> command:</p>
+
+<pre><code class="language-sh">tex ifluatex.dtx
+</code></pre>
+
+<p>Several files spill out into your Home directory.  You care only about <code>ifluatex.sty</code>.  Copy it as follows:</p>
+
+<pre><code class="language-sh">sudo cp ifluatex.sty /usr/share/texmf/tex/generic/oberdiek
+</code></pre>
+
+<p>As for the <code>framed</code> package, you must first unzip the downloaded file into a directory:</p>
+
+<pre><code class="language-sh">mkdir framed
+unzip framed.zip -d framed
+</code></pre>
+
+<p>Now copy the <code>framed</code> directory as follows:</p>
+
+<pre><code class="language-sh">sudo cp -rf framed /usr/share/texmf/tex/latex
+</code></pre>
+
+<p>Finally, you need to make tex aware of the existence of these new packages with <code>texhash</code>:</p>
+
+<pre><code class="language-sh">sudo texhash
+</code></pre>
+
+<p>Now you may Knit to your heart’s content!</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/05/reasons-to-teach-with-R-3.html">
+        Five Reasons to Teach Elementary Statistics With R:  #3
+      </a>
+    </h1>
+    
+<a href="/2014/05/reasons-to-teach-with-R-3.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">04 May 2014</span>
+
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-3--rstudios-shiny" id="markdown-toc-reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></a></li>
+  <li><a href="#examples" id="markdown-toc-examples">Examples</a>    <ul>
+      <li><a href="#slow-simulation" id="markdown-toc-slow-simulation">“Slow” Simulation</a></li>
+      <li><a href="#understanding-model-assumptions" id="markdown-toc-understanding-model-assumptions">Understanding Model Assumptions</a></li>
+      <li><a href="#types-of-error" id="markdown-toc-types-of-error">Types of Error</a></li>
+      <li><a href="#illustrating-fine-points" id="markdown-toc-illustrating-fine-points">Illustrating Fine Points</a></li>
+      <li><a href="#playing-games" id="markdown-toc-playing-games">Playing Games</a></li>
+    </ul>
+  </li>
+  <li><a href="#shiny-vs-manipulate" id="markdown-toc-shiny-vs-manipulate">Shiny vs. <code>manipulate</code></a></li>
+  <li><a href="#instructional-apps-gallery" id="markdown-toc-instructional-apps-gallery">Instructional Apps Gallery?</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is the third in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/08/reasons-to-teach-with-R-2/">previous post</a> in this series described R Studio’s package <code>manipulate</code> and its applications in the easy authoring of instructional applets.  Today we’ll look at <code>shiny</code>, a related RStudio project.</p>
+
+<p>In order to try the ensuing examples, download an ancillary package that we use for our elementary course:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;homerhanumat/tigerstats&quot;</span><span class="p">)</span></code></pre></div>
+
+<h2 id="reason-3--rstudios-shiny">Reason #3:  RStudio’s <code>shiny</code></h2>
+
+<p><a href="https://www.rstudio.com/shiny/">Shiny</a> appears to be intended primarily for data analysts working in industry or in academic or institutional research, but on the very day of its public release Victor Moreno pointed out its implications for statistics education (see his comment on <a href="http://blog.rstudio.org/2012/11/08/introducing-shiny/">this RStudio blog post</a>).  For statistics instructors Shiny offers essentially the same benefits as <code>manipulate</code>, but in addition comes pimped out with:</p>
+
+<ul>
+  <li>options for dynamic user input;</li>
+  <li>output formats that go well beyond <code>manipulate</code>’s home in the Plots pane;</li>
+  <li>default Bootstrap styling.</li>
+</ul>
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="slow-simulation">“Slow” Simulation</h3>
+
+<p>At my College we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose for example you are wondering whether a certain die is loaded.  You don’t want to crack it open, so you roll it sixty times, getting the following results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center"><strong>Spots</strong></th>
+      <th style="text-align: center">One</th>
+      <th style="text-align: center">Two</th>
+      <th style="text-align: center">Three</th>
+      <th style="text-align: center">Four</th>
+      <th style="text-align: center">Five</th>
+      <th style="text-align: center">Six</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"><strong>Freq</strong></td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">18</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>This looks like an awful lot of two-spots, but we were not expecting this in advance.  By this point in the course students have been made aware of the perils of “data snooping” and hence should be disinclined to employ an inferential procedure that is based specifically on a pattern that one happens to notice in one’s data.  Therefore, rather than perform inferential procedures keyed to “Two-spot” side of the die, we might turn instead to the chi-square statistic as a neutral measure of the difference between the observed results and what one would expect if the die were fair.</p>
+
+<p>The situation is addressed in this Shiny app:</p>
+
+<p><a href="http://rstudio.georgetowncollege.edu:3838/SlowGoodness">http://rstudio.georgetowncollege.edu:3838/SlowGoodness</a></p>
+
+<p>After re-sampling for a few minutes, students are convinced that it’s not so unlikely, after all to get results like the ones we observed, if the die is fair all along.</p>
+
+<p>Students are then prepared to understand a full-scale re-sampling simulation like the following one:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>tigerstats<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">observed <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">18</span><span class="p">,</span><span class="m">11</span><span class="p">,</span><span class="m">7</span><span class="p">,</span><span class="m">9</span><span class="p">,</span><span class="m">7</span><span class="p">)</span>
+fair <span class="o">&lt;-</span> <span class="kp">rep</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">6</span><span class="p">,</span><span class="m">6</span><span class="p">)</span>
+<span class="kp">set.seed</span><span class="p">(</span><span class="m">2020</span><span class="p">)</span>
+chisqtestGC<span class="p">(</span>observed<span class="p">,</span>p<span class="o">=</span>fair<span class="p">,</span>
+      simulate.p.value<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>
+      B<span class="o">=</span><span class="m">3000</span><span class="p">,</span>graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value 
+## 	 (based on 3000 resamples) 
+## 
+##   Observed counts Expected by Null Contr to chisq stat
+## A               8               10                 0.4
+## B              18               10                 6.4
+## C              11               10                 0.1
+## D               7               10                 0.9
+## E               9               10                 0.1
+## F               7               10                 0.9
+## 
+## 
+## Chi-Square Statistic = 8.8 
+## Degrees of Freedom of the table = 5 
+## P-Value = 0.1253</code></pre></div>
+
+<p><img src="/figure/source/2014-05-05-reasons-to-teach-with-R-3/reasonsteachr3chisq-1.png" alt="plot of chunk reasonsteachr3chisq" /></p>
+
+<p>Sure enough, if the die is fair then there is a reasonably good chance—about 12.5%—of getting results at least as extreme as the ones we got in our 60 rolls.</p>
+
+<p><strong>Note:</strong>  Shiny users know that the apps are liable to run more quickly if you run them locally.  To run the foregoing app locally from an R session, pull it out of the <code>tigerstats</code> package:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>siny<span class="p">)</span>
+runApp<span class="p">(</span><span class="kp">system.file</span><span class="p">(</span><span class="s">&quot;SlowGoodness&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span></code></pre></div>
+
+<h3 id="understanding-model-assumptions">Understanding Model Assumptions</h3>
+
+<p>Students tend to be somewhat rigid in their handling of “safety checks”—the diagnostics they are instructed to perform in order to judge whether the statistical model underlying a given inferential procedure is appropriate to the data at hand.  This rigidity stems partly from a lack of understanding of what the inferential procedure is intended to deliver (for example, that a method for making 95%-confidence intervals for a parameter should produce intervals that cover the parameter about 95% of the time in repeated sampling), and partly from a lack of experience with situations in which the mathematical assumptions of the model are not perfectly satisfied.</p>
+
+<p>The following Shiny app:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">runApp<span class="p">(</span><span class="kp">system.file</span><span class="p">(</span><span class="s">&quot;CIMean&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span></code></pre></div>
+
+<p>addresses two learning outcomes:</p>
+
+<ul>
+  <li>coverage properties of confidence intervals (e.g, what “95% confidence” means, from a frequentist point of view);</li>
+  <li>the effect on coverage properties, at various sample sizes, of departures from normality assumptions in procedures based upon the t-statistic.</li>
+</ul>
+
+<p>Both “slow” (one-at-a-time) simulation and large-scale simulation (5000 samples) are available to the student.</p>
+
+<h3 id="types-of-error">Types of Error</h3>
+
+<p>Simulation is also helpful in coming to understand such notions as the level of significance of a hypothesis test (i.e., the probability a true Null Hypothesis in repeated sampling), and the notion of power as well.  See the following app:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">runApp<span class="p">(</span><span class="kp">system.file</span><span class="p">(</span><span class="s">&quot;Type12Errors&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span></code></pre></div>
+
+<h3 id="illustrating-fine-points">Illustrating Fine Points</h3>
+
+<p>Sometimes you want to have an app on hand, not because it addresses a major course objective, but simply in case students ask a particular question.  For example, sometimes when the class is looking at a scatter plot—with regression line—of data that comes from a bivariate normal distribution, a student will remark that the regression line looks “too shallow”.  This root of this question is a confusion, in the student’s mind, between two purposes that a line might serve:</p>
+
+<ul>
+  <li>to provide a “linear summary”” of the scatter plot;</li>
+  <li>to provide linear predictions, based on the scatter plot, of y-values from x-values.</li>
+</ul>
+
+<p>The so-called “SD line”—the line that runs through the point of averages and whose slope is the ratio of the standard deviation of the <script type="math/tex">y</script>-value to the standard deviation of the <script type="math/tex">x</script>-value—is well-suited to the former task, whereas the regression line is, of course, the right choice for the latter one.  When many students first look at a scatter plot, they see an SD line in their mind’s eye; when they get around to producing the regression line, it can look like a misfire.</p>
+
+<p>The following app helps clear things up for students.  It is based on a discussion on the “shallow regression line” issue in <a href="http://books.wwnorton.com/books/Statistics/"><em>Statistics</em></a>, the classic text by Freeman, Pisani and Purves.</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">runApp<span class="p">(</span><span class="kp">system.file</span><span class="p">(</span><span class="s">&quot;ShallowReg&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span></code></pre></div>
+
+<h3 id="playing-games">Playing Games</h3>
+
+<p>Here’s is yet another of those “find the regression line” apps that you see all over the web:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">runApp<span class="p">(</span><span class="kp">system.file</span><span class="p">(</span><span class="s">&quot;FindRegLine&quot;</span><span class="p">,</span>package<span class="o">=</span><span class="s">&quot;tigerstats&quot;</span><span class="p">))</span></code></pre></div>
+
+<p>You have the option to keep score.  Your score is the sum of the number of times you have submitted a guess and the following “closeness measure”:</p>
+
+<script type="math/tex; mode=display">100 \times \frac{\textbf{Your Line's Error-SS}-\textbf{Residual-SS}}{\textbf{Total-SS}-\textbf{Residual-SS}}.</script>
+
+<h2 id="shiny-vs-manipulate">Shiny vs. <code>manipulate</code></h2>
+
+<p>You don’t need to know much at all about web development in order to program in Shiny, but for R users there is the extra requirement of becoming comfortable with the reactive programming paradigm.  The hurdle is not all that high:  as an intermediate-level R-programmer, I was able to pick up Shiny over a weekend.  The <a href="http://shiny.rstudio.com/tutorial/">online Shiny tutorials</a> and a few consultations with <a href="http://stackoverflow.com/">Stack Overflow</a> provide almost everything I needed to know.</p>
+
+<p>The pay-back for the extra learning is considerable.  Shiny apps permit a much more flexible user-interface, as compared to <code>manipulate</code>.  For example, it is easy to make input “dynamic”, in the sense that the requests that a user can make of the app can be easily made to depend upon previous choices that the user has made.  It’s also easy to provide plenty of written explanation for the activity, as it proceeds:  with <code>manipulate</code> apps this can be somewhat difficult.</p>
+
+<p>On the other hand, since <code>manipulate</code> apps run directly within RStudio, they can easily be programmed to work with any data frame that the user specifies.  Shiny apps will allow you to upload a CSV file, but for elementary students this process is usually too much of a burden.</p>
+
+<h2 id="instructional-apps-gallery">Instructional Apps Gallery?</h2>
+
+<p><a href="http://www.showmeshiny.com/">Show Me Shiny</a> has some wonderful instructional apps.</p>
+
+<p>Considering all of the buzz surrounding Shiny, I am baffled at how difficult it is has been for me to find other up-to-date sites featuring Shiny apps for statistics instruction.  Perhaps readers of this post could direct me to any that they know of.  Eventually it would be nice to develop something like a ShinyTeachingTube, which could serve as a central hub for Shiny instructional applets.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/04/reasons-to-teach-with-R-2.html">
+        Five Reasons to Teach Elementary Statistics With R:  #2
+      </a>
+    </h1>
+    
+<a href="/2014/04/reasons-to-teach-with-R-2.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">08 Apr 2014</span>
+
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-2--rstudios-manipulate" id="markdown-toc-reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></a>    <ul>
+      <li><a href="#do-it-yourself" id="markdown-toc-do-it-yourself">Do It Yourself</a></li>
+      <li><a href="#next-time" id="markdown-toc-next-time">Next Time</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is second in a projected five-part series of posts aimed at colleagues who teach elementary statistics.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<p>The <a href="http://statistics.rainandrhino.org/blog/2014/04/05/tigerstatsintro/">first post</a> in this series introduced package <code>mosaic</code>, and promised to review a supplementary package that I and a colleague put together for our own students, but I’ve decided put that off a bit and focus instead on another powerful new tool for statistics instruction:  the well-known <a href="https://www.rstudio.com/">RStudio</a> Integrated Development Environment for R, and its <code>manipulate</code> package in particular.</p>
+
+<h2 id="reason-2--rstudios-manipulate">Reason #2:  RStudio’s <code>manipulate</code></h2>
+
+<p>You might think that an IDE is strictly for programmers.  The authors of <code>mosaic</code>, though, looked at RStudio and saw an environment ripe for customization to fit the elementary classroom.  RStudio offers many benefits in this regard, but for this post I’ll concentrate on just one:  its pre-installed package <code>manipulate</code>.</p>
+
+<p>The RStudio developers may have written <code>manipulate</code> simply as a prototype for <a href="http://shiny.rstudio.com/">Shiny</a>, but it happens to be a fabulous tool for authoring instructional applets.  To be sure, there are many great instructional apps out on the web—visual stunners put together by authentic web developers—but the everyday statistics instructor may find that <code>manipulate</code> empowers her to quickly work up small instructional apps that address needs specific to her own students.</p>
+
+<p>At my College, for example, we believe that simulation is important to understanding probability concepts, but we also find that our students don’t easily grasp the import of a simulation when the computers simply generates, say, 3000 re-samples and summarizes the results, <em>all in flash</em>.  We feel the need for plenty of “one at a time” simulation experiences that serve as transitions to the analysis of large-scale simulation results, and we don’t always find apps on the web that cater to our needs in just the way we would like.</p>
+
+<p>Suppose you want students to understand coverage properties of confidence intervals—i.e., what we really mean when we say that we are “95%-confident” that the interval covers the population parameter–in a ground-up way.  Then you might do as my colleague Rebekah Robinson did, and write a manipulate app like <code>CIMean()</code>.</p>
+
+<p>To get the app, install package <code>tigerstats</code> from CRAN, or for the very latest version try:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;homerhanumat/tigerstats&quot;</span><span class="p">)</span></code></pre></div>
+
+<p>Next, get into RStudio (if you are not there already), and run:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>tigerstats<span class="p">)</span>
+<span class="kn">require</span><span class="p">(</span>manipulate<span class="p">)</span>
+CIMean<span class="p">(</span><span class="o">~</span>height<span class="p">,</span>data<span class="o">=</span>imagpop<span class="p">)</span></code></pre></div>
+
+<p>The app loads in the (roughly normally distributed) heights of an imaginary population of 10,000 people.  Sliders allow the user to select a sample size and a desired confidence level.  Click on one of the sliders and you’ll get just one sample from the population, with a histogram of the sample overlaying the density curve for the population, and a confidence interval displayed clearly along the horizontal axis.  The user can easily see whether the interval contains the population mean (marked by the red vertical line).  Output to the console also keeps the user apprised of what has just happened.  When the user has clicked enough to get the idea, he/she can ask for a lot of samples at once, verifying that when assumptions are met 95%-confidence intervals do indeed cover their target parameter about 95% of the time.</p>
+
+<p>One advantage of <code>manipulate</code> apps over the visually spectacular ones you find on the web is that you can easily write them to accept arbitrary input.  <code>CIMean()</code>, for example, will deal with any numerical variable from any data frame on R’s search path,including the quite right-skewed variable <strong>income</strong> from<code>imagpop</code>:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">CIMean<span class="p">(</span><span class="o">~</span>income<span class="p">,</span>data<span class="o">=</span>imagpop<span class="p">)</span></code></pre></div>
+
+<p>The user realizes quickly that the standard t-intervals applied to small samples from skewed populations do not possess the advertised coverage properties.</p>
+
+<p>Once you get into the spirit of <code>manipulate</code> you may find yourself writing apps that work in a similar vein without requiring the elements of the package itself.  For example <code>ChisqSimSlow()</code>, which does not require <code>manipulate</code> (and in fact runs outside of RStudio) takes arbitrary data and applies a one-at-a-time re-sampling routine to slowly build up the Null Distribution of the chi-square statistic, in a situation where one is testing whether two factor variables are associated.</p>
+
+<p>For example, suppose we are looking at survey in which a random sample of students were asked for their sex and for their seating preference in a classroom:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">SexSeat <span class="o">&lt;-</span> xtabs<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">)</span>
+SexSeat</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7</code></pre></div>
+
+<p>Let’s check this out with some row percentages:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">rowPerc<span class="p">(</span>SexSeat<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##         seat
+## sex      1_front 2_middle 3_back  Total
+##   female   47.50    40.00  12.50 100.00
+##   male     25.81    51.61  22.58 100.00</code></pre></div>
+
+<p>Hmm, the women in the sample seem much more likely than the guys to prefer the Front!  Does this data provide convincing evidence for a relationship between <strong>sex</strong> and <strong>seat</strong> in the College population at large?  To investigate this, a student might try:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">ChisqSimSlow<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">)</span></code></pre></div>
+
+<p>Keep asking for a re-sample, and after a while you get the sense that the observed value of the chi-square statistic is not an unusually large value, if <strong>sex</strong> and <strong>seat</strong> are, all along, unrelated in the population.</p>
+
+<p>Once students understand the import of simulation they can employ it to advantage on a large scale.  In the <code>tigerstats</code> version of the <code>chisq.test()</code>, the student might ask for:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">set.seed</span><span class="p">(</span><span class="m">2014</span><span class="p">)</span>
+chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+      simulate.p.value<span class="o">=</span><span class="s">&quot;random&quot;</span><span class="p">,</span>
+      B<span class="o">=</span><span class="m">3000</span><span class="p">,</span>
+      graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value, marginal sums not fixed
+## 	 (based on 3000 resamples) 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1729</code></pre></div>
+
+<p><img src="/figure/source/2014-04-08-reasons-to-teach-with-R-2/reasonsteachr2-1.png" alt="plot of chunk reasonsteachr2" /></p>
+
+<h3 id="do-it-yourself">Do It Yourself</h3>
+
+<p>I do not discuss the above apps with the expectation that colleagues at other institution will adopt them.  On the contrary, my point is merely that the folks at RStudio have provided R-users with a tool that enables ordinary instructors like us to write our own apps.  If you like a particular app, them check out the source code (<code>tigerstats</code>, for example is <a href="http:github.com/homerhanumat/tigerstats">on GitHub</a>), clean it up a bit maybe, and use it as a basis for an app tailored to your particular tastes and the needs of your particular students.</p>
+
+<p>Better yet, persuade an upper-level student to write the app for you as a programming project:  <code>manipulate</code>’s greatest use may prove to be as a gateway-drug to coding!</p>
+
+<h3 id="next-time">Next Time</h3>
+
+<p>In the next post, maybe we’ll have a look at what R Studio’s <code>shiny</code> can do for an elementary class.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/03/tigerstatsintro.html">
+        Five Reasons to Teach Elementary Statistics With R:  #1
+      </a>
+    </h1>
+    
+<a href="/2014/03/tigerstatsintro.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">31 Mar 2014</span>
+
+    <ul id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#reason-1--package-mosaic" id="markdown-toc-reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></a>    <ul>
+      <li><a href="#keeping-simple-things-simple" id="markdown-toc-keeping-simple-things-simple">Keeping Simple Things Simple</a></li>
+      <li><a href="#flow-control-for-the-masses" id="markdown-toc-flow-control-for-the-masses">Flow-Control for the Masses</a></li>
+      <li><a href="#there-is-much-more" id="markdown-toc-there-is-much-more">There is Much More</a></li>
+    </ul>
+  </li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ul>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>This is is first in a projected five-part series of posts aimed at colleagues who teach elementary statistics.</p>
+
+<p>I can’t remember exactly how I first made acquaintance with R, but it’s been an important part of my teaching/consulting life since at least 2007, when I used it for the first time in an upper-level undergraduate statistics class.  As of last Fall all of our statistics classes—even the elementary ones—are based on R.  We may never return to a ground-up GUI platform.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students—many of whom whom will have had no prior experience with the command line, much less with coding—then I hope these posts will give you some encouragement.</p>
+
+<h2 id="reason-1--package-mosaic">Reason #1:  Package <code>mosaic</code></h2>
+
+<p>This package is a product of the NSF-funded <a href="http://mosaic-web.org/">Project Mosaic</a>, led by Nick Horton, Daniel Kaplan and Randall Pruim.  It’s on CRAN, but you might want to keep up with the very latest releases on Github:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;rpruim/mosaic&quot;</span><span class="p">)</span></code></pre></div>
+
+<p><code>mosaic</code> aims to flatten the learning curve for elementary students by gentling down the coding aspects of the R experience.  With <code>mosaic</code>:</p>
+
+<ul>
+  <li>students need to know relatively few R-functions in order to thrive in the introductory course;</li>
+  <li>many of the these functions are “wrappers” for standard R-functions, and provide a fairly uniform interface for user input;</li>
+  <li>the package provides tools that mostly obviate the need for students to deal with R as a programming language:
+    <ul>
+      <li>the students don’t have to write their own functions;</li>
+      <li>they don’t need to think much about the different types of R objects;</li>
+      <li>they don’t even need to learn about flow-control structures.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="keeping-simple-things-simple">Keeping Simple Things Simple</h3>
+
+<p>R can make the easy stuff surprisingly tricky for beginners:  suppose for example, that you want numerical summaries of a particular numerical variable, broken down by the values of some factor variable.  Standard procedure in R would be to write your own anonymous function as an argument for <code>aggregate()</code>, thus:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">aggregate<span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span>mtcars<span class="p">,</span>
+    FUN<span class="o">=</span><span class="kr">function</span><span class="p">(</span>x<span class="p">)</span> <span class="kt">c</span><span class="p">(</span>mean<span class="o">=</span><span class="kp">mean</span><span class="p">(</span>x<span class="p">),</span>sd<span class="o">=</span>sd<span class="p">(</span>x<span class="p">)))</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##   cyl  mpg.mean    mpg.sd
+## 1   4 26.663636  4.509828
+## 2   6 19.742857  1.453567
+## 3   8 15.100000  2.560048</code></pre></div>
+
+<p><code>mosaic</code> skirts the problem by providing wrapper functions for aggregation:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>mosaic<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">mean</span><span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span>mtcars<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##        4        6        8 
+## 26.66364 19.74286 15.10000</code></pre></div>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">sd<span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span>mtcars<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##        4        6        8 
+## 4.509828 1.453567 2.560048</code></pre></div>
+
+<p>One can attain even more simplicity, at only a small cost in flexibility, by sticking to <code>mosaic</code>’s <code>favstats()</code> as a one-stop shop:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">favstats<span class="p">(</span>mpg<span class="o">~</span>cyl<span class="p">,</span>data<span class="o">=</span> mtcars<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##   cyl  min    Q1 median    Q3  max     mean       sd  n missing
+## 1   4 21.4 22.80   26.0 30.40 33.9 26.66364 4.509828 11       0
+## 2   6 17.8 18.65   19.7 21.00 21.4 19.74286 1.453567  7       0
+## 3   8 10.4 14.40   15.2 16.25 19.2 15.10000 2.560048 14       0</code></pre></div>
+
+<h3 id="flow-control-for-the-masses">Flow-Control for the Masses</h3>
+
+<p><code>mosaic</code> includes powerful wrapper functions that permit extensive work with re-sampling and simulation, without the need to learn flow-control.  Here follows a <code>mosaic</code>-style implementation of a permutation test.</p>
+
+<p>Consider the data frame <code>Pseudoscorpions</code> from the <code>abd</code> package:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>abd<span class="p">)</span>
+data<span class="p">(</span>Pseudoscorpions<span class="p">)</span></code></pre></div>
+
+<p><code>Pseudoscorpions</code> contains the results of an experiment on 36 female Pseudoscorpions:  each one was either mated twice with a single male (<code>SM</code>) or was mated with two males, one time each (<code>DM</code>), receiving about the same total amount of sperm under either treatment.  The idea was to see whether an increase in genetic diversity of sperm sources increases the number of successful broods a female produces during her lifetime.</p>
+
+<p>Here are some descriptive results:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">favstats<span class="p">(</span>successful.broods<span class="o">~</span>treatment<span class="p">,</span>
+    data<span class="o">=</span>Pseudoscorpions<span class="p">)[</span><span class="kt">c</span><span class="p">(</span><span class="s">&quot;treatment&quot;</span><span class="p">,</span><span class="s">&quot;mean&quot;</span><span class="p">,</span><span class="s">&quot;sd&quot;</span><span class="p">)]</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##   treatment  mean       sd
+## 1        DM 3.625 1.962142
+## 2        SM 2.200 1.609184</code></pre></div>
+
+<p>For the permutation test, we first compute and store the observed difference between the sample means:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">obsDiff <span class="o">&lt;-</span> diffmean<span class="p">(</span>successful.broods<span class="o">~</span>treatment<span class="p">,</span>
+    data<span class="o">=</span>Pseudoscorpions<span class="p">)</span>
+obsDiff</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## diffmean 
+##   -1.425</code></pre></div>
+
+<p>Next, we create an empirical Null distribution with <code>shuffle()</code> (the random permutation function) and <code>do()</code> (a for-loop wrapper):</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">set.seed</span><span class="p">(</span><span class="m">12345</span><span class="p">)</span>
+nullDist <span class="o">&lt;-</span> do<span class="p">(</span><span class="m">2500</span><span class="p">)</span><span class="o">*</span><span class="p">(</span>
+  diffmean<span class="p">(</span>successful.broods<span class="o">~</span>shuffle<span class="p">(</span>treatment<span class="p">),</span>
+      data<span class="o">=</span>Pseudoscorpions<span class="p">))</span></code></pre></div>
+
+<p>Finally, we call <code>statTally()</code> for numerical and graphical analysis of the results:</p>
+
+<div class="highlight"><pre><code class="language-r" data-lang="r">statTally<span class="p">(</span>obsDiff<span class="p">,</span>nullDist<span class="p">)</span></code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Null distribution appears to be asymmetric. (p = 0.000258)
+## 
+## Test statistic applied to sample data =  -1.425
+## 
+## Quantiles of test statistic applied to random data:</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">##    50%    90%    95%    99% 
+## 0.0375 0.8250 0.9375 1.3875</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">## 
+## Of the 2501 samples (1 original + 2500 random),
+## 
+## 	12 ( 0.48 % ) had test stats = -1.425
+## 
+## 	40 ( 1.6 % ) had test stats &lt;= -1.425</code></pre></div>
+
+<p><img src="/figure/source/2014-04-01-tigerstatsintro/reason1hist-1.png" alt="plot of chunk reason1hist" /></p>
+
+<p>We seem to have fairly strong evidence (<script type="math/tex">P \approx 1.7\%</script>) that mating with more males increases the number of successful broods.</p>
+
+<h3 id="there-is-much-more">There is Much More</h3>
+
+<p>I have only scratched the surface of the <code>mosaic</code> package, which is rich enough to support statistics instruction in both elementary and advanced courses.  The <code>mosaic</code> authors provide extensive instructor resources in the package vignettes, and frequently offer workshops and short-courses, especially through events sponsored by the <a href="https://www.causeweb.org/">Consortium for the Advancement of Undergraduate Statistics Education</a>.</p>
+
+<p>Next week I’ll introduce a supplementary package that is intended for students who might require even more simplicity, and that aligns their R experience with a particular set of teaching objectives.</p>
+
+<h2 id="references">References</h2>
+
+<p>The Pseudoscorpion experiment is discussed in Whitlock and Schluter’s <em>The Analysis of Biological Data</em> (Roberts and Company Publishers; First Edition, 1st Edition July 2008).</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="/2014/02/chisqtestGCtutorial.html">
+        chisqtestGC() Tutorial
+      </a>
+    </h1>
+    
+<a href="/2014/02/chisqtestGCtutorial.html#disqus_thread"
+    class = "commentcount"></a>
+    
+    <span class="post-date">01 Feb 2014</span>
+
+    <ul id="markdown-toc">
+  <li><a href="#preliminaries" id="markdown-toc-preliminaries">Preliminaries</a></li>
+  <li><a href="#two-factor-variables-association" id="markdown-toc-two-factor-variables-association">Two Factor Variables (Association)</a>    <ul>
+      <li><a href="#formula-data-input" id="markdown-toc-formula-data-input">Formula-Data Input</a></li>
+      <li><a href="#two-way-table-input" id="markdown-toc-two-way-table-input">Two-Way Table Input</a></li>
+      <li><a href="#a-table-from-summary-data" id="markdown-toc-a-table-from-summary-data">A Table From Summary Data</a></li>
+      <li><a href="#simulation" id="markdown-toc-simulation">Simulation</a>        <ul>
+          <li><a href="#explanatory-tallies-fixed" id="markdown-toc-explanatory-tallies-fixed">Explanatory Tallies Fixed</a></li>
+          <li><a href="#explanatory-tallies-random" id="markdown-toc-explanatory-tallies-random">Explanatory Tallies Random</a></li>
+          <li><a href="#both-tallies-fixed" id="markdown-toc-both-tallies-fixed">Both Tallies Fixed</a></li>
+        </ul>
+      </li>
+      <li><a href="#graphs-of-the-p-value" id="markdown-toc-graphs-of-the-p-value">Graphs of the P-Value</a></li>
+    </ul>
+  </li>
+  <li><a href="#one-factor-variable-goodness-of-fit" id="markdown-toc-one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</a>    <ul>
+      <li><a href="#formula-data-input-1" id="markdown-toc-formula-data-input-1">Formula-Data Input</a></li>
+      <li><a href="#summary-data" id="markdown-toc-summary-data">Summary Data</a></li>
+      <li><a href="#simulation-1" id="markdown-toc-simulation-1">Simulation</a></li>
+    </ul>
+  </li>
+  <li><a href="#want-less-output" id="markdown-toc-want-less-output">Want Less Output?</a></li>
+</ul>
+
+<h2 id="preliminaries">Preliminaries</h2>
+
+<p>You use the <script type="math/tex">\chi^2</script>-test when you are addressing the inferential aspect of research questions about:</p>
+
+<ul>
+  <li>the relationship between two factor variables (test for association);</li>
+  <li>the distribution of one factor variable (goodness-of-fit test).</li>
+</ul>
+
+<p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
+
+<p><code>r
+require(tigerstats)
+</code></p>
+
+<p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
+
+<p><code>r
+require(devtools)
+install_github(repo="homerhanumat/tigerstats")
+</code></p>
+
+<h2 id="two-factor-variables-association">Two Factor Variables (Association)</h2>
+
+<h3 id="formula-data-input">Formula-Data Input</h3>
+
+<p>When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the <code>mat111survey</code> data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:</p>
+
+<p><code>r
+chisqtestGC(~sex+seat,data=m111survey)
+</code></p>
+
+<p><code>
+## Pearson's Chi-squared test 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1546
+</code></p>
+
+<h3 id="two-way-table-input">Two-Way Table Input</h3>
+
+<p>Sometimes you already have a two-way table on hand:</p>
+
+<p><code>r
+SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
+SexSeat
+</code></p>
+
+<p><code>
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+</code></p>
+
+<p>In that case you can save yourself some typing by entering the table in place of the formula and the <code>data</code> arguments:</p>
+
+<p><code>r
+chisqtestGC(SexSeat)
+</code></p>
+
+<h3 id="a-table-from-summary-data">A Table From Summary Data</h3>
+
+<p>Remember:  if you are given summary data, only, then you can construct a nice two-way table and enter it into <code>chisquaretestGC()</code>.  Suppose that you want this two-way table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left"> </th>
+      <th style="text-align: center">Front</th>
+      <th style="text-align: center">Middle</th>
+      <th style="text-align: center">Back</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Female</td>
+      <td style="text-align: center">19</td>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">5</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Male</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">16</td>
+      <td style="text-align: center">7</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You can get it as follows:</p>
+
+<p><code>r
+MySexSeat &lt;- rbind(female=c(19,16,5),male=c(8,16,7))
+colnames(MySexSeat) &lt;- c("front","middle","back")
+</code></p>
+
+<p>Let’s just check to see that this worked:</p>
+
+<p><code>r
+MySexSeat
+</code></p>
+
+<p><code>
+##        front middle back
+## female    19     16    5
+## male       8     16    7
+</code></p>
+
+<p>Then you can enter <code>MySexSeat</code> into the function:</p>
+
+<p><code>r
+chisqtestGC(MySexSeat)
+</code></p>
+
+<h3 id="simulation">Simulation</h3>
+
+<p>When the Null’s expected counts are low, <code>chisqtestGC()</code> delivers a warning and suggests the use of simulation to compute the <script type="math/tex">P</script>-value.  You do this by way of the argument <code>simulate.p.value</code>, and you have three options:</p>
+
+<ul>
+  <li><code>simulate.p.value = "fixed"</code></li>
+  <li><code>simulate.p.value = "random"</code></li>
+  <li><code>simulate.p.value = "TRUE"</code></li>
+</ul>
+
+<h4 id="explanatory-tallies-fixed">Explanatory Tallies Fixed</h4>
+
+<p>Suppose that the objects under study are not a random sample from some larger population, and that the way chance comes into the production of the data is through random variation in all of the other factors—besides the explanatory variable— that might be associated with the response variable.  Then since the items being observed are fixed, the tally of values for the explanatory variable are fixed.  The response values for these items are the product of chance, but only through random variation in those other factors.</p>
+
+<p>The study from the <code>ledgejump</code> data frame was an example of this.  The 21 incidents were fixed, so there were nine cold-weather incidents and 12 warm-weather incidents, no matter what.  The crowd behavior at each incident, however is still a matter of chance.</p>
+
+<p>In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:</p>
+
+<p><code>r
+chisqtestGC(~weather+crowd.behavior,data=ledgejump,
+             simulate.p.value="fixed",B=2500)
+</code></p>
+
+<p><code>
+## Pearson's chi-squared test with simulated p-value, fixed row sums
+## 	 (based on 2500 resamples) 
+## 
+## Observed Counts:
+##        crowd.behavior
+## weather baiting polite
+##    cool       2      7
+##    warm       8      4
+## 
+## Counts Expected by Null:
+##        crowd.behavior
+## weather baiting polite
+##    cool    4.29   4.71
+##    warm    5.71   6.29
+## 
+## Contributions to the chi-square statistic:
+##        crowd.behavior
+## weather baiting polite
+##    cool    1.22   1.11
+##    warm    0.91   0.83
+## 
+## 
+## Chi-Square Statistic = 4.0727 
+## Degrees of Freedom of the table = 1 
+## P-Value = 0.05
+</code></p>
+
+<p>You can set <code>B</code>, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the <script type="math/tex">P</script>-value, having been determined by random resampling, will vary from one run of the function to another.</p>
+
+<h4 id="explanatory-tallies-random">Explanatory Tallies Random</h4>
+
+<p>In the <code>m111survey</code> study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set <code>simulate.p.value</code> to “random”:</p>
+
+<p><code>r
+chisqtestGC(~sex+seat,data=m111survey,
+             simulate.p.value="random",B=2500)
+</code></p>
+
+<p><code>
+## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
+## 	 (based on 2500 resamples) 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1687
+</code></p>
+
+<h4 id="both-tallies-fixed">Both Tallies Fixed</h4>
+
+<p>If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set <code>simulate.p.value</code> to “TRUE”.  This invokes R’s standard method for resampling:</p>
+
+<p><code>r
+chisqtestGC(~sex+seat,data=m111survey,
+             simulate.p.value=TRUE,B=2500)
+</code></p>
+
+<p><code>
+## Pearson's chi-squared test with simulated p-value 
+## 	 (based on 2500 resamples) 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1704
+</code></p>
+
+<p>It’s not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.</p>
+
+<h3 id="graphs-of-the-p-value">Graphs of the P-Value</h3>
+
+<p>You can get a graph of the <script type="math/tex">P</script>-value in the plot window by setting the argument <code>graph</code> to TRUE.  When you did not simulate, the graph shows a density curve for the <script type="math/tex">\chi^2</script> random variable with the relevant degrees of freedom.  When you simulate, the graph is a histogram of the resampled <script type="math/tex">\chi^2</script>-statistics.</p>
+
+<p>Here is a case with no simulation:</p>
+
+<p><code>r
+chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
+</code></p>
+
+<p><code>
+## Pearson's Chi-squared test 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1546
+</code></p>
+
+<p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutnosim-1.png" alt="Graph of P-value, no simulation" /></p>
+
+<p>Here is a case with simulation:</p>
+
+<p><code>r
+chisqtestGC(~sex+seat,data=m111survey,
+             simulate.p.value="random",B=2500,graph=TRUE)
+</code></p>
+
+<p><code>
+## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
+## 	 (based on 2500 resamples) 
+## 
+## Observed Counts:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female      19       16      5
+##   male         8       16      7
+## 
+## Counts Expected by Null:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female   15.21    18.03   6.76
+##   male     11.79    13.97   5.24
+## 
+## Contributions to the chi-square statistic:
+##         seat
+## sex      1_front 2_middle 3_back
+##   female    0.94     0.23   0.46
+##   male      1.22     0.29   0.59
+## 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1575
+</code></p>
+
+<p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutsim-1.png" alt="Graph of P-value, with simulation" /></p>
+
+<h2 id="one-factor-variable-goodness-of-fit">One Factor Variable (Goodness of Fit)</h2>
+
+<h3 id="formula-data-input-1">Formula-Data Input</h3>
+
+<p>The variable <strong>seat</strong> in the <code>m111survey</code> data frame indicates the classroom seating preference of each person in the survey.  Suppose we want to know whether or not the sample data provide strong evidence that seating preference in the Georgetown College population is not uniformly distributed among the three possible options (Front, Middle, and Back).  That is, letting</p>
+
+<blockquote>
+  <p><script type="math/tex">p_f =</script> proportion of all GC students who prefer the front,</p>
+</blockquote>
+
+<blockquote>
+  <p><script type="math/tex">p_m =</script> proportion of all GC students who prefer the middle,</p>
+</blockquote>
+
+<blockquote>
+  <p><script type="math/tex">p_b =</script> proportion of all GC students who prefer the back,</p>
+</blockquote>
+
+<p>we want to test the hypotheses:</p>
+
+<blockquote>
+  <p><script type="math/tex">H_0:</script>  <script type="math/tex">p_f = 1/3</script> and <script type="math/tex">p_m = 1/3</script> and <script type="math/tex">p_b = 1/3</script></p>
+</blockquote>
+
+<blockquote>
+  <p><script type="math/tex">H_a:</script>  at least one of the above proportions is not <script type="math/tex">1/3</script></p>
+</blockquote>
+
+<p>We can do so using the <script type="math/tex">\chi^2</script>-test for goodness of fit.  The argument <code>p</code> will give what the Null Hypothesis believes to be the distribution of the variable <strong>seat</strong> in the Georgetown College population:</p>
+
+<p><code>r
+chisqtestGC(~seat,data=m111survey,
+            p=c(1/3,1/3,1/3),
+            graph=TRUE)
+</code></p>
+
+<p><code>
+## Chi-squared test for given probabilities 
+## 
+##          Observed counts Expected by Null Contr to chisq stat
+## 1_front               27            23.67                0.47
+## 2_middle              32            23.67                2.93
+## 3_back                12            23.67                5.75
+## 
+## 
+## Chi-Square Statistic = 9.1549 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.0103
+</code></p>
+
+<p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatgraph-1.png" alt="plot of chunk chisqtutseatgraph" /></p>
+
+<h3 id="summary-data">Summary Data</h3>
+
+<p>Suppose that the data had only come to us in summary form:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Front</th>
+      <th style="text-align: center">Middle</th>
+      <th style="text-align: center">Back</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">27</td>
+      <td style="text-align: center">32</td>
+      <td style="text-align: center">12</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>We could still perform the test, by making a table and storing it as an R-object:</p>
+
+<p><code>r
+Seat &lt;- c(front=27,middle=32,back=12)
+Seat
+</code></p>
+
+<p><code>
+##  front middle   back 
+##     27     32     12
+</code></p>
+
+<p>Then we could perform the test using <code>Seat</code>:</p>
+
+<p><code>r
+chisqtestGC(Seat,p=c(1/3,1/3,1/3))
+</code></p>
+
+<p><code>
+## Chi-squared test for given probabilities 
+## 
+##        Observed counts Expected by Null Contr to chisq stat
+## front               27            23.67                0.47
+## middle              32            23.67                2.93
+## back                12            23.67                5.75
+## 
+## 
+## Chi-Square Statistic = 9.1549 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.0103
+</code></p>
+
+<h3 id="simulation-1">Simulation</h3>
+
+<p>When expected cell counts fall below 5, <code>chisqtestGC()</code> issues a warning and suggests the use of simulation.  We can perform simulation at any time, though.</p>
+
+<p>For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting <code>simulate.p.value</code> to <code>TRUE</code>.  Of course we also need to set the number <code>B</code> of resamples.</p>
+
+<p><code>r
+set.seed(678910)
+chisqtestGC(~seat,data=m111survey,
+            p=c(1/3,1/3,1/3),
+            simulate.p.value=TRUE,
+            B=2500,graph=TRUE)
+</code></p>
+
+<p><code>
+## Pearson's chi-squared test with simulated p-value 
+## 	 (based on 2500 resamples) 
+## 
+##          Observed counts Expected by Null Contr to chisq stat
+## 1_front               27            23.67                0.47
+## 2_middle              32            23.67                2.93
+## 3_back                12            23.67                5.75
+## 
+## 
+## Chi-Square Statistic = 9.1549 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.0116
+</code></p>
+
+<p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatsim-1.png" alt="plot of chunk chisqtutseatsim" /></p>
+
+<h2 id="want-less-output">Want Less Output?</h2>
+
+<p>If you do not want to see quite so much output to the console and are only interested in the essentials for reporting a <script type="math/tex">\chi^2</script>-test, then set the argument <code>verbose</code> to <code>FALSE</code>:</p>
+
+<p><code>r
+chisqtestGC(~sex+seat,data=m111survey,
+            verbose=FALSE)
+</code></p>
+
+<p><code>
+## Pearson's Chi-squared test 
+## 
+## Chi-Square Statistic = 3.734 
+## Degrees of Freedom of the table = 2 
+## P-Value = 0.1546
+</code></p>
+
+
+  </div>
+  
+</div>
+
+    </div>
+
+  </body>
+</html>
