@@ -10,8 +10,10 @@ output:
     mathjax:  default
 ---
 
+
 * will be replaced by TOB
 {:toc}
+
 
 
 
@@ -27,17 +29,17 @@ You use the $$ \chi^2 $$-test when you are addressing the inferential aspect of 
 The function (and some of the data) that we will use comes from the `tigerstats` package, so make sure that it is loaded:
 
 
-```r
+{% highlight r %}
 require(tigerstats)
-```
+{% endhighlight %}
 
 **Note:**  If you are not working with the R Studio server hosted by Georgetown College, then you will need install `tigerstats` on your own machine.  You can get the current version from [Github](http://github.com) by first installing the `devtools` package from the CRAN repository, and then running the following commands in a fresh R session:
 
 
-```r
+{% highlight r %}
 require(devtools)
 install_github(repo="homerhanumat/tigerstats")
-```
+{% endhighlight %}
 
 ## Two Factor Variables (Association)
 
@@ -46,11 +48,13 @@ install_github(repo="homerhanumat/tigerstats")
 When your data are in raw form, straight from a data frame, you can perform the test using "formula-data input".  For example, in the `mat111survey` data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:
 
 
-```r
+{% highlight r %}
 chisqtestGC(~sex+seat,data=m111survey)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's Chi-squared test 
 ## 
 ## Observed Counts:
@@ -75,7 +79,7 @@ chisqtestGC(~sex+seat,data=m111survey)
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.1546
-```
+{% endhighlight %}
 
 
 ### Two-Way Table Input
@@ -83,24 +87,26 @@ chisqtestGC(~sex+seat,data=m111survey)
 Sometimes you already have a two-way table on hand:
 
 
-```r
+{% highlight r %}
 SexSeat <- xtabs(~sex+seat,data=m111survey)
 SexSeat
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##         seat
 ## sex      1_front 2_middle 3_back
 ##   female      19       16      5
 ##   male         8       16      7
-```
+{% endhighlight %}
 
 In that case you can save yourself some typing by entering the table in place of the formula and the `data` arguments:
 
 
-```r
+{% highlight r %}
 chisqtestGC(SexSeat)
-```
+{% endhighlight %}
 
 
 ### A Table From Summary Data
@@ -115,30 +121,32 @@ Remember:  if you are given summary data, only, then you can construct a nice tw
 You can get it as follows:
 
 
-```r
+{% highlight r %}
 MySexSeat <- rbind(female=c(19,16,5),male=c(8,16,7))
 colnames(MySexSeat) <- c("front","middle","back")
-```
+{% endhighlight %}
 
 Let's just check to see that this worked:
 
 
-```r
+{% highlight r %}
 MySexSeat
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##        front middle back
 ## female    19     16    5
 ## male       8     16    7
-```
+{% endhighlight %}
 
 Then you can enter `MySexSeat` into the function:
 
 
-```r
+{% highlight r %}
 chisqtestGC(MySexSeat)
-```
+{% endhighlight %}
 
 
 ### Simulation
@@ -161,12 +169,14 @@ In such a case you might want to resample under the restriction that in all of y
 
 
 
-```r
+{% highlight r %}
 chisqtestGC(~weather+crowd.behavior,data=ledgejump,
              simulate.p.value="fixed",B=2500)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's chi-squared test with simulated p-value, fixed row sums
 ## 	 (based on 2500 resamples) 
 ## 
@@ -192,7 +202,7 @@ chisqtestGC(~weather+crowd.behavior,data=ledgejump,
 ## Chi-Square Statistic = 4.0727 
 ## Degrees of Freedom of the table = 1 
 ## P-Value = 0.05
-```
+{% endhighlight %}
 
 You can set `B`, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the $$ P $$-value, having been determined by random resampling, will vary from one run of the function to another.
 
@@ -202,12 +212,14 @@ You can set `B`, the number of resamples, as you wish, but it should be at least
 In the `m111survey` study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set `simulate.p.value` to "random":
 
 
-```r
+{% highlight r %}
 chisqtestGC(~sex+seat,data=m111survey,
              simulate.p.value="random",B=2500)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
 ## 	 (based on 2500 resamples) 
 ## 
@@ -233,7 +245,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.1687
-```
+{% endhighlight %}
 
 
 
@@ -242,12 +254,14 @@ chisqtestGC(~sex+seat,data=m111survey,
 If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set `simulate.p.value` to "TRUE".  This invokes R's standard method for resampling:
 
 
-```r
+{% highlight r %}
 chisqtestGC(~sex+seat,data=m111survey,
              simulate.p.value=TRUE,B=2500)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's chi-squared test with simulated p-value 
 ## 	 (based on 2500 resamples) 
 ## 
@@ -273,7 +287,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.1704
-```
+{% endhighlight %}
 
 It's not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.
 
@@ -285,11 +299,13 @@ You can get a graph of the $$ P $$-value in the plot window by setting the argum
 Here is a case with no simulation:
 
 
-```r
+{% highlight r %}
 chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's Chi-squared test 
 ## 
 ## Observed Counts:
@@ -314,7 +330,7 @@ chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.1546
-```
+{% endhighlight %}
 
 ![Graph of P-value, no simulation](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutnosim-1.png) 
 
@@ -323,12 +339,14 @@ Here is a case with simulation:
 
 
 
-```r
+{% highlight r %}
 chisqtestGC(~sex+seat,data=m111survey,
              simulate.p.value="random",B=2500,graph=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
 ## 	 (based on 2500 resamples) 
 ## 
@@ -354,7 +372,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.1575
-```
+{% endhighlight %}
 
 ![Graph of P-value, with simulation](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutsim-1.png) 
 
@@ -379,13 +397,15 @@ we want to test the hypotheses:
 We can do so using the $$ \chi^2 $$-test for goodness of fit.  The argument `p` will give what the Null Hypothesis believes to be the distribution of the variable **seat** in the Georgetown College population:
 
 
-```r
+{% highlight r %}
 chisqtestGC(~seat,data=m111survey,
             p=c(1/3,1/3,1/3),
             graph=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Chi-squared test for given probabilities 
 ## 
 ##          Observed counts Expected by Null Contr to chisq stat
@@ -397,7 +417,7 @@ chisqtestGC(~seat,data=m111survey,
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.0103
-```
+{% endhighlight %}
 
 ![plot of chunk chisqtutseatgraph](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatgraph-1.png) 
 
@@ -413,24 +433,28 @@ Suppose that the data had only come to us in summary form:
 We could still perform the test, by making a table and storing it as an R-object:
 
 
-```r
+{% highlight r %}
 Seat <- c(front=27,middle=32,back=12)
 Seat
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ##  front middle   back 
 ##     27     32     12
-```
+{% endhighlight %}
 
 Then we could perform the test using `Seat`:
 
 
-```r
+{% highlight r %}
 chisqtestGC(Seat,p=c(1/3,1/3,1/3))
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Chi-squared test for given probabilities 
 ## 
 ##        Observed counts Expected by Null Contr to chisq stat
@@ -442,7 +466,7 @@ chisqtestGC(Seat,p=c(1/3,1/3,1/3))
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.0103
-```
+{% endhighlight %}
 
 ### Simulation
 
@@ -451,15 +475,17 @@ When expected cell counts fall below 5, `chisqtestGC()` issues a warning and sug
 For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting `simulate.p.value` to `TRUE`.  Of course we also need to set the number `B` of resamples.
 
 
-```r
+{% highlight r %}
 set.seed(678910)
 chisqtestGC(~seat,data=m111survey,
             p=c(1/3,1/3,1/3),
             simulate.p.value=TRUE,
             B=2500,graph=TRUE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's chi-squared test with simulated p-value 
 ## 	 (based on 2500 resamples) 
 ## 
@@ -472,7 +498,7 @@ chisqtestGC(~seat,data=m111survey,
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.0116
-```
+{% endhighlight %}
 
 ![plot of chunk chisqtutseatsim](/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatsim-1.png) 
 
@@ -481,16 +507,18 @@ chisqtestGC(~seat,data=m111survey,
 If you do not want to see quite so much output to the console and are only interested in the essentials for reporting a $$ \chi^2 $$-test, then set the argument `verbose` to `FALSE`:
 
 
-```r
+{% highlight r %}
 chisqtestGC(~sex+seat,data=m111survey,
             verbose=FALSE)
-```
+{% endhighlight %}
 
-```
+
+
+{% highlight text %}
 ## Pearson's Chi-squared test 
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
 ## P-Value = 0.1546
-```
+{% endhighlight %}
 

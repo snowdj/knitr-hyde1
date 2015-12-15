@@ -15,6 +15,7 @@ categories: [R]
 ## Introduction
 
 
+
 This is is first in a projected five-part series of posts aimed at colleagues who teach elementary statistics.
 
 I can't remember exactly how I first made acquaintance with R, but it's been an important part of my teaching/consulting life since at least 2007, when I used it for the first time in an upper-level undergraduate statistics class.  As of last Fall all of our statistics classes---even the elementary ones---are based on R.  We may never return to a ground-up GUI platform.  If you teach with R but hesitate to spring such a powerful and complex tool on unsuspecting introductory students---many of whom whom will have had no prior experience with the command line, much less with coding---then I hope these posts will give you some encouragement.

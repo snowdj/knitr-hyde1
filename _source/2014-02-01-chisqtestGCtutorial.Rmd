@@ -10,6 +10,7 @@ output:
     mathjax:  default
 ---
 
+
 * will be replaced by TOB
 {:toc}
 
@@ -17,6 +18,7 @@ output:
 library(knitr)
 opts_chunk$set(tidy=FALSE,fig.width=4.5,fig.height=3.5)
 ```
+
 
 
 ## Preliminaries

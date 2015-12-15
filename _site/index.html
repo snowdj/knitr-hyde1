@@ -11,7 +11,7 @@
 
   <title>
     
-      A Statistics Blog &middot; 
+      R Contour &middot; 
     
   </title>
 
@@ -57,7 +57,7 @@
     <div class="sidebar-about">
       <h1>
         <a href="/">
-          A Statistics Blog
+          R Contour
         </a>
       </h1>
       <p class="lead">A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
@@ -1700,16 +1700,12 @@ nullDist <span class="o">&lt;-</span> do<span class="p">(</span><span class="m">
 
 <p>The function (and some of the data) that we will use comes from the <code>tigerstats</code> package, so make sure that it is loaded:</p>
 
-<p><code>r
-require(tigerstats)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>tigerstats<span class="p">)</span></code></pre></div>
 
 <p><strong>Note:</strong>  If you are not working with the R Studio server hosted by Georgetown College, then you will need install <code>tigerstats</code> on your own machine.  You can get the current version from <a href="http://github.com">Github</a> by first installing the <code>devtools</code> package from the CRAN repository, and then running the following commands in a fresh R session:</p>
 
-<p><code>r
-require(devtools)
-install_github(repo="homerhanumat/tigerstats")
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kn">require</span><span class="p">(</span>devtools<span class="p">)</span>
+install_github<span class="p">(</span>repo<span class="o">=</span><span class="s">&quot;homerhanumat/tigerstats&quot;</span><span class="p">)</span></code></pre></div>
 
 <h2 id="two-factor-variables-association">Two Factor Variables (Association)</h2>
 
@@ -1717,12 +1713,9 @@ install_github(repo="homerhanumat/tigerstats")
 
 <p>When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the <code>mat111survey</code> data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:</p>
 
-<p><code>r
-chisqtestGC(~sex+seat,data=m111survey)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's Chi-squared test 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s Chi-squared test 
 ## 
 ## Observed Counts:
 ##         seat
@@ -1745,30 +1738,23 @@ chisqtestGC(~sex+seat,data=m111survey)
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></p>
+## P-Value = 0.1546</code></pre></div>
 
 <h3 id="two-way-table-input">Two-Way Table Input</h3>
 
 <p>Sometimes you already have a two-way table on hand:</p>
 
-<p><code>r
-SexSeat &lt;- xtabs(~sex+seat,data=m111survey)
-SexSeat
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">SexSeat <span class="o">&lt;-</span> xtabs<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">)</span>
+SexSeat</code></pre></div>
 
-<p><code>
-##         seat
+<div class="highlight"><pre><code class="language-text" data-lang="text">##         seat
 ## sex      1_front 2_middle 3_back
 ##   female      19       16      5
-##   male         8       16      7
-</code></p>
+##   male         8       16      7</code></pre></div>
 
 <p>In that case you can save yourself some typing by entering the table in place of the formula and the <code>data</code> arguments:</p>
 
-<p><code>r
-chisqtestGC(SexSeat)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span>SexSeat<span class="p">)</span></code></pre></div>
 
 <h3 id="a-table-from-summary-data">A Table From Summary Data</h3>
 
@@ -1801,28 +1787,20 @@ chisqtestGC(SexSeat)
 
 <p>You can get it as follows:</p>
 
-<p><code>r
-MySexSeat &lt;- rbind(female=c(19,16,5),male=c(8,16,7))
-colnames(MySexSeat) &lt;- c("front","middle","back")
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">MySexSeat <span class="o">&lt;-</span> <span class="kp">rbind</span><span class="p">(</span>female<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">19</span><span class="p">,</span><span class="m">16</span><span class="p">,</span><span class="m">5</span><span class="p">),</span>male<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">8</span><span class="p">,</span><span class="m">16</span><span class="p">,</span><span class="m">7</span><span class="p">))</span>
+<span class="kp">colnames</span><span class="p">(</span>MySexSeat<span class="p">)</span> <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span><span class="s">&quot;front&quot;</span><span class="p">,</span><span class="s">&quot;middle&quot;</span><span class="p">,</span><span class="s">&quot;back&quot;</span><span class="p">)</span></code></pre></div>
 
 <p>Let’s just check to see that this worked:</p>
 
-<p><code>r
-MySexSeat
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">MySexSeat</code></pre></div>
 
-<p><code>
-##        front middle back
+<div class="highlight"><pre><code class="language-text" data-lang="text">##        front middle back
 ## female    19     16    5
-## male       8     16    7
-</code></p>
+## male       8     16    7</code></pre></div>
 
 <p>Then you can enter <code>MySexSeat</code> into the function:</p>
 
-<p><code>r
-chisqtestGC(MySexSeat)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span>MySexSeat<span class="p">)</span></code></pre></div>
 
 <h3 id="simulation">Simulation</h3>
 
@@ -1842,13 +1820,10 @@ chisqtestGC(MySexSeat)
 
 <p>In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:</p>
 
-<p><code>r
-chisqtestGC(~weather+crowd.behavior,data=ledgejump,
-             simulate.p.value="fixed",B=2500)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>weather<span class="o">+</span>crowd.behavior<span class="p">,</span>data<span class="o">=</span>ledgejump<span class="p">,</span>
+             simulate.p.value<span class="o">=</span><span class="s">&quot;fixed&quot;</span><span class="p">,</span>B<span class="o">=</span><span class="m">2500</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's chi-squared test with simulated p-value, fixed row sums
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value, fixed row sums
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1872,8 +1847,7 @@ chisqtestGC(~weather+crowd.behavior,data=ledgejump,
 ## 
 ## Chi-Square Statistic = 4.0727 
 ## Degrees of Freedom of the table = 1 
-## P-Value = 0.05
-</code></p>
+## P-Value = 0.05</code></pre></div>
 
 <p>You can set <code>B</code>, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the <script type="math/tex">P</script>-value, having been determined by random resampling, will vary from one run of the function to another.</p>
 
@@ -1881,13 +1855,10 @@ chisqtestGC(~weather+crowd.behavior,data=ledgejump,
 
 <p>In the <code>m111survey</code> study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set <code>simulate.p.value</code> to “random”:</p>
 
-<p><code>r
-chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value="random",B=2500)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+             simulate.p.value<span class="o">=</span><span class="s">&quot;random&quot;</span><span class="p">,</span>B<span class="o">=</span><span class="m">2500</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value, marginal sums not fixed
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1911,20 +1882,16 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1687
-</code></p>
+## P-Value = 0.1687</code></pre></div>
 
 <h4 id="both-tallies-fixed">Both Tallies Fixed</h4>
 
 <p>If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set <code>simulate.p.value</code> to “TRUE”.  This invokes R’s standard method for resampling:</p>
 
-<p><code>r
-chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value=TRUE,B=2500)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+             simulate.p.value<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>B<span class="o">=</span><span class="m">2500</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's chi-squared test with simulated p-value 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value 
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1948,8 +1915,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1704
-</code></p>
+## P-Value = 0.1704</code></pre></div>
 
 <p>It’s not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.</p>
 
@@ -1959,12 +1925,9 @@ chisqtestGC(~sex+seat,data=m111survey,
 
 <p>Here is a case with no simulation:</p>
 
-<p><code>r
-chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's Chi-squared test 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s Chi-squared test 
 ## 
 ## Observed Counts:
 ##         seat
@@ -1987,20 +1950,16 @@ chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></p>
+## P-Value = 0.1546</code></pre></div>
 
 <p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutnosim-1.png" alt="Graph of P-value, no simulation" /></p>
 
 <p>Here is a case with simulation:</p>
 
-<p><code>r
-chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value="random",B=2500,graph=TRUE)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+             simulate.p.value<span class="o">=</span><span class="s">&quot;random&quot;</span><span class="p">,</span>B<span class="o">=</span><span class="m">2500</span><span class="p">,</span>graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's chi-squared test with simulated p-value, marginal sums not fixed
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value, marginal sums not fixed
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -2024,8 +1983,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1575
-</code></p>
+## P-Value = 0.1575</code></pre></div>
 
 <p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutsim-1.png" alt="Graph of P-value, with simulation" /></p>
 
@@ -2059,14 +2017,11 @@ chisqtestGC(~sex+seat,data=m111survey,
 
 <p>We can do so using the <script type="math/tex">\chi^2</script>-test for goodness of fit.  The argument <code>p</code> will give what the Null Hypothesis believes to be the distribution of the variable <strong>seat</strong> in the Georgetown College population:</p>
 
-<p><code>r
-chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            graph=TRUE)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+            p<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">),</span>
+            graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Chi-squared test for given probabilities 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Chi-squared test for given probabilities 
 ## 
 ##          Observed counts Expected by Null Contr to chisq stat
 ## 1_front               27            23.67                0.47
@@ -2076,8 +2031,7 @@ chisqtestGC(~seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-</code></p>
+## P-Value = 0.0103</code></pre></div>
 
 <p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatgraph-1.png" alt="plot of chunk chisqtutseatgraph" /></p>
 
@@ -2104,24 +2058,17 @@ chisqtestGC(~seat,data=m111survey,
 
 <p>We could still perform the test, by making a table and storing it as an R-object:</p>
 
-<p><code>r
-Seat &lt;- c(front=27,middle=32,back=12)
-Seat
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">Seat <span class="o">&lt;-</span> <span class="kt">c</span><span class="p">(</span>front<span class="o">=</span><span class="m">27</span><span class="p">,</span>middle<span class="o">=</span><span class="m">32</span><span class="p">,</span>back<span class="o">=</span><span class="m">12</span><span class="p">)</span>
+Seat</code></pre></div>
 
-<p><code>
-##  front middle   back 
-##     27     32     12
-</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">##  front middle   back 
+##     27     32     12</code></pre></div>
 
 <p>Then we could perform the test using <code>Seat</code>:</p>
 
-<p><code>r
-chisqtestGC(Seat,p=c(1/3,1/3,1/3))
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span>Seat<span class="p">,</span>p<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">))</span></code></pre></div>
 
-<p><code>
-## Chi-squared test for given probabilities 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Chi-squared test for given probabilities 
 ## 
 ##        Observed counts Expected by Null Contr to chisq stat
 ## front               27            23.67                0.47
@@ -2131,8 +2078,7 @@ chisqtestGC(Seat,p=c(1/3,1/3,1/3))
 ## 
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-</code></p>
+## P-Value = 0.0103</code></pre></div>
 
 <h3 id="simulation-1">Simulation</h3>
 
@@ -2140,16 +2086,13 @@ chisqtestGC(Seat,p=c(1/3,1/3,1/3))
 
 <p>For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting <code>simulate.p.value</code> to <code>TRUE</code>.  Of course we also need to set the number <code>B</code> of resamples.</p>
 
-<p><code>r
-set.seed(678910)
-chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            simulate.p.value=TRUE,
-            B=2500,graph=TRUE)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r"><span class="kp">set.seed</span><span class="p">(</span><span class="m">678910</span><span class="p">)</span>
+chisqtestGC<span class="p">(</span><span class="o">~</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+            p<span class="o">=</span><span class="kt">c</span><span class="p">(</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">,</span><span class="m">1</span><span class="o">/</span><span class="m">3</span><span class="p">),</span>
+            simulate.p.value<span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span>
+            B<span class="o">=</span><span class="m">2500</span><span class="p">,</span>graph<span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's chi-squared test with simulated p-value 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s chi-squared test with simulated p-value 
 ## 	 (based on 2500 resamples) 
 ## 
 ##          Observed counts Expected by Null Contr to chisq stat
@@ -2160,8 +2103,7 @@ chisqtestGC(~seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.0116
-</code></p>
+## P-Value = 0.0116</code></pre></div>
 
 <p><img src="/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatsim-1.png" alt="plot of chunk chisqtutseatsim" /></p>
 
@@ -2169,18 +2111,14 @@ chisqtestGC(~seat,data=m111survey,
 
 <p>If you do not want to see quite so much output to the console and are only interested in the essentials for reporting a <script type="math/tex">\chi^2</script>-test, then set the argument <code>verbose</code> to <code>FALSE</code>:</p>
 
-<p><code>r
-chisqtestGC(~sex+seat,data=m111survey,
-            verbose=FALSE)
-</code></p>
+<div class="highlight"><pre><code class="language-r" data-lang="r">chisqtestGC<span class="p">(</span><span class="o">~</span>sex<span class="o">+</span>seat<span class="p">,</span>data<span class="o">=</span>m111survey<span class="p">,</span>
+            verbose<span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span></code></pre></div>
 
-<p><code>
-## Pearson's Chi-squared test 
+<div class="highlight"><pre><code class="language-text" data-lang="text">## Pearson&#39;s Chi-squared test 
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-</code></p>
+## P-Value = 0.1546</code></pre></div>
 
 
   </div>

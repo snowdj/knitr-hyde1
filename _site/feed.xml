@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>A Statistics Blog</title>
+    <title>R Contour</title>
     <description>A blog devoted mostly to the the teaching of undergraduate-level statstics and data anlysis with R, along with occasional technical notes on R-related tools.
 </description>
     <link>https://homerhanumat.github.io/</link>
     <atom:link href="https://homerhanumat.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 14 Dec 2015 20:44:54 -0500</pubDate>
-    <lastBuildDate>Mon, 14 Dec 2015 20:44:54 -0500</lastBuildDate>
+    <pubDate>Mon, 14 Dec 2015 22:33:42 -0500</pubDate>
+    <lastBuildDate>Mon, 14 Dec 2015 22:33:42 -0500</lastBuildDate>
     <generator>Jekyll v2.4.0</generator>
     
       <item>
@@ -1574,16 +1574,12 @@ nullDist &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; do&lt;span class
 
 &lt;p&gt;The function (and some of the data) that we will use comes from the &lt;code&gt;tigerstats&lt;/code&gt; package, so make sure that it is loaded:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-require(tigerstats)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kn&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;tigerstats&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt;  If you are not working with the R Studio server hosted by Georgetown College, then you will need install &lt;code&gt;tigerstats&lt;/code&gt; on your own machine.  You can get the current version from &lt;a href=&quot;http://github.com&quot;&gt;Github&lt;/a&gt; by first installing the &lt;code&gt;devtools&lt;/code&gt; package from the CRAN repository, and then running the following commands in a fresh R session:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-require(devtools)
-install_github(repo=&quot;homerhanumat/tigerstats&quot;)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kn&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;devtools&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+install_github&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;repo&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;homerhanumat/tigerstats&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;two-factor-variables-association&quot;&gt;Two Factor Variables (Association)&lt;/h2&gt;
 
@@ -1591,12 +1587,9 @@ install_github(repo=&quot;homerhanumat/tigerstats&quot;)
 
 &lt;p&gt;When your data are in raw form, straight from a data frame, you can perform the test using “formula-data input”.  For example, in the &lt;code&gt;mat111survey&lt;/code&gt; data, we might wonder whether sex and seating preference are related, in the population from which the sample was (allegedly randomly) drawn.  The function call and the output are as follows:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~sex+seat,data=m111survey)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s Chi-squared test 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s Chi-squared test 
 ## 
 ## Observed Counts:
 ##         seat
@@ -1619,30 +1612,23 @@ chisqtestGC(~sex+seat,data=m111survey)
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.1546&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;two-way-table-input&quot;&gt;Two-Way Table Input&lt;/h3&gt;
 
 &lt;p&gt;Sometimes you already have a two-way table on hand:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-SexSeat &amp;lt;- xtabs(~sex+seat,data=m111survey)
-SexSeat
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;SexSeat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; xtabs&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+SexSeat&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-##         seat
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;##         seat
 ## sex      1_front 2_middle 3_back
 ##   female      19       16      5
-##   male         8       16      7
-&lt;/code&gt;&lt;/p&gt;
+##   male         8       16      7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;In that case you can save yourself some typing by entering the table in place of the formula and the &lt;code&gt;data&lt;/code&gt; arguments:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(SexSeat)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;SexSeat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;a-table-from-summary-data&quot;&gt;A Table From Summary Data&lt;/h3&gt;
 
@@ -1675,28 +1661,20 @@ chisqtestGC(SexSeat)
 
 &lt;p&gt;You can get it as follows:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-MySexSeat &amp;lt;- rbind(female=c(19,16,5),male=c(8,16,7))
-colnames(MySexSeat) &amp;lt;- c(&quot;front&quot;,&quot;middle&quot;,&quot;back&quot;)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;MySexSeat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;rbind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;female&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;19&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;male&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;span class=&quot;kp&quot;&gt;colnames&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;MySexSeat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;front&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;middle&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;back&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Let’s just check to see that this worked:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-MySexSeat
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;MySexSeat&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-##        front middle back
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;##        front middle back
 ## female    19     16    5
-## male       8     16    7
-&lt;/code&gt;&lt;/p&gt;
+## male       8     16    7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Then you can enter &lt;code&gt;MySexSeat&lt;/code&gt; into the function:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(MySexSeat)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;MySexSeat&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;simulation&quot;&gt;Simulation&lt;/h3&gt;
 
@@ -1716,13 +1694,10 @@ chisqtestGC(MySexSeat)
 
 &lt;p&gt;In such a case you might want to resample under the restriction that in all of your resamples, the tally for the explanatory variable stays just the same as it was in the data you observed.  Then your function call looks like:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~weather+crowd.behavior,data=ledgejump,
-             simulate.p.value=&quot;fixed&quot;,B=2500)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;weather&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;crowd.behavior&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;ledgejump&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             simulate.p.value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fixed&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s chi-squared test with simulated p-value, fixed row sums
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s chi-squared test with simulated p-value, fixed row sums
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1746,8 +1721,7 @@ chisqtestGC(~weather+crowd.behavior,data=ledgejump,
 ## 
 ## Chi-Square Statistic = 4.0727 
 ## Degrees of Freedom of the table = 1 
-## P-Value = 0.05
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.05&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You can set &lt;code&gt;B&lt;/code&gt;, the number of resamples, as you wish, but it should be at least a few thousand.  Of course the &lt;script type=&quot;math/tex&quot;&gt;P&lt;/script&gt;-value, having been determined by random resampling, will vary from one run of the function to another.&lt;/p&gt;
 
@@ -1755,13 +1729,10 @@ chisqtestGC(~weather+crowd.behavior,data=ledgejump,
 
 &lt;p&gt;In the &lt;code&gt;m111survey&lt;/code&gt; study on sex and seating preference, the subjects are a random sample from a larger population.  In that case the tallies for both the explanatory and the response variables depend upon chance. If you simulate in such a case, then you set &lt;code&gt;simulate.p.value&lt;/code&gt; to “random”:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value=&quot;random&quot;,B=2500)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             simulate.p.value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;random&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s chi-squared test with simulated p-value, marginal sums not fixed
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s chi-squared test with simulated p-value, marginal sums not fixed
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1785,20 +1756,16 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1687
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.1687&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;both-tallies-fixed&quot;&gt;Both Tallies Fixed&lt;/h4&gt;
 
 &lt;p&gt;If you want to resample in such a way that the tallies for BOTH the explanatory and response variables stay exactly the same as they were in the actual data, then you set &lt;code&gt;simulate.p.value&lt;/code&gt; to “TRUE”.  This invokes R’s standard method for resampling:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value=TRUE,B=2500)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             simulate.p.value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s chi-squared test with simulated p-value 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s chi-squared test with simulated p-value 
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1822,8 +1789,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1704
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.1704&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It’s not easy to understand why R would adopt such a method, but there is some good theoretical support for it.  If you are ever in doubt about how to simulate, just use this third option.&lt;/p&gt;
 
@@ -1833,12 +1799,9 @@ chisqtestGC(~sex+seat,data=m111survey,
 
 &lt;p&gt;Here is a case with no simulation:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;graph&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s Chi-squared test 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s Chi-squared test 
 ## 
 ## Observed Counts:
 ##         seat
@@ -1861,20 +1824,16 @@ chisqtestGC(~sex+seat,data=m111survey,graph=TRUE)
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.1546&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutnosim-1.png&quot; alt=&quot;Graph of P-value, no simulation&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Here is a case with simulation:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~sex+seat,data=m111survey,
-             simulate.p.value=&quot;random&quot;,B=2500,graph=TRUE)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             simulate.p.value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;random&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;graph&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s chi-squared test with simulated p-value, marginal sums not fixed
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s chi-squared test with simulated p-value, marginal sums not fixed
 ## 	 (based on 2500 resamples) 
 ## 
 ## Observed Counts:
@@ -1898,8 +1857,7 @@ chisqtestGC(~sex+seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1575
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.1575&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutsim-1.png&quot; alt=&quot;Graph of P-value, with simulation&quot; /&gt;&lt;/p&gt;
 
@@ -1933,14 +1891,11 @@ chisqtestGC(~sex+seat,data=m111survey,
 
 &lt;p&gt;We can do so using the &lt;script type=&quot;math/tex&quot;&gt;\chi^2&lt;/script&gt;-test for goodness of fit.  The argument &lt;code&gt;p&lt;/code&gt; will give what the Null Hypothesis believes to be the distribution of the variable &lt;strong&gt;seat&lt;/strong&gt; in the Georgetown College population:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            graph=TRUE)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            p&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            graph&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Chi-squared test for given probabilities 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Chi-squared test for given probabilities 
 ## 
 ##          Observed counts Expected by Null Contr to chisq stat
 ## 1_front               27            23.67                0.47
@@ -1950,8 +1905,7 @@ chisqtestGC(~seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.0103&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatgraph-1.png&quot; alt=&quot;plot of chunk chisqtutseatgraph&quot; /&gt;&lt;/p&gt;
 
@@ -1978,24 +1932,17 @@ chisqtestGC(~seat,data=m111survey,
 
 &lt;p&gt;We could still perform the test, by making a table and storing it as an R-object:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-Seat &amp;lt;- c(front=27,middle=32,back=12)
-Seat
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;Seat &lt;span class=&quot;o&quot;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;front&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;27&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;middle&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;back&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;12&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+Seat&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-##  front middle   back 
-##     27     32     12
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;##  front middle   back 
+##     27     32     12&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Then we could perform the test using &lt;code&gt;Seat&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(Seat,p=c(1/3,1/3,1/3))
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;Seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;p&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Chi-squared test for given probabilities 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Chi-squared test for given probabilities 
 ## 
 ##        Observed counts Expected by Null Contr to chisq stat
 ## front               27            23.67                0.47
@@ -2005,8 +1952,7 @@ chisqtestGC(Seat,p=c(1/3,1/3,1/3))
 ## 
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.0103
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.0103&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&quot;simulation-1&quot;&gt;Simulation&lt;/h3&gt;
 
@@ -2014,16 +1960,13 @@ chisqtestGC(Seat,p=c(1/3,1/3,1/3))
 
 &lt;p&gt;For goodness-of-fit tests, the only relevant form of simulation is the one provided by setting &lt;code&gt;simulate.p.value&lt;/code&gt; to &lt;code&gt;TRUE&lt;/code&gt;.  Of course we also need to set the number &lt;code&gt;B&lt;/code&gt; of resamples.&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-set.seed(678910)
-chisqtestGC(~seat,data=m111survey,
-            p=c(1/3,1/3,1/3),
-            simulate.p.value=TRUE,
-            B=2500,graph=TRUE)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;&lt;span class=&quot;kp&quot;&gt;set.seed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;678910&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            p&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+            simulate.p.value&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            B&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;graph&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;TRUE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s chi-squared test with simulated p-value 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s chi-squared test with simulated p-value 
 ## 	 (based on 2500 resamples) 
 ## 
 ##          Observed counts Expected by Null Contr to chisq stat
@@ -2034,8 +1977,7 @@ chisqtestGC(~seat,data=m111survey,
 ## 
 ## Chi-Square Statistic = 9.1549 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.0116
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.0116&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&quot;/figure/source/2014-02-01-chisqtestGCtutorial/chisqtutseatsim-1.png&quot; alt=&quot;plot of chunk chisqtutseatsim&quot; /&gt;&lt;/p&gt;
 
@@ -2043,18 +1985,14 @@ chisqtestGC(~seat,data=m111survey,
 
 &lt;p&gt;If you do not want to see quite so much output to the console and are only interested in the essentials for reporting a &lt;script type=&quot;math/tex&quot;&gt;\chi^2&lt;/script&gt;-test, then set the argument &lt;code&gt;verbose&lt;/code&gt; to &lt;code&gt;FALSE&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;r
-chisqtestGC(~sex+seat,data=m111survey,
-            verbose=FALSE)
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-r&quot; data-lang=&quot;r&quot;&gt;chisqtestGC&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;~&lt;/span&gt;sex&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;seat&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;data&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;m111survey&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+            verbose&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;FALSE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-## Pearson&#39;s Chi-squared test 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;## Pearson&amp;#39;s Chi-squared test 
 ## 
 ## Chi-Square Statistic = 3.734 
 ## Degrees of Freedom of the table = 2 
-## P-Value = 0.1546
-&lt;/code&gt;&lt;/p&gt;
+## P-Value = 0.1546&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 </description>
         <pubDate>Sat, 01 Feb 2014 15:00:00 -0500</pubDate>
