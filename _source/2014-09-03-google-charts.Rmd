@@ -11,7 +11,6 @@ output:
     mathjax:  default
 ---
 
-
 * will be replaced by TOC
 {:toc}
 
@@ -49,7 +48,6 @@ x <- seq(0,100,by=0.5)
 y <- (50-x)^2+rnorm(length(x),sd=100)
 
 curvy <- data.frame(x,y)
-
 
 gvScat <- gvisScatterChart(curvy,
                    options=list(

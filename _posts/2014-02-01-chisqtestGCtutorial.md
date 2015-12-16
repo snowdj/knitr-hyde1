@@ -10,7 +10,6 @@ output:
     mathjax:  default
 ---
 
-
 * will be replaced by TOB
 {:toc}
 

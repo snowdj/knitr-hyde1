@@ -3,11 +3,12 @@ title: R Contour
 email: homerhanumatATgmailDOTcom
 description: > # this means to ignore newlines until "baseurl:"
   A blog devoted mostly to the the teaching of undergraduate-level statstics
-  and data anlysis with R, along with occasional technical notes on R-related
+  and data analysis with R, along with occasional technical notes on R-related
   tools.
 url: "https://homerhanumat.github.io" # the base hostname & protocol for your site
 github_username:  homerhanumat
 permalink: /:year/:month/:day/:title.html
+# highlighter:  rouge (on my Mac, need to set this to rouge or flas with Jekyll 3.0)
 author:  Homer White
 
 baseurl: "/" # the sub-path of your proejct site, e.g. /myProject/

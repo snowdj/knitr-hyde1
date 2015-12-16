@@ -11,7 +11,6 @@ output:
     mathjax:  default
 ---
 
-
 * will be replaced by TOC
 {:toc}
 
@@ -39,7 +38,7 @@ The app below (a slight modification of the example in Gesmann's post) makes the
 
 
 <!-- ScatterChart generated in R 3.2.2 by googleVis 0.5.10 package -->
-<!-- Sat Dec 12 09:31:41 2015 -->
+<!-- Tue Dec 15 19:49:23 2015 -->
 
 
 <!-- jsHeader -->
