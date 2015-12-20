@@ -1,4 +1,5 @@
 # Ignore docs files
+.gitgnore
 _site
 .Rhistory
 
