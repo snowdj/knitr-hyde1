@@ -31,6 +31,8 @@ I assume that you have R and R Studio installed and working to your satisfaction
 We want:
 
 * `rmarkdown` (for conversion)
+* 'caTools` (forconversion)
+* `bitopts` (for conversion)
 * `knitr` (in case users need it in their R Markdown sources)
 
 So log on to the server and run:
@@ -42,7 +44,7 @@ sudo R
 Then, in R:
 
 ~~~ r
-install.packages(c("knitr", "rmarkdown"))
+install.packages(c("knitr", ,"caTools", "bitops","rmarkdown"))
 ~~~
 
 ## Pandoc
