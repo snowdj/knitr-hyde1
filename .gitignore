@@ -2,6 +2,7 @@
 .gitgnore
 _site
 .Rhistory
+.sass_cache
 
 
 # Folders to ignore
