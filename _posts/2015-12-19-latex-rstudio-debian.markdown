@@ -31,7 +31,7 @@ I assume that you have R and R Studio installed and working to your satisfaction
 We want:
 
 * `rmarkdown` (for conversion)
-* 'caTools` (forconversion)
+* `caTools` (forconversion)
 * `bitopts` (for conversion)
 * `knitr` (in case users need it in their R Markdown sources)
 
